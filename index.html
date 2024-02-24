@@ -1,38 +1,103 @@
-<html>
-<title>欢迎您</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome Page</title>
 <style>
-body {
-  background-image: url('https://upload-bbs.miyoushe.com/upload/2023/03/21/107098851/32787bf5ba4899d6a8e6b4f6458a7372_778142024190562657.jpg?x-oss-process=image/auto-orient,0/interlace,1/format,jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-}
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #4E5B8D; /* 深蓝 */
+    color: white;
+  }
+  
+  #welcome {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+    font-weight: bold;
+    color: #63a1ff; /* 深紫 */
+    background-image: radial-gradient(circle, #4E5B8D, #63a1ff); /* 从左至右深蓝到浅蓝的圆滑渐变 */
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+    animation: slideIn 3s forwards, fadeOut 1s 3s forwards;
+  }
+
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .main-content {
+    height: 100%;
+    background-color: #63a1ff; /* 浅蓝 */
+    transition: background-color 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .intro {
+    text-align: center;
+  }
+
+  .intro p {
+    margin: 10px 0;
+    font-size: 2em;
+  }
+
+  .intro p:last-child {
+    font-size: 0.8em;
+  }
 </style>
-<p><font size="10" color="white">Hello 大家好</font></p>
-<p><font size="10" color="white">我是      ，这里是我的个人网站。</font></p>
-<p><font size="10" color="white">很高兴你来到这里</font></p>
-<p><font size="10" color="white">你可以在以下的网站找到我</font></p>
-<p><font size="3" color="white">原神启动！！！（2023/11/16更新）</font></p>
+</head>
+<body>
+  <div id="welcome">W<span>e</span>l<span>c</span>o<span>m</span>e</div>
+  <div class="main-content">
+    <div class="intro">
+      <p>Hello 大家好</p>
+      <p>我是<span id="username">______</span>，这里是我的个人网站。</p>
+      <p>很高兴你来到这里</p>
+      <p>你可以在以下的网站找到我</p>
+      <p><span id="update">原神启动！！！（2023/11/16更新）</span></p>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      window.addEventListener('wheel', function(event) {
+        if (event.deltaY > 0) {
+          document.querySelector('.main-content').style.backgroundColor = '#3a69a8'; /* 加深浅蓝色背景 */
+          document.querySelector('#welcome').style.top = '-100px'; /* welcome字幕向上滚动消失 */
+        }
+      });
 
-  <ul>
-  <li> <a href="https://wym100171113.github.io/yxy/">yxy专属</a> </li>
-</ul>
- 
-
-  <ul>
-  <li> <a href="https://tieba.baidu.com/home/main?id=tb.1.f0bf2ff8.PQlOX8td1TTFd3pYnFSMMA&fr=index">百度贴吧</a> </li>
-</ul>
- 
-  <ul>
-  <li> <a href="https://github.com/wym100171113">Github</a> </li>
-</ul>
-
-  <p>网站源代码有彩蛋~</p>
-
-</p> 
-
-<div style="display:none;"> 
-
-/．．．━ ━/．．━ ━ ━/．━ ━ ━ ━/━．．．．/━ ━ ━ ━ ━/━ ━ ━ ━ ━/．━ ━ ━ ━/．．．━ ━/━ ━．．．/．．．．．/．━ ━ ━ ━
-
-</div> 
+      // 动态添加用户名和更新信息
+      document.getElementById('username').innerText = 'ChatGPT';
+    });
+  </script>
+</body>
+</html>
