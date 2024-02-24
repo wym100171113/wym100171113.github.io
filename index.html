@@ -49,9 +49,66 @@
     margin-top: 20px; /* 上方留白 */
   }
 
-  /* 简介栏样式 */
-  .introduction {
-    font-size: 20px; /* 较小字体 */
+  /* 菜单样式 */
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: #000;
+    border-radius: 2px;
+    margin-bottom: 6px;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-toggle.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+    transition: height 0.3s ease;
+    z-index: 998;
+  }
+
+  .menu.open {
+    height: 100%;
+  }
+
+  .menu-links {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .menu-links a {
+    display: block;
+    margin-bottom: 10px;
+    color: #000;
+    text-decoration: none;
+    font-size: 24px;
   }
 </style>
 </head>
@@ -59,15 +116,40 @@
   <!-- 欢迎词 -->
   <div class="welcome">Welcome</div>
 
+  <!-- 菜单按钮 -->
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- 菜单 -->
+  <div class="menu" id="menu">
+    <div class="menu-links">
+      <!-- 菜单项 -->
+      <a href="#">菜单项1</a>
+      <a href="#">菜单项2</a>
+      <a href="#">菜单项3</a>
+      <a href="#">菜单项4</a>
+    </div>
+  </div>
+
   <!-- 主界面 -->
   <div class="flex items-center justify-center min-h-screen">
     <div class="rounded-box">
       <h1>Hello 大家好</h1>
-      <p class="introduction">我是<span id="username">______</span>，这里是我的个人网站。</p>
-      <p class="introduction">很高兴你来到这里</p>
-      <p class="introduction">你可以在以下的网站找到我</p>
-      <p class="introduction">原神启动！！！（2023/11/16更新）</p>
+      <p><span style="font-size: 24px;">我是<span id="username">______</span>，这里是我的个人网站。</span></p>
+      <p><span style="font-size: 24px;">很高兴你来到这里</span></p>
+      <p><span style="font-size: 24px;">你可以在以下的网站找到我</span></p>
+      <p><span style="font-size: 24px;">原神启动！！！（2023/11/16更新）</span></p>
     </div>
   </div>
+
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById('menu');
+      menu.classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
