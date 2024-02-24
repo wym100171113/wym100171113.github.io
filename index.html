@@ -12,93 +12,161 @@
     overflow: hidden;
     background-color: #FFFFFF; /* 白色背景 */
     color: #4E5B8D; /* 深蓝 */
+    font-family: Arial, sans-serif; /* 使用Arial字体 */
   }
   
-  #welcome {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 100px;
-    font-weight: bold;
-    color: transparent; /* 隐藏文字 */
-    -webkit-text-fill-color: transparent; /* 隐藏文字 */
-    background-image: linear-gradient(to bottom, #7B68EE, #63a1ff); /* 从上至下深紫到蓝色的渐变 */
-    background-clip: text;
-    -webkit-background-clip: text;
-    text-align: center;
-    white-space: nowrap;
-    opacity: 0;
-    padding: 20px 30px; /* 调整welcome文字的内边距 */
-    border-radius: 10px; /* 添加圆角 */
-    animation: slideIn 3s forwards;
+  .flex {
+    display: flex;
   }
 
-  @keyframes slideIn {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, -50%) translateY(-100%);
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-      transform: translate(-50%, -50%) translateY(-100%);
-    }
+  .flex-col {
+    flex-direction: column;
   }
 
-  .main-content {
-    height: 100%;
-    background-color: #FFFFFF; /* 白色背景 */
-    transition: background-color 1s;
-    display: none; /* 初始隐藏主页文字 */
-    justify-content: center;
+  .min-h-screen {
+    min-height: 100vh;
+  }
+
+  .relative {
+    position: relative;
+  }
+
+  .flex-1 {
+    flex: 1;
+  }
+
+  .items-center {
     align-items: center;
-    color: #4E5B8D; /* 深蓝 */
   }
 
-  .intro {
-    text-align: center;
+  .justify-center {
+    justify-content: center;
   }
 
-  .intro p {
-    margin: 10px 0;
-    font-size: 2em;
+  .overflow-hidden {
+    overflow: hidden;
   }
 
-  .intro p:last-child {
-    font-size: 0.8em;
+  .bg-gradient-to-b {
+    background-image: linear-gradient(to bottom, #F3F4F6, #E5E7EB); /* 从上至下深紫到蓝色的渐变 */
+  }
+
+  .from-gray-50 {
+    background-color: #F9FAFB; /* 淡灰 */
+  }
+
+  .to-gray-100 {
+    background-color: #E5E7EB; /* 深蓝 */
+  }
+
+  .dark\:from-gray-900 {
+    background-color: #111827; /* 深灰 */
+  }
+
+  .dark\:to-gray-950 {
+    background-color: #1F2937; /* 深蓝 */
+  }
+
+  .absolute {
+    position: absolute;
+  }
+
+  .inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .z-10 {
+    z-index: 10;
+  }
+
+  .text-9xl {
+    font-size: 9rem;
+  }
+
+  .font-extrabold {
+    font-weight: 800;
+  }
+
+  .tracking-tighter {
+    letter-spacing: -0.05em;
+  }
+
+  .sm\:text-9xl {
+    @apply text-9xl;
+  }
+
+  .lg\:gap-8 {
+    gap: 2rem; /* 调整间距 */
+  }
+
+  .bg-clip-text {
+    background-clip: text;
+  }
+
+  .text-transparent {
+    color: transparent;
+  }
+
+  .from-[#1f6feb] {
+    color: #1f6feb; /* 深蓝 */
+  }
+
+  .to-[#36d6d6] {
+    color: #36d6d6; /* 浅蓝 */
+  }
+
+  .h-14 {
+    height: 3.5rem; /* 调整高度 */
+  }
+
+  .dark\:bg-gray-950 {
+    background-color: #1F2937; /* 深蓝 */
+  }
+
+  .dark\:bg-gray-50 {
+    background-color: #F9FAFB; /* 淡灰 */
+  }
+
+  /* iOS风格的圆滑矩形框样式 */
+  .rounded-box {
+    border-radius: 10px; /* 圆角 */
+    background-color: #FFFFFF; /* 白色背景 */
+    padding: 20px; /* 内边距 */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 阴影 */
   }
 </style>
 </head>
 <body>
-  <div id="welcome">W<span>e</span>l<span>c</span>o<span>m</span>e</div>
-  <div class="main-content">
-    <div class="intro">
-      <p>Hello 大家好</p>
+  <!-- 欢迎页面 -->
+  <div class="flex flex-col min-h-screen">
+    <div class="relative flex-1 flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950">
+      <div class="absolute inset-0 z-10 flex items-center justify-center">
+        <div class="grid grid-cols-2 gap-4 text-9xl font-extrabold tracking-tighter sm:text-9xl lg:gap-8">
+          <span class="bg-clip-text text-transparent bg-gradient-to-br from-[#1f6feb] to-[#36d6d6]">W<span>e</span>l<span>c</span>o<span>m</span>e</span>
+        </div>
+      </div>
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950" />
+      </div>
+    </div>
+    <div class="h-14 flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+      <button class="absolute inset-0 z-40 w-full h-full -translate-y-full opacity-0 cursor-default" />
+      <!-- 填充其他按钮 -->
+    </div>
+  </div>
+
+  <!-- 简介栏 -->
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="rounded-box">
+      <h1>Hello 大家好</h1>
       <p>我是<span id="username">______</span>，这里是我的个人网站。</p>
       <p>很高兴你来到这里</p>
       <p>你可以在以下的网站找到我</p>
       <p><span id="update">原神启动！！！（2023/11/16更新）</span></p>
     </div>
   </div>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const welcome = document.getElementById('welcome');
-      const mainContent = document.querySelector('.main-content');
-      const username = document.getElementById('username');
-
-      welcome.style.animation = 'slideIn 3s forwards';
-
-      welcome.addEventListener('animationend', function() {
-        welcome.style.top = '-100px'; /* welcome字幕向上滚动消失 */
-        mainContent.style.display = 'flex'; /* 显示主页文字 */
-        // 动态添加用户名和更新信息
-        username.innerText = 'ChatGPT';
-      });
-    });
-  </script>
 </body>
 </html>
