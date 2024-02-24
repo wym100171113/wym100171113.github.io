@@ -3,18 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welcome Page</title>
+<title>简洁主页</title>
 <style>
   body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
-    background-color: #000000; /* 黑色背景 */
-    color: #FFFFFF; /* 白色文字 */
+    background-color: #FFFFFF; /* 白色背景 */
+    color: #000000; /* 黑色文字 */
     font-family: Arial, sans-serif; /* 使用Arial字体 */
   }
-  
+
   .flex {
     display: flex;
   }
@@ -27,14 +26,6 @@
     min-height: 100vh;
   }
 
-  .relative {
-    position: relative;
-  }
-
-  .flex-1 {
-    flex: 1;
-  }
-
   .items-center {
     align-items: center;
   }
@@ -43,94 +34,6 @@
     justify-content: center;
   }
 
-  .overflow-hidden {
-    overflow: hidden;
-  }
-
-  .bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, #F3F4F6, #E5E7EB); /* 从上至下深紫到蓝色的渐变 */
-  }
-
-  .from-gray-50 {
-    background-color: #F9FAFB; /* 淡灰 */
-  }
-
-  .to-gray-100 {
-    background-color: #E5E7EB; /* 深蓝 */
-  }
-
-  .dark\:from-gray-900 {
-    background-color: #111827; /* 深灰 */
-  }
-
-  .dark\:to-gray-950 {
-    background-color: #1F2937; /* 深蓝 */
-  }
-
-  .absolute {
-    position: absolute;
-  }
-
-  .inset-0 {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-  .z-10 {
-    z-index: 10;
-  }
-
-  .text-9xl {
-    font-size: 9rem;
-  }
-
-  .font-extrabold {
-    font-weight: 800;
-  }
-
-  .tracking-tighter {
-    letter-spacing: -0.05em;
-  }
-
-  .sm\:text-9xl {
-    @apply text-9xl;
-  }
-
-  .lg\:gap-8 {
-    gap: 2rem; /* 调整间距 */
-  }
-
-  .bg-clip-text {
-    background-clip: text;
-  }
-
-  .text-transparent {
-    color: transparent;
-  }
-
-  .from-[#1f6feb] {
-    color: #1f6feb; /* 深蓝 */
-  }
-
-  .to-[#36d6d6] {
-    color: #36d6d6; /* 浅蓝 */
-  }
-
-  .h-14 {
-    height: 3.5rem; /* 调整高度 */
-  }
-
-  .dark\:bg-gray-950 {
-    background-color: #1F2937; /* 深蓝 */
-  }
-
-  .dark\:bg-gray-50 {
-    background-color: #F9FAFB; /* 淡灰 */
-  }
-
-  /* iOS风格的圆滑矩形框样式 */
   .rounded-box {
     border-radius: 10px; /* 圆角 */
     background-color: #FFFFFF; /* 白色背景 */
@@ -140,20 +43,6 @@
 </style>
 </head>
 <body>
-  <!-- 欢迎页面 -->
-  <div class="flex flex-col min-h-screen">
-    <div class="relative flex-1 flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950">
-      <div class="absolute inset-0 z-10 flex items-center justify-center">
-        <div class="grid grid-cols-2 gap-4 text-9xl font-extrabold tracking-tighter sm:text-9xl lg:gap-8">
-          <span class="bg-clip-text text-transparent bg-gradient-to-br from-[#1f6feb] to-[#36d6d6]">W<span>e</span>l<span>c</span>o<span>m</span>e</span>
-        </div>
-      </div>
-      <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950" />
-      </div>
-    </div>
-  </div>
-
   <!-- 主界面 -->
   <div class="flex items-center justify-center min-h-screen">
     <div class="rounded-box">
