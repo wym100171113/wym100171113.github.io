@@ -10,8 +10,8 @@
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background-color: #4E5B8D; /* 深蓝 */
-    color: white;
+    background-color: #FFFFFF; /* 白色背景 */
+    color: #4E5B8D; /* 深蓝 */
   }
   
   #welcome {
@@ -21,14 +21,17 @@
     transform: translate(-50%, -50%);
     font-size: 100px;
     font-weight: bold;
-    color: #63a1ff; /* 深紫 */
-    background-image: radial-gradient(circle, #4E5B8D, #63a1ff); /* 从左至右深蓝到浅蓝的圆滑渐变 */
+    color: transparent; /* 隐藏文字 */
+    -webkit-text-fill-color: transparent; /* 隐藏文字 */
+    background-image: linear-gradient(to bottom, #7B68EE, #63a1ff); /* 从上至下深紫到蓝色的渐变 */
     background-clip: text;
     -webkit-background-clip: text;
     text-align: center;
     white-space: nowrap;
     opacity: 0;
-    animation: slideIn 3s forwards, fadeOut 1s 3s forwards;
+    padding: 20px 30px; /* 调整welcome文字的内边距 */
+    border-radius: 10px; /* 添加圆角 */
+    animation: slideIn 3s forwards;
   }
 
   @keyframes slideIn {
@@ -36,28 +39,23 @@
       opacity: 0;
       transform: translate(-50%, -50%) translateY(-100%);
     }
-    100% {
-      opacity: 1;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  @keyframes fadeOut {
-    0% {
+    50% {
       opacity: 1;
     }
     100% {
-      opacity: 0;
+      opacity: 1;
+      transform: translate(-50%, -50%) translateY(-100%);
     }
   }
 
   .main-content {
     height: 100%;
-    background-color: #63a1ff; /* 浅蓝 */
+    background-color: #FFFFFF; /* 白色背景 */
     transition: background-color 1s;
-    display: flex;
+    display: none; /* 初始隐藏主页文字 */
     justify-content: center;
     align-items: center;
+    color: #4E5B8D; /* 深蓝 */
   }
 
   .intro {
@@ -88,15 +86,18 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      window.addEventListener('wheel', function(event) {
-        if (event.deltaY > 0) {
-          document.querySelector('.main-content').style.backgroundColor = '#3a69a8'; /* 加深浅蓝色背景 */
-          document.querySelector('#welcome').style.top = '-100px'; /* welcome字幕向上滚动消失 */
-        }
-      });
+      const welcome = document.getElementById('welcome');
+      const mainContent = document.querySelector('.main-content');
+      const username = document.getElementById('username');
 
-      // 动态添加用户名和更新信息
-      document.getElementById('username').innerText = 'ChatGPT';
+      welcome.style.animation = 'slideIn 3s forwards';
+
+      welcome.addEventListener('animationend', function() {
+        welcome.style.top = '-100px'; /* welcome字幕向上滚动消失 */
+        mainContent.style.display = 'flex'; /* 显示主页文字 */
+        // 动态添加用户名和更新信息
+        username.innerText = 'ChatGPT';
+      });
     });
   </script>
 </body>
