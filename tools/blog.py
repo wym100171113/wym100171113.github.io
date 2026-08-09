@@ -66,17 +66,27 @@ def parse_frontmatter(text: str):
 
 
 def read_posts():
-    """读取 posts/ 下所有 .md，返回 [{meta, body, slug}]，按日期倒序。"""
+    """读取 posts/ 下所有 .md（含子文件夹），返回 [{slug, folder, meta, body, path}]，按日期倒序。
+
+    folder 是相对 posts/ 的目录（如 "数学/数论"），顶层文章为 ""。
+    跳过隐藏目录、templates/、.trash/（这些不进索引）。
+    """
     items = []
-    for f in sorted(POSTS.glob("*.md")):
-        slug = f.stem
+    for f in sorted(POSTS.rglob("*.md")):
+        rel = f.relative_to(POSTS)
+        parts = rel.parts
+        if any(p.startswith(".") for p in parts):
+            continue
+        if parts[0] in ("templates", ".trash", "trash"):
+            continue
+        folder = str(rel.parent) if len(parts) > 1 else ""
         try:
             text = f.read_text(encoding="utf-8")
         except OSError as e:
             print(f"  ! 无法读取 {f.name}: {e}", file=sys.stderr)
             continue
         meta, body = parse_frontmatter(text)
-        items.append({"slug": slug, "meta": meta, "body": body, "path": f})
+        items.append({"slug": f.stem, "folder": folder, "meta": meta, "body": body, "path": f})
     items.sort(key=lambda x: x["meta"].get("date", "0000-00-00"), reverse=True)
     return items
 
@@ -188,6 +198,13 @@ def cmd_check(args):
         if problems:
             errors += 1
             print(f"  ! {slug}.md：{'；'.join(problems)}")
+    # 检测 slug 冲突：不同文件夹下的同名文件会生成相同网址
+    seen = {}
+    for it in items:
+        if it["slug"] in seen:
+            errors += 1
+            print(f"  ! slug 冲突：{seen[it['slug']].relative_to(ROOT)} 与 {it['path'].relative_to(ROOT)} 文件名相同")
+        seen[it["slug"]] = it["path"]
     published = [it for it in items if is_published(it)]
     print(f"共 {len(items)} 篇（其中待发布 {len(published)} 篇，草稿 {len(items) - len(published)} 篇）")
     if errors:
@@ -210,6 +227,7 @@ def build_manifest():
         tags = meta.get("tags") or []
         manifest.append({
             "slug": it["slug"],
+            "folder": it["folder"],
             "title": meta["title"],
             "date": meta["date"],
             "tags": tags,

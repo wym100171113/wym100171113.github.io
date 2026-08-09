@@ -199,6 +199,18 @@ input { font: inherit; }
   font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--accent);
 }
+
+/* 所属文件夹小标签（首页 / 详情页） */
+.p-folder {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.04em;
+  color: var(--muted); border: 1px solid var(--line); border-radius: 6px;
+  padding: 2px 8px; margin-right: 8px;
+  transition: all 0.25s var(--ease);
+}
+.p-folder::before { content: "▸"; font-size: 0.7em; color: var(--accent); }
+.p-folder:hover { color: var(--accent); border-color: var(--accent); }
+.post-head .p-folder { margin: 0 0 14px; }
 .post-row h3 {
   font-size: clamp(1.12rem, 2.4vw, 1.32rem); font-weight: 600;
   line-height: 1.42; letter-spacing: 0.005em;
@@ -295,6 +307,21 @@ input { font: inherit; }
 .tag-chip:hover { color: var(--accent); border-color: var(--accent); }
 .tag-chip.on { background: var(--accent); border-color: var(--accent); color: var(--paper); }
 
+/* 分类分组（文件夹） */
+.folder-block { margin-bottom: clamp(30px, 5vw, 44px); }
+.folder-title {
+  font-family: var(--serif); font-size: 1.15rem; font-weight: 600;
+  color: var(--ink); display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px;
+}
+.folder-title b { font-weight: 600; }
+.folder-title .sep { color: var(--faint); margin: 0 2px; font-family: var(--mono); font-weight: 400; }
+.folder-title .count {
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 400;
+  color: var(--accent); border: 1px solid var(--line); border-radius: 999px;
+  padding: 1px 9px;
+}
+
 /* 年度分组 */
 .year-block { margin-bottom: clamp(30px, 5vw, 44px); }
 .year-title {
@@ -336,7 +363,22 @@ input { font: inherit; }
 }
 .side-card .side-link:last-child { border-bottom: none; }
 .side-card .side-link:hover { color: var(--accent); }
+.side-card .side-link.on { color: var(--accent); }
 .side-card .side-link span { float: right; color: var(--faint); }
+
+/* 侧栏分类树 */
+.folder-tree { list-style: none; margin-top: 2px; }
+.folder-tree ul { list-style: none; margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--line-2); }
+.folder-tree li { margin: 0; }
+.folder-tree a {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+  font-family: var(--mono); font-size: 0.76rem;
+  color: var(--ink-2); padding: 7px 0; border-bottom: 1px dashed var(--line-2);
+  transition: color 0.25s var(--ease);
+}
+.folder-tree a:hover { color: var(--accent); }
+.folder-tree a.on { color: var(--accent); }
+.folder-tree a span { color: var(--faint); font-size: 0.68rem; }
 
 /* ==========================================================================
    文章页

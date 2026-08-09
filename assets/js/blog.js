@@ -184,7 +184,10 @@
         <article class="post-row reveal" style="animation-delay:${0.06 * i}s">
           <time class="p-date">${esc(shortDate(p.date))}</time>
           <div>
-            <div class="p-meta"><span class="p-cat">${esc(p.category)}</span></div>
+            <div class="p-meta">
+              ${p.folder ? `<a class="p-folder" href="archive.html?folder=${encodeURIComponent(p.folder)}" title="${esc(p.folder)}">${esc(p.folder.split("/").pop())}</a>` : ""}
+              <span class="p-cat">${esc(p.category)}</span>
+            </div>
             <h3><a href="${postUrl(p.slug)}">${esc(p.title)}</a></h3>
             ${p.excerpt ? `<p class="p-excerpt">${esc(p.excerpt)}</p>` : ""}
             <span class="p-readmore">Read more</span>
@@ -232,10 +235,14 @@
     try { posts = await getPosts(); } catch { /* ignore */ }
     const info = posts.find((p) => p.slug === id);
     const idx = posts.findIndex((p) => p.slug === id);
+    const folder = (info && info.folder) || "";
 
     let md;
+    const mdPath = folder
+      ? `posts/${folder.split("/").map(encodeURIComponent).join("/")}/${encodeURIComponent(id)}.md`
+      : `posts/${encodeURIComponent(id)}.md`;
     try {
-      const res = await fetch(`posts/${encodeURIComponent(id)}.md`, { cache: "no-cache" });
+      const res = await fetch(mdPath, { cache: "no-cache" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       md = await res.text();
     } catch (e) {
@@ -280,6 +287,7 @@
       <section class="post-head rise">
         <a class="back-link" href="archive.html">← 返回归档</a>
         <span class="p-cat">${esc(cat)}</span>
+        ${folder ? `<a class="p-folder" href="archive.html?folder=${encodeURIComponent(folder)}">${esc(folder.replace(/\//g, " / "))}</a>` : ""}
         <h1>${esc(title)}</h1>
         <div class="meta">
           <span class="d">${esc(zhDate(date))}</span>
@@ -372,32 +380,72 @@
 
     const q = (new URLSearchParams(location.search).get("q") || "").trim();
     const tag = (new URLSearchParams(location.search).get("tag") || "").trim();
+    const folder = (new URLSearchParams(location.search).get("folder") || "").trim();
 
     /* 标签计数 */
     const tagCount = {};
     posts.forEach((p) => (p.tags || []).forEach((t) => { tagCount[t] = (tagCount[t] || 0) + 1; }));
     const tags = Object.keys(tagCount).sort((a, b) => tagCount[b] - tagCount[a] || a.localeCompare(b));
 
+    /* 文件夹树（侧栏分类） */
+    const tree = { name: "", path: "", count: 0, children: {} };
+    for (const p of posts) {
+      const parts = (p.folder || "").split("/").filter(Boolean);
+      let node = tree;
+      node.count++;
+      for (const part of parts) {
+        if (!node.children[part]) {
+          node.children[part] = { name: part, path: node.path ? `${node.path}/${part}` : part, count: 0, children: {} };
+        }
+        node = node.children[part];
+        node.count++;
+      }
+    }
+    const treeHTML = (node) => {
+      const kids = Object.values(node.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
+      if (!kids.length) return "";
+      return `<ul class="folder-tree">${kids.map((c) => `
+        <li>
+          <a href="archive.html?folder=${encodeURIComponent(c.path)}"${folder === c.path ? ' class="on"' : ""}>${esc(c.name)}<span>${c.count}</span></a>
+          ${treeHTML(c)}
+        </li>`).join("")}</ul>`;
+    };
+
     const kw = q.toLowerCase();
     const filtered = posts.filter((p) => {
       if (tag && !(p.tags || []).includes(tag)) return false;
-      if (q && !`${p.title} ${p.excerpt} ${(p.tags || []).join(" ")}`.toLowerCase().includes(kw)) return false;
+      if (q && !`${p.title} ${p.excerpt} ${(p.tags || []).join(" ")} ${p.folder || ""}`.toLowerCase().includes(kw)) return false;
+      if (folder) {
+        const pf = p.folder || "";
+        if (pf !== folder && !pf.startsWith(folder + "/")) return false;
+      }
       return true;
     });
 
-    const byYear = {};
-    filtered.forEach((p) => {
-      const y = p.date ? String(new Date(p.date).getFullYear()) : "未知";
-      (byYear[y] ||= []).push(p);
+    /* 按文件夹分组，组内再按年份 */
+    const groupByYear = (list) => {
+      const byY = {};
+      for (const p of list) {
+        const y = p.date ? String(new Date(p.date).getFullYear()) : "未知";
+        (byY[y] ||= []).push(p);
+      }
+      return Object.keys(byY).sort((a, b) => b.localeCompare(a)).map((y) => ({ y, list: byY[y] }));
+    };
+    const byFolder = {};
+    for (const p of filtered) (byFolder[p.folder || ""] ||= []).push(p);
+    const folderKeys = Object.keys(byFolder).sort((a, b) => {
+      if (!a) return -1;
+      if (!b) return 1;
+      return a.localeCompare(b, "zh");
     });
-    const years = Object.keys(byYear).sort((a, b) => b.localeCompare(a));
 
     main.innerHTML = `
       <section class="page-head">
         <h1>归档 <span class="zh-sub">Posts</span></h1>
         <p class="sub">
           共 <b>${posts.length}</b> 篇文章
-          ${q || tag ? `，筛选后 <b>${filtered.length}</b> 篇（<a class="clear-f" href="archive.html">清空筛选</a>）` : "，按年份整理如下"}。
+          ${folder ? `，分类 <b>${esc(folder.replace(/\//g, " / "))}</b> 下 <b>${filtered.length}</b> 篇（<a class="clear-f" href="archive.html">查看全部</a>）` : ""}
+          ${q || tag ? `，筛选后 <b>${filtered.length}</b> 篇（<a class="clear-f" href="archive.html">清空筛选</a>）` : "，按分类整理如下"}。
         </p>
       </section>
 
@@ -413,20 +461,31 @@
             ).join("")}</div>` : ""}
           </div>
 
-          ${years.length === 0
+          ${filtered.length === 0
             ? `<div class="empty"><p>没有匹配的文章，试试别的关键词？</p></div>`
-            : years.map((y) => `
-              <section class="year-block reveal">
-                <h2 class="year-title"><b>${esc(y)}</b><span class="count">${byYear[y].length} 篇</span></h2>
-                ${byYear[y].map((p) => `
-                  <div class="arc-row">
-                    <span class="d">${esc(enDate(p.date))}</span>
-                    <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
-                  </div>`).join("")}
-              </section>`).join("")}
+            : folderKeys.map((fk) => {
+                const list = byFolder[fk];
+                return `
+                <section class="folder-block reveal">
+                  ${fk ? `<h2 class="folder-title">${fk.split("/").map((s) => `<b>${esc(s)}</b>`).join('<span class="sep">/</span>')}<span class="count">${list.length} 篇</span></h2>` : ""}
+                  ${groupByYear(list).map(({ y, list: yl }) => `
+                    <h3 class="year-title"><b>${esc(y)}</b><span class="count">${yl.length} 篇</span></h3>
+                    ${yl.map((p) => `
+                      <div class="arc-row">
+                        <span class="d">${esc(enDate(p.date))}</span>
+                        <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
+                      </div>`).join("")}
+                  `).join("")}
+                </section>`;
+              }).join("")}
         </div>
 
         <aside class="archive-side">
+          <div class="side-card">
+            <h3>分类</h3>
+            <a class="side-link${folder ? "" : " on"}" href="archive.html">全部<span>${posts.length}</span></a>
+            ${treeHTML(tree)}
+          </div>
           <div class="side-card">
             <h3>关于本站</h3>
             <p class="who">blog · wym</p>
@@ -465,6 +524,7 @@
         if (btn.dataset.tag === tag) args.delete("tag");
         else args.set("tag", btn.dataset.tag);
         if (q) args.set("q", q);
+        if (folder) args.set("folder", folder);
         const qs = args.toString();
         location.search = qs ? `?${qs}` : "?";
       });
