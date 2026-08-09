@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>余白 · Yohaku</title>
+    <link>https://wym100171113.github.io/</link>
+    <description>把复杂的，讲得漂亮。</description>
+    <language>zh-CN</language>
+    <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>你好，余白</title>
+      <link>https://wym100171113.github.io/post.html?slug=hello</link>
+      <guid>https://wym100171113.github.io/post.html?slug=hello</guid>
+      <pubDate>Sun, 09 Aug 2026 00:00:00 +0800</pubDate>
+      <description>这个博客为什么存在：关于数学、代码与偶然想法的笔记本。</description>
+      <category>随笔</category>
+    </item>
+    <item>
+      <title>斐波那契数列与黄金分割：一个美丽的巧合</title>
+      <link>https://wym100171113.github.io/post.html?slug=fibonacci</link>
+      <guid>https://wym100171113.github.io/post.html?slug=fibonacci</guid>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0800</pubDate>
+      <description>斐波那契数列为什么逼近黄金分割？比奈公式给出答案。顺便聊聊从兔子到向日葵的巧合。</description>
+      <category>数学</category>
+    </item>
+  </channel>
+</rss>

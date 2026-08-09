@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>此处留白 · 余白 Yohaku</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b0452e'/%3E%3Ctext x='16' y='21' font-size='14' font-family='serif' fill='%23faf7f0' text-anchor='middle'%3E余%3C/text%3E%3C/svg%3E">
+</head>
+<body data-theme="light">
+<div class="paper-noise"></div>
+<main class="shell">
+  <div class="notfound rise">
+    <div class="seal-big"><span>留白</span></div>
+    <span class="code">404</span>
+    <p class="zh">这一页，什么都没写。</p>
+    <p>留白也是设计的一部分——不过您想找的内容可能被移动了。</p>
+    <a class="back-link" href="/">← 回到首页</a>
+  </div>
+</main>
+<script>
+  document.documentElement.setAttribute("data-theme",
+    localStorage.getItem("yohaku-theme-v2") ||
+    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+</script>
+</body>
+</html>

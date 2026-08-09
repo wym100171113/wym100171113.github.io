@@ -1,0 +1,57 @@
+# 余白 · Yohaku — 自动发布流水线
+# 每次推送到 main：先由 blog.py 重建索引/RSS/站点地图（若无变化则跳过），再部署到 GitHub Pages。
+name: Build & Deploy
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild posts/index.json, feed.xml, sitemap.xml
+        run: python3 tools/blog.py build
+
+      - name: Validate all posts (frontmatter)
+        run: python3 tools/blog.py check || true
+
+      - name: Commit generated files (if any)
+        run: |
+          git config user.name "wym100171113"
+          git config user.email "wym100171113@outlook.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: rebuild posts index [auto]"
+            git push origin main
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

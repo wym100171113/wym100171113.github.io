@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="余白 · Yohaku — 全部文章归档，按年份整理，支持搜索与标签筛选。">
+<title>归档 · 余白 Yohaku</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b0452e'/%3E%3Ctext x='16' y='21' font-size='14' font-family='serif' fill='%23faf7f0' text-anchor='middle'%3E余%3C/text%3E%3C/svg%3E">
+</head>
+<body data-theme="light" class="page-archive">
+<div class="paper-noise"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="shell nav-row">
+    <a class="brand" href="index.html">
+      <span class="seal-mark">余<small>白</small></span>
+      <span class="wordmark">余白<em>Yohaku</em></span>
+    </a>
+    <nav class="nav-links" aria-label="站点导航">
+      <a href="index.html">首页</a>
+      <a href="archive.html" class="active">归档</a>
+      <a href="about.html">关于</a>
+      <button class="theme-btn" id="themeBtn" aria-label="切换明暗主题">
+        <svg class="moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"/></svg>
+        <svg class="sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="shell" id="main" data-view="archive">
+  <div class="status">载入中…</div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell foot-row">
+    <div class="foot-links">
+      <a href="index.html">首页</a>
+      <a href="archive.html">归档</a>
+      <a href="about.html">关于</a>
+      <a href="feed.xml">RSS</a>
+      <a href="sitemap.xml">Sitemap</a>
+      <a href="https://github.com/wym100171113" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="foot-note">
+      <span>© <span id="year">2026</span> 余白 · Yohaku — 把复杂的，讲得漂亮。</span>
+      <span class="seal-foot"><span class="seal-mini">余</span> 由 Markdown 与留白构成</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="assets/js/blog.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
