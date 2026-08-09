@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-余白 · Yohaku 博客内容管理工具 (CMS CLI)
+blog · wym 博客内容管理工具 (CMS CLI)
 ================================================
 用法:
     python3 tools/blog.py new "文章标题" [--tags 数学,算法] [--slug custom]
@@ -28,9 +28,9 @@ ASSETS = ROOT / "assets"
 
 # 站点信息 —— 发布地址与作者名，改这里即可
 SITE_URL = "https://wym100171113.github.io"
-SITE_NAME = "余白 · Yohaku"
+SITE_NAME = "blog · wym"
 SITE_TAGLINE = "把复杂的，讲得漂亮。"
-AUTHOR = "余白"
+AUTHOR = "wym"
 
 FRONTMATTER_RE = re.compile(r"^---\r?\n(.*?)\r?\n---\r?\n?(.*)$", re.S)
 
@@ -118,12 +118,10 @@ excerpt: 在这里写一两句话作为摘要，会显示在首页文章列表�
 支持完整的 Markdown 语法：**粗体**、*斜体*、`行内代码`、[链接](https://example.com)、列表、引用、表格、图片。
 
 ```python
-print("hello, yohaku")
+print("hello, wym")
 ```
 
-数学公式（KaTeX 渲染）：
-
-$$E = mc^2$$
+数学公式（KaTeX 渲染）：行内 $E = mc^2$，独立 $$E = mc^2$$
 
 写完后运行 `python3 tools/blog.py build && python3 tools/blog.py publish "新文章" --push` 即可发布。
 """
@@ -314,7 +312,7 @@ def cmd_publish(args):
 # ---------------------------------------------------------------------------
 
 def main():
-    p = argparse.ArgumentParser(prog="blog.py", description="余白博客内容管理工具")
+    p = argparse.ArgumentParser(prog="blog.py", description="blog · wym 博客内容管理工具")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     q = sub.add_parser("new", help="新建一篇文章")

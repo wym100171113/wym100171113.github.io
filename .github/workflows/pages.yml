@@ -1,4 +1,4 @@
-# 余白 · Yohaku — 自动发布流水线
+# blog · wym — 自动发布流水线
 # 每次推送到 main：先由 blog.py 重建索引/RSS/站点地图（若无变化则跳过），再部署到 GitHub Pages。
 name: Build & Deploy
 

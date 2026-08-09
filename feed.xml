@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>余白 · Yohaku</title>
+    <title>blog · wym</title>
     <link>https://wym100171113.github.io/</link>
     <description>把复杂的，讲得漂亮。</description>
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>你好，余白</title>
+      <title>你好，世界</title>
       <link>https://wym100171113.github.io/post.html?slug=hello</link>
       <guid>https://wym100171113.github.io/post.html?slug=hello</guid>
       <pubDate>Sun, 09 Aug 2026 00:00:00 +0800</pubDate>

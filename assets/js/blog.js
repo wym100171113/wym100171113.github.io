@@ -1,5 +1,5 @@
 /* ==========================================================================
-   余白 · Yohaku blog — 前端逻辑
+   blog · wym — 前端逻辑
    主题切换 / 首页 / 文章渲染（marked + KaTeX + highlight.js + TOC）/ 归档
    ========================================================================== */
 
@@ -7,18 +7,19 @@
   "use strict";
 
   const CONFIG = {
-    siteName: "余白",
+    siteName: "wym",
+    wordmark: "blog",
     tagline: "把复杂的，讲得漂亮。",
     // 首页「随手记」——想改修改这里即可
     thoughts: [
       { text: "好的界面是让人注意不到界面的界面。", time: "最近" },
       { text: "写东西最开心的一刻，是自己终于把复杂的事讲明白了。", time: "前些天" },
-      { text: "留白不是空着，是把最重要的东西显出来。", time: "很久以前" },
+      { text: "简洁不是简单，是去掉所有不必要的东西之后剩下的。", time: "很久以前" },
     ],
   };
 
   const MANIFEST = "posts/index.json";
-  const THEME_KEY = "yohaku-theme-v2";
+  const THEME_KEY = "wym-blog-theme";
 
   const $  = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -26,6 +27,27 @@
   const esc = (s) =>
     String(s ?? "").replace(/[&<>"']/g, (c) =>
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  /* 保护数学公式：在交给 marked 之前把 $..$ / $$..$$ 换成占位符，
+     避免 marked 把 $F_n$ 这类下划线解析成斜体；渲染 HTML 后再还原。 */
+  function protectMath(md) {
+    const stash = [];
+    md = md.replace(/\$\$([\s\S]+?)\$\$/g, (_, tex) => {
+      stash.push({ display: true, tex });
+      return `\u0000M${stash.length - 1}\u0000`;
+    });
+    md = md.replace(/\$([^\$\n]+?)\$/g, (_, tex) => {
+      stash.push({ display: false, tex });
+      return `\u0000M${stash.length - 1}\u0000`;
+    });
+    return { md, stash };
+  }
+  function restoreMath(html, stash) {
+    return html.replace(/\u0000M(\d+)\u0000/g, (_, i) => {
+      const m = stash[+i];
+      return m ? (m.display ? `$$${m.tex}$$` : `$${m.tex}$`) : "";
+    });
+  }
 
   /* ---------------- 日期 ---------------- */
   const MONTHS_ZH = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"];
@@ -116,6 +138,8 @@
 
     const recent = posts.slice(0, 5);
     const nth = posts.length;
+    const tagSet = new Set();
+    posts.forEach((p) => (p.tags || []).forEach((t) => tagSet.add(t)));
 
     main.innerHTML = `
       <section class="hero">
@@ -128,9 +152,9 @@
           这里，是我的笔记本——关于 <b>数学</b>、<b>代码</b> 与 <b>有趣的想法</b>。把复杂的，讲得漂亮。
         </p>
         <div class="hero-stats rise" style="animation-delay:.24s">
-          <div><b>${nth}</b><span class="unit"> 篇文章</span></div>
-          <div><b>${recent.length ? new Date(recent[0].date).getFullYear() : "—"}</b><span class="unit"> 最近更新</span></div>
-          <div><b>${CONFIG.tagline}</b></div>
+          <div><b>${nth}</b><span class="unit">篇文章</span></div>
+          <div><b>${recent.length ? new Date(recent[0].date).getFullYear() : "—"}</b><span class="unit">最近更新</span></div>
+          <div><b>${tagSet.size}</b><span class="unit">个标签</span></div>
         </div>
       </section>
 
@@ -234,7 +258,8 @@
     let html;
     if (window.marked) {
       marked.setOptions({ gfm: true, breaks: false });
-      html = marked.parse(body);
+      const { md, stash } = protectMath(body);
+      html = restoreMath(marked.parse(md), stash);
     } else {
       html = `<pre>${esc(body)}</pre>`;
     }
@@ -286,13 +311,15 @@
         </aside>
       </section>`;
 
-    /* KaTeX 数学公式 */
+    /* KaTeX 数学公式（$..$ 行内 / $$..$$ 独立 / \(..\) 与 \[..\] 兼容） */
     if (window.renderMathInElement) {
       try {
         renderMathInElement($("#prose"), {
           delimiters: [
             { left: "$$", right: "$$", display: true },
+            { left: "\\[", right: "\\]", display: true },
             { left: "\\(", right: "\\)", display: false },
+            { left: "$", right: "$", display: false },
           ],
           throwOnError: false,
         });
@@ -402,7 +429,7 @@
         <aside class="archive-side">
           <div class="side-card">
             <h3>关于本站</h3>
-            <p class="who">余白 · Yohaku</p>
+            <p class="who">blog · wym</p>
             <p>${esc(CONFIG.tagline)}。记录数学、代码与有趣的想法的笔记本。</p>
           </div>
           <div class="side-card">
