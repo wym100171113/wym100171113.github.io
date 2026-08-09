@@ -24,5 +24,115 @@
     "excerpt": "斐波那契数列为什么逼近黄金分割？比奈公式给出答案。顺便聊聊从兔子到向日葵的巧合。",
     "category": "数学",
     "readTime": "1 分钟"
+  },
+  {
+    "slug": "不等式证明方法综述",
+    "folder": "数学/不等式",
+    "title": "不等式证明方法综述",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "9 分钟"
+  },
+  {
+    "slug": "伯努利不等式",
+    "folder": "数学/不等式",
+    "title": "伯努利不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "3 分钟"
+  },
+  {
+    "slug": "切线不等式",
+    "folder": "数学/不等式",
+    "title": "切线不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "4 分钟"
+  },
+  {
+    "slug": "卡尔松不等式",
+    "folder": "数学/不等式",
+    "title": "卡尔松不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "4 分钟"
+  },
+  {
+    "slug": "反柯西不等式",
+    "folder": "数学/不等式",
+    "title": "反柯西不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "3 分钟"
+  },
+  {
+    "slug": "指数不等式",
+    "folder": "数学/不等式",
+    "title": "指数不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "3 分钟"
+  },
+  {
+    "slug": "明可夫斯基不等式",
+    "folder": "数学/不等式",
+    "title": "明可夫斯基不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "3 分钟"
+  },
+  {
+    "slug": "立方和不等式",
+    "folder": "数学/不等式",
+    "title": "立方和不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "2 分钟"
+  },
+  {
+    "slug": "绝对值不等式",
+    "folder": "数学/不等式",
+    "title": "绝对值不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "3 分钟"
+  },
+  {
+    "slug": "舒尔不等式",
+    "folder": "数学/不等式",
+    "title": "舒尔不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "4 分钟"
+  },
+  {
+    "slug": "赫尔德不等式",
+    "folder": "数学/不等式",
+    "title": "赫尔德不等式",
+    "date": "2026-06-12",
+    "tags": [],
+    "excerpt": "",
+    "category": "随笔",
+    "readTime": "4 分钟"
   }
 ]
