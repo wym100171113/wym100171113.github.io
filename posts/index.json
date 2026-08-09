@@ -13,6 +13,16 @@
     "readTime": "1 分钟"
   },
   {
+    "slug": "AM-GM不等式",
+    "folder": "数学/不等式",
+    "title": "AM-GM不等式",
+    "date": "2026-08-09",
+    "tags": [],
+    "excerpt": "最基本的不等式",
+    "category": "随笔",
+    "readTime": "1 分钟"
+  },
+  {
     "slug": "fibonacci",
     "folder": "",
     "title": "斐波那契数列与黄金分割：一个美丽的巧合",
