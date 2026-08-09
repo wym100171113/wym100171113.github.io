@@ -550,19 +550,21 @@
         <h2 class="folder-title">
           <button class="folder-toggle" data-fold="${esc(key)}" aria-label="折叠/展开">▾</button>
           <span class="fpath">${isRoot ? "<b>全部文章</b>" : esc(node.name)}</span>
-          <span class="count">${node.count} 篇</span>
+          <span class="count">${isRoot ? node.posts.length : node.count} 篇</span>
           ${more ? `<a class="more" href="${makeURL({ folder: node.path, page: "" })}">全部 ${node.posts.length} 篇 →</a>` : ""}
         </h2>
         <div class="folder-body">
-          ${groupByYear(shown).map(({ y, list: yl }) => `
-            <h3 class="year-title"><b>${esc(y)}</b><span class="count">${yl.length} 篇</span></h3>
-            ${yl.map((p) => `
-              <div class="arc-row">
-                <span class="d">${esc(enDate(p.date))}</span>
-                <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
-              </div>`).join("")}
-          `).join("")}
-          ${noKids ? "" : kids.map((k) => sectionHTML(k, false)).join("")}
+          <div class="folder-body-inner">
+            ${groupByYear(shown).map(({ y, list: yl }) => `
+              <h3 class="year-title"><b>${esc(y)}</b><span class="count">${yl.length} 篇</span></h3>
+              ${yl.map((p) => `
+                <div class="arc-row">
+                  <span class="d">${esc(enDate(p.date))}</span>
+                  <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
+                </div>`).join("")}
+            `).join("")}
+            ${noKids ? "" : kids.map((k) => sectionHTML(k, false)).join("")}
+          </div>
         </div>
       </section>`;
     };
