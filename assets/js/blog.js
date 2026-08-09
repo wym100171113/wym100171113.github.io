@@ -217,11 +217,25 @@
     const m = md.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
     const meta = {};
     if (m) {
-      m[1].split(/\r?\n/).forEach((line) => {
-        const i = line.indexOf(":");
-        if (i > 0) meta[line.slice(0, i).trim()] = line.slice(i + 1).trim();
-      });
-      if (meta.tags) {
+      const lines = m[1].split(/\r?\n/);
+      for (let i = 0; i < lines.length; i++) {
+        const idx = lines[i].indexOf(":");
+        if (idx <= 0) continue;
+        const key = lines[i].slice(0, idx).trim();
+        let value = lines[i].slice(idx + 1).trim();
+        if (key === "tags" && value === "") {
+          // YAML 列表格式（Obsidian Properties 默认）
+          const items = [];
+          while (i + 1 < lines.length && /^\s*-\s*/.test(lines[i + 1])) {
+            items.push(lines[i + 1].replace(/^\s*-\s*/, "").trim());
+            i++;
+          }
+          meta.tags = items;
+        } else {
+          meta[key] = value;
+        }
+      }
+      if (meta.tags && !Array.isArray(meta.tags)) {
         try { meta.tags = JSON.parse(meta.tags.replace(/'/g, '"')); }
         catch { meta.tags = meta.tags.replace(/[\[\]]/g, "").split(",").map((s) => s.trim()).filter(Boolean); }
       }

@@ -40,12 +40,23 @@ FRONTMATTER_RE = re.compile(r"^---\r?\n(.*?)\r?\n---\r?\n?(.*)$", re.S)
 # ---------------------------------------------------------------------------
 
 def parse_frontmatter(text: str):
-    """解析 markdown 顶部的 --- 块，返回 (meta, body)。"""
+    """解析 markdown 顶部的 --- 块，返回 (meta, body)。
+
+    支持两种 tags 写法：
+      tags: [数学, 不等式]      # 行内
+      tags:                    # YAML 列表（Obsidian Properties 默认）
+        - 数学
+        - 不等式
+    """
     m = FRONTMATTER_RE.match(text)
     if not m:
         return {}, text
     meta = {}
-    for line in m.group(1).splitlines():
+    lines = m.group(1).splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        i += 1
         if not line.strip() or line.lstrip().startswith("#"):
             continue
         key, _, value = line.partition(":")
@@ -53,7 +64,14 @@ def parse_frontmatter(text: str):
         value = value.strip()
         if not key:
             continue
-        if key == "tags":
+        if key == "tags" and not value:
+            # YAML 列表：收集后续缩进的 - item 行
+            items = []
+            while i < len(lines) and lines[i].lstrip().startswith("-"):
+                items.append(lines[i].strip().lstrip("-").strip())
+                i += 1
+            meta[key] = items
+        elif key == "tags":
             try:
                 meta[key] = json.loads(value)
             except Exception:
