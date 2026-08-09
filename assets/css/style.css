@@ -420,17 +420,16 @@ input { font: inherit; }
 .folder-tree { list-style: none; margin-top: 2px; }
 .folder-tree ul { list-style: none; margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--line-2); }
 .folder-tree li { display: flex; flex-wrap: wrap; align-items: center; }
-.folder-tree li > ul {
+/* 子树折叠：grid-rows 1fr→0fr（inner 包裹层承载溢出裁剪），内容再多也不会被写死的高度截断 */
+.folder-tree li > .tree-sub {
   flex-basis: 100%;
-  margin-left: 12px;
-  padding-left: 10px;
-  border-left: 1px solid var(--line-2);
-  max-height: 400px;
-  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr;
   opacity: 1;
-  transition: max-height 0.3s var(--ease), opacity 0.25s var(--ease);
+  transition: grid-template-rows 0.3s var(--ease), opacity 0.25s var(--ease);
 }
-.folder-tree li.folded > ul { max-height: 0; opacity: 0; }
+.folder-tree li > .tree-sub > .tree-sub-inner { overflow: hidden; min-height: 0; }
+.folder-tree li.folded > .tree-sub { grid-template-rows: 0fr; opacity: 0; }
 .folder-tree li > a { flex: 1 1 auto; min-width: 0; }
 .folder-tree a {
   display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
@@ -705,14 +704,21 @@ input { font: inherit; }
 .empty code { font-family: var(--mono); background: var(--paper-2); border: 1px solid var(--line); border-radius: 5px; padding: 2px 8px; color: var(--accent); }
 
 /* ==========================================================================
-   动效（参考 yohaku-blog-template：fadeIn + 弹簧交互）
+   动效（参考 yohaku-blog-template：fadeIn + 弹簧交互；stylekit：Blur In）
    ========================================================================== */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes blurIn { from { opacity: 0; filter: blur(6px); transform: translateY(6px); } to { opacity: 1; filter: blur(0); transform: none; } }
 .rise { animation: fadeIn 0.6s ease-out both; }
 .rise-slow { animation: fadeIn 0.85s ease-out both; }
+/* 文章正文入场：墨色落纸，由虚到实 */
+.prose { animation: blurIn 0.55s ease-out both; }
 
 /* 滚动显现的元素在进入视口前先隐藏，避免「先显示→再闪一下」 */
 .js-wait { opacity: 0; }
+
+/* 文章图片微交互：轻轻浮起 */
+.prose img { transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); }
+.prose img:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(28, 28, 30, 0.12); }
 
 @media (max-width: 640px) {
   .post-row { grid-template-columns: 1fr; gap: 8px; }
@@ -725,4 +731,6 @@ input { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
+  /* 动画被禁用时，等待滚动显现的元素必须直接可见，否则内容永久空白 */
+  .js-wait { opacity: 1 !important; }
 }

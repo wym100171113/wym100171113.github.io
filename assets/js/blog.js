@@ -497,13 +497,18 @@
       const kids = Object.values(node.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
       if (!kids.length) return "";
       const hasKids = (c) => c.children && Object.keys(c.children).length;
-      return `<ul class="folder-tree">${kids.map((c) => `
+      const sub = treeHTMLInner(kids);
+      return sub ? `<div class="tree-sub"><div class="tree-sub-inner">${sub}</div></div>` : "";
+    };
+    const treeHTMLInner = (kids) => `<ul class="folder-tree">${kids.map((c) => {
+      const hasKids = (x) => x.children && Object.keys(x.children).length;
+      return `
         <li class="${hasKids(c) ? "has-children" : ""}">
           ${hasKids(c) ? `<button class="tree-fold" aria-label="折叠">▾</button>` : ""}
           <a href="${makeURL({ folder: c.path, page: "" })}"${folder === c.path ? ' class="on"' : ""}>${esc(c.name)}<span>${c.count}</span></a>
-          ${treeHTML(c)}
-        </li>`).join("")}</ul>`;
-    };
+          ${hasKids(c) ? `<div class="tree-sub"><div class="tree-sub-inner">${treeHTMLInner(Object.values(c.children).sort((a, b) => a.name.localeCompare(b.name, "zh")))}</div></div>` : ""}
+        </li>`;
+    }).join("")}</ul>`;
 
     const kw = q.toLowerCase();
     const filtered = posts.filter((p) => {
@@ -582,7 +587,7 @@
     main.innerHTML = `
       <section class="page-head">
         <h1>归档 <span class="zh-sub">Posts</span></h1>
-        <p class="sub">
+        <p class="sub" id="arcSub">
           共 <b>${posts.length}</b> 篇文章
           ${folder ? `，分类 <b>${esc(folder.replace(/\//g, " / "))}</b> 下 <b>${filtered.length}</b> 篇（<a class="clear-f" href="archive.html">查看全部</a>）` : ""}
           ${q || tag ? `，筛选后 <b>${filtered.length}</b> 篇（<a class="clear-f" href="archive.html">清空筛选</a>）` : "，按分类整理如下"}。
@@ -607,6 +612,7 @@
             <button class="fold-btn" id="collapseAllBtn">收起全部</button>
           </div>` : ""}
 
+          <div id="arcResults">
           ${filtered.length === 0
             ? `<div class="empty"><p>没有匹配的文章，试试别的关键词？</p></div>`
             : isFiltered
@@ -626,6 +632,7 @@
                     ${pagerHTML(filtered.length, cur)}`;
                 })()
               : renderOverview()}
+          </div>
         </div>
 
         <aside class="archive-side">
@@ -648,21 +655,47 @@
         </aside>
       </div>`;
 
-    /* 搜索（防抖，重置页码） */
+    /* 搜索（防抖，内存过滤不重载页面，保留焦点与光标） */
     const qInput = $("#qInput");
-    if (qInput) {
+    const resultsBox = $("#arcResults");
+    if (qInput && resultsBox) {
       let timer;
       qInput.addEventListener("input", () => {
         clearTimeout(timer);
         timer = setTimeout(() => {
-          const args = new URLSearchParams(location.search);
           const v = qInput.value.trim();
+          /* 同步 URL（可分享），不触发重载 */
+          const args = new URLSearchParams(location.search);
           if (v) args.set("q", v); else args.delete("q");
           args.delete("page");
           const qs = args.toString();
           history.replaceState(null, "", qs ? `archive.html?${qs}` : "archive.html");
-          location.reload();
-        }, 350);
+
+          /* 内存中重新筛选并只重渲染结果区 */
+          const kw2 = v.toLowerCase();
+          const list = posts.filter((p) => {
+            if (tag && !(p.tags || []).includes(tag)) return false;
+            if (folder) {
+              const pf = p.folder || "";
+              if (pf !== folder && !pf.startsWith(folder + "/")) return false;
+            }
+            if (v && !`${p.title} ${p.excerpt} ${(p.tags || []).join(" ")} ${p.folder || ""}`.toLowerCase().includes(kw2)) return false;
+            return true;
+          });
+          resultsBox.innerHTML = list.length === 0
+            ? `<div class="empty"><p>没有匹配的文章，试试别的关键词？</p></div>`
+            : groupByYear(list).map(({ y, list: yl }) => `
+                <section class="folder-block">
+                  <h3 class="year-title"><b>${esc(y)}</b><span class="count">${yl.length} 篇</span></h3>
+                  ${yl.map((p) => `
+                    <div class="arc-row">
+                      <span class="d">${esc(enDate(p.date))}</span>
+                      <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
+                    </div>`).join("")}
+                </section>`).join("");
+          const sub = $("#arcSub");
+          if (sub) sub.innerHTML = `共 <b>${posts.length}</b> 篇文章，筛选后 <b>${list.length}</b> 篇（<a class="clear-f" href="archive.html">清空筛选</a>）。`;
+        }, 250);
       });
     }
 
@@ -676,7 +709,7 @@
         if (folder) args.set("folder", folder);
         args.delete("page");
         const qs = args.toString();
-        location.search = qs ? `?${qs}` : "?";
+        location.href = qs ? `archive.html?${qs}` : "archive.html";
       });
     });
 
