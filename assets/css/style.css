@@ -338,6 +338,9 @@ input { font: inherit; }
 .folder-toggle:hover { color: var(--accent); border-color: var(--accent); }
 .folder-block[data-collapsed] .folder-toggle { transform: rotate(-90deg); }
 .folder-block[data-collapsed] .folder-body { display: none; }
+/* 嵌套分类区块（父目录下再放子目录，用左边线示意层级） */
+.folder-body .folder-node { margin: 14px 0 4px; padding-left: 16px; border-left: 1px solid var(--line-2); }
+.folder-body .folder-node .folder-title { font-size: 1.02rem; }
 
 /* 归档分页 */
 .pager {
@@ -494,6 +497,8 @@ input { font: inherit; }
   font-size: 1.12rem; font-weight: 600; margin-top: 2rem; scroll-margin-top: 90px;
 }
 .prose h4 { font-size: 1.0rem; font-weight: 600; margin-top: 1.6rem; color: var(--ink-2); }
+.prose h5 { font-size: 0.95rem; font-weight: 600; margin-top: 1.5rem; color: var(--ink-2); }
+.prose h6 { font-size: 0.9rem; font-weight: 600; margin-top: 1.4rem; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.03em; }
 .prose p { color: var(--ink); }
 .prose a {
   color: var(--accent);
@@ -540,6 +545,42 @@ input { font: inherit; }
 /* KaTeX 居中与配色微调 */
 .prose .katex-display { margin: 1.8rem 0; overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
 .prose .katex { font-size: 1.06em; }
+
+/* Obsidian callout */
+.callout {
+  border: 1px solid var(--line);
+  border-left-width: 4px;
+  border-radius: 10px;
+  background: var(--paper-2);
+  padding: 14px 18px;
+  margin: 1.4rem 0;
+}
+.callout > * + * { margin-top: 0.55rem; }
+.callout .callout-title {
+  font-weight: 600; font-size: 0.95rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.callout .callout-title::before { content: ""; }
+.callout p { color: var(--ink-2); }
+.callout-note, .callout-info, .callout-tldr { border-left-color: #3b82f6; }
+.callout-note .callout-title, .callout-info .callout-title, .callout-tldr .callout-title { color: #3b82f6; }
+.callout-tip, .callout-success, .callout-check { border-left-color: #22c55e; }
+.callout-tip .callout-title, .callout-success .callout-title, .callout-check .callout-title { color: #16a34a; }
+.callout-warning, .callout-caution, .callout-important { border-left-color: #f59e0b; }
+.callout-warning .callout-title, .callout-caution .callout-title, .callout-important .callout-title { color: #d97706; }
+.callout-danger, .callout-error, .callout-fail { border-left-color: #ef4444; }
+.callout-danger .callout-title, .callout-error .callout-title, .callout-fail .callout-title { color: #dc2626; }
+.callout-question, .callout-help, .callout-faq { border-left-color: #0ea5e9; }
+.callout-question .callout-title, .callout-help .callout-title, .callout-faq .callout-title { color: #0284c7; }
+.callout-quote, .callout-example { border-left-color: var(--muted); }
+.callout-quote .callout-title, .callout-example .callout-title { color: var(--muted); }
+.callout-bug, .callout-abstract, .callout-summary { border-left-color: #a855f7; }
+.callout-bug .callout-title, .callout-abstract .callout-title, .callout-summary .callout-title { color: #9333ea; }
+
+/* Mermaid 图表 */
+.prose .mermaid { margin: 1.6rem 0; text-align: center; }
+.prose .mermaid svg { max-width: 100%; height: auto; background: transparent; }
+[data-theme="dark"] .prose .mermaid svg { filter: brightness(0.9); }
 
 /* 代码高亮（自定义低饱和配色） */
 .hljs-comment, .hljs-quote { color: var(--faint); font-style: italic; }

@@ -49,6 +49,14 @@
     });
   }
 
+  /* marked 配置（只初始化一次） */
+  let markedReady = false;
+  function ensureMarked() {
+    if (!window.marked || markedReady) return;
+    markedReady = true;
+    marked.setOptions({ gfm: true, breaks: false });
+  }
+
   /* ---------------- 日期 ---------------- */
   const MONTHS_ZH = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"];
   const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -264,7 +272,7 @@
     /* Markdown → HTML，并给标题编号以便生成目录 */
     let html;
     if (window.marked) {
-      marked.setOptions({ gfm: true, breaks: false });
+      ensureMarked();
       const { md, stash } = protectMath(body);
       html = restoreMath(marked.parse(md), stash);
     } else {
@@ -274,6 +282,33 @@
     const toc = [];
     const tmp = document.createElement("div");
     tmp.innerHTML = html;
+
+    /* Obsidian callout：把 > [!type] 块引用转成 callout */
+    $$("blockquote", tmp).forEach((bq) => {
+      const firstP = bq.firstElementChild;
+      if (!firstP || firstP.tagName !== "P") return;
+      // GFM 会把 callout 的标题与正文合并进同一个 <p>，用换行切分
+      const m = firstP.innerHTML.match(/^\[!([a-zA-Z]+)\](-\s*)?([^\n]*)([\s\S]*)$/);
+      if (!m) return;
+      const type = m[1].toLowerCase();
+      const titleHTML = m[3].trim();
+      const bodyHTML = m[4];
+      firstP.remove();
+      const div = document.createElement("div");
+      div.className = `callout callout-${type}`;
+      const titleP = document.createElement("p");
+      titleP.className = "callout-title";
+      titleP.innerHTML = titleHTML || esc(type);
+      div.appendChild(titleP);
+      if (bodyHTML && bodyHTML.trim()) {
+        const bodyP = document.createElement("p");
+        bodyP.innerHTML = bodyHTML.trim();
+        div.appendChild(bodyP);
+      }
+      while (bq.firstChild) div.appendChild(bq.firstChild);
+      bq.replaceWith(div);
+    });
+
     let n = 0;
     $$("h2, h3", tmp).forEach((h) => {
       const id = `sec-${++n}`;
@@ -334,10 +369,30 @@
       } catch (e) { /* noop */ }
     }
 
-    /* 代码高亮 */
+    /* 代码高亮（mermaid 交给 mermaid.js，跳过） */
     if (window.hljs) {
       $$("#prose pre code").forEach((b) => {
+        if (b.className && String(b.className).includes("language-mermaid")) return;
         try { hljs.highlightElement(b); } catch (e) { /* noop */ }
+      });
+    }
+
+    /* Mermaid 图表 */
+    if (window.mermaid) {
+      try {
+        mermaid.initialize({ startOnLoad: false, securityLevel: "loose", theme: "default", themeVariables: { background: "transparent" } });
+      } catch (e) { /* noop */ }
+      let mmd = 0;
+      $$("#prose pre code.language-mermaid").forEach((el) => {
+        const code = el.textContent;
+        const id = `mmd-${++mmd}-${Date.now()}`;
+        (async () => {
+          try {
+            const { svg } = await mermaid.render(id, code);
+            const pre = el.closest("pre");
+            if (pre) pre.outerHTML = `<div class="mermaid">${svg}</div>`;
+          } catch (e) { /* 渲染失败则保留原代码块 */ }
+        })();
       });
     }
 
@@ -409,19 +464,20 @@
       try { localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...collapsed])); } catch { /* ignore */ }
     };
 
-    /* 文件夹树（侧栏分类，可折叠子级） */
-    const tree = { name: "", path: "", count: 0, children: {} };
+    /* 文件夹树（侧栏分类 + 主区嵌套分组，可折叠子级） */
+    const tree = { name: "", path: "", count: 0, children: {}, posts: [] };
     for (const p of posts) {
       const parts = (p.folder || "").split("/").filter(Boolean);
       let node = tree;
       node.count++;
       for (const part of parts) {
         if (!node.children[part]) {
-          node.children[part] = { name: part, path: node.path ? `${node.path}/${part}` : part, count: 0, children: {} };
+          node.children[part] = { name: part, path: node.path ? `${node.path}/${part}` : part, count: 0, children: {}, posts: [] };
         }
         node = node.children[part];
         node.count++;
       }
+      node.posts.push(p);
     }
     const treeHTML = (node) => {
       const kids = Object.values(node.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
@@ -469,13 +525,40 @@
       }
       return Object.keys(byY).sort((a, b) => b.localeCompare(a)).map((y) => ({ y, list: byY[y] }));
     };
-    const byFolder = {};
-    for (const p of filtered) (byFolder[p.folder || ""] ||= []).push(p);
-    const folderKeys = Object.keys(byFolder).sort((a, b) => {
-      if (!a) return -1;
-      if (!b) return 1;
-      return a.localeCompare(b, "zh");
-    });
+    /* 递归渲染文件夹区块（支持嵌套：父目录下直接放子目录区块） */
+    const sectionHTML = (node, isRoot) => {
+      const kids = Object.values(node.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
+      const key = node.path || "__root__";
+      const more = !isRoot && node.posts.length > PAGE_SIZE;
+      const shown = more ? node.posts.slice(0, PAGE_SIZE) : node.posts;
+      return `
+      <section class="folder-block reveal${isRoot ? "" : " folder-node"}" data-folder-key="${esc(key)}"${collapsed.has(key) ? ' data-collapsed="1"' : ""}>
+        <h2 class="folder-title">
+          <button class="folder-toggle" data-fold="${esc(key)}" aria-label="折叠/展开">▾</button>
+          <span class="fpath">${isRoot ? "<b>全部文章</b>" : esc(node.name)}</span>
+          <span class="count">${node.count} 篇</span>
+          ${more ? `<a class="more" href="${makeURL({ folder: node.path, page: "" })}">全部 ${node.posts.length} 篇 →</a>` : ""}
+        </h2>
+        <div class="folder-body">
+          ${groupByYear(shown).map(({ y, list: yl }) => `
+            <h3 class="year-title"><b>${esc(y)}</b><span class="count">${yl.length} 篇</span></h3>
+            ${yl.map((p) => `
+              <div class="arc-row">
+                <span class="d">${esc(enDate(p.date))}</span>
+                <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
+              </div>`).join("")}
+          `).join("")}
+          ${kids.map((k) => sectionHTML(k, false)).join("")}
+        </div>
+      </section>`;
+    };
+    const renderOverview = () => {
+      const rootKids = Object.values(tree.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
+      const out = [];
+      if (tree.posts.length) out.push(sectionHTML(tree, true));
+      rootKids.forEach((c) => out.push(sectionHTML(c, false)));
+      return out.join("");
+    };
 
     const isFiltered = !!(folder || tag || q);
 
@@ -519,31 +602,7 @@
                       </section>`).join("")}
                     ${pagerHTML(filtered.length, cur)}`;
                 })()
-              : folderKeys.map((fk) => {
-                  const list = byFolder[fk];
-                  const more = list.length > PAGE_SIZE;
-                  const shown = more ? list.slice(0, PAGE_SIZE) : list;
-                  const key = fk || "__root__";
-                  return `
-                  <section class="folder-block reveal" data-folder-key="${esc(key)}"${collapsed.has(key) ? ' data-collapsed="1"' : ""}>
-                    <h2 class="folder-title">
-                      <button class="folder-toggle" data-fold="${esc(key)}" aria-label="折叠/展开">▾</button>
-                      <span class="fpath">${fk ? fk.split("/").map((s) => `<b>${esc(s)}</b>`).join('<span class="sep">/</span>') : "<b>全部文章</b>"}</span>
-                      <span class="count">${list.length} 篇</span>
-                      ${more ? `<a class="more" href="${makeURL({ folder: fk, page: "" })}">全部 ${list.length} 篇 →</a>` : ""}
-                    </h2>
-                    <div class="folder-body">
-                      ${groupByYear(shown).map(({ y, list: yl }) => `
-                        <h3 class="year-title"><b>${esc(y)}</b><span class="count">${yl.length} 篇</span></h3>
-                        ${yl.map((p) => `
-                          <div class="arc-row">
-                            <span class="d">${esc(enDate(p.date))}</span>
-                            <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
-                          </div>`).join("")}
-                      `).join("")}
-                    </div>
-                  </section>`;
-                }).join("")}
+              : renderOverview()}
         </div>
 
         <aside class="archive-side">
