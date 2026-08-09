@@ -350,7 +350,10 @@ input { font: inherit; }
   background: var(--accent);
 }
 
-.post-head { padding: clamp(40px, 6vw, 64px) 0 clamp(24px, 4vw, 34px); }
+.post-head {
+  padding: clamp(40px, 6vw, 64px) 0 clamp(24px, 4vw, 34px);
+  max-width: 47.75rem;   /* 与正文列对齐，标题下的分割线不再超长 */
+}
 .back-link {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--mono); font-size: 0.76rem; color: var(--muted);
@@ -556,6 +559,9 @@ input { font: inherit; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .rise { animation: fadeIn 0.6s ease-out both; }
 .rise-slow { animation: fadeIn 0.85s ease-out both; }
+
+/* 滚动显现的元素在进入视口前先隐藏，避免「先显示→再闪一下」 */
+.js-wait { opacity: 0; }
 
 @media (max-width: 640px) {
   .post-row { grid-template-columns: 1fr; gap: 8px; }

@@ -277,7 +277,7 @@
 
     main.innerHTML = `
       <div class="read-progress"><i id="readBar"></i></div>
-      <section class="post-head">
+      <section class="post-head rise">
         <a class="back-link" href="archive.html">← 返回归档</a>
         <span class="p-cat">${esc(cat)}</span>
         <h1>${esc(title)}</h1>
@@ -288,7 +288,7 @@
         </div>
       </section>
 
-      <section class="post-body-layout">
+      <section class="post-body-layout rise" style="animation-delay:.06s">
         <article class="post-content">
           <div class="prose" id="prose">${html}</div>
 
@@ -477,17 +477,25 @@
   async function initAboutStats() {
     const box = $("#aboutStats");
     if (!box) return;
-    let posts;
-    try { posts = await getPosts(); } catch { return; }
-    const tagSet = new Set();
-    posts.forEach((p) => (p.tags || []).forEach((t) => tagSet.add(t)));
     const set = (k, v) => {
       const el = box.querySelector(`[data-k="${k}"]`);
       if (el) el.textContent = v;
     };
+    let posts = [];
+    try { posts = await getPosts(); } catch { /* ignore */ }
+    const tagSet = new Set();
+    posts.forEach((p) => (p.tags || []).forEach((t) => tagSet.add(t)));
     set("count", posts.length);
     set("year", posts.length ? new Date(posts[0].date).getFullYear() : "—");
     set("tags", tagSet.size);
+    // 仓库 stars（GitHub 公开 API，无需鉴权）
+    try {
+      const res = await fetch("https://api.github.com/repos/wym100171113/wym100171113.github.io");
+      if (res.ok) {
+        const repo = await res.json();
+        set("stars", repo.stargazers_count ?? 0);
+      }
+    } catch { /* ignore */ }
   }
 
   /* ---------------- 启动 ---------------- */
