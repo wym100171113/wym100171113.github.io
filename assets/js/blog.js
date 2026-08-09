@@ -540,7 +540,7 @@
       return Object.keys(byY).sort((a, b) => b.localeCompare(a)).map((y) => ({ y, list: byY[y] }));
     };
     /* 递归渲染文件夹区块（支持嵌套：父目录下直接放子目录区块） */
-    const sectionHTML = (node, isRoot) => {
+    const sectionHTML = (node, isRoot, noKids = false) => {
       const kids = Object.values(node.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
       const key = node.path || "__root__";
       const more = !isRoot && node.posts.length > PAGE_SIZE;
@@ -562,14 +562,15 @@
                 <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
               </div>`).join("")}
           `).join("")}
-          ${kids.map((k) => sectionHTML(k, false)).join("")}
+          ${noKids ? "" : kids.map((k) => sectionHTML(k, false)).join("")}
         </div>
       </section>`;
     };
     const renderOverview = () => {
       const rootKids = Object.values(tree.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
       const out = [];
-      if (tree.posts.length) out.push(sectionHTML(tree, true));
+      // 全部文章：只放顶层文章，子目录由各自的顶级区块呈现，避免重复
+      if (tree.posts.length) out.push(sectionHTML(tree, true, true));
       rootKids.forEach((c) => out.push(sectionHTML(c, false)));
       return out.join("");
     };
@@ -597,6 +598,12 @@
               `<button class="tag-chip${t === tag ? " on" : ""}" data-tag="${esc(t)}">${esc(t)} · ${tagCount[t]}</button>`
             ).join("")}</div>` : ""}
           </div>
+
+          ${!isFiltered ? `
+          <div class="fold-actions">
+            <button class="fold-btn" id="expandAllBtn">展开全部</button>
+            <button class="fold-btn" id="collapseAllBtn">收起全部</button>
+          </div>` : ""}
 
           ${filtered.length === 0
             ? `<div class="empty"><p>没有匹配的文章，试试别的关键词？</p></div>`
@@ -680,6 +687,27 @@
         if (block) block.toggleAttribute("data-collapsed");
       });
     });
+
+    /* 展开全部 / 收起全部 */
+    const expandAllBtn = $("#expandAllBtn");
+    if (expandAllBtn) {
+      expandAllBtn.addEventListener("click", () => {
+        collapsed.clear();
+        try { localStorage.setItem(COLLAPSE_KEY, "[]"); } catch { /* ignore */ }
+        $$(".folder-block").forEach((b) => b.removeAttribute("data-collapsed"));
+      });
+    }
+    const collapseAllBtn = $("#collapseAllBtn");
+    if (collapseAllBtn) {
+      collapseAllBtn.addEventListener("click", () => {
+        $$(".folder-block").forEach((b) => {
+          const key = b.getAttribute("data-folder-key");
+          if (key) collapsed.add(key);
+          b.setAttribute("data-collapsed", "1");
+        });
+        try { localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...collapsed])); } catch { /* ignore */ }
+      });
+    }
 
     /* 侧栏分类树折叠 */
     $$(".tree-fold").forEach((btn) => {

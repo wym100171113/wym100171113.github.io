@@ -342,6 +342,15 @@ input { font: inherit; }
 .folder-body .folder-node { margin: 14px 0 4px; padding-left: 16px; border-left: 1px solid var(--line-2); }
 .folder-body .folder-node .folder-title { font-size: 1.02rem; }
 
+/* 展开 / 收起全部 */
+.fold-actions { display: flex; gap: 8px; margin: 0 0 18px; }
+.fold-btn {
+  font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 6px 12px; transition: all 0.25s var(--ease);
+}
+.fold-btn:hover { color: var(--accent); border-color: var(--accent); }
+
 /* 归档分页 */
 .pager {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
