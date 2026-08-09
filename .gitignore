@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# Obsidian（vault 配置是本地化的，不入库）
+posts/.obsidian/
+posts/.trash/
