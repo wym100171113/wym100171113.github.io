@@ -381,13 +381,35 @@
     const q = (new URLSearchParams(location.search).get("q") || "").trim();
     const tag = (new URLSearchParams(location.search).get("tag") || "").trim();
     const folder = (new URLSearchParams(location.search).get("folder") || "").trim();
+    const page = Math.max(1, parseInt(new URLSearchParams(location.search).get("page") || "1", 10) || 1);
+    const PAGE_SIZE = 15;
 
     /* 标签计数 */
     const tagCount = {};
     posts.forEach((p) => (p.tags || []).forEach((t) => { tagCount[t] = (tagCount[t] || 0) + 1; }));
     const tags = Object.keys(tagCount).sort((a, b) => tagCount[b] - tagCount[a] || a.localeCompare(b));
 
-    /* 文件夹树（侧栏分类） */
+    /* 构建归档链接（保留当前筛选，可覆盖/清空参数） */
+    const makeURL = (ov) => {
+      const args = new URLSearchParams();
+      if (q) args.set("q", q);
+      if (tag) args.set("tag", tag);
+      if (folder) args.set("folder", folder);
+      for (const [k, v] of Object.entries(ov || {})) { if (v) args.set(k, v); else args.delete(k); }
+      const qs = args.toString();
+      return qs ? `archive.html?${qs}` : "archive.html";
+    };
+
+    /* 折叠状态（localStorage 持久化） */
+    const COLLAPSE_KEY = "wym-blog-collapsed-folders";
+    let collapsed = new Set();
+    try { collapsed = new Set(JSON.parse(localStorage.getItem(COLLAPSE_KEY) || "[]")); } catch { /* ignore */ }
+    const toggleCollapse = (k) => {
+      if (collapsed.has(k)) collapsed.delete(k); else collapsed.add(k);
+      try { localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...collapsed])); } catch { /* ignore */ }
+    };
+
+    /* 文件夹树（侧栏分类，可折叠子级） */
     const tree = { name: "", path: "", count: 0, children: {} };
     for (const p of posts) {
       const parts = (p.folder || "").split("/").filter(Boolean);
@@ -404,9 +426,11 @@
     const treeHTML = (node) => {
       const kids = Object.values(node.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
       if (!kids.length) return "";
+      const hasKids = (c) => c.children && Object.keys(c.children).length;
       return `<ul class="folder-tree">${kids.map((c) => `
-        <li>
-          <a href="archive.html?folder=${encodeURIComponent(c.path)}"${folder === c.path ? ' class="on"' : ""}>${esc(c.name)}<span>${c.count}</span></a>
+        <li class="${hasKids(c) ? "has-children" : ""}">
+          ${hasKids(c) ? `<button class="tree-fold" aria-label="折叠">▾</button>` : ""}
+          <a href="${makeURL({ folder: c.path, page: "" })}"${folder === c.path ? ' class="on"' : ""}>${esc(c.name)}<span>${c.count}</span></a>
           ${treeHTML(c)}
         </li>`).join("")}</ul>`;
     };
@@ -421,6 +445,20 @@
       }
       return true;
     });
+
+    /* 分页 */
+    const totalPages = (n) => Math.max(1, Math.ceil(n / PAGE_SIZE));
+    const cur = Math.min(page, totalPages(filtered.length));
+    const pagerHTML = (total, c) => {
+      const tp = totalPages(total);
+      if (tp <= 1) return "";
+      return `
+        <nav class="pager">
+          <a class="pg" href="${makeURL({ page: c - 1 })}"${c <= 1 ? ' aria-disabled="true" tabindex="-1"' : ""}>← 上一页</a>
+          <span class="pg-info">第 ${c} / ${tp} 页 · 共 ${total} 篇</span>
+          <a class="pg" href="${makeURL({ page: c + 1 })}"${c >= tp ? ' aria-disabled="true" tabindex="-1"' : ""}>下一页 →</a>
+        </nav>`;
+    };
 
     /* 按文件夹分组，组内再按年份 */
     const groupByYear = (list) => {
@@ -439,6 +477,8 @@
       return a.localeCompare(b, "zh");
     });
 
+    const isFiltered = !!(folder || tag || q);
+
     main.innerHTML = `
       <section class="page-head">
         <h1>归档 <span class="zh-sub">Posts</span></h1>
@@ -454,7 +494,7 @@
           <div class="filter-bar">
             <div class="search-box">
               <span class="s-icon">⌕</span>
-              <input id="qInput" type="search" placeholder="搜标题 / 摘要 / 标签…" value="${esc(q)}">
+              <input id="qInput" type="search" placeholder="搜标题 / 摘要 / 标签 / 分类…" value="${esc(q)}">
             </div>
             ${tags.length ? `<div class="tag-chips" id="chips">${tags.map((t) =>
               `<button class="tag-chip${t === tag ? " on" : ""}" data-tag="${esc(t)}">${esc(t)} · ${tagCount[t]}</button>`
@@ -463,21 +503,47 @@
 
           ${filtered.length === 0
             ? `<div class="empty"><p>没有匹配的文章，试试别的关键词？</p></div>`
-            : folderKeys.map((fk) => {
-                const list = byFolder[fk];
-                return `
-                <section class="folder-block reveal">
-                  ${fk ? `<h2 class="folder-title">${fk.split("/").map((s) => `<b>${esc(s)}</b>`).join('<span class="sep">/</span>')}<span class="count">${list.length} 篇</span></h2>` : ""}
-                  ${groupByYear(list).map(({ y, list: yl }) => `
-                    <h3 class="year-title"><b>${esc(y)}</b><span class="count">${yl.length} 篇</span></h3>
-                    ${yl.map((p) => `
-                      <div class="arc-row">
-                        <span class="d">${esc(enDate(p.date))}</span>
-                        <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
-                      </div>`).join("")}
-                  `).join("")}
-                </section>`;
-              }).join("")}
+            : isFiltered
+              ? (() => {
+                  const pagePosts = filtered.slice((cur - 1) * PAGE_SIZE, cur * PAGE_SIZE);
+                  return `
+                    ${pagerHTML(filtered.length, cur)}
+                    ${groupByYear(pagePosts).map(({ y, list: yl }) => `
+                      <section class="folder-block reveal">
+                        <h3 class="year-title"><b>${esc(y)}</b><span class="count">${yl.length} 篇</span></h3>
+                        ${yl.map((p) => `
+                          <div class="arc-row">
+                            <span class="d">${esc(enDate(p.date))}</span>
+                            <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
+                          </div>`).join("")}
+                      </section>`).join("")}
+                    ${pagerHTML(filtered.length, cur)}`;
+                })()
+              : folderKeys.map((fk) => {
+                  const list = byFolder[fk];
+                  const more = list.length > PAGE_SIZE;
+                  const shown = more ? list.slice(0, PAGE_SIZE) : list;
+                  const key = fk || "__root__";
+                  return `
+                  <section class="folder-block reveal" data-folder-key="${esc(key)}"${collapsed.has(key) ? ' data-collapsed="1"' : ""}>
+                    <h2 class="folder-title">
+                      <button class="folder-toggle" data-fold="${esc(key)}" aria-label="折叠/展开">▾</button>
+                      <span class="fpath">${fk ? fk.split("/").map((s) => `<b>${esc(s)}</b>`).join('<span class="sep">/</span>') : "<b>全部文章</b>"}</span>
+                      <span class="count">${list.length} 篇</span>
+                      ${more ? `<a class="more" href="${makeURL({ folder: fk, page: "" })}">全部 ${list.length} 篇 →</a>` : ""}
+                    </h2>
+                    <div class="folder-body">
+                      ${groupByYear(shown).map(({ y, list: yl }) => `
+                        <h3 class="year-title"><b>${esc(y)}</b><span class="count">${yl.length} 篇</span></h3>
+                        ${yl.map((p) => `
+                          <div class="arc-row">
+                            <span class="d">${esc(enDate(p.date))}</span>
+                            <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
+                          </div>`).join("")}
+                      `).join("")}
+                    </div>
+                  </section>`;
+                }).join("")}
         </div>
 
         <aside class="archive-side">
@@ -500,7 +566,7 @@
         </aside>
       </div>`;
 
-    /* 搜索（防抖） */
+    /* 搜索（防抖，重置页码） */
     const qInput = $("#qInput");
     if (qInput) {
       let timer;
@@ -510,6 +576,7 @@
           const args = new URLSearchParams(location.search);
           const v = qInput.value.trim();
           if (v) args.set("q", v); else args.delete("q");
+          args.delete("page");
           const qs = args.toString();
           history.replaceState(null, "", qs ? `archive.html?${qs}` : "archive.html");
           location.reload();
@@ -517,7 +584,7 @@
       });
     }
 
-    /* 标签筛选 */
+    /* 标签筛选（保留 folder，重置页码） */
     $$("#chips .tag-chip").forEach((btn) => {
       btn.addEventListener("click", () => {
         const args = new URLSearchParams(location.search);
@@ -525,8 +592,29 @@
         else args.set("tag", btn.dataset.tag);
         if (q) args.set("q", q);
         if (folder) args.set("folder", folder);
+        args.delete("page");
         const qs = args.toString();
         location.search = qs ? `?${qs}` : "?";
+      });
+    });
+
+    /* 分类区块折叠/展开 */
+    $$(".folder-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.fold;
+        toggleCollapse(key);
+        const block = btn.closest(".folder-block");
+        if (block) block.toggleAttribute("data-collapsed");
+      });
+    });
+
+    /* 侧栏分类树折叠 */
+    $$(".tree-fold").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const li = btn.closest("li");
+        const folded = li.classList.toggle("folded");
+        btn.textContent = folded ? "▸" : "▾";
       });
     });
 
