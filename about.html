@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=2">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233b82f6'/%3E%3Ctext x='16' y='22' font-size='15' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3Ew%3C/text%3E%3C/svg%3E">
 </head>
 <body data-theme="light" class="page-about">
@@ -41,6 +41,15 @@
     <div class="about-card rise">
       <p>你好，我是 <b>wym</b>。写代码，也写点数学；大多数时候，在琢磨怎么把<u>复杂的</u>事<u>讲得漂亮</u>。</p>
       <p>这个博客用来放三种东西：<b>数学</b>——那些"原来如此"的时刻；<b>代码</b>——踩过的坑与想通的道理；<b>随笔</b>——关于界面、设计与极简的杂想。</p>
+
+      <div class="stats-card" id="aboutStats">
+        <h3>小统计 <span class="en">At a glance</span></h3>
+        <div class="stats-grid">
+          <div class="stat"><b data-k="count">—</b><span>篇文章</span></div>
+          <div class="stat"><b data-k="year">—</b><span>最近更新</span></div>
+          <div class="stat"><b data-k="tags">—</b><span>个标签</span></div>
+        </div>
+      </div>
 
       <h2>这个博客</h2>
       <p>这里只做一件事：把想法写下来。排版尽量简单——白底、黑字、一抹蓝色强调，剩下的交给留白。因为好的文章靠停顿思考，好的界面靠克制说话。</p>
@@ -90,7 +99,7 @@
   </div>
 </footer>
 
-<script src="assets/js/blog.js"></script>
+<script src="assets/js/blog.js?v=2"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

@@ -430,7 +430,7 @@
           <div class="side-card">
             <h3>关于本站</h3>
             <p class="who">blog · wym</p>
-            <p>${esc(CONFIG.tagline)}。记录数学、代码与有趣的想法的笔记本。</p>
+            <p>${esc(CONFIG.tagline)} 记录数学、代码与有趣的想法的笔记本。</p>
           </div>
           <div class="side-card">
             <h3>订阅</h3>
@@ -473,6 +473,23 @@
     initReveal();
   }
 
+  /* ---------------- 关于页小统计 ---------------- */
+  async function initAboutStats() {
+    const box = $("#aboutStats");
+    if (!box) return;
+    let posts;
+    try { posts = await getPosts(); } catch { return; }
+    const tagSet = new Set();
+    posts.forEach((p) => (p.tags || []).forEach((t) => tagSet.add(t)));
+    const set = (k, v) => {
+      const el = box.querySelector(`[data-k="${k}"]`);
+      if (el) el.textContent = v;
+    };
+    set("count", posts.length);
+    set("year", posts.length ? new Date(posts[0].date).getFullYear() : "—");
+    set("tags", tagSet.size);
+  }
+
   /* ---------------- 启动 ---------------- */
   function boot() {
     initTheme();
@@ -481,6 +498,7 @@
     if (view === "home") renderHome();
     else if (view === "post") renderPost();
     else if (view === "archive") renderArchive();
+    initAboutStats();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

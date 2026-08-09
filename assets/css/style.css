@@ -21,7 +21,7 @@
            "STSong", "SimSun", serif;
   --mono: "IBM Plex Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
 
-  --col:   52rem;                    /* 正文栏宽（较宽，阅读不拥挤） */
+  --col:   56rem;                    /* 正文栏宽（较宽，阅读不拥挤） */
   --gutter: clamp(20px, 5vw, 48px);
   --ease:  cubic-bezier(0.22, 1, 0.36, 1);
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -70,6 +70,9 @@ input { font: inherit; }
 }
 
 .shell { position: relative; z-index: 1; max-width: var(--col); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* 详情页更宽：正文 + 右侧目录都要有位置 */
+.page-post .shell { max-width: 68rem; }
 
 /* ==========================================================================
    顶栏
@@ -179,6 +182,7 @@ input { font: inherit; }
    ========================================================================== */
 .post-list { display: flex; flex-direction: column; }
 .post-row {
+  position: relative;   /* 让标题上的覆盖层铺满整行，点击范围更大 */
   display: grid; grid-template-columns: 120px 1fr; gap: clamp(16px, 3vw, 28px);
   padding: clamp(18px, 3vw, 24px) 0;
   border-bottom: 1px solid var(--line-2);
@@ -202,7 +206,6 @@ input { font: inherit; }
 }
 .post-row:hover h3 { color: var(--accent); }
 .post-row h3 a::after { content: ""; position: absolute; inset: 0; }
-.post-row h3 a { position: relative; }
 .post-row .p-excerpt {
   margin-top: 7px; color: var(--muted);
   font-size: 0.92rem; line-height: 1.78; max-width: 58ch;
@@ -305,6 +308,7 @@ input { font: inherit; }
   border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px;
 }
 .arc-row {
+  position: relative;   /* 标题覆盖层铺满整行 */
   display: grid; grid-template-columns: 96px 1fr; gap: 18px; align-items: baseline;
   padding: 11px 0; border-bottom: 1px dashed var(--line-2);
   transition: padding-left 0.4s var(--spring);
@@ -313,6 +317,7 @@ input { font: inherit; }
 .arc-row .d { font-family: var(--mono); font-size: 0.72rem; color: var(--faint); }
 .arc-row .t { font-size: 0.98rem; line-height: 1.5; }
 .arc-row .t a { transition: color 0.25s var(--ease); }
+.arc-row .t a::after { content: ""; position: absolute; inset: 0; }
 .arc-row .t a:hover { color: var(--accent); }
 
 /* 侧栏 */
@@ -368,16 +373,16 @@ input { font: inherit; }
 .post-head .meta .d { color: var(--accent); }
 
 .post-body-layout {
-  display: grid; grid-template-columns: minmax(0, 1fr) 190px;
-  gap: clamp(24px, 5vw, 56px); align-items: start;
+  display: grid; grid-template-columns: minmax(0, 1fr) 180px;
+  gap: clamp(24px, 4vw, 48px); align-items: start;
 }
-@media (max-width: 960px) { .post-body-layout { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .post-body-layout { grid-template-columns: 1fr; } }
 
 .post-content { min-width: 0; padding-bottom: clamp(30px, 5vw, 48px); }
 
-/* TOC */
+/* TOC（侧栏目录，让正文更宽） */
 .toc { position: sticky; top: 92px; display: none; }
-@media (min-width: 961px) { .toc { display: block; } }
+@media (min-width: 901px) { .toc { display: block; } }
 .toc .toc-title {
   font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--faint); margin-bottom: 14px;
@@ -502,6 +507,28 @@ input { font: inherit; }
 .about-card ul li a { color: var(--accent); }
 .about-side { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 24px; }
 @media (max-width: 860px) { .about-side { position: static; } }
+
+/* 关于页小统计 */
+.stats-card {
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  background: var(--paper-2);
+  padding: 22px 24px;
+  margin: 10px 0 2px;
+}
+.stats-card h3 {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--faint);
+  display: flex; align-items: baseline; gap: 8px; margin-bottom: 16px;
+}
+.stats-card h3 .en { text-transform: none; letter-spacing: 0.02em; }
+.stats-grid { display: flex; gap: clamp(20px, 4vw, 40px); flex-wrap: wrap; }
+.stat b {
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 600;
+  color: var(--ink); display: block; line-height: 1.1;
+}
+.stat span { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+@media (max-width: 640px) { .stats-grid { flex-direction: column; gap: 14px; } }
 
 /* ==========================================================================
    404
