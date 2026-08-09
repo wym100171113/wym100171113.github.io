@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="墨笺 — 一个关于数学、代码与偶然想法的笔记本">
-<title>墨笺 · Ink Letter</title>
+<meta name="description" content="关于墨笺与作者">
+<title>关于 · 墨笺</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Serif+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,31 +27,31 @@
     </div>
   </header>
 
-  <section class="intro">
-    <div class="shell">
-      <h1>把想法 <em>写下来</em>，<br>比记住它更可靠。</h1>
-      <p>这是一个关于数学、代码与偶然想法的笔记本。慢慢写，慢慢改，不赶时间。</p>
-      <div class="meta-row">
-        <span>由 Markdown 驱动</span>
-        <span>静态托管于 GitHub Pages</span>
-        <span>支持日 / 夜模式</span>
-      </div>
+  <main class="shell page-body">
+    <div class="prose fade">
+      <h1>关于</h1>
+      <p>这里是 <strong>墨笺 · Ink Letter</strong>，一个用来安放想法的地方。</p>
+      <p>写点什么来介绍你自己吧 —— 你是谁，在哪里，关心什么，以及为什么开始写这个博客。这段文字会出现在「关于」页面。直接编辑 <code>about.html</code> 里的这段 <code>&lt;div class="prose"&gt;</code> 即可，支持完整的 HTML 排版。</p>
+      <h2>这个博客是怎么搭起来的</h2>
+      <p>它是一个纯静态站点：文章以 Markdown 写就，放在 <code>posts/</code> 目录下；浏览器读取 <code>posts/index.json</code> 索引并渲染列表与正文。不需要数据库，不需要服务端，推送到 GitHub 即自动发布。</p>
+      <h2>怎么找到我</h2>
+      <ul>
+        <li>GitHub —— <a href="#">@your-name</a></li>
+        <li>邮箱 —— <a href="mailto:you@example.com">you@example.com</a></li>
+        <li>其它 —— 自行补充</li>
+      </ul>
+      <hr>
+      <p>如果你也想搭一个一样的，看看仓库根目录的 <code>操作指南.md</code>。</p>
     </div>
-  </section>
-
-  <main id="main" class="shell" data-view="home">
-    <div class="status">加载中…</div>
   </main>
 
   <footer class="site-foot">
     <div class="shell">
       <span><span class="seal" aria-hidden="true"></span>&nbsp; © <span id="yr"></span> 墨笺 · Ink Letter</span>
-      <span>由 Markdown 与一点留白构成 · <a href="about.html">关于</a></span>
+      <span>由 Markdown 与一点留白构成 · <a href="index.html">首页</a></span>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/highlight.min.js"></script>
   <script src="assets/js/blog.js"></script>
   <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
 </body>
