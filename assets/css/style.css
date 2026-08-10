@@ -561,6 +561,24 @@ input { font: inherit; }
   padding: 18px 20px; overflow-x: auto;
 }
 .prose pre code { background: none; border: none; padding: 0; color: var(--ink); font-size: 1em; }
+
+/* 代码块复制按钮 */
+.prose .code-block { position: relative; }
+.prose .code-block .copy-btn {
+  position: absolute; top: 10px; right: 12px;
+  font-family: var(--mono); font-size: 0.7rem; line-height: 1;
+  color: var(--muted);
+  background: var(--paper);
+  border: 1px solid var(--line); border-radius: 7px;
+  padding: 5px 10px; cursor: pointer;
+  opacity: 0; transition: opacity 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.prose .code-block:hover .copy-btn,
+.prose .code-block .copy-btn:focus-visible,
+.prose .code-block .copy-btn.done { opacity: 1; }
+.prose .code-block .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+.prose .code-block .copy-btn.done { color: #16a34a; border-color: #16a34a; }
+@media (hover: none) { .prose .code-block .copy-btn { opacity: 1; } }
 .prose table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.82rem; margin: 1.8rem 0; }
 .prose th, .prose td { border-bottom: 1px solid var(--line); padding: 10px 14px; text-align: left; }
 .prose th { color: var(--ink-2); font-weight: 500; border-bottom-width: 2px; }

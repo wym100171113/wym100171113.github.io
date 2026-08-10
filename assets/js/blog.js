@@ -391,6 +391,9 @@
       });
     }
 
+    /* 代码块复制按钮（mermaid 块会被替换为图表，跳过） */
+    initCopyButtons();
+
     /* Mermaid 图表 */
     if (window.mermaid) {
       try {
@@ -434,6 +437,58 @@
       window.addEventListener("scroll", onToc, { passive: true });
       onToc();
     }
+  }
+
+  /* ---------------- 代码块复制按钮 ---------------- */
+  function initCopyButtons() {
+    $$("#prose pre").forEach((pre) => {
+      const code = pre.querySelector("code");
+      if (!code) return;
+      if (code.className && String(code.className).includes("language-mermaid")) return;
+
+      const wrap = document.createElement("div");
+      wrap.className = "code-block";
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "copy-btn";
+      btn.textContent = "复制";
+      btn.setAttribute("aria-label", "复制代码");
+      wrap.appendChild(btn);
+
+      btn.addEventListener("click", async () => {
+        const text = code.textContent;
+        let ok = false;
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            ok = true;
+          }
+        } catch (e) { /* fall through */ }
+        if (!ok) {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            ok = document.execCommand("copy");
+            ta.remove();
+          } catch (e) { /* noop */ }
+        }
+        if (ok) {
+          btn.textContent = "已复制";
+          btn.classList.add("done");
+          setTimeout(() => {
+            btn.textContent = "复制";
+            btn.classList.remove("done");
+          }, 1600);
+        }
+      });
+    });
   }
 
   /* ---------------- 归档页 ---------------- */
