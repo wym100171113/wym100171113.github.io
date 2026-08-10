@@ -491,6 +491,7 @@ input { font: inherit; }
   display: grid; grid-template-columns: minmax(0, 1fr) 180px;
   gap: clamp(24px, 4vw, 48px); align-items: start;
 }
+.post-body-layout.no-toc { grid-template-columns: 1fr; }
 @media (max-width: 900px) { .post-body-layout { grid-template-columns: 1fr; } }
 
 .post-content { min-width: 0; padding-bottom: clamp(30px, 5vw, 48px); }
@@ -507,8 +508,11 @@ input { font: inherit; }
   display: block; font-size: 0.8rem; line-height: 1.5; color: var(--muted);
   padding: 4px 0; transition: color 0.25s var(--ease), transform 0.25s var(--ease);
 }
+.toc a.sub { padding-left: 12px; font-size: 0.76rem; }
+.toc a.sub2 { padding-left: 24px; font-size: 0.72rem; }
 .toc a:hover { color: var(--ink); }
 .toc a.on { color: var(--accent); transform: translateX(3px); }
+.toc a.sub.on, .toc a.sub2.on { transform: translateX(3px); }
 
 /* 正文排版 */
 .prose { font-size: 1.0rem; line-height: 1.95; }
@@ -520,7 +524,7 @@ input { font: inherit; }
 .prose h3 {
   font-size: 1.12rem; font-weight: 600; margin-top: 2rem; scroll-margin-top: 90px;
 }
-.prose h4 { font-size: 1.0rem; font-weight: 600; margin-top: 1.6rem; color: var(--ink-2); }
+.prose h4 { font-size: 1.0rem; font-weight: 600; margin-top: 1.6rem; color: var(--ink-2); scroll-margin-top: 90px; }
 .prose h5 { font-size: 0.95rem; font-weight: 600; margin-top: 1.5rem; color: var(--ink-2); }
 .prose h6 { font-size: 0.9rem; font-weight: 600; margin-top: 1.4rem; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.03em; }
 .prose p { color: var(--ink); }

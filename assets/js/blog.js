@@ -323,11 +323,44 @@
       bq.replaceWith(div);
     });
 
+    /* 标题归一化 + 目录
+       1) 删掉与文章标题重复的正文 h1（避免标题在页面上出现两遍）；
+       2) 找出正文最浅的标题层级，整体顺移到 h2 起步（h1 留给页面标题）——
+          无论作者用 # 还是 ## 或更深层级，视觉与目录层级都保持一致；
+       3) 目录收录归一化后的 h2/h3/h4+（h5/h6 按 h4 平级展示，不再漏掉）；
+         所有标题都会拿到锚点 id。 */
+    const HEADING_TAGS = ["h1", "h2", "h3", "h4", "h5", "h6"];
+    let removedTitleH1 = false;
+    $$("h1, h2, h3, h4, h5, h6", tmp).forEach((h) => {
+      if (!removedTitleH1 && h.tagName === "H1" && h.textContent.trim() === title.trim()) {
+        h.remove();
+        removedTitleH1 = true;
+      }
+    });
+    let headings = $$("h1, h2, h3, h4, h5, h6", tmp);
+    if (headings.length) {
+      const minLv = Math.min(...headings.map((h) => HEADING_TAGS.indexOf(h.tagName.toLowerCase())));
+      const shift = minLv === 0 ? 1 : 1 - minLv;   // 最浅一级顺移到 h2，h6 不越界
+      headings.forEach((h) => {
+        const lv = HEADING_TAGS.indexOf(h.tagName.toLowerCase());
+        const tag = HEADING_TAGS[Math.min(lv + shift, 5)];
+        if (tag !== h.tagName.toLowerCase()) {
+          const nh = document.createElement(tag);
+          nh.innerHTML = h.innerHTML;
+          h.replaceWith(nh);
+        }
+      });
+      headings = $$("h2, h3, h4", tmp);
+    }
     let n = 0;
-    $$("h2, h3", tmp).forEach((h) => {
+    headings.forEach((h) => {
       const id = `sec-${++n}`;
       h.id = id;
-      toc.push({ id, text: h.textContent, sub: h.tagName === "H3" });
+      toc.push({
+        id,
+        text: h.textContent,
+        depth: Math.min(HEADING_TAGS.indexOf(h.tagName.toLowerCase()) - 1, 2), // h2→0, h3→1, h4+→2
+      });
     });
     html = tmp.innerHTML;
 
@@ -345,7 +378,7 @@
         </div>
       </section>
 
-      <section class="post-body-layout rise" style="animation-delay:.06s">
+      <section class="post-body-layout rise${toc.length ? "" : " no-toc"}" style="animation-delay:.06s">
         <article class="post-content">
           <div class="prose" id="prose">${html}</div>
 
@@ -362,10 +395,11 @@
           </div>
         </article>
 
+        ${toc.length ? `
         <aside class="toc">
           <p class="toc-title">本页目录</p>
-          <nav id="tocNav">${toc.map((h) => `<a href="#${h.id}"${h.sub ? ' class="sub"' : ""}>${esc(h.text)}</a>`).join("")}</nav>
-        </aside>
+          <nav id="tocNav">${toc.map((h) => `<a href="#${h.id}"${h.depth ? ` class="${h.depth === 1 ? "sub" : "sub2"}"` : ""}>${esc(h.text)}</a>`).join("")}</nav>
+        </aside>` : ""}
       </section>`;
 
     /* KaTeX 数学公式（$..$ 行内 / $$..$$ 独立 / \(..\) 与 \[..\] 兼容） */
@@ -429,7 +463,7 @@
     if (tocLinks.length) {
       const onToc = () => {
         let cur = "";
-        $$("#prose h2, #prose h3").forEach((el) => {
+        $$("#prose h2, #prose h3, #prose h4").forEach((el) => {
           if (el.getBoundingClientRect().top <= 140) cur = el.id;
         });
         tocLinks.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${cur}`));
