@@ -297,6 +297,22 @@
     const tmp = document.createElement("div");
     tmp.innerHTML = html;
 
+    /* 站内文章链接转译：Obsidian 里站内链接是相对 .md 路径（如 ../代数/韦达定理.md），
+       站点上点击会 404。这里把指向 .md（或纯文件名）的链接统一换成 post.html?id=文件名 */
+    $$("a[href]", tmp).forEach((a) => {
+      let href = a.getAttribute("href");
+      if (!href) return;
+      if (/^(https?:|mailto:|tel:|#|javascript:|data:)/i.test(href)) return;
+      if (/\.(html?|xml|png|jpe?g|gif|svg|webp|pdf|zip|css|js)([?#]|$)/i.test(href)) return;
+      const bare = href.replace(/[?#].*$/, "");
+      const file = bare.split("/").pop();
+      if (!file) return;
+      const isMd = /\.md$/i.test(bare);
+      const hasExt = /\.[a-z0-9]{1,6}$/i.test(bare);
+      if (!isMd && (hasExt || !/^[\w\u4e00-\u9fff-]+$/.test(file))) return;
+      a.setAttribute("href", `post.html?id=${encodeURIComponent(file.replace(/\.md$/i, ""))}`);
+    });
+
     /* Obsidian callout：把 > [!type] 块引用转成 callout */
     $$("blockquote", tmp).forEach((bq) => {
       const firstP = bq.firstElementChild;
