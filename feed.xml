@@ -15,14 +15,6 @@
       <category>数学</category>
     </item>
     <item>
-      <title>Hello world</title>
-      <link>https://wym100171113.github.io/post.html?slug=hello</link>
-      <guid>https://wym100171113.github.io/post.html?slug=hello</guid>
-      <pubDate>Sun, 09 Aug 2026 00:00:00 +0800</pubDate>
-      <description>这个博客为什么存在：关于数学、代码与偶然想法的笔记本。</description>
-      <category>随笔</category>
-    </item>
-    <item>
       <title>AM-GM不等式</title>
       <link>https://wym100171113.github.io/post.html?slug=AM-GM%E4%B8%8D%E7%AD%89%E5%BC%8F</link>
       <guid>https://wym100171113.github.io/post.html?slug=AM-GM%E4%B8%8D%E7%AD%89%E5%BC%8F</guid>
@@ -45,6 +37,14 @@
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0800</pubDate>
       <description>斐波那契数列为什么逼近黄金分割？比奈公式给出答案。顺便聊聊从兔子到向日葵的巧合。</description>
       <category>数学</category>
+    </item>
+    <item>
+      <title>Hello world</title>
+      <link>https://wym100171113.github.io/post.html?slug=hello</link>
+      <guid>https://wym100171113.github.io/post.html?slug=hello</guid>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0800</pubDate>
+      <description>这个博客为什么存在：关于数学、代码与偶然想法的笔记本。</description>
+      <category>随笔</category>
     </item>
   </channel>
 </rss>
