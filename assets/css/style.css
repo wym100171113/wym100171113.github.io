@@ -624,9 +624,52 @@ input { font: inherit; }
 .callout-bug .callout-title, .callout-abstract .callout-title, .callout-summary .callout-title { color: #9333ea; }
 
 /* Mermaid 图表 */
-.prose .mermaid { margin: 1.6rem 0; text-align: center; }
+.prose .mermaid { margin: 1.6rem 0; text-align: center; position: relative; cursor: zoom-in; }
 .prose .mermaid svg { max-width: 100%; height: auto; background: transparent; }
 [data-theme="dark"] .prose .mermaid svg { filter: brightness(0.9); }
+.mmd-hint {
+  position: absolute; right: 10px; bottom: 10px;
+  font-family: var(--mono); font-size: 0.66rem; color: var(--muted);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
+  padding: 3px 8px; opacity: 0; transition: opacity 0.25s var(--ease);
+  pointer-events: none;
+}
+.mermaid:hover .mmd-hint { opacity: 1; }
+@media (hover: none) { .mmd-hint { opacity: 1; } }
+
+/* Mermaid 放大灯箱 */
+body.mmd-locked { overflow: hidden; }
+.mmd-lightbox {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(15, 15, 17, 0.72);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  animation: mmdIn 0.22s var(--ease);
+}
+@keyframes mmdIn { from { opacity: 0; } to { opacity: 1; } }
+.mmd-stage { width: 92vw; height: 88vh; position: relative; overflow: hidden; }
+.mmd-zoom {
+  position: absolute; left: 50%; top: 50%;
+  transform-origin: 0 0;
+  cursor: grab; touch-action: none;
+  background: #fff; border-radius: 10px; padding: 20px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+.mmd-zoom.grabbing { cursor: grabbing; }
+.mmd-zoom svg { display: block; max-width: 82vw; max-height: 76vh; }
+.mmd-close {
+  position: fixed; top: 18px; right: 22px;
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.08);
+  color: #fff; font-size: 20px; line-height: 1; cursor: pointer;
+  transition: background 0.25s var(--ease);
+}
+.mmd-close:hover { background: rgba(255, 255, 255, 0.2); }
+.mmd-tip {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 0.7rem; color: rgba(255, 255, 255, 0.65);
+  pointer-events: none; white-space: nowrap;
+}
 
 /* 代码高亮（自定义低饱和配色） */
 .hljs-comment, .hljs-quote { color: var(--faint); font-style: italic; }

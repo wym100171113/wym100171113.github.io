@@ -302,7 +302,7 @@
       const firstP = bq.firstElementChild;
       if (!firstP || firstP.tagName !== "P") return;
       // GFM 会把 callout 的标题与正文合并进同一个 <p>，用换行切分
-      const m = firstP.innerHTML.match(/^\[!([a-zA-Z]+)\](-\s*)?([^\n]*)([\s\S]*)$/);
+      const m = firstP.innerHTML.match(/^\[!([a-zA-Z]+)\]((?:-|\+)?\s*)?([^\n]*)([\s\S]*)$/);
       if (!m) return;
       const type = m[1].toLowerCase();
       const titleHTML = m[3].trim();
@@ -440,8 +440,12 @@
         (async () => {
           try {
             const { svg } = await mermaid.render(id, code);
+            const wrap = document.createElement("div");
+            wrap.className = "mermaid";
+            wrap.innerHTML = `${svg}<span class="mmd-hint">点击放大</span>`;
             const pre = el.closest("pre");
-            if (pre) pre.outerHTML = `<div class="mermaid">${svg}</div>`;
+            if (pre) pre.replaceWith(wrap);
+            initMmdZoom(wrap);
           } catch (e) { /* 渲染失败则保留原代码块 */ }
         })();
       });
@@ -523,6 +527,79 @@
         }
       });
     });
+  }
+
+  /* ---------------- Mermaid 图表放大（灯箱：滚轮缩放 + 拖拽平移） ---------------- */
+  function initMmdZoom(box) {
+    box.addEventListener("click", () => openMmdLightbox(box));
+  }
+
+  function openMmdLightbox(box) {
+    const src = box.querySelector("svg");
+    if (!src) return;
+    const overlay = document.createElement("div");
+    overlay.className = "mmd-lightbox";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.innerHTML = `
+      <div class="mmd-stage"><div class="mmd-zoom"></div></div>
+      <button class="mmd-close" aria-label="关闭">×</button>
+      <span class="mmd-tip">滚轮缩放 · 拖拽平移 · 双击复位 · Esc 关闭</span>`;
+    const stage = $(".mmd-stage", overlay);
+    const zoom = $(".mmd-zoom", overlay);
+    zoom.appendChild(src.cloneNode(true));
+
+    let scale = 1, tx = 0, ty = 0;
+    const apply = () => { zoom.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`; };
+
+    const onWheel = (e) => {
+      e.preventDefault();
+      const ns = Math.min(12, Math.max(1, scale * Math.exp(-e.deltaY * 0.0015)));
+      const r = stage.getBoundingClientRect();
+      const cx = e.clientX - r.left - r.width / 2;
+      const cy = e.clientY - r.top - r.height / 2;
+      tx = cx - (cx - tx) * (ns / scale);
+      ty = cy - (cy - ty) * (ns / scale);
+      scale = ns;
+      apply();
+    };
+
+    let dragging = false, sx = 0, sy = 0;
+    const onDown = (e) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      dragging = true;
+      sx = e.clientX - tx; sy = e.clientY - ty;
+      zoom.setPointerCapture(e.pointerId);
+      zoom.classList.add("grabbing");
+    };
+    const onMove = (e) => {
+      if (!dragging) return;
+      tx = e.clientX - sx; ty = e.clientY - sy;
+      apply();
+    };
+    const onUp = () => {
+      dragging = false;
+      zoom.classList.remove("grabbing");
+    };
+    const onKey = (e) => { if (e.key === "Escape") close(); };
+    const close = () => {
+      overlay.remove();
+      document.body.classList.remove("mmd-locked");
+      document.removeEventListener("keydown", onKey);
+    };
+
+    zoom.addEventListener("wheel", onWheel, { passive: false });
+    zoom.addEventListener("pointerdown", onDown);
+    zoom.addEventListener("pointermove", onMove);
+    zoom.addEventListener("pointerup", onUp);
+    zoom.addEventListener("pointercancel", onUp);
+    zoom.addEventListener("dblclick", () => { scale = 1; tx = 0; ty = 0; apply(); });
+    overlay.addEventListener("click", (e) => { if (e.target === overlay || e.target === stage) close(); });
+    $(".mmd-close", overlay).addEventListener("click", close);
+    document.addEventListener("keydown", onKey);
+
+    document.body.appendChild(overlay);
+    document.body.classList.add("mmd-locked");
   }
 
   /* ---------------- 归档页 ---------------- */
