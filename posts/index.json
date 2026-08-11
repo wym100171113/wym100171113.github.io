@@ -1,5 +1,18 @@
 [
   {
+    "slug": "fibonacci-part2",
+    "folder": "",
+    "title": "再谈斐波那契:通项公式的两种推导",
+    "date": "2026-08-11",
+    "tags": [
+      "数学",
+      "数列"
+    ],
+    "excerpt": "上一篇留下的作业,今天来交。第一种推导只用初中代数,第二种交给生成函数这把大锤——顺便把上次没展开的细节全部补齐。",
+    "category": "数学",
+    "readTime": "4 分钟"
+  },
+  {
     "slug": "hello",
     "folder": "",
     "title": "Hello world",
