@@ -7,7 +7,7 @@
   "use strict";
 
   const CONFIG = {
-    siteName: "wym",
+    siteName: "wym's blog",
     wordmark: "blog",
     tagline: "把复杂的，讲得漂亮。",
     // 首页「随手记」——想改修改这里即可
