@@ -7,6 +7,22 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>生成函数:把数列打包成代数</title>
+      <link>https://wym100171113.github.io/post.html?slug=generating-functions</link>
+      <guid>https://wym100171113.github.io/post.html?slug=generating-functions</guid>
+      <pubDate>Wed, 12 Aug 2026 00:00:00 +0800</pubDate>
+      <description>把整个数列打包成一个函数,递推、求和、卷积全都变成代数运算。上一篇用它推了比奈公式,这篇正式介绍它,并兑现卡特兰数的承诺。</description>
+      <category>数学</category>
+    </item>
+    <item>
+      <title>递推与迭代:不动点与轨道</title>
+      <link>https://wym100171113.github.io/post.html?slug=recurrence-iteration</link>
+      <guid>https://wym100171113.github.io/post.html?slug=recurrence-iteration</guid>
+      <pubDate>Wed, 12 Aug 2026 00:00:00 +0800</pubDate>
+      <description>递推的另一种看法:一阶递推就是函数迭代,轨道奔向不动点;二阶递推则是矩阵迭代。牛顿法、黄金分割、Cassini 恒等式,同一件事。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>再谈斐波那契:通项公式的两种推导</title>
       <link>https://wym100171113.github.io/post.html?slug=fibonacci-part2</link>
       <guid>https://wym100171113.github.io/post.html?slug=fibonacci-part2</guid>

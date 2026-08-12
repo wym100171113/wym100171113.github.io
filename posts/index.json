@@ -1,5 +1,31 @@
 [
   {
+    "slug": "generating-functions",
+    "folder": "",
+    "title": "生成函数:把数列打包成代数",
+    "date": "2026-08-12",
+    "tags": [
+      "数学",
+      "数列"
+    ],
+    "excerpt": "把整个数列打包成一个函数,递推、求和、卷积全都变成代数运算。上一篇用它推了比奈公式,这篇正式介绍它,并兑现卡特兰数的承诺。",
+    "category": "数学",
+    "readTime": "3 分钟"
+  },
+  {
+    "slug": "recurrence-iteration",
+    "folder": "",
+    "title": "递推与迭代:不动点与轨道",
+    "date": "2026-08-12",
+    "tags": [
+      "数学",
+      "数列"
+    ],
+    "excerpt": "递推的另一种看法:一阶递推就是函数迭代,轨道奔向不动点;二阶递推则是矩阵迭代。牛顿法、黄金分割、Cassini 恒等式,同一件事。",
+    "category": "数学",
+    "readTime": "7 分钟"
+  },
+  {
     "slug": "fibonacci-part2",
     "folder": "",
     "title": "再谈斐波那契:通项公式的两种推导",
