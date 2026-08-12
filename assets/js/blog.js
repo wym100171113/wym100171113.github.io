@@ -313,6 +313,23 @@
       a.setAttribute("href", `post.html?id=${encodeURIComponent(file.replace(/\.md$/i, ""))}`);
     });
 
+    /* Obsidian 附件路径转译：Obsidian 里图片是相对笔记文件的 vault 相对路径（vault=posts/），
+       站点渲染页在根目录。这里把 vault 相对路径换算成站点根相对路径：
+       按 ../ 级数上溯、按笔记所在文件夹深度归位，统一指向 posts/ 下的附件。
+       例如（笔记在 posts/数学/代数/ 下）：../../assets/img/x.png → posts/assets/img/x.png */
+    $$("img[src]", tmp).forEach((img) => {
+      let src = img.getAttribute("src");
+      if (!src) return;
+      if (/^(https?:|data:|blob:)/i.test(src)) return;
+      const segs = folder ? folder.split("/") : [];
+      let rest = src;
+      let up = 0;
+      while (rest.startsWith("../")) { up++; rest = rest.slice(3); }
+      if (rest.startsWith("/")) rest = rest.slice(1);
+      const dir = segs.slice(0, Math.max(0, segs.length - up));
+      img.setAttribute("src", ["posts", ...dir, rest].filter(Boolean).join("/"));
+    });
+
     /* Obsidian callout：把 > [!type] 块引用转成 callout */
     $$("blockquote", tmp).forEach((bq) => {
       const firstP = bq.firstElementChild;
