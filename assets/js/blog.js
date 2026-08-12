@@ -450,6 +450,9 @@
       } catch (e) { /* noop */ }
     }
 
+    /* 正文图片：点击放大（灯箱缩放/平移） */
+    initImgZoom();
+
     /* 代码高亮（mermaid 交给 mermaid.js，跳过） */
     if (window.hljs) {
       $$("#prose pre code").forEach((b) => {
@@ -564,12 +567,18 @@
 
   /* ---------------- Mermaid 图表放大（灯箱：滚轮缩放 + 拖拽平移） ---------------- */
   function initMmdZoom(box) {
-    box.addEventListener("click", () => openMmdLightbox(box));
+    box.addEventListener("click", () => openLightbox(box.querySelector("svg")));
   }
 
-  function openMmdLightbox(box) {
-    const src = box.querySelector("svg");
-    if (!src) return;
+  /* 正文图片点击放大（复用 mermaid 灯箱） */
+  function initImgZoom() {
+    $$("#prose img").forEach((img) => {
+      img.addEventListener("click", () => openLightbox(img));
+    });
+  }
+
+  function openLightbox(el) {
+    if (!el) return;
     const overlay = document.createElement("div");
     overlay.className = "mmd-lightbox";
     overlay.setAttribute("role", "dialog");
@@ -580,7 +589,7 @@
       <span class="mmd-tip">滚轮缩放 · 拖拽平移 · 双击复位 · Esc 关闭</span>`;
     const stage = $(".mmd-stage", overlay);
     const zoom = $(".mmd-zoom", overlay);
-    zoom.appendChild(src.cloneNode(true));
+    zoom.appendChild(el.cloneNode(true));
 
     let scale = 1, tx = 0, ty = 0;
     const apply = () => { zoom.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`; };

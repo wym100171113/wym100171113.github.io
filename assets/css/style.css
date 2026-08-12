@@ -548,7 +548,12 @@ input { font: inherit; }
 }
 .prose blockquote p { color: inherit; }
 .prose hr { border: none; border-top: 1px dashed var(--line); margin: 2.8rem 0; }
-.prose img { border-radius: 10px; border: 1px solid var(--line); margin: 1.6rem 0; box-shadow: 0 2px 14px rgba(28, 28, 30, 0.06); }
+.prose img {
+  display: block; margin: 1.6rem auto; cursor: zoom-in;
+  max-width: min(100%, 520px); max-height: 70vh;
+  border-radius: 10px; border: 1px solid var(--line);
+  box-shadow: 0 2px 14px rgba(28, 28, 30, 0.06);
+}
 .prose figcaption, .prose img + em {
   display: block; text-align: center; font-size: 0.78rem; color: var(--muted);
   font-style: normal; margin-top: -8px;
@@ -657,6 +662,7 @@ body.mmd-locked { overflow: hidden; }
 }
 .mmd-zoom.grabbing { cursor: grabbing; }
 .mmd-zoom svg { display: block; max-width: 82vw; max-height: 76vh; }
+.mmd-zoom img { display: block; max-width: 86vw; max-height: 80vh; border-radius: 8px; }
 .mmd-close {
   position: fixed; top: 18px; right: 22px;
   width: 40px; height: 40px; border-radius: 50%;
