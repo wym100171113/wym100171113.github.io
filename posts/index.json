@@ -1,5 +1,18 @@
 [
   {
+    "slug": "fractals",
+    "folder": "",
+    "title": "分形:局部与整体高度相似的几何",
+    "date": "2026-08-13",
+    "tags": [
+      "数学",
+      "几何"
+    ],
+    "excerpt": "科赫雪花、谢尔宾斯基三角形,以及一个让人坐不住的结论:雪花周长无穷大,面积却有限。豪斯多夫维数解释了这一切。",
+    "category": "数学",
+    "readTime": "4 分钟"
+  },
+  {
     "slug": "generating-functions",
     "folder": "",
     "title": "生成函数:把数列打包成代数",

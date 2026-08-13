@@ -7,6 +7,14 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>分形:局部与整体高度相似的几何</title>
+      <link>https://wym100171113.github.io/post.html?id=fractals</link>
+      <guid>https://wym100171113.github.io/post.html?id=fractals</guid>
+      <pubDate>Thu, 13 Aug 2026 00:00:00 +0800</pubDate>
+      <description>科赫雪花、谢尔宾斯基三角形,以及一个让人坐不住的结论:雪花周长无穷大,面积却有限。豪斯多夫维数解释了这一切。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>生成函数:把数列打包成代数</title>
       <link>https://wym100171113.github.io/post.html?id=generating-functions</link>
       <guid>https://wym100171113.github.io/post.html?id=generating-functions</guid>
