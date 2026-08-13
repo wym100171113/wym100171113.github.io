@@ -18,7 +18,7 @@
     ],
   };
 
-  const MANIFEST = "posts/index.json";
+  const MANIFEST = "/posts/index.json";
   const THEME_KEY = "wym-blog-theme";
 
   const $  = (s, r = document) => r.querySelector(s);
@@ -92,7 +92,7 @@
   }
 
   function postUrl(slug) {
-    return `post.html?id=${encodeURIComponent(slug)}`;
+    return `/post/${encodeURIComponent(slug)}.html`;
   }
 
   /* ---------------- 主题与顶栏 ---------------- */
@@ -265,20 +265,20 @@
 
     let md;
     const mdPath = folder
-      ? `posts/${folder.split("/").map(encodeURIComponent).join("/")}/${encodeURIComponent(id)}.md`
-      : `posts/${encodeURIComponent(id)}.md`;
+      ? `/posts/${folder.split("/").map(encodeURIComponent).join("/")}/${encodeURIComponent(id)}.md`
+      : `/posts/${encodeURIComponent(id)}.md`;
     try {
       const res = await fetch(mdPath, { cache: "no-cache" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       md = await res.text();
     } catch (e) {
-      main.innerHTML = `<div class="status err">找不到文章 <code>${esc(id)}</code>（${esc(e.message)}）<br><a class="back-link" href="archive.html">← 返回归档</a></div>`;
+      main.innerHTML = `<div class="status err">找不到文章 <code>${esc(id)}</code>（${esc(e.message)}）<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
       return;
     }
 
     const { meta, body } = parseFrontmatter(md);
     if (String(meta.status || "").toLowerCase() === "draft") {
-      main.innerHTML = `<div class="status err">这是一篇草稿，尚未发布。<br><a class="back-link" href="archive.html">← 返回归档</a></div>`;
+      main.innerHTML = `<div class="status err">这是一篇草稿，尚未发布。<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
       return;
     }
     const title = meta.title || (info && info.title) || id;
@@ -306,10 +306,13 @@
     tmp.innerHTML = html;
 
     /* 站内文章链接转译：Obsidian 里站内链接是相对 .md 路径（如 ../代数/韦达定理.md），
-       站点上点击会 404。这里把指向 .md（或纯文件名）的链接统一换成 post.html?id=文件名 */
+       站点上点击会 404。这里把指向 .md（或纯文件名、post.html?id= 旧写法）的链接
+       统一换成分享页地址 /post/文件名.html */
     $$("a[href]", tmp).forEach((a) => {
       let href = a.getAttribute("href");
       if (!href) return;
+      const old = href.match(/^post\.html\?id=([^&#]+)/);
+      if (old) { a.setAttribute("href", postUrl(old[1])); return; }
       if (/^(https?:|mailto:|tel:|#|javascript:|data:)/i.test(href)) return;
       if (/\.(html?|xml|png|jpe?g|gif|svg|webp|pdf|zip|css|js)([?#]|$)/i.test(href)) return;
       const bare = href.replace(/[?#].*$/, "");
@@ -318,7 +321,7 @@
       const isMd = /\.md$/i.test(bare);
       const hasExt = /\.[a-z0-9]{1,6}$/i.test(bare);
       if (!isMd && (hasExt || !/^[\w\u4e00-\u9fff-]+$/.test(file))) return;
-      a.setAttribute("href", `post.html?id=${encodeURIComponent(file.replace(/\.md$/i, ""))}`);
+      a.setAttribute("href", postUrl(file.replace(/\.md$/i, "")));
     });
 
     /* Obsidian 附件路径转译：Obsidian 里图片是相对笔记文件的 vault 相对路径（vault=posts/），
@@ -335,7 +338,7 @@
       while (rest.startsWith("../")) { up++; rest = rest.slice(3); }
       if (rest.startsWith("/")) rest = rest.slice(1);
       const dir = segs.slice(0, Math.max(0, segs.length - up));
-      img.setAttribute("src", ["posts", ...dir, rest].filter(Boolean).join("/"));
+      img.setAttribute("src", "/" + ["posts", ...dir, rest].filter(Boolean).join("/"));
     });
 
     /* Obsidian callout：把 > [!type] 块引用转成 callout */
@@ -408,9 +411,9 @@
     main.innerHTML = `
       <div class="read-progress"><i id="readBar"></i></div>
       <section class="post-head rise">
-        <a class="back-link" href="archive.html">← 返回归档</a>
+        <a class="back-link" href="/archive.html">← 返回归档</a>
         <span class="p-cat">${esc(cat)}</span>
-        ${folder ? `<a class="p-folder" href="archive.html?folder=${encodeURIComponent(folder)}">${esc(folder.replace(/\//g, " / "))}</a>` : ""}
+        ${folder ? `<a class="p-folder" href="/archive.html?folder=${encodeURIComponent(folder)}">${esc(folder.replace(/\//g, " / "))}</a>` : ""}
         <h1>${esc(title)}</h1>
         <div class="meta">
           <span class="d">${esc(zhDate(date))}</span>
@@ -424,7 +427,7 @@
           <div class="prose" id="prose">${html}</div>
 
           <div class="post-foot">
-            ${tags.length ? `<div class="post-tags">${tags.map((t) => `<a href="archive.html?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join("")}</div>` : ""}
+            ${tags.length ? `<div class="post-tags">${tags.map((t) => `<a href="/archive.html?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join("")}</div>` : ""}
             <nav class="pn-nav">
               ${prev
                 ? `<a href="${postUrl(prev.slug)}"><small>上一篇</small><span>${esc(prev.title)}</span></a>`
@@ -518,6 +521,29 @@
       };
       window.addEventListener("scroll", onToc, { passive: true });
       onToc();
+    }
+
+    /* 分享元数据 + 规范 URL：
+       地址栏换成静态分享页 post/<slug>.html（可被抓取、可分享），
+       并把页面的 title/description/OG 标签同步为当前文章内容 */
+    const shareUrl = `${location.origin}/post/${encodeURIComponent(id)}.html`;
+    history.replaceState(null, "", shareUrl);
+    const excerpt = meta.excerpt || (info && info.excerpt) || "";
+    const setMeta = (sel, val) => {
+      const el = document.querySelector(sel);
+      if (el) el.setAttribute("content", val);
+    };
+    setMeta('meta[name="description"]', excerpt);
+    setMeta('meta[property="og:title"]', title);
+    setMeta('meta[property="og:description"]', excerpt);
+    setMeta('meta[property="og:url"]', shareUrl);
+    const firstImg = $("#prose img");
+    if (firstImg) {
+      let src = firstImg.getAttribute("src");
+      if (src && !/^(https?:|data:|blob:)/i.test(src)) {
+        src = new URL(src, location.origin).href;
+      }
+      if (src) setMeta('meta[property="og:image"]', src);
     }
   }
 
