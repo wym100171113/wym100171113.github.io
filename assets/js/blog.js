@@ -351,6 +351,8 @@
       const type = m[1].toLowerCase();
       const titleHTML = m[3].trim();
       const bodyHTML = m[4];
+      const collapsible = /[-+]/.test(m[2] || "");
+      const collapsed = /-/.test(m[2] || "");
       firstP.remove();
       const div = document.createElement("div");
       div.className = `callout callout-${type}`;
@@ -358,6 +360,11 @@
       titleP.className = "callout-title";
       titleP.innerHTML = titleHTML || esc(type);
       div.appendChild(titleP);
+      if (collapsible) {
+        div.classList.add("is-collapsible");
+        if (collapsed) div.classList.add("is-collapsed");
+        titleP.addEventListener("click", () => div.classList.toggle("is-collapsed"));
+      }
       if (bodyHTML && bodyHTML.trim()) {
         const bodyP = document.createElement("p");
         bodyP.innerHTML = bodyHTML.trim();
@@ -604,10 +611,10 @@
     box.addEventListener("click", () => openLightbox(box.querySelector("svg")));
   }
 
-  /* 正文图片点击放大（复用 mermaid 灯箱） */
+  /* 正文图片 / 表格点击放大（复用灯箱） */
   function initImgZoom() {
-    $$("#prose img").forEach((img) => {
-      img.addEventListener("click", () => openLightbox(img));
+    $$("#prose img, #prose table").forEach((el) => {
+      el.addEventListener("click", () => openLightbox(el));
     });
   }
 
@@ -620,43 +627,107 @@
     overlay.innerHTML = `
       <div class="mmd-stage"><div class="mmd-zoom"></div></div>
       <button class="mmd-close" aria-label="关闭">×</button>
-      <span class="mmd-tip">滚轮缩放 · 拖拽平移 · 双击复位 · Esc 关闭</span>`;
+      <span class="mmd-tip">滚轮/双指缩放 · 拖拽平移 · 双击复位 · Esc 关闭</span>`;
     const stage = $(".mmd-stage", overlay);
     const zoom = $(".mmd-zoom", overlay);
     zoom.appendChild(el.cloneNode(true));
 
     let scale = 1, tx = 0, ty = 0;
     const apply = () => { zoom.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`; };
-
-    const onWheel = (e) => {
-      e.preventDefault();
-      const ns = Math.min(12, Math.max(1, scale * Math.exp(-e.deltaY * 0.0015)));
+    const stageCenter = (cx, cy) => {
       const r = stage.getBoundingClientRect();
-      const cx = e.clientX - r.left - r.width / 2;
-      const cy = e.clientY - r.top - r.height / 2;
-      tx = cx - (cx - tx) * (ns / scale);
-      ty = cy - (cy - ty) * (ns / scale);
+      return { x: cx - r.left - r.width / 2, y: cy - r.top - r.height / 2 };
+    };
+    /* 以某点为中心缩放 */
+    const zoomAt = (ns, px, py) => {
+      const c = stageCenter(px, py);
+      tx = c.x - (c.x - tx) * (ns / scale);
+      ty = c.y - (c.y - ty) * (ns / scale);
       scale = ns;
       apply();
     };
 
-    let dragging = false, sx = 0, sy = 0;
+    const onWheel = (e) => {
+      e.preventDefault();
+      zoomAt(Math.min(12, Math.max(1, scale * Math.exp(-e.deltaY * 0.0015))), e.clientX, e.clientY);
+    };
+
+    /* 多点触控：单指拖拽，双指捏合缩放 */
+    const pointers = new Map();
+    let dragging = false, sx = 0, sy = 0, pinchStart = null;
+    const mid = () => {
+      const pts = [...pointers.values()];
+      return {
+        x: (pts[0].x + pts[1].x) / 2,
+        y: (pts[0].y + pts[1].y) / 2,
+        dist: Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y),
+      };
+    };
     const onDown = (e) => {
       if (e.pointerType === "mouse" && e.button !== 0) return;
+      zoom.setPointerCapture(e.pointerId);
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size === 2) {
+        pinchStart = { ...mid(), scale, tx, ty };
+        dragging = false;
+        return;
+      }
       dragging = true;
       sx = e.clientX - tx; sy = e.clientY - ty;
-      zoom.setPointerCapture(e.pointerId);
       zoom.classList.add("grabbing");
     };
     const onMove = (e) => {
-      if (!dragging) return;
-      tx = e.clientX - sx; ty = e.clientY - sy;
-      apply();
+      if (!pointers.has(e.pointerId)) return;
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size === 2 && pinchStart) {
+        const m = mid();
+        const r = stage.getBoundingClientRect();
+        const cx = m.x - r.left - r.width / 2;
+        const cy = m.y - r.top - r.height / 2;
+        const ns = Math.min(12, Math.max(1, pinchStart.scale * (m.dist / Math.max(pinchStart.dist, 1))));
+        tx = cx - (cx - pinchStart.tx) * (ns / pinchStart.scale);
+        ty = cy - (cy - pinchStart.ty) * (ns / pinchStart.scale);
+        scale = ns;
+        apply();
+      } else if (dragging) {
+        tx = e.clientX - sx; ty = e.clientY - sy;
+        apply();
+      }
     };
-    const onUp = () => {
-      dragging = false;
+    const onUp = (e) => {
+      pointers.delete(e.pointerId);
+      if (pointers.size === 1) {
+        const [p] = pointers.values();
+        sx = p.x - tx; sy = p.y - ty;
+        dragging = true;
+      } else if (pointers.size === 0) {
+        dragging = false;
+        pinchStart = null;
+      }
       zoom.classList.remove("grabbing");
     };
+
+    /* 双击：放大到 2.5 倍（已放大则复位）——触屏双击也生效 */
+    const toggle = (e) => {
+      if (scale > 1.1) {
+        scale = 1; tx = 0; ty = 0;
+      } else {
+        zoomAt(2.5, e.clientX, e.clientY);
+      }
+      apply();
+    };
+    let lastTap = 0;
+    const onTap = (e) => {
+      if (e.pointerType !== "touch") return;
+      const now = Date.now();
+      if (now - lastTap < 320) {
+        toggle(e);
+        lastTap = 0;
+      } else {
+        lastTap = now;
+      }
+    };
+
     const onKey = (e) => { if (e.key === "Escape") close(); };
     const close = () => {
       overlay.remove();
@@ -669,7 +740,8 @@
     zoom.addEventListener("pointermove", onMove);
     zoom.addEventListener("pointerup", onUp);
     zoom.addEventListener("pointercancel", onUp);
-    zoom.addEventListener("dblclick", () => { scale = 1; tx = 0; ty = 0; apply(); });
+    zoom.addEventListener("pointerup", onTap);
+    zoom.addEventListener("dblclick", toggle);
     overlay.addEventListener("click", (e) => { if (e.target === overlay || e.target === stage) close(); });
     $(".mmd-close", overlay).addEventListener("click", close);
     document.addEventListener("keydown", onKey);

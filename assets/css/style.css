@@ -588,7 +588,8 @@ input { font: inherit; }
 .prose .code-block .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
 .prose .code-block .copy-btn.done { color: #16a34a; border-color: #16a34a; }
 @media (hover: none) { .prose .code-block .copy-btn { opacity: 1; } }
-.prose table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.82rem; margin: 1.8rem 0; }
+.prose table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.82rem; margin: 1.8rem 0; cursor: zoom-in; }
+@media (max-width: 900px) { .prose table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
 .prose th, .prose td { border-bottom: 1px solid var(--line); padding: 10px 14px; text-align: left; }
 .prose th { color: var(--ink-2); font-weight: 500; border-bottom-width: 2px; }
 .prose tr:last-child td { border-bottom: none; }
@@ -659,12 +660,19 @@ body.mmd-locked { overflow: hidden; }
 .mmd-zoom {
   transform-origin: 50% 50%;
   cursor: grab; touch-action: none;
-  background: #fff; border-radius: 10px; padding: 20px;
+  background: var(--paper); border-radius: 10px; padding: 20px;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
 }
 .mmd-zoom.grabbing { cursor: grabbing; }
 .mmd-zoom svg { display: block; max-width: 84vw; max-height: 76vh; }
 .mmd-zoom img { display: block; max-width: 84vw; max-height: 80vh; border-radius: 8px; }
+.mmd-zoom table {
+  border-collapse: collapse; font-family: var(--mono); font-size: 0.85rem;
+  max-width: 84vw; max-height: 80vh; display: block; overflow: auto;
+}
+.mmd-zoom th, .mmd-zoom td { border-bottom: 1px solid var(--line); padding: 10px 14px; text-align: left; }
+.mmd-zoom th { color: var(--ink-2); font-weight: 500; border-bottom-width: 2px; }
+.mmd-zoom tr:last-child td { border-bottom: none; }
 .mmd-close {
   position: fixed; top: 18px; right: 22px;
   width: 40px; height: 40px; border-radius: 50%;
