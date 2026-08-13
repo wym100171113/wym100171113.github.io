@@ -8,56 +8,56 @@
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>生成函数:把数列打包成代数</title>
-      <link>https://wym100171113.github.io/post.html?slug=generating-functions</link>
-      <guid>https://wym100171113.github.io/post.html?slug=generating-functions</guid>
+      <link>https://wym100171113.github.io/post.html?id=generating-functions</link>
+      <guid>https://wym100171113.github.io/post.html?id=generating-functions</guid>
       <pubDate>Wed, 12 Aug 2026 00:00:00 +0800</pubDate>
       <description>把整个数列打包成一个函数,递推、求和、卷积全都变成代数运算。上一篇用它推了比奈公式,这篇正式介绍它,并兑现卡特兰数的承诺。</description>
       <category>数学</category>
     </item>
     <item>
       <title>递推与迭代:不动点与轨道</title>
-      <link>https://wym100171113.github.io/post.html?slug=recurrence-iteration</link>
-      <guid>https://wym100171113.github.io/post.html?slug=recurrence-iteration</guid>
+      <link>https://wym100171113.github.io/post.html?id=recurrence-iteration</link>
+      <guid>https://wym100171113.github.io/post.html?id=recurrence-iteration</guid>
       <pubDate>Wed, 12 Aug 2026 00:00:00 +0800</pubDate>
       <description>递推的另一种看法:一阶递推就是函数迭代,轨道奔向不动点;二阶递推则是矩阵迭代。牛顿法、黄金分割、Cassini 恒等式,同一件事。</description>
       <category>数学</category>
     </item>
     <item>
       <title>再谈斐波那契:通项公式的两种推导</title>
-      <link>https://wym100171113.github.io/post.html?slug=fibonacci-part2</link>
-      <guid>https://wym100171113.github.io/post.html?slug=fibonacci-part2</guid>
+      <link>https://wym100171113.github.io/post.html?id=fibonacci-part2</link>
+      <guid>https://wym100171113.github.io/post.html?id=fibonacci-part2</guid>
       <pubDate>Tue, 11 Aug 2026 00:00:00 +0800</pubDate>
       <description>上一篇留下的引子,今天来补充。第一种推导只用初中代数,第二种交给生成函数这把大锤——顺便把上次没展开的细节全部补齐。</description>
       <category>数学</category>
     </item>
     <item>
       <title>AM-GM不等式</title>
-      <link>https://wym100171113.github.io/post.html?slug=AM-GM%E4%B8%8D%E7%AD%89%E5%BC%8F</link>
-      <guid>https://wym100171113.github.io/post.html?slug=AM-GM%E4%B8%8D%E7%AD%89%E5%BC%8F</guid>
+      <link>https://wym100171113.github.io/post.html?id=AM-GM%E4%B8%8D%E7%AD%89%E5%BC%8F</link>
+      <guid>https://wym100171113.github.io/post.html?id=AM-GM%E4%B8%8D%E7%AD%89%E5%BC%8F</guid>
       <pubDate>Sun, 09 Aug 2026 00:00:00 +0800</pubDate>
       <description>最基本的不等式</description>
       <category>数学</category>
     </item>
     <item>
       <title>韦达定理</title>
-      <link>https://wym100171113.github.io/post.html?slug=%E9%9F%A6%E8%BE%BE%E5%AE%9A%E7%90%86</link>
-      <guid>https://wym100171113.github.io/post.html?slug=%E9%9F%A6%E8%BE%BE%E5%AE%9A%E7%90%86</guid>
+      <link>https://wym100171113.github.io/post.html?id=%E9%9F%A6%E8%BE%BE%E5%AE%9A%E7%90%86</link>
+      <guid>https://wym100171113.github.io/post.html?id=%E9%9F%A6%E8%BE%BE%E5%AE%9A%E7%90%86</guid>
       <pubDate>Sun, 09 Aug 2026 00:00:00 +0800</pubDate>
       <description>方程根与系数间的美丽联系</description>
       <category>数学</category>
     </item>
     <item>
       <title>斐波那契数列与黄金分割：一个美丽的巧合</title>
-      <link>https://wym100171113.github.io/post.html?slug=fibonacci</link>
-      <guid>https://wym100171113.github.io/post.html?slug=fibonacci</guid>
+      <link>https://wym100171113.github.io/post.html?id=fibonacci</link>
+      <guid>https://wym100171113.github.io/post.html?id=fibonacci</guid>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0800</pubDate>
       <description>斐波那契数列为什么逼近黄金分割？比奈公式给出答案。顺便聊聊从兔子到向日葵的巧合。</description>
       <category>数学</category>
     </item>
     <item>
       <title>Hello world</title>
-      <link>https://wym100171113.github.io/post.html?slug=hello</link>
-      <guid>https://wym100171113.github.io/post.html?slug=hello</guid>
+      <link>https://wym100171113.github.io/post.html?id=hello</link>
+      <guid>https://wym100171113.github.io/post.html?id=hello</guid>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0800</pubDate>
       <description>这个博客为什么存在：关于数学、代码与偶然想法的笔记本。</description>
       <category>随笔</category>

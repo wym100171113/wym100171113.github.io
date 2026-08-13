@@ -45,7 +45,11 @@
   function restoreMath(html, stash) {
     return html.replace(/\u0000M(\d+)\u0000/g, (_, i) => {
       const m = stash[+i];
-      return m ? (m.display ? `$$${m.tex}$$` : `$${m.tex}$`) : "";
+      if (!m) return "";
+      // 公式里若有 < 或 &（如 $a<b$），直接插回会被浏览器当 HTML 标签解析；转义后
+      // KaTeX auto-render 按 textContent 读取，实体解码后公式不受影响。
+      const tex = m.tex.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+      return m.display ? `$$${tex}$$` : `$${tex}$`;
     });
   }
 
@@ -273,6 +277,10 @@
     }
 
     const { meta, body } = parseFrontmatter(md);
+    if (String(meta.status || "").toLowerCase() === "draft") {
+      main.innerHTML = `<div class="status err">这是一篇草稿，尚未发布。<br><a class="back-link" href="archive.html">← 返回归档</a></div>`;
+      return;
+    }
     const title = meta.title || (info && info.title) || id;
     const date = meta.date || (info && info.date) || "";
     const tags = (meta.tags && meta.tags.length ? meta.tags : (info && info.tags)) || [];

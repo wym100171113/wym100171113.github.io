@@ -109,6 +109,15 @@ def read_posts():
     return items
 
 
+def is_valid_date(iso) -> bool:
+    """严格校验 YYYY-MM-DD 是否为真实存在的日期（strptime 会拒绝 2026-02-30 这类）。"""
+    try:
+        datetime.datetime.strptime(iso, "%Y-%m-%d")
+        return True
+    except (TypeError, ValueError):
+        return False
+
+
 def is_published(item) -> bool:
     meta = item["meta"]
     if meta.get("status") == "draft":
@@ -209,6 +218,8 @@ def cmd_check(args):
             problems.append("缺少 date")
         elif not re.fullmatch(r"\d{4}-\d{2}-\d{2}", meta["date"]):
             problems.append(f"date 格式应为 YYYY-MM-DD，当前为 {meta['date']!r}")
+        elif not is_valid_date(meta["date"]):
+            problems.append(f"date 不是真实存在的日期：{meta['date']!r}")
         if meta.get("status") not in (None, "draft", "published"):
             problems.append(f"status 非法：{meta['status']!r}")
         if not body.strip():
@@ -242,6 +253,12 @@ def build_manifest():
         if not is_published(it):
             continue
         meta, body = it["meta"], it["body"]
+        if not is_valid_date(meta["date"]):
+            print(
+                f"  ! {it['slug']}.md 的 date 无效（{meta['date']!r}），无法生成 feed/sitemap",
+                file=sys.stderr,
+            )
+            sys.exit(1)
         tags = meta.get("tags") or []
         manifest.append({
             "slug": it["slug"],
@@ -274,8 +291,8 @@ def build_feed(manifest):
     items = "\n".join(
         f"""    <item>
       <title>{esc(p['title'])}</title>
-      <link>{SITE_URL}/post.html?slug={urllib.parse.quote(p['slug'])}</link>
-      <guid>{SITE_URL}/post.html?slug={urllib.parse.quote(p['slug'])}</guid>
+      <link>{SITE_URL}/post.html?id={urllib.parse.quote(p['slug'])}</link>
+      <guid>{SITE_URL}/post.html?id={urllib.parse.quote(p['slug'])}</guid>
       <pubDate>{rfc822(p['date'])}</pubDate>
       <description>{esc(p['excerpt'] or p['title'])}</description>
       <category>{esc(p['category'])}</category>
@@ -299,7 +316,7 @@ def build_feed(manifest):
 
 def build_sitemap(manifest):
     urls = ["/", "/archive.html", "/about.html"]
-    urls += [f"/post.html?slug={urllib.parse.quote(p['slug'])}" for p in manifest]
+    urls += [f"/post.html?id={urllib.parse.quote(p['slug'])}" for p in manifest]
     entries = "\n".join(
         f"  <url><loc>{SITE_URL}{u}</loc></url>" for u in urls
     )
