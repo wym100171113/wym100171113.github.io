@@ -652,17 +652,19 @@ body.mmd-locked { overflow: hidden; }
   animation: mmdIn 0.22s var(--ease);
 }
 @keyframes mmdIn { from { opacity: 0; } to { opacity: 1; } }
-.mmd-stage { width: 92vw; height: 88vh; position: relative; overflow: hidden; }
+.mmd-stage {
+  width: 92vw; height: 88vh; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
 .mmd-zoom {
-  position: absolute; left: 50%; top: 50%;
-  transform-origin: 0 0;
+  transform-origin: 50% 50%;
   cursor: grab; touch-action: none;
   background: #fff; border-radius: 10px; padding: 20px;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
 }
 .mmd-zoom.grabbing { cursor: grabbing; }
-.mmd-zoom svg { display: block; max-width: 82vw; max-height: 76vh; }
-.mmd-zoom img { display: block; max-width: 86vw; max-height: 80vh; border-radius: 8px; }
+.mmd-zoom svg { display: block; max-width: 84vw; max-height: 76vh; }
+.mmd-zoom img { display: block; max-width: 84vw; max-height: 80vh; border-radius: 8px; }
 .mmd-close {
   position: fixed; top: 18px; right: 22px;
   width: 40px; height: 40px; border-radius: 50%;
