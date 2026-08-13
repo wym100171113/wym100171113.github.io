@@ -40,7 +40,7 @@ jobs:
           git config user.email "wym100171113@outlook.com"
           git add -A
           if ! git diff --cached --quiet; then
-            git commit -m "chore: rebuild posts index [auto]"
+            git commit -m "[skip ci] chore: rebuild posts index [auto]"
             git push origin main
           fi
 
