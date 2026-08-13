@@ -15,6 +15,14 @@
       <category>数学</category>
     </item>
     <item>
+      <title>为什么正多面体只有五种:从欧拉公式说起</title>
+      <link>https://wym100171113.github.io/post/polyhedra.html</link>
+      <guid>https://wym100171113.github.io/post/polyhedra.html</guid>
+      <pubDate>Thu, 13 Aug 2026 00:00:00 +0800</pubDate>
+      <description>一个公式 V-E+F=2,一串跌宕的故事(笛卡尔的手稿、欧拉的信、柯西的压平法),和一个漂亮得不像话的结论:正多面体恰好五种。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>生成函数:把数列打包成代数</title>
       <link>https://wym100171113.github.io/post/generating-functions.html</link>
       <guid>https://wym100171113.github.io/post/generating-functions.html</guid>

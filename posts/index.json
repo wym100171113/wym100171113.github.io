@@ -13,6 +13,19 @@
     "readTime": "4 分钟"
   },
   {
+    "slug": "polyhedra",
+    "folder": "",
+    "title": "为什么正多面体只有五种:从欧拉公式说起",
+    "date": "2026-08-13",
+    "tags": [
+      "数学",
+      "几何"
+    ],
+    "excerpt": "一个公式 V-E+F=2,一串跌宕的故事(笛卡尔的手稿、欧拉的信、柯西的压平法),和一个漂亮得不像话的结论:正多面体恰好五种。",
+    "category": "数学",
+    "readTime": "6 分钟"
+  },
+  {
     "slug": "generating-functions",
     "folder": "",
     "title": "生成函数:把数列打包成代数",
