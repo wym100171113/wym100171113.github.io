@@ -276,89 +276,6 @@ def build_manifest():
     return manifest
 
 
-def resolve_asset(src: str, folder: str) -> str:
-    """把正文里相对笔记文件的路径换算成站点根相对路径（与前端 blog.js 的转译一致）。"""
-    segs = folder.split("/") if folder else []
-    rest = src
-    up = 0
-    while rest.startswith("../"):
-        up += 1
-        rest = rest[3:]
-    if rest.startswith("/"):
-        rest = rest[1:]
-    dirs = segs[: max(0, len(segs) - up)]
-    return "/".join(x for x in ["posts", *dirs, rest] if x)
-
-
-def excerpt_from_body(body: str, limit: int = 120) -> str:
-    """正文里没有 excerpt 时，自动从正文提取一段纯文字摘要（去代码/公式/图片/标记）。"""
-    txt = re.sub(r"```[\s\S]*?```", " ", body)
-    txt = re.sub(r"\$\$[\s\S]*?\$\$", " ", txt)
-    txt = re.sub(r"\$[^\$\n]+?\$", " ", txt)
-    txt = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", txt)
-    txt = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", txt)
-    txt = re.sub(r"[#>*_~`|]", " ", txt)
-    txt = re.sub(r"\s+", " ", txt).strip()
-    return txt[:limit].rstrip() + ("…" if len(txt) > limit else "")
-
-
-POST_PAGE_TEMPLATE = """<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<title>{title} · {site}</title>
-<meta name="description" content="{excerpt}">
-<meta name="author" content="wym">
-<link rel="canonical" href="{url}">
-<meta property="og:site_name" content="{site}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="{title}">
-<meta property="og:description" content="{excerpt}">
-<meta property="og:url" content="{url}">
-{og_image}
-<script>location.replace("../post.html?id={id}");</script>
-</head>
-<body><noscript><a href="../post.html?id={id}">打开文章</a></noscript></body>
-</html>
-"""
-
-
-def build_post_pages(manifest):
-    """为每篇文章生成静态分享页 post/<slug>.html：
-    带上可被抓取的 title/description/OG 元数据（微信、QQ、Telegram 等分享预览可读），
-    浏览器打开时立即跳转到 post.html?id=… 渲染正文；已删除文章的分享页同步清理。"""
-    out_dir = ROOT / "post"
-    out_dir.mkdir(exist_ok=True)
-    items = {it["slug"]: it for it in read_posts()}
-    written = 0
-    for p in manifest:
-        slug = p["slug"]
-        body = items[slug]["body"] if slug in items else ""
-        desc = p["excerpt"] or excerpt_from_body(body)
-        og_image = ""
-        m = re.search(r"!\[[^\]]*\]\(([^)\s]+)", body)
-        if m:
-            src = m.group(1)
-            if not re.match(r"^https?://", src):
-                src = resolve_asset(src, p["folder"])
-            og_image = f'<meta property="og:image" content="{html.escape(SITE_URL + "/" + src)}">'
-        q = urllib.parse.quote(slug)
-        page = POST_PAGE_TEMPLATE.format(
-            title=html.escape(p["title"], quote=False),
-            site=html.escape("wym's blog"),
-            excerpt=html.escape(desc, quote=False),
-            url=f"{SITE_URL}/post/{q}.html",
-            id=q,
-            og_image=og_image,
-        )
-        (out_dir / f"{slug}.html").write_text(page, encoding="utf-8")
-        written += 1
-    for f in out_dir.glob("*.html"):
-        if f.stem not in {p["slug"] for p in manifest}:
-            f.unlink()
-    return written
-
-
 def build_feed(manifest):
     def esc(s):
         return html.escape(str(s), quote=False)
@@ -374,8 +291,8 @@ def build_feed(manifest):
     items = "\n".join(
         f"""    <item>
       <title>{esc(p['title'])}</title>
-      <link>{SITE_URL}/post/{urllib.parse.quote(p['slug'])}.html</link>
-      <guid>{SITE_URL}/post/{urllib.parse.quote(p['slug'])}.html</guid>
+      <link>{SITE_URL}/post.html?id={urllib.parse.quote(p['slug'])}</link>
+      <guid>{SITE_URL}/post.html?id={urllib.parse.quote(p['slug'])}</guid>
       <pubDate>{rfc822(p['date'])}</pubDate>
       <description>{esc(p['excerpt'] or p['title'])}</description>
       <category>{esc(p['category'])}</category>
@@ -399,7 +316,7 @@ def build_feed(manifest):
 
 def build_sitemap(manifest):
     urls = ["/", "/archive.html", "/about.html"]
-    urls += [f"/post/{urllib.parse.quote(p['slug'])}.html" for p in manifest]
+    urls += [f"/post.html?id={urllib.parse.quote(p['slug'])}" for p in manifest]
     entries = "\n".join(
         f"  <url><loc>{SITE_URL}{u}</loc></url>" for u in urls
     )
@@ -415,8 +332,7 @@ def cmd_build(args):
     manifest = build_manifest()
     build_feed(manifest)
     build_sitemap(manifest)
-    pages = build_post_pages(manifest)
-    print(f"已重建 posts/index.json、feed.xml、sitemap.xml、post/*.html（{len(manifest)} 篇文章，{pages} 个分享页）")
+    print(f"已重建 posts/index.json、feed.xml、sitemap.xml（{len(manifest)} 篇文章）")
 
 
 # ---------------------------------------------------------------------------

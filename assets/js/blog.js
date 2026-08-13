@@ -92,7 +92,7 @@
   }
 
   function postUrl(slug) {
-    return `/post/${encodeURIComponent(slug)}.html`;
+    return `post.html?id=${encodeURIComponent(slug)}`;
   }
 
   /* ---------------- 主题与顶栏 ---------------- */
@@ -539,11 +539,7 @@
       onToc();
     }
 
-    /* 分享元数据 + 规范 URL：
-       地址栏换成静态分享页 post/<slug>.html（可被抓取、可分享），
-       并把页面的 title/description/OG 标签同步为当前文章内容 */
-    const shareUrl = `${location.origin}/post/${encodeURIComponent(id)}.html`;
-    history.replaceState(null, "", shareUrl);
+    /* 页面元数据与当前文章同步（便于支持 JS 渲染的搜索引擎抓取标题/简介） */
     const excerpt = meta.excerpt || (info && info.excerpt) || "";
     const setMeta = (sel, val) => {
       const el = document.querySelector(sel);
@@ -552,7 +548,7 @@
     setMeta('meta[name="description"]', excerpt);
     setMeta('meta[property="og:title"]', title);
     setMeta('meta[property="og:description"]', excerpt);
-    setMeta('meta[property="og:url"]', shareUrl);
+    setMeta('meta[property="og:url"]', `${location.origin}/post.html?id=${encodeURIComponent(id)}`);
     const firstImg = $("#prose img");
     if (firstImg) {
       let src = firstImg.getAttribute("src");
@@ -635,8 +631,7 @@
     overlay.setAttribute("aria-modal", "true");
     overlay.innerHTML = `
       <div class="mmd-stage"><div class="mmd-zoom"></div></div>
-      <button class="mmd-close" aria-label="关闭">×</button>
-      <span class="mmd-tip">滚轮/双指缩放 · 拖拽平移 · 双击复位 · Esc 关闭</span>`;
+      <button class="mmd-close" aria-label="关闭">×</button>`;
     const stage = $(".mmd-stage", overlay);
     const zoom = $(".mmd-zoom", overlay);
     zoom.appendChild(el.cloneNode(true));
@@ -661,9 +656,10 @@
       zoomAt(Math.min(12, Math.max(1, scale * Math.exp(-e.deltaY * 0.0015))), e.clientX, e.clientY);
     };
 
-    /* 多点触控：单指拖拽，双指捏合缩放 */
+    /* 多点触控：单指拖拽，双指捏合缩放；轻点检测（单指 + 位移小 + 抬起时无其他手指） */
     const pointers = new Map();
     let dragging = false, sx = 0, sy = 0, pinchStart = null;
+    let tapId = null, tapX = 0, tapY = 0, lastTap = 0, suppressDblClick = 0;
     const mid = () => {
       const pts = [...pointers.values()];
       return {
@@ -679,14 +675,17 @@
       if (pointers.size === 2) {
         pinchStart = { ...mid(), scale, tx, ty };
         dragging = false;
+        tapId = null;
         return;
       }
+      tapId = e.pointerId; tapX = e.clientX; tapY = e.clientY;
       dragging = true;
       sx = e.clientX - tx; sy = e.clientY - ty;
       zoom.classList.add("grabbing");
     };
     const onMove = (e) => {
       if (!pointers.has(e.pointerId)) return;
+      if (tapId === e.pointerId && Math.hypot(e.clientX - tapX, e.clientY - tapY) > 8) tapId = null;
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       if (pointers.size === 2 && pinchStart) {
         const m = mid();
@@ -716,7 +715,8 @@
       zoom.classList.remove("grabbing");
     };
 
-    /* 双击：放大到 2.5 倍（已放大则复位）——触屏双击也生效 */
+    /* 双击：放大到 2.5 倍（已放大则复位）。触屏只在"干净轻点"时判定，
+       避免双指捏合抬起被误判成双击而复位 */
     const toggle = (e) => {
       if (scale > 1.1) {
         scale = 1; tx = 0; ty = 0;
@@ -725,11 +725,12 @@
       }
       apply();
     };
-    let lastTap = 0;
     const onTap = (e) => {
       if (e.pointerType !== "touch") return;
+      if (tapId !== e.pointerId || pointers.size !== 0) return;
       const now = Date.now();
       if (now - lastTap < 320) {
+        suppressDblClick = now;
         toggle(e);
         lastTap = 0;
       } else {
@@ -750,7 +751,10 @@
     zoom.addEventListener("pointerup", onUp);
     zoom.addEventListener("pointercancel", onUp);
     zoom.addEventListener("pointerup", onTap);
-    zoom.addEventListener("dblclick", toggle);
+    zoom.addEventListener("dblclick", (e) => {
+      if (Date.now() - suppressDblClick < 400) return;   // 触屏双击已处理，跳过原生 dblclick
+      toggle(e);
+    });
     overlay.addEventListener("click", (e) => { if (e.target === overlay || e.target === stage) close(); });
     $(".mmd-close", overlay).addEventListener("click", close);
     document.addEventListener("keydown", onKey);
