@@ -365,7 +365,6 @@
       if (collapsible) {
         div.classList.add("is-collapsible");
         if (collapsed) div.classList.add("is-collapsed");
-        titleP.addEventListener("click", () => div.classList.toggle("is-collapsed"));
       }
       if (bodyHTML && bodyHTML.trim()) {
         const bodyP = document.createElement("p");
@@ -454,6 +453,14 @@
           <nav id="tocNav">${toc.map((h) => `<a href="#${h.id}"${h.depth ? ` class="${h.depth === 1 ? "sub" : "sub2"}"` : ""}>${esc(h.text)}</a>`).join("")}</nav>
         </aside>` : ""}
       </section>`;
+
+    /* callout 折叠（事件委托——tmp 序列化为 HTML 会丢失监听器，必须绑定在真实 DOM 上） */
+    $("#prose").addEventListener("click", (e) => {
+      const t = e.target.closest(".callout.is-collapsible .callout-title");
+      if (!t) return;
+      const c = t.closest(".callout");
+      if (c) c.classList.toggle("is-collapsed");
+    });
 
     /* KaTeX 数学公式（$..$ 行内 / $$..$$ 独立 / \(..\) 与 \[..\] 兼容） */
     if (window.renderMathInElement) {
