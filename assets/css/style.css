@@ -617,6 +617,15 @@ input { font: inherit; }
 .callout.is-collapsible .callout-title::after { content: "▾"; margin-left: auto; opacity: 0.55; }
 .callout.is-collapsible.is-collapsed .callout-title::after { content: "▸"; }
 .callout.is-collapsible.is-collapsed > *:not(.callout-title) { display: none; }
+
+/* 技术附录 detail：虚线弱化样式，默认折叠，与正文明显区分 */
+.callout-detail {
+  border: 1px dashed var(--line-2);
+  border-left: 3px dashed var(--muted);
+  background: transparent;
+  font-size: 0.92rem;
+}
+.callout-detail .callout-title { color: var(--muted); }
 .callout p { color: var(--ink-2); }
 .callout-note, .callout-info, .callout-tldr { border-left-color: #3b82f6; }
 .callout-note .callout-title, .callout-info .callout-title, .callout-tldr .callout-title { color: #3b82f6; }

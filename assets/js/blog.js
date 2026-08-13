@@ -351,8 +351,10 @@
       const type = m[1].toLowerCase();
       const titleHTML = m[3].trim();
       const bodyHTML = m[4];
-      const collapsible = /[-+]/.test(m[2] || "");
-      const collapsed = /-/.test(m[2] || "");
+      const marker = (m[2] || "").trim();
+      /* detail：技术附录专用，默认折叠（除非显式 +）；其他类型：带 - 默认折叠，带 +/- 可折叠 */
+      const collapsible = type === "detail" ? marker !== "+" : /[-+]/.test(marker);
+      const collapsed = type === "detail" ? marker !== "+" : marker === "-";
       firstP.remove();
       const div = document.createElement("div");
       div.className = `callout callout-${type}`;
