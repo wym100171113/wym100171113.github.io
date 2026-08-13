@@ -630,7 +630,7 @@ input { font: inherit; }
 
 /* Mermaid 图表 */
 .prose .mermaid { margin: 1.6rem 0; text-align: center; position: relative; cursor: zoom-in; }
-.prose .mermaid svg { max-width: 100%; height: auto; background: transparent; }
+.prose .mermaid svg { max-width: min(100%, 520px); max-height: 70vh; margin: 0 auto; background: transparent; }
 [data-theme="dark"] .prose .mermaid svg { filter: brightness(0.9); }
 .mmd-hint {
   position: absolute; right: 10px; bottom: 10px;
