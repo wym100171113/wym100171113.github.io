@@ -112,4 +112,4 @@ $$\frac{1}{E} = \frac{1}{m} + \frac{1}{n} - \frac12$$
 
 这一脉后来长成了参天大树:施莱夫利(Schläfli,1852)把正多面体推广到高维,庞加莱(1895)把欧拉公式推广成欧拉-庞加莱公式 $\chi = \sum (-1)^k b_k$,奠基了代数拓扑。而这一切的种子,是一封 1750 年的信、一份 1630 年的手稿,和一个希腊人在公元前四世纪画下的五种图形。
 
-> 补充:文中五面体渲染与压平示意图均由 Mathematica 生成(`PolyhedronData` 一族)。你可以在 Mathematica 里运行 `Graphics3D[PolyhedronData["Dodecahedron"]]` 旋转着玩,顺便验证:怎么数,$V-E+F$ 都等于 2。
+> 补充:文中五种正多面体渲染与压平示意图均由 Mathematica 生成(`PolyhedronData` 一族)。你可以在 Mathematica 里运行 `Graphics3D[PolyhedronData["Dodecahedron"]]` 旋转着玩,顺便验证:怎么数,$V-E+F$ 都等于 2。
