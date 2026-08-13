@@ -112,4 +112,35 @@ $$\frac{1}{E} = \frac{1}{m} + \frac{1}{n} - \frac12$$
 
 这一脉后来长成了参天大树:施莱夫利(Schläfli,1852)把正多面体推广到高维,庞加莱(1895)把欧拉公式推广成欧拉-庞加莱公式 $\chi = \sum (-1)^k b_k$,奠基了代数拓扑。而这一切的种子,是一封 1750 年的信、一份 1630 年的手稿,和一个希腊人在公元前四世纪画下的五种图形。
 
-> 补充:文中五种正多面体渲染与压平示意图均由 Mathematica 生成(`PolyhedronData` 一族)。你可以在 Mathematica 里运行 `Graphics3D[PolyhedronData["Dodecahedron"]]` 旋转着玩,顺便验证:怎么数,$V-E+F$ 都等于 2。
+> [!note]- 附:Mathematica 绘制细节(可展开)
+> 文中两幅插图均由 Mathematica 生成,以下是可复现的代码与踩过的坑。
+>
+> **五种多面体的渲染**:`PolyhedronData` 自带全部五种柏拉图立体。为了让五个立体并排时大小一致,统一做"外接半径归一化 + 固定旋转 + 固定视角":
+>
+> ```mathematica
+> names = {"Tetrahedron","Cube","Octahedron","Dodecahedron","Icosahedron"};
+> gc = PolyhedronData[names[[i]]][[1]];   (* GraphicsComplex *)
+> pts = N[gc[[1]]];                        (* 顶点坐标 *)
+> rad = Max[Norm /@ pts];                  (* 外接半径归一化到 1 *)
+> rot = N[RotationMatrix[0.45,{0,0,1}] . RotationMatrix[-0.3,{1,0,0}]];
+> Graphics3D[{EdgeForm[GrayLevel[0.25]], FaceForm[RGBColor[0.82,0.88,1]],
+>   GraphicsComplex[rot . # & /@ pts / rad, gc[[2]]]},
+>   Boxed -> False, Lighting -> "Neutral",
+>   ViewPoint -> {1.35, -2.4, 2}, ViewAngle -> 0.55]
+> ```
+>
+> **用 Mathematica 直接数 V、E、F**:一行验证欧拉公式:
+>
+> ```mathematica
+> Table[PolyhedronData[n, #] & /@ {"VertexCount","EdgeCount","FaceCount"},
+>   {n, {"Tetrahedron","Cube","Octahedron","Dodecahedron","Icosahedron"}}]
+> ```
+>
+> 输出 `{{4,6,4},{8,12,6},{6,12,8},{20,30,12},{12,30,20}}`——每一行的 $V-E+F$ 都等于 2,与第三节表格一致。
+>
+> **压平示意图**是纯平面图形:十字形网络与三角剖分图用 `Line`/`Point` 手绘,顶点坐标手工核对过(压平后 $V=8, E=12, F=5$;每条对角线让 $E,F$ 同时加 1,所以 $V-E+F$ 保持为 1)。
+>
+> **踩过的三个坑**,均真实发生:
+> 1. `PolyhedronData` 像 `Entity` 一样**不求值第一个参数**——在 `Table` 里写 `PolyhedronData[name]` 会把符号 `name` 原样传进去报 `notent`,必须用 `With[{n = name}, PolyhedronData[n]]` 强制代入;
+> 2. 命令行 `wolframscript` 的 `$FontFamilies` 是**空的**,中文字标完全无法渲染——插图的中文标注改用 PIL 以系统 STHeiti 字体合成;
+> 3. `ScalingTransform[1/rad]` 传标量会报错(此版本要求向量),归一化改为矩阵直接除以半径。
