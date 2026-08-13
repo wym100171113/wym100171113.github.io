@@ -48,7 +48,7 @@ body {
   font-family: var(--serif);
   background: var(--paper);
   color: var(--ink);
-  line-height: 1.75;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -515,7 +515,7 @@ input { font: inherit; }
 .toc a.sub.on, .toc a.sub2.on { transform: translateX(3px); }
 
 /* 正文排版 */
-.prose { font-size: 1.0rem; line-height: 1.95; }
+.prose { font-size: 1.0rem; line-height: 2.05; }
 .prose > * + * { margin-top: 1.35rem; }
 .prose h2 {
   font-size: 1.32rem; font-weight: 600; letter-spacing: 0.01em;
