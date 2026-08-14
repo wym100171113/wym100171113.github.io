@@ -15,6 +15,14 @@
       <category>数学</category>
     </item>
     <item>
+      <title>琴生不等式:函数的平均,不小于平均的函数</title>
+      <link>https://wym100171113.github.io/post.html?id=%E7%90%B4%E7%94%9F%E4%B8%8D%E7%AD%89%E5%BC%8F</link>
+      <guid>https://wym100171113.github.io/post.html?id=%E7%90%B4%E7%94%9F%E4%B8%8D%E7%AD%89%E5%BC%8F</guid>
+      <pubDate>Fri, 14 Aug 2026 00:00:00 +0800</pubDate>
+      <description>对凸函数 f,加权平均处的取值不超过取值的加权平均: f(Σwᵢxᵢ) ≤ Σwᵢf(xᵢ)。两种证明、四道例题,以及它与二阶导 f″ ≥ 0 的等价关系。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>分形:越看越多的几何</title>
       <link>https://wym100171113.github.io/post.html?id=fractals</link>
       <guid>https://wym100171113.github.io/post.html?id=fractals</guid>
