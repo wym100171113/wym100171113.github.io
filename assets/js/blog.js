@@ -329,6 +329,14 @@
        按 ../ 级数上溯、按笔记所在文件夹深度归位，统一指向 posts/ 下的附件。
        例如（笔记在 posts/数学/代数/ 下）：../../assets/img/x.png → posts/assets/img/x.png */
     $$("img[src]", tmp).forEach((img) => {
+      /* Obsidian 图片尺寸语法：![alt|宽] 或 ![alt|宽x高]，从 alt 中解析并应用显示尺寸 */
+      const alt = img.getAttribute("alt") || "";
+      const size = alt.match(/\|(\d+)(?:x(\d+))?\s*$/);
+      if (size) {
+        img.setAttribute("alt", alt.slice(0, size.index).trim());
+        img.style.width = `${size[1]}px`;
+        img.style.height = size[2] ? `${size[2]}px` : "auto";
+      }
       let src = img.getAttribute("src");
       if (!src) return;
       if (/^(https?:|data:|blob:)/i.test(src)) return;
@@ -634,7 +642,9 @@
       <button class="mmd-close" aria-label="关闭">×</button>`;
     const stage = $(".mmd-stage", overlay);
     const zoom = $(".mmd-zoom", overlay);
-    zoom.appendChild(el.cloneNode(true));
+    const clone = el.cloneNode(true);
+    if (el.tagName === "IMG") clone.removeAttribute("style");   // 去掉 |宽x高 的内联尺寸，灯箱里全尺寸显示
+    zoom.appendChild(clone);
 
     let scale = 1, tx = 0, ty = 0;
     const apply = () => { zoom.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`; };
