@@ -182,7 +182,7 @@ $$\iiint_\Omega dV = \int_0^{2\pi}\!\int_0^{\pi}\!\int_0^R r^2\sin\varphi\,dr\,d
 - [微积分的本质（Essence of Calculus）](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr)（3Blue1Brown）：积分的几何直觉——"切薄片求和"，与本文第七节互为表里。
 
 > [!detail] 附：绘图细节（可展开）
-> 文中 3D 插图由 Mathematica 生成；2D 示意图（展开图、半球对比）由 PIL 绘制并合成中文标注（STHeiti），GIF 组装与量化在 Mathematica 内完成。关键代码摘录如下。
+> 文中 3D 插图与动画由 Mathematica 生成；2D 示意图采用 SVG（`lateral-unfold.svg`，Python 手写、浏览器字体渲染）；`hemisphere-cone.gif` 由 PIL 绘制帧、Mathematica 组装。关键代码摘录如下。
 >
 > **三棱柱切三锥**：`Prism[{A,B,C}]` 给三棱柱，`Tetrahedron[pts]` 给四面体，`GeometricTransformation` 只包图元（指令留在外面），三个四面体沿不同方向平移：
 >
@@ -192,10 +192,10 @@ $$\iiint_\Omega dV = \int_0^{2\pi}\!\int_0^{\pi}\!\int_0^R r^2\sin\varphi\,dr\,d
 > (* 切面 A'BC 与 A'BC' 把三棱柱分成这三个四面体 *)
 > ```
 >
-> **牟合方盖**：两个圆柱的公共部分是 `RegionPlot3D[x^2+y^2<=1 && x^2+z^2<=1, ...]`，从中提取 `GraphicsComplex` 嵌入场景；高度 $h$ 处的截面正方形是 `Polygon[{{-a,h,-a},{a,h,-a},{a,h,a},{-a,h,a}}]`，`a=Sqrt[1-h^2]`。
+> **牟合方盖**：两个圆柱的公共部分是 `RegionPlot3D[x^2+y^2<=1 && x^2+z^2<=1, ...]`，提取 `GraphicsComplex` 嵌入场景。为让正方形截面清晰（不被半透明实体罩成脏色），采用**两通道渲染 + PIL 合成**：通道 A 只画圆柱与实体，通道 B 用同一相机只画橙色正方形（`Lighting -> None` 保证纯色），再按 `color = 0.6·橙 + 0.4·底` 混合叠回，描边保持不透明。
 >
 > **球与外切圆柱**：`Sphere[{0,0,0},1]` 与 `Cylinder[{{0,0,-1},{0,0,1}},1]` 叠加，圆柱 `Opacity[0.22]`。
 >
 > **圆环体**：`Tube[Table[{R Cos[u],R Sin[u],0},{u,0,2Pi,2Pi/72}],r]`；旋转的生成圆盘用扇形 `Polygon` 近似，重心轨迹是虚线大圆。
 >
-> 所有 3D 图统一 `ViewPoint`/`ViewAngle`、`SphericalRegion -> True` 防抖，`Rasterize` 时 `ImageResolution -> 72` 出 1x，GIF 用 `ColorQuantize[#, 32]` 量化压体积。
+> 所有 3D 图统一 `ViewPoint`/`ViewAngle`、`SphericalRegion -> True` 防抖，`Rasterize` 时 `ImageResolution -> 72` 出 1x；GIF 用 `ColorQuantize[#, 128, Dithering -> False]` 量化压体积（无抖动避免噪点，更多颜色数保住渐变）。若需中文标注，Mathematica 里用 `\:xxxx` Unicode 转义（`FontFamily -> "PingFang SC"`），并必须用 `Export` 而非 `Rasterize`。
