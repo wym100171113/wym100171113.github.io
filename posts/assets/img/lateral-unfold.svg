@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="700" viewBox="0 0 980 700">
+
+<rect width="980" height="700" fill="white"/>
+<rect x="138" y="150" width="144" height="130" fill="#d0e0f6"/>
+<ellipse cx="210" cy="150" rx="72" ry="26" fill="#d0e0f6" stroke="#4e6c9e" stroke-width="2.5"/>
+<path d="M 138 280 A 72 26 0 0 0 282 280" fill="#d0e0f6" stroke="#4e6c9e" stroke-width="2.5"/>
+<text x="210" y="324" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="28" fill="#26303d" text-anchor="middle">圆柱</text>
+<line x1="302" y1="215.0" x2="344" y2="215.0" stroke="#26303d" stroke-width="3"/>
+<path d="M 344.0 215.0 L 336.7 218.3 L 336.7 211.7 Z" fill="#26303d"/>
+<rect x="400" y="150" width="360" height="130" fill="#d0e0f6" stroke="#4e6c9e" stroke-width="2.5"/>
+<line x1="400" y1="126" x2="548.0" y2="126" stroke="#26303d" stroke-width="2"/>
+<line x1="612.0" y1="126" x2="760" y2="126" stroke="#26303d" stroke-width="2"/>
+<line x1="400" y1="126" x2="400" y2="142" stroke="#26303d" stroke-width="2"/>
+<line x1="760" y1="126" x2="760" y2="142" stroke="#26303d" stroke-width="2"/>
+<text x="580.0" y="112" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle">底面周长  C = 2πr</text>
+<line x1="788" y1="156" x2="788" y2="274" stroke="#26303d" stroke-width="2.5"/>
+<path d="M 788.0 156.0 L 791.3 163.3 L 784.7 163.3 Z" fill="#26303d"/>
+<path d="M 788.0 274.0 L 784.7 266.7 L 791.3 266.7 Z" fill="#26303d"/>
+<text x="804" y="225.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="start">高 h</text>
+<text x="580.0" y="225.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle">S侧 = C × h = 2πrh</text>
+<text x="580.0" y="322" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="26" fill="#26303d" text-anchor="middle">侧面展开成矩形</text>
+<polygon points="210,430 138,580 282,580" fill="#d0e0f6"/>
+<path d="M 138 580 A 72 26 0 0 0 282 580" fill="#d0e0f6" stroke="#4e6c9e" stroke-width="2.5"/>
+<line x1="210" y1="430" x2="138" y2="580" stroke="#4e6c9e" stroke-width="2.5"/>
+<line x1="210" y1="430" x2="282" y2="580" stroke="#4e6c9e" stroke-width="2.5"/>
+<line x1="210" y1="430" x2="282" y2="580" stroke="#96999f" stroke-width="2" stroke-dasharray="5,4"/>
+<text x="274.0" y="545.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="26" fill="#26303d" text-anchor="start">斜高 l</text>
+<text x="210" y="632" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="28" fill="#26303d" text-anchor="middle">圆锥</text>
+<line x1="302" y1="505.0" x2="344" y2="505.0" stroke="#26303d" stroke-width="3"/>
+<path d="M 344.0 505.0 L 336.7 508.3 L 336.7 501.7 Z" fill="#26303d"/>
+<path d="M 580 460 L 695.7 529.5 A 135 135 0 0 1 464.3 529.5 Z" fill="#d0e0f6" stroke="#4e6c9e" stroke-width="2.5"/>
+<text x="480.14120720260746" y="500.76507005642867" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="26" fill="#26303d" text-anchor="start">l</text>
+<text x="590" y="633" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="24" fill="#26303d" text-anchor="start">2πr</text>
+<text x="580" y="659" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="26" fill="#26303d" text-anchor="middle">S侧 = ½×2πr×l = πrl</text>
+<text x="580" y="691" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="26" fill="#26303d" text-anchor="middle">侧面展开成扇形</text>
+</svg>
