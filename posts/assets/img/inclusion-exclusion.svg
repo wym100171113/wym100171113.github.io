@@ -6,6 +6,6 @@
 <text x="250" y="320" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="44" fill="#26303d" text-anchor="middle" font-weight="normal">A</text>
 <text x="710" y="320" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="44" fill="#26303d" text-anchor="middle" font-weight="normal">B</text>
 <text x="480" y="120" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="44" fill="#26303d" text-anchor="middle" font-weight="normal">C</text>
-<text x="480" y="560" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="28" fill="#26303d" text-anchor="middle" font-weight="normal">|A∪B∪C| = |A|+|B|+|C| − |A∩B|−|A∩C|−|B∩C| + |A∩B∩C|</text>
-<text x="480" y="600" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="26" fill="#96999f" text-anchor="middle" font-weight="normal">容斥原理：奇加偶减（半透明区域表示重叠）</text>
+<text x="480" y="545" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="28" fill="#26303d" text-anchor="middle" font-weight="normal">|A∪B∪C| = |A|+|B|+|C| − |A∩B|−|A∩C|−|B∩C| + |A∩B∩C|</text>
+<text x="480" y="580" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="26" fill="#96999f" text-anchor="middle" font-weight="normal">容斥原理：奇加偶减</text>
 </svg>
