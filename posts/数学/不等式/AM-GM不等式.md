@@ -6,6 +6,7 @@ tags:
   - 不等式
 excerpt: 最基本的不等式
 ---
+
 ## 表达式
 $$a_{1}, a_{2}, \cdots, a_{n}>0,\frac{a_{1}+a_{2}+\cdots+a_{n}}{n} \geq \sqrt[n]{a_{1} a_{2} \cdots a_{n}}$$
 $$\newline\frac{1}{n} \sum_{k=1}^{n} a_{k} \geq \sqrt[n]{\prod_{k=1}^{n} a_{k}}$$

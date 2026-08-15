@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+<rect width="960" height="600" fill="white"/>
+<circle cx="360" cy="320" r="190" fill="#3c6eb9" fill-opacity="0.25" stroke="#3c6eb9" stroke-width="3"/>
+<circle cx="600" cy="320" r="190" fill="#d63e3e" fill-opacity="0.25" stroke="#d63e3e" stroke-width="3"/>
+<circle cx="480" cy="180" r="190" fill="#2e8b57" fill-opacity="0.25" stroke="#2e8b57" stroke-width="3"/>
+<text x="250" y="320" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="44" fill="#26303d" text-anchor="middle" font-weight="normal">A</text>
+<text x="710" y="320" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="44" fill="#26303d" text-anchor="middle" font-weight="normal">B</text>
+<text x="480" y="120" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="44" fill="#26303d" text-anchor="middle" font-weight="normal">C</text>
+<text x="480" y="560" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="28" fill="#26303d" text-anchor="middle" font-weight="normal">|A∪B∪C| = |A|+|B|+|C| − |A∩B|−|A∩C|−|B∩C| + |A∩B∩C|</text>
+<text x="480" y="600" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="26" fill="#96999f" text-anchor="middle" font-weight="normal">容斥原理：奇加偶减（半透明区域表示重叠）</text>
+</svg>

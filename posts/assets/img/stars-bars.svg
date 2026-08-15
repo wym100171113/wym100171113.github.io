@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 960 480">
+<rect width="960" height="480" fill="white"/>
+<text x="480" y="80" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="32" fill="#26303d" text-anchor="middle" font-weight="normal">隔板法：r 个相同物分成 n 类</text>
+<text x="240" y="220" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="52" fill="#3c6eb9" text-anchor="middle" font-weight="normal">★</text>
+<text x="300" y="220" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="52" fill="#3c6eb9" text-anchor="middle" font-weight="normal">★</text>
+<text x="360" y="220" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="52" fill="#3c6eb9" text-anchor="middle" font-weight="normal">★</text>
+<text x="500" y="220" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="52" fill="#3c6eb9" text-anchor="middle" font-weight="normal">★</text>
+<text x="560" y="220" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="52" fill="#3c6eb9" text-anchor="middle" font-weight="normal">★</text>
+<text x="620" y="220" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="52" fill="#3c6eb9" text-anchor="middle" font-weight="normal">★</text>
+<text x="740" y="220" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="52" fill="#3c6eb9" text-anchor="middle" font-weight="normal">★</text>
+<text x="800" y="220" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="52" fill="#3c6eb9" text-anchor="middle" font-weight="normal">★</text>
+<line x1="425" y1="140" x2="425" y2="280" stroke="#d63e3e" stroke-width="4"/>
+<line x1="665" y1="140" x2="665" y2="280" stroke="#d63e3e" stroke-width="4"/>
+<text x="300" y="340" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="28" fill="#26303d" text-anchor="middle" font-weight="normal">x₁ = 2</text>
+<text x="560" y="340" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="28" fill="#26303d" text-anchor="middle" font-weight="normal">x₂ = 3</text>
+<text x="770" y="340" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="28" fill="#26303d" text-anchor="middle" font-weight="normal">x₃ = 2</text>
+<text x="480" y="420" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="28" fill="#26303d" text-anchor="middle" font-weight="normal">等价于 x₁+x₂+x₃ = 7 的非负整数解：C(7+3−1, 3−1) = C(9,2) = 36</text>
+</svg>

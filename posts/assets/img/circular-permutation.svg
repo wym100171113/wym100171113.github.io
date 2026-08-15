@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+<rect width="960" height="600" fill="white"/>
+<text x="480" y="80" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="26" fill="#d63e3e" text-anchor="middle" font-weight="normal">旋转后算同一种</text>
+<line x1="400" y1="110" x2="546.0" y2="110.0" stroke="#d63e3e" stroke-width="3"/><polygon points="560,110 547.9,117.0 547.9,103.0" fill="#d63e3e"/>
+<circle cx="260" cy="250" r="150" fill="none" stroke="#26303d" stroke-width="3"/>
+<circle cx="260.0" cy="400.0" r="7" fill="#3c6eb9" stroke="none" stroke-width="0"/>
+<text x="260.0" y="444.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle" font-weight="normal">A</text>
+<circle cx="410.0" cy="250.0" r="7" fill="#3c6eb9" stroke="none" stroke-width="0"/>
+<text x="446.0" y="258.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle" font-weight="normal">B</text>
+<circle cx="260.0" cy="100.0" r="7" fill="#3c6eb9" stroke="none" stroke-width="0"/>
+<text x="259.99999999999994" y="72.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle" font-weight="normal">C</text>
+<circle cx="110.0" cy="250.00000000000003" r="7" fill="#3c6eb9" stroke="none" stroke-width="0"/>
+<text x="74.0" y="258.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle" font-weight="normal">D</text>
+<circle cx="700" cy="250" r="150" fill="none" stroke="#26303d" stroke-width="3"/>
+<circle cx="850.0" cy="250.0" r="7" fill="#3c6eb9" stroke="none" stroke-width="0"/>
+<text x="886.0" y="258.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle" font-weight="normal">A</text>
+<circle cx="700.0" cy="100.0" r="7" fill="#3c6eb9" stroke="none" stroke-width="0"/>
+<text x="700.0" y="72.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle" font-weight="normal">B</text>
+<circle cx="550.0" cy="250.00000000000003" r="7" fill="#3c6eb9" stroke="none" stroke-width="0"/>
+<text x="514.0" y="258.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle" font-weight="normal">C</text>
+<circle cx="700.0" cy="400.0" r="7" fill="#3c6eb9" stroke="none" stroke-width="0"/>
+<text x="700.0" y="444.0" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle" font-weight="normal">D</text>
+<text x="480" y="540" font-family="PingFang SC, STHeiti, Heiti SC, sans-serif" font-size="30" fill="#26303d" text-anchor="middle" font-weight="normal">圆排列：n 个不同元素围成一圈，有 (n−1)! 种</text>
+</svg>
