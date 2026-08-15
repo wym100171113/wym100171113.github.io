@@ -83,12 +83,19 @@
   };
 
   /* ---------------- 数据 ---------------- */
-  async function getPosts() {
-    const res = await fetch(MANIFEST, { cache: "no-cache" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return (await res.json())
-      .filter((p) => p && p.slug && p.date)
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
+  /* 会话级缓存：归档页渲染层切换时零网络请求；失败自动重置以便重试 */
+  let postsPromise = null;
+  function getPosts() {
+    if (!postsPromise) {
+      postsPromise = fetch(MANIFEST, { cache: "no-cache" })
+        .then((res) => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
+        .then((list) => list.filter((p) => p && p.slug && p.date).sort((a, b) => new Date(b.date) - new Date(a.date)))
+        .catch((e) => { postsPromise = null; throw e; });
+    }
+    return postsPromise;
   }
 
   function postUrl(slug) {
@@ -774,6 +781,20 @@
   }
 
   /* ---------------- 归档页 ---------------- */
+  /* 渲染层切换：更新 URL（可分享/可后退）→ 全量重渲染 → 恢复滚动位置。
+     URL 是唯一状态源，renderArchive 从 URL 参数恢复一切状态。 */
+  let isSwitch = false; // 本次渲染是否为页内切换（用于过渡动画）
+  function switchView(href, replace = false) {
+    const url = new URL(href, location.href);
+    const target = url.pathname.split("/").pop() + url.search + url.hash;
+    const cur = location.pathname.split("/").pop() + location.search + location.hash;
+    if (target === cur) return; // 无变化不重渲染
+    const y = window.scrollY;
+    isSwitch = true;
+    history[replace ? "replaceState" : "pushState"](null, "", target);
+    renderArchive().then(() => window.scrollTo(0, y));
+  }
+
   async function renderArchive() {
     const main = $("#main");
     let posts;
@@ -1028,6 +1049,11 @@
         </aside>
       </div>`;
 
+    /* 页内切换时给结果区挂过渡动画（初始加载不动画） */
+    const arcBox = $("#arcResults");
+    if (arcBox && isSwitch) arcBox.classList.add("arc-switch");
+    isSwitch = false;
+
     /* 搜索（防抖，内存过滤不重载页面，保留焦点与光标） */
     const qInput = $("#qInput");
     const resultsBox = $("#arcResults");
@@ -1067,6 +1093,9 @@
                       <span class="t"><a href="${postUrl(p.slug)}">${esc(p.title)}</a></span>
                     </div>`).join("")}
                 </section>`).join("");
+          resultsBox.classList.remove("arc-switch");
+          void resultsBox.offsetWidth; // 强制 reflow，让动画可重新触发
+          resultsBox.classList.add("arc-switch");
           const sub = $("#arcSub");
           if (sub) sub.innerHTML = `共 <b>${posts.length}</b> 篇文章，筛选后 <b>${list.length}</b> 篇（<a class="clear-f" href="archive.html">清空筛选</a>）。`;
         }, 250);
@@ -1083,7 +1112,7 @@
         if (folder) args.set("folder", folder);
         args.delete("page");
         const qs = args.toString();
-        location.href = qs ? `archive.html?${qs}` : "archive.html";
+        switchView(qs ? `archive.html?${qs}` : "archive.html");
       });
     });
 
@@ -1160,6 +1189,29 @@
   function boot() {
     initTheme();
     initHeader();
+
+    /* 归档页渲染层切换：主区点击委托（一次性绑定；main 元素跨渲染复用，不能每次 renderArchive 重复挂） */
+    const mainEl = $("#main");
+    if (mainEl) {
+      mainEl.addEventListener("click", (e) => {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // 保留新标签页等原生行为
+        if (mainEl.dataset.view !== "archive") return;
+        const a = e.target.closest("a");
+        if (!a) return;
+        const href = a.getAttribute("href") || "";
+        if (!/^archive\.html(?:\?|#|$)/.test(href)) return;
+        e.preventDefault();
+        switchView(href);
+      });
+      /* 浏览器前进/后退：从 URL 恢复视图 */
+      window.addEventListener("popstate", () => {
+        if (mainEl.dataset.view !== "archive") return;
+        const y = window.scrollY;
+        isSwitch = true;
+        renderArchive().then(() => window.scrollTo(0, y));
+      });
+    }
+
     const view = $("#main") && $("#main").dataset.view;
     if (view === "home") renderHome();
     else if (view === "post") renderPost();

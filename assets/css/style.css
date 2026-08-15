@@ -309,6 +309,13 @@ input { font: inherit; }
 
 /* 分类分组（文件夹） */
 .folder-block { margin-bottom: clamp(30px, 5vw, 44px); }
+
+/* 归档页视图切换过渡：渲染层切换时防内容瞬移（200ms 淡入 + 轻微上移，只动 transform/opacity） */
+.arc-switch { animation: arc-in 0.2s var(--ease); }
+@keyframes arc-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
 .folder-title {
   font-family: var(--serif); font-size: 1.15rem; font-weight: 600;
   color: var(--ink); display: flex; align-items: center; gap: 10px;
@@ -824,3 +831,8 @@ body.mmd-locked { overflow: hidden; }
   /* 动画被禁用时，等待滚动显现的元素必须直接可见，否则内容永久空白 */
   .js-wait { opacity: 1 !important; }
 }
+
+/* 跨文档页面过渡（View Transitions API）：Chrome/Edge 126+、Safari 18.2+ 生效，
+   页面间跳转自动交叉淡入；不支持（如 Firefox）时自动降级为普通跳转，不影响功能。
+   系统开启"减少动态效果"时浏览器会自动跳过过渡。 */
+@view-transition { navigation: auto; }
