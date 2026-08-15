@@ -787,6 +787,7 @@
     const q = (new URLSearchParams(location.search).get("q") || "").trim();
     const tag = (new URLSearchParams(location.search).get("tag") || "").trim();
     const folder = (new URLSearchParams(location.search).get("folder") || "").trim();
+    const unfiled = new URLSearchParams(location.search).get("unfiled") === "1";
     const page = Math.max(1, parseInt(new URLSearchParams(location.search).get("page") || "1", 10) || 1);
     const PAGE_SIZE = 15;
 
@@ -801,6 +802,7 @@
       if (q) args.set("q", q);
       if (tag) args.set("tag", tag);
       if (folder) args.set("folder", folder);
+      if (unfiled) args.set("unfiled", "1");
       for (const [k, v] of Object.entries(ov || {})) { if (v) args.set(k, v); else args.delete(k); }
       const qs = args.toString();
       return qs ? `archive.html?${qs}` : "archive.html";
@@ -830,8 +832,32 @@
       }
       node.posts.push(p);
     }
+
+    /* 文件夹排序：同级按「子树内最新一篇的日期」倒序；无文章的（空文件夹）垫底；同日并列按名字 */
+    const newestOf = (node) => {
+      let d = null;
+      for (const p of node.posts) if (!d || p.date > d) d = p.date;
+      for (const c of Object.values(node.children)) {
+        const cd = newestOf(c);
+        if (cd && (!d || cd > d)) d = cd;
+      }
+      return d;
+    };
+    const sortKids = (node) => Object.values(node.children).sort((a, b) => {
+      const da = newestOf(a), db = newestOf(b);
+      if (da && db && da !== db) return da < db ? 1 : -1;
+      if (da && !db) return -1;
+      if (!da && db) return 1;
+      return a.name.localeCompare(b.name, "zh");
+    });
+    /* 仅直接文章的最近日期（「散篇」块只展示未归档文章，排序键不能用整棵子树） */
+    const newestDirect = (node) => {
+      let d = null;
+      for (const p of node.posts) if (!d || p.date > d) d = p.date;
+      return d;
+    };
     const treeHTML = (node) => {
-      const kids = Object.values(node.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
+      const kids = sortKids(node);
       if (!kids.length) return "";
       const hasKids = (c) => c.children && Object.keys(c.children).length;
       const sub = treeHTMLInner(kids);
@@ -843,12 +869,13 @@
         <li class="${hasKids(c) ? "has-children" : ""}">
           ${hasKids(c) ? `<button class="tree-fold" aria-label="折叠">▾</button>` : ""}
           <a href="${makeURL({ folder: c.path, page: "" })}"${folder === c.path ? ' class="on"' : ""}>${esc(c.name)}<span>${c.count}</span></a>
-          ${hasKids(c) ? `<div class="tree-sub"><div class="tree-sub-inner">${treeHTMLInner(Object.values(c.children).sort((a, b) => a.name.localeCompare(b.name, "zh")))}</div></div>` : ""}
+          ${hasKids(c) ? `<div class="tree-sub"><div class="tree-sub-inner">${treeHTMLInner(sortKids(c))}</div></div>` : ""}
         </li>`;
     }).join("")}</ul>`;
 
     const kw = q.toLowerCase();
     const filtered = posts.filter((p) => {
+      if (unfiled && p.folder) return false;
       if (tag && !(p.tags || []).includes(tag)) return false;
       if (q && !`${p.title} ${p.excerpt} ${(p.tags || []).join(" ")} ${p.folder || ""}`.toLowerCase().includes(kw)) return false;
       if (folder) {
@@ -883,17 +910,17 @@
     };
     /* 递归渲染文件夹区块（支持嵌套：父目录下直接放子目录区块） */
     const sectionHTML = (node, isRoot, noKids = false) => {
-      const kids = Object.values(node.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
+      const kids = sortKids(node);
       const key = node.path || "__root__";
-      const more = !isRoot && node.posts.length > PAGE_SIZE;
+      const more = node.posts.length > PAGE_SIZE;
       const shown = more ? node.posts.slice(0, PAGE_SIZE) : node.posts;
       return `
       <section class="folder-block reveal${isRoot ? "" : " folder-node"}" data-folder-key="${esc(key)}"${collapsed.has(key) ? ' data-collapsed="1"' : ""}>
         <h2 class="folder-title">
           <button class="folder-toggle" data-fold="${esc(key)}" aria-label="折叠/展开">▾</button>
-          <span class="fpath">${isRoot ? "<b>全部文章</b>" : esc(node.name)}</span>
+          <span class="fpath">${isRoot ? "<b>散篇</b>" : esc(node.name)}</span>
           <span class="count">${isRoot ? node.posts.length : node.count} 篇</span>
-          ${more ? `<a class="more" href="${makeURL({ folder: node.path, page: "" })}">全部 ${node.posts.length} 篇 →</a>` : ""}
+          ${more ? `<a class="more" href="${makeURL({ folder: node.path, page: "", unfiled: isRoot ? "1" : "" })}">全部 ${node.posts.length} 篇 →</a>` : ""}
         </h2>
         <div class="folder-body">
           <div class="folder-body-inner">
@@ -911,15 +938,23 @@
       </section>`;
     };
     const renderOverview = () => {
-      const rootKids = Object.values(tree.children).sort((a, b) => a.name.localeCompare(b.name, "zh"));
       const out = [];
-      // 全部文章：只放顶层文章，子目录由各自的顶级区块呈现，避免重复
-      if (tree.posts.length) out.push(sectionHTML(tree, true, true));
-      rootKids.forEach((c) => out.push(sectionHTML(c, false)));
+      /* 「散篇」（根目录未归档文章）与顶层文件夹块一起按最新日期参与排序 */
+      const blocks = [];
+      if (tree.posts.length) blocks.push({ node: tree, label: "散篇", key: newestDirect(tree) });
+      sortKids(tree).forEach((c) => blocks.push({ node: c, label: c.name, key: newestOf(c) }));
+      blocks.sort((a, b) => {
+        const da = a.key, db = b.key;
+        if (da && db && da !== db) return da < db ? 1 : -1;
+        if (da && !db) return -1;
+        if (!da && db) return 1;
+        return a.label.localeCompare(b.label, "zh");
+      });
+      blocks.forEach(({ node }) => out.push(sectionHTML(node, node === tree, node === tree)));
       return out.join("");
     };
 
-    const isFiltered = !!(folder || tag || q);
+    const isFiltered = !!(folder || tag || q || unfiled);
 
     main.innerHTML = `
       <section class="page-head">
@@ -927,6 +962,7 @@
         <p class="sub" id="arcSub">
           共 <b>${posts.length}</b> 篇文章
           ${folder ? `，分类 <b>${esc(folder.replace(/\//g, " / "))}</b> 下 <b>${filtered.length}</b> 篇（<a class="clear-f" href="archive.html">查看全部</a>）` : ""}
+          ${unfiled ? `，只看 <b>散篇</b>（未放入文件夹的文章）共 <b>${filtered.length}</b> 篇（<a class="clear-f" href="archive.html">查看全部</a>）` : ""}
           ${q || tag ? `，筛选后 <b>${filtered.length}</b> 篇（<a class="clear-f" href="archive.html">清空筛选</a>）` : "，按分类整理如下"}。
         </p>
       </section>
@@ -1011,6 +1047,7 @@
           /* 内存中重新筛选并只重渲染结果区 */
           const kw2 = v.toLowerCase();
           const list = posts.filter((p) => {
+            if (unfiled && p.folder) return false;
             if (tag && !(p.tags || []).includes(tag)) return false;
             if (folder) {
               const pf = p.folder || "";
