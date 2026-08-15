@@ -7,6 +7,14 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>排列组合进阶：从圆排列到容斥原理</title>
+      <link>https://wym100171113.github.io/post.html?id=%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%E8%BF%9B%E9%98%B6</link>
+      <guid>https://wym100171113.github.io/post.html?id=%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%E8%BF%9B%E9%98%B6</guid>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 +0800</pubDate>
+      <description>从基本排列组合出发，一路走到圆排列、可重复组合、错排、置换不动点与容斥原理；每节配一道练习题，文末有详细解答。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>几何体的体积与表面积：切、拼、展开与极限</title>
       <link>https://wym100171113.github.io/post.html?id=volume-surface-area</link>
       <guid>https://wym100171113.github.io/post.html?id=volume-surface-area</guid>
