@@ -538,6 +538,7 @@ input { font: inherit; }
 .prose a:hover { text-decoration-color: var(--accent); }
 .prose strong { font-weight: 600; }
 .prose em { font-style: italic; }
+.prose mark { background: rgba(255, 208, 0, 0.4); color: inherit; padding: 0 0.15em; border-radius: 3px; }
 .prose ul, .prose ol { padding-left: 1.35em; }
 .prose li { margin: 0.35em 0; }
 .prose li::marker { color: var(--accent); }
