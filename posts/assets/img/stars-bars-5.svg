@@ -51,6 +51,7 @@
   <text x="320" y="185" text-anchor="middle" font-size="12" fill="#9ca3af">两个隔板之间是空的,这一段就是 0</text>
 
   <!-- 行 2:空 | 球球球 | 球球 -->
+  <line x1="40" y1="240" x2="600" y2="240" stroke="#d1d5db" stroke-width="1.5"/>
   <rect x="40"  y="222" width="7" height="36" rx="3" fill="#1c1c1e"/>
   <circle cx="116" cy="240" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
   <circle cx="188" cy="240" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
@@ -58,7 +59,7 @@
   <rect x="312" y="222" width="7" height="36" rx="3" fill="#1c1c1e"/>
   <circle cx="388" cy="240" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
   <circle cx="460" cy="240" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-  <text x="24"  y="245" text-anchor="middle" font-size="13" fill="#f59e0b">x₁ = 0</text>
+  <text x="40"  y="282" text-anchor="middle" font-size="13" fill="#f59e0b">x₁ = 0</text>
   <text x="188" y="282" text-anchor="middle" font-size="13" fill="#f59e0b">x₂ = 3</text>
   <text x="424" y="282" text-anchor="middle" font-size="13" fill="#f59e0b">x₃ = 2</text>
 
