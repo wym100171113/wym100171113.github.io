@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="980" height="700" viewBox="0 0 980 700">
+  <style>
+    @media (prefers-color-scheme: dark) {
+      [fill="#26303d"] { fill: #d8d8de; }
+      [stroke="#26303d"] { stroke: #d8d8de; }
+      [fill="#1c1c1e"] { fill: #d8d8de; }
+      [stroke="#1c1c1e"] { stroke: #d8d8de; }
+      [fill="white"] { fill: #2a2a2e; }
+      [fill="#3c6eb9"] { fill: #6b9df0; }
+      [stroke="#3c6eb9"] { stroke: #6b9df0; }
+      [fill="#d63e3e"] { fill: #f07070; }
+      [stroke="#d63e3e"] { stroke: #f07070; }
+      [fill="#2e8b57"] { fill: #4caf7d; }
+      [stroke="#2e8b57"] { stroke: #4caf7d; }
+      [fill="#96999f"] { fill: #6b6b72; }
+      [stroke="#96999f"] { stroke: #6b6b72; }
+      [stroke="#bcc0c8"] { stroke: #3a3a40; }
+      [fill="#d0e0f6"] { fill: #1f3a5c; }
+      [stroke="#4e6c9e"] { stroke: #7e9cc8; }
+      [fill-opacity="0.25"] { fill-opacity: 0.4; }
+      [fill="#3b82f6"] { fill: #7db2ff; }
+      [stroke="#3b82f6"] { stroke: #7db2ff; }
+      [fill="#f59e0b"] { fill: #fbbf24; }
+      [stroke="#f59e0b"] { stroke: #fbbf24; }
+      [fill="#eff6ff"] { fill: #1c2a44; }
+      [fill="#dbeafe"] { fill: #1c2f4d; }
+      [fill="#fef3c7"] { fill: #4a3a1a; }
+      [fill="#6b7280"] { fill: #8e8e93; }
+      [fill="#9ca3af"] { fill: #5b5b60; }
+      [stroke="#d1d5db"] { stroke: #3a3a40; }
+      [stroke="#e5e7eb"] { stroke: #2a2a2e; }
+    }
+  </style>
 
-<rect width="980" height="700" fill="white"/>
 <rect x="138" y="150" width="144" height="130" fill="#d0e0f6"/>
 <ellipse cx="210" cy="150" rx="72" ry="26" fill="#d0e0f6" stroke="#4e6c9e" stroke-width="2.5"/>
 <path d="M 138 280 A 72 26 0 0 0 282 280" fill="#d0e0f6" stroke="#4e6c9e" stroke-width="2.5"/>

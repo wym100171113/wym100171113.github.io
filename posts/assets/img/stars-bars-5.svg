@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="320" viewBox="0 0 640 320" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    @media (prefers-color-scheme: dark) {
+      [fill="#26303d"] { fill: #d8d8de; }
+      [stroke="#26303d"] { stroke: #d8d8de; }
+      [fill="#1c1c1e"] { fill: #d8d8de; }
+      [stroke="#1c1c1e"] { stroke: #d8d8de; }
+      [fill="white"] { fill: #2a2a2e; }
+      [fill="#3c6eb9"] { fill: #6b9df0; }
+      [stroke="#3c6eb9"] { stroke: #6b9df0; }
+      [fill="#d63e3e"] { fill: #f07070; }
+      [stroke="#d63e3e"] { stroke: #f07070; }
+      [fill="#2e8b57"] { fill: #4caf7d; }
+      [stroke="#2e8b57"] { stroke: #4caf7d; }
+      [fill="#96999f"] { fill: #6b6b72; }
+      [stroke="#96999f"] { stroke: #6b6b72; }
+      [stroke="#bcc0c8"] { stroke: #3a3a40; }
+      [fill="#d0e0f6"] { fill: #1f3a5c; }
+      [stroke="#4e6c9e"] { stroke: #7e9cc8; }
+      [fill-opacity="0.25"] { fill-opacity: 0.4; }
+      [fill="#3b82f6"] { fill: #7db2ff; }
+      [stroke="#3b82f6"] { stroke: #7db2ff; }
+      [fill="#f59e0b"] { fill: #fbbf24; }
+      [stroke="#f59e0b"] { stroke: #fbbf24; }
+      [fill="#eff6ff"] { fill: #1c2a44; }
+      [fill="#dbeafe"] { fill: #1c2f4d; }
+      [fill="#fef3c7"] { fill: #4a3a1a; }
+      [fill="#6b7280"] { fill: #8e8e93; }
+      [fill="#9ca3af"] { fill: #5b5b60; }
+      [stroke="#d1d5db"] { stroke: #3a3a40; }
+      [stroke="#e5e7eb"] { stroke: #2a2a2e; }
+    }
+  </style>
+  <!-- 标题 -->
+  <text x="320" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#1c1c1e">x₁ + x₂ + x₃ = 5:7 个位置里选 2 个放隔板</text>
+
+  <!-- 槽位基座线 -->
+  <line x1="40" y1="120" x2="600" y2="120" stroke="#d1d5db" stroke-width="1.5"/>
+
+  <!-- 行 1:球球 | 球球球 |(空)-->
+  <circle cx="76"  cy="120" r="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="148" cy="120" r="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="200" y="102" width="7" height="36" rx="3" fill="#1c1c1e"/>
+  <circle cx="276" cy="120" r="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="348" cy="120" r="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="420" cy="120" r="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="472" y="102" width="7" height="36" rx="3" fill="#1c1c1e"/>
+  <text x="112" y="160" text-anchor="middle" font-size="13" fill="#3b82f6">x₁ = 2</text>
+  <text x="348" y="160" text-anchor="middle" font-size="13" fill="#3b82f6">x₂ = 3</text>
+  <text x="552" y="160" text-anchor="middle" font-size="13" fill="#3b82f6">x₃ = 0</text>
+  <text x="320" y="185" text-anchor="middle" font-size="12" fill="#9ca3af">两个隔板之间是空的,这一段就是 0</text>
+
+  <!-- 行 2:空 | 球球球 | 球球 -->
+  <rect x="40"  y="222" width="7" height="36" rx="3" fill="#1c1c1e"/>
+  <circle cx="116" cy="240" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <circle cx="188" cy="240" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <circle cx="260" cy="240" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <rect x="312" y="222" width="7" height="36" rx="3" fill="#1c1c1e"/>
+  <circle cx="388" cy="240" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <circle cx="460" cy="240" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="24"  y="245" text-anchor="middle" font-size="13" fill="#f59e0b">x₁ = 0</text>
+  <text x="188" y="282" text-anchor="middle" font-size="13" fill="#f59e0b">x₂ = 3</text>
+  <text x="424" y="282" text-anchor="middle" font-size="13" fill="#f59e0b">x₃ = 2</text>
+
+  <!-- 底部结论 -->
+  <text x="320" y="308" text-anchor="middle" font-size="13" fill="#6b7280">5 个球 + 2 块隔板 = 7 个位置,选 2 个放隔板 → C(7, 2) = 21 种分组</text>
+</svg>
