@@ -103,20 +103,30 @@
   }
 
   /* ---------------- 主题与顶栏 ---------------- */
-  function initTheme() {
+  /* 应用主题：读 localStorage → 设 data-theme（与按钮绑定分离，供 bfcache 恢复时重放） */
+  function applyTheme() {
     const root = document.documentElement;
     const saved = localStorage.getItem(THEME_KEY);
-    const theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    root.setAttribute("data-theme", theme);
+    root.setAttribute("data-theme", saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+  }
+
+  function initTheme() {
+    applyTheme();
     const btn = $("#themeBtn");
     if (btn) {
       btn.addEventListener("click", () => {
-        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", next);
+        const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
         localStorage.setItem(THEME_KEY, next);
       });
     }
   }
+
+  /* bfcache 恢复时脚本不会重跑：A 深色 → B 改浅色 → 返回 A，必须重放主题，
+     否则恢复的是离开时冻结的旧主题（back/forward 缓存陈腐问题） */
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) applyTheme();
+  });
 
   function initHeader() {
     const h = $("#siteHeader");
