@@ -1,5 +1,18 @@
 [
   {
+    "slug": "characteristic-and-fixed-point",
+    "folder": "",
+    "title": "特征根与不动点:二阶递推、分式递推与周期数列",
+    "date": "2026-08-16",
+    "tags": [
+      "数学",
+      "数列"
+    ],
+    "excerpt": "二阶线性递推靠特征根,分式递推靠不动点——两者统一于\"变换的特征\"。特征落在单位圆上,数列就循环起来。判别式三情形、周期数列的充要条件与最小正周期的求法,配四道竞赛例题。",
+    "category": "数学",
+    "readTime": "16 分钟"
+  },
+  {
     "slug": "generating-functions-counting",
     "folder": "",
     "title": "生成函数:把计数打包成多项式",

@@ -7,6 +7,14 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>特征根与不动点:二阶递推、分式递推与周期数列</title>
+      <link>https://wym100171113.github.io/post.html?id=characteristic-and-fixed-point</link>
+      <guid>https://wym100171113.github.io/post.html?id=characteristic-and-fixed-point</guid>
+      <pubDate>Sun, 16 Aug 2026 00:00:00 +0800</pubDate>
+      <description>二阶线性递推靠特征根,分式递推靠不动点——两者统一于"变换的特征"。特征落在单位圆上,数列就循环起来。判别式三情形、周期数列的充要条件与最小正周期的求法,配四道竞赛例题。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>生成函数:把计数打包成多项式</title>
       <link>https://wym100171113.github.io/post.html?id=generating-functions-counting</link>
       <guid>https://wym100171113.github.io/post.html?id=generating-functions-counting</guid>
