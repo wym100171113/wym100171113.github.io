@@ -65,7 +65,7 @@ $$\sum_i w_i f(x_i) \ge \sum_i w_i \big[f(x_0) + f'(x_0)(x_i - x_0)\big] = f(x_0
 
 $$-\ln\frac{x_1 + \cdots + x_n}{n} \le \frac{-\ln x_1 - \cdots - \ln x_n}{n} \Longrightarrow \frac{x_1 + \cdots + x_n}{n} \ge \sqrt[n]{x_1 \cdots x_n}$$
 
-算术平均 ≥ 几何平均，一行写完。（本站另有一篇[不使用凸性的初等证明](post.html?slug=AM-GM不等式)。）
+算术平均 ≥ 几何平均，一行写完。（本站另有一篇[不使用凸性的初等证明](post.html?slug=am-gm-inequality)。）
 
 **例 2（幂平均链）**。换不同的凸函数，把四条平均串成一条链：
 
@@ -125,7 +125,7 @@ $$f(\mathbb{E}[X]) \le \mathbb{E}[f(X)]$$
 
 ## 相关阅读
 
-- [AM-GM不等式](post.html?slug=AM-GM不等式)（本站）：琴生最著名的推论，那里给出了不依赖凸性的初等证明，两篇对照读更有味道。
+- [AM-GM不等式](post.html?slug=am-gm-inequality)（本站）：琴生最著名的推论，那里给出了不依赖凸性的初等证明，两篇对照读更有味道。
 
 > [!detail] 附：配图绘制细节（可展开）
 > 三幅图均为 **SVG 矢量图**（Python 手写），在浏览器里渲染：曲线用采样点画折线，文字用 `<text>` 交给浏览器字体渲染，因此中文与数学符号无需额外处理，且任意放大不失真。要点：
