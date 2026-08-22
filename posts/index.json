@@ -1,6 +1,6 @@
 [
   {
-    "slug": "抽象函数",
+    "slug": "abstract-functions",
     "folder": "数学/函数",
     "title": "抽象函数：不给公式，也能破案",
     "date": "2026-08-22",
@@ -26,6 +26,19 @@
     "readTime": "16 分钟"
   },
   {
+    "slug": "combinatorial-identities",
+    "folder": "数学/组合",
+    "title": "组合恒等式:从杨辉三角到二项式定理",
+    "date": "2026-08-16",
+    "tags": [
+      "数学",
+      "组合"
+    ],
+    "excerpt": "杨辉三角的每个数都身兼数职:递推、对称、行和、范德蒙德卷积……二项式定理是它们的代数引擎,格路与投票是两个最常见的计数模型。",
+    "category": "数学",
+    "readTime": "9 分钟"
+  },
+  {
     "slug": "generating-functions-counting",
     "folder": "数学/组合",
     "title": "生成函数:把计数打包成多项式",
@@ -39,20 +52,7 @@
     "readTime": "7 分钟"
   },
   {
-    "slug": "组合恒等式",
-    "folder": "数学/组合",
-    "title": "组合恒等式:从杨辉三角到二项式定理",
-    "date": "2026-08-16",
-    "tags": [
-      "数学",
-      "组合"
-    ],
-    "excerpt": "杨辉三角的每个数都身兼数职:递推、对称、行和、范德蒙德卷积……二项式定理是它们的代数引擎,格路与投票是两个最常见的计数模型。",
-    "category": "数学",
-    "readTime": "9 分钟"
-  },
-  {
-    "slug": "排列组合进阶",
+    "slug": "permutations-combinations",
     "folder": "数学/组合",
     "title": "排列组合进阶：从圆排列到容斥原理",
     "date": "2026-08-15",
@@ -65,7 +65,7 @@
     "readTime": "13 分钟"
   },
   {
-    "slug": "琴生不等式",
+    "slug": "jensen-inequality",
     "folder": "数学/不等式",
     "title": "琴生不等式:函数的平均,不小于平均的函数",
     "date": "2026-08-14",
@@ -156,7 +156,7 @@
     "readTime": "4 分钟"
   },
   {
-    "slug": "AM-GM不等式",
+    "slug": "am-gm-inequality",
     "folder": "数学/不等式",
     "title": "AM-GM不等式",
     "date": "2026-08-09",
@@ -169,7 +169,7 @@
     "readTime": "1 分钟"
   },
   {
-    "slug": "韦达定理",
+    "slug": "vieta-formulas",
     "folder": "数学/代数",
     "title": "韦达定理",
     "date": "2026-08-09",
