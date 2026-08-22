@@ -10,7 +10,7 @@
       <title>特征根与不动点:二阶递推、分式递推与周期数列</title>
       <link>https://wym100171113.github.io/post.html?id=characteristic-and-fixed-point</link>
       <guid>https://wym100171113.github.io/post.html?id=characteristic-and-fixed-point</guid>
-      <pubDate>Sun, 16 Aug 2026 00:00:00 +0800</pubDate>
+      <pubDate>Fri, 21 Aug 2026 00:00:00 +0800</pubDate>
       <description>二阶线性递推靠特征根,分式递推靠不动点——两者统一于"变换的特征"。特征落在单位圆上,数列就循环起来。判别式三情形、周期数列的充要条件与最小正周期的求法,配四道竞赛例题。</description>
       <category>数学</category>
     </item>
@@ -39,19 +39,19 @@
       <category>数学</category>
     </item>
     <item>
-      <title>几何体的体积与表面积：切、拼、展开与极限</title>
-      <link>https://wym100171113.github.io/post.html?id=volume-surface-area</link>
-      <guid>https://wym100171113.github.io/post.html?id=volume-surface-area</guid>
-      <pubDate>Fri, 14 Aug 2026 00:00:00 +0800</pubDate>
-      <description>锥体为什么是柱体的 1/3？球体积 4/3πr³ 是怎么来的？从三棱柱切三锥、祖暅原理到牟合方盖与帕普斯定理，一条由简入深的体积之路。</description>
-      <category>数学</category>
-    </item>
-    <item>
       <title>琴生不等式:函数的平均,不小于平均的函数</title>
       <link>https://wym100171113.github.io/post.html?id=%E7%90%B4%E7%94%9F%E4%B8%8D%E7%AD%89%E5%BC%8F</link>
       <guid>https://wym100171113.github.io/post.html?id=%E7%90%B4%E7%94%9F%E4%B8%8D%E7%AD%89%E5%BC%8F</guid>
       <pubDate>Fri, 14 Aug 2026 00:00:00 +0800</pubDate>
       <description>对凸函数 f,加权平均处的取值不超过取值的加权平均: f(Σwᵢxᵢ) ≤ Σwᵢf(xᵢ)。两种证明、四道例题,以及它与二阶导 f″ ≥ 0 的等价关系。</description>
+      <category>数学</category>
+    </item>
+    <item>
+      <title>几何体的体积与表面积：切、拼、展开与极限</title>
+      <link>https://wym100171113.github.io/post.html?id=volume-surface-area</link>
+      <guid>https://wym100171113.github.io/post.html?id=volume-surface-area</guid>
+      <pubDate>Fri, 14 Aug 2026 00:00:00 +0800</pubDate>
+      <description>锥体为什么是柱体的 1/3？球体积 4/3πr³ 是怎么来的？从三棱柱切三锥、祖暅原理到牟合方盖与帕普斯定理，一条由简入深的体积之路。</description>
       <category>数学</category>
     </item>
     <item>
@@ -111,20 +111,20 @@
       <category>数学</category>
     </item>
     <item>
-      <title>斐波那契数列与黄金分割：一个美丽的巧合</title>
-      <link>https://wym100171113.github.io/post.html?id=fibonacci</link>
-      <guid>https://wym100171113.github.io/post.html?id=fibonacci</guid>
-      <pubDate>Sat, 08 Aug 2026 00:00:00 +0800</pubDate>
-      <description>斐波那契数列为什么逼近黄金分割？比奈公式给出答案。顺便聊聊从兔子到向日葵的巧合。</description>
-      <category>数学</category>
-    </item>
-    <item>
       <title>Hello world</title>
       <link>https://wym100171113.github.io/post.html?id=hello</link>
       <guid>https://wym100171113.github.io/post.html?id=hello</guid>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0800</pubDate>
       <description>这个博客为什么存在：关于数学、代码与偶然想法的笔记本。</description>
       <category>随笔</category>
+    </item>
+    <item>
+      <title>斐波那契数列与黄金分割：一个美丽的巧合</title>
+      <link>https://wym100171113.github.io/post.html?id=fibonacci</link>
+      <guid>https://wym100171113.github.io/post.html?id=fibonacci</guid>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0800</pubDate>
+      <description>斐波那契数列为什么逼近黄金分割？比奈公式给出答案。顺便聊聊从兔子到向日葵的巧合。</description>
+      <category>数学</category>
     </item>
   </channel>
 </rss>

@@ -1,9 +1,9 @@
 [
   {
     "slug": "characteristic-and-fixed-point",
-    "folder": "",
+    "folder": "数学/数列",
     "title": "特征根与不动点:二阶递推、分式递推与周期数列",
-    "date": "2026-08-16",
+    "date": "2026-08-21",
     "tags": [
       "数学",
       "数列"
@@ -14,7 +14,7 @@
   },
   {
     "slug": "generating-functions-counting",
-    "folder": "",
+    "folder": "数学/组合",
     "title": "生成函数:把计数打包成多项式",
     "date": "2026-08-16",
     "tags": [
@@ -52,19 +52,6 @@
     "readTime": "13 分钟"
   },
   {
-    "slug": "volume-surface-area",
-    "folder": "",
-    "title": "几何体的体积与表面积：切、拼、展开与极限",
-    "date": "2026-08-14",
-    "tags": [
-      "数学",
-      "几何"
-    ],
-    "excerpt": "锥体为什么是柱体的 1/3？球体积 4/3πr³ 是怎么来的？从三棱柱切三锥、祖暅原理到牟合方盖与帕普斯定理，一条由简入深的体积之路。",
-    "category": "数学",
-    "readTime": "10 分钟"
-  },
-  {
     "slug": "琴生不等式",
     "folder": "数学/不等式",
     "title": "琴生不等式:函数的平均,不小于平均的函数",
@@ -78,8 +65,21 @@
     "readTime": "5 分钟"
   },
   {
+    "slug": "volume-surface-area",
+    "folder": "数学/几何",
+    "title": "几何体的体积与表面积：切、拼、展开与极限",
+    "date": "2026-08-14",
+    "tags": [
+      "数学",
+      "几何"
+    ],
+    "excerpt": "锥体为什么是柱体的 1/3？球体积 4/3πr³ 是怎么来的？从三棱柱切三锥、祖暅原理到牟合方盖与帕普斯定理，一条由简入深的体积之路。",
+    "category": "数学",
+    "readTime": "10 分钟"
+  },
+  {
     "slug": "fractals",
-    "folder": "",
+    "folder": "数学/几何",
     "title": "分形:越看越多的几何",
     "date": "2026-08-13",
     "tags": [
@@ -92,7 +92,7 @@
   },
   {
     "slug": "polyhedra",
-    "folder": "",
+    "folder": "数学/几何",
     "title": "为什么正多面体只有五种:从欧拉公式说起",
     "date": "2026-08-13",
     "tags": [
@@ -105,7 +105,7 @@
   },
   {
     "slug": "generating-functions",
-    "folder": "",
+    "folder": "数学/数列",
     "title": "生成函数:把数列打包成代数",
     "date": "2026-08-12",
     "tags": [
@@ -118,7 +118,7 @@
   },
   {
     "slug": "recurrence-iteration",
-    "folder": "",
+    "folder": "数学/数列",
     "title": "递推与迭代:不动点与轨道",
     "date": "2026-08-12",
     "tags": [
@@ -131,7 +131,7 @@
   },
   {
     "slug": "fibonacci-part2",
-    "folder": "",
+    "folder": "数学/数列",
     "title": "再谈斐波那契:通项公式的两种推导",
     "date": "2026-08-11",
     "tags": [
@@ -169,19 +169,6 @@
     "readTime": "2 分钟"
   },
   {
-    "slug": "fibonacci",
-    "folder": "",
-    "title": "斐波那契数列与黄金分割：一个美丽的巧合",
-    "date": "2026-08-08",
-    "tags": [
-      "数学",
-      "数列"
-    ],
-    "excerpt": "斐波那契数列为什么逼近黄金分割？比奈公式给出答案。顺便聊聊从兔子到向日葵的巧合。",
-    "category": "数学",
-    "readTime": "2 分钟"
-  },
-  {
     "slug": "hello",
     "folder": "",
     "title": "Hello world",
@@ -193,5 +180,18 @@
     "excerpt": "这个博客为什么存在：关于数学、代码与偶然想法的笔记本。",
     "category": "随笔",
     "readTime": "1 分钟"
+  },
+  {
+    "slug": "fibonacci",
+    "folder": "数学/数列",
+    "title": "斐波那契数列与黄金分割：一个美丽的巧合",
+    "date": "2026-08-08",
+    "tags": [
+      "数学",
+      "数列"
+    ],
+    "excerpt": "斐波那契数列为什么逼近黄金分割？比奈公式给出答案。顺便聊聊从兔子到向日葵的巧合。",
+    "category": "数学",
+    "readTime": "2 分钟"
   }
 ]
