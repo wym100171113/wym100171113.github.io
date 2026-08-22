@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <title>函数方程指纹：四类初等函数与它们的身份方程</title>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      [fill="#26303d"] { fill: #d8d8de; }
+      [stroke="#26303d"] { stroke: #d8d8de; }
+      [fill="#96999f"] { fill: #6b6b72; }
+      [stroke="#96999f"] { stroke: #6b6b72; }
+      [fill="#3c6eb9"] { fill: #6b9df0; }
+      [stroke="#3c6eb9"] { stroke: #6b9df0; }
+      [fill="#d63e3e"] { fill: #f07070; }
+      [stroke="#d63e3e"] { stroke: #f07070; }
+      [fill="#2e8b57"] { fill: #4caf7d; }
+      [stroke="#2e8b57"] { stroke: #4caf7d; }
+      [fill="#f59e0b"] { fill: #fbbf24; }
+      [stroke="#f59e0b"] { stroke: #fbbf24; }
+      [stroke="#bcc0c8"] { stroke: #3a3a40; }
+    }
+    text { font-family: "PingFang SC, STHeiti, Heiti SC, sans-serif"; }
+  </style>
+
+  <!-- ════════ 左上：正比例 ════════ -->
+  <text x="225" y="44" font-size="26" font-weight="600" fill="#26303d" text-anchor="middle">正比例 · f(x) = cx</text>
+  <line x1="105" y1="210" x2="345" y2="210" stroke="#26303d" stroke-width="2"/>
+  <polygon points="345,210 336,206.5 336,213.5" fill="#26303d"/>
+  <line x1="135" y1="240" x2="135" y2="60" stroke="#26303d" stroke-width="2"/>
+  <polygon points="135,60 131.5,69 138.5,69" fill="#26303d"/>
+  <text x="124" y="228" font-size="15" fill="#96999f" text-anchor="middle">O</text>
+  <line x1="135" y1="210" x2="330" y2="75" stroke="#3c6eb9" stroke-width="3"/>
+  <text x="295" y="88" font-size="18" fill="#3c6eb9" text-anchor="middle">f(x) = cx</text>
+  <text x="225" y="272" font-size="21" fill="#26303d" text-anchor="middle">f(x+y) = f(x) + f(y)</text>
+
+  <!-- ════════ 右上：指数 ════════ -->
+  <text x="675" y="44" font-size="26" font-weight="600" fill="#26303d" text-anchor="middle">指数 · f(x) = a<tspan dy="-8" font-size="17">x</tspan></text>
+  <line x1="555" y1="210" x2="795" y2="210" stroke="#26303d" stroke-width="2"/>
+  <polygon points="795,210 786,206.5 786,213.5" fill="#26303d"/>
+  <line x1="585" y1="240" x2="585" y2="60" stroke="#26303d" stroke-width="2"/>
+  <polygon points="585,60 581.5,69 588.5,69" fill="#26303d"/>
+  <circle cx="585" cy="178" r="4" fill="#d63e3e"/>
+  <text x="572" y="184" font-size="14" fill="#96999f" text-anchor="end">1</text>
+  <path d="M 566 208 C 575 196 579 186 585 178 C 608 173 640 164 660 147 C 682 127 698 98 706 62"
+        fill="none" stroke="#d63e3e" stroke-width="3"/>
+  <text x="742" y="120" font-size="18" fill="#d63e3e" text-anchor="middle">f(x) = a<tspan dy="-8" font-size="14">x</tspan></text>
+  <text x="675" y="272" font-size="21" fill="#26303d" text-anchor="middle">f(x+y) = f(x) · f(y)</text>
+
+  <!-- ════════ 左下：幂 ════════ -->
+  <text x="225" y="334" font-size="26" font-weight="600" fill="#26303d" text-anchor="middle">幂 · f(x) = x<tspan dy="-8" font-size="17">α</tspan></text>
+  <line x1="105" y1="500" x2="345" y2="500" stroke="#26303d" stroke-width="2"/>
+  <polygon points="345,500 336,496.5 336,503.5" fill="#26303d"/>
+  <line x1="135" y1="530" x2="135" y2="350" stroke="#26303d" stroke-width="2"/>
+  <polygon points="135,350 131.5,359 138.5,359" fill="#26303d"/>
+  <text x="124" y="518" font-size="15" fill="#96999f" text-anchor="middle">O</text>
+  <text x="316" y="521" font-size="14" fill="#96999f" text-anchor="middle">x &gt; 0</text>
+  <path d="M 135 500 C 158 452 205 424 330 402" fill="none" stroke="#2e8b57" stroke-width="3"/>
+  <text x="252" y="388" font-size="18" fill="#2e8b57" text-anchor="middle">f(x) = x<tspan dy="-8" font-size="14">α</tspan></text>
+  <text x="225" y="562" font-size="21" fill="#26303d" text-anchor="middle">f(x·y) = f(x) · f(y)</text>
+
+  <!-- ════════ 右下：对数 ════════ -->
+  <text x="675" y="334" font-size="26" font-weight="600" fill="#26303d" text-anchor="middle">对数 · f(x) = log<tspan dy="6" font-size="17">a</tspan><tspan dy="-6">&#8201;x</tspan></text>
+  <line x1="555" y1="500" x2="795" y2="500" stroke="#26303d" stroke-width="2"/>
+  <polygon points="795,500 786,496.5 786,503.5" fill="#26303d"/>
+  <line x1="585" y1="530" x2="585" y2="350" stroke="#26303d" stroke-width="2"/>
+  <polygon points="585,350 581.5,359 588.5,359" fill="#26303d"/>
+  <circle cx="630" cy="500" r="4" fill="#f59e0b"/>
+  <text x="630" y="523" font-size="14" fill="#96999f" text-anchor="middle">1</text>
+  <text x="772" y="521" font-size="14" fill="#96999f" text-anchor="middle">x &gt; 0</text>
+  <path d="M 594 513 C 606 506 618 502 630 500 C 662 494 706 468 764 396"
+        fill="none" stroke="#f59e0b" stroke-width="3"/>
+  <text x="716" y="434" font-size="18" fill="#f59e0b" text-anchor="middle">f(x) = log<tspan dy="5" font-size="14">a</tspan><tspan dy="-5">&#8201;x</tspan></text>
+  <text x="675" y="562" font-size="21" fill="#26303d" text-anchor="middle">f(x·y) = f(x) + f(y)</text>
+</svg>

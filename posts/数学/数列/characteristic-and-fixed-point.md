@@ -29,7 +29,7 @@ $$r = |\lambda| = \sqrt{-q}$$
 
 $A,B$(或 $C,D$)由 $a_1, a_2$ 定出。
 
-![特征根的三种分布:实根在实轴上,重根一个点,共轭复根在单位圆上——根的位置决定数列的命运](assets/img/characteristic-roots.svg)
+![特征根的三种分布:实根在实轴上,重根一个点,共轭复根在单位圆上——根的位置决定数列的命运](../../assets/img/characteristic-roots.svg)
 
 **三个例子**($\Delta$ 三种符号各一个):
 
