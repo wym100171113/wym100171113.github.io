@@ -75,9 +75,9 @@
 <circle cx="410" cy="215" r="4" class="c-ink" fill="currentColor"/>
 <text x="400" y="240" text-anchor="end" class="c-ink" font-size="15">1536</text>
 <circle cx="410" cy="235" r="4" class="c-ink" fill="currentColor"/>
-<circle cx="160" cy="95" r="9" fill="none" class="c-blue" stroke="currentColor" stroke-width="2.2"/>
-<circle cx="410" cy="155" r="9" fill="none" class="c-red" stroke="currentColor" stroke-width="2.2"/>
-<circle cx="410" cy="235" r="9" fill="none" class="c-red" stroke="currentColor" stroke-width="2.2"/>
+<circle cx="160" cy="95" r="9" fill="none" class="c-blue" stroke="currentColor" stroke-width="2.2" style="fill:none"/>
+<circle cx="410" cy="155" r="9" fill="none" class="c-red" stroke="currentColor" stroke-width="2.2" style="fill:none"/>
+<circle cx="410" cy="235" r="9" fill="none" class="c-red" stroke="currentColor" stroke-width="2.2" style="fill:none"/>
 
 <text x="260" y="286" text-anchor="middle" class="c-ink" font-size="15">每一列里,下面的数除得动上面的数</text>
 <text x="260" y="304" text-anchor="middle" class="c-gray" font-size="13">例 {4, 96, 1536}:96 与 1536 同列 → 96 | 1536(红圈)</text>

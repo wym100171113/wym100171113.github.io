@@ -16,7 +16,7 @@
 <circle cx="70" cy="200" r="10" class="c-blue" fill="currentColor"/>
 <text x="52" y="172" class="c-ink" font-size="15">P</text>
 <text x="40" y="238" class="c-gray" font-size="13">任意一人</text>
-<circle cx="290" cy="200" r="160" fill="none" class="c-gray" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4"/>
+<circle cx="290" cy="200" r="160" fill="none" class="c-gray" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" style="fill:none"/>
   <line x1="70" y1="200" x2="290.0" y2="40.0" class="c-red" stroke="currentColor" stroke-width="3.6"/>
   <line x1="70" y1="200" x2="321.2" y2="43.1" class="c-red" stroke="currentColor" stroke-width="3.6"/>
   <line x1="70" y1="200" x2="351.2" y2="52.2" class="c-red" stroke="currentColor" stroke-width="3.6"/>
@@ -35,7 +35,7 @@
   <line x1="70" y1="200" x2="321.2" y2="356.9" class="c-green" stroke="currentColor" stroke-width="1.4"/>
 
 <!-- 红色邻居圈 -->
-<circle cx="290" cy="200" r="160" fill="none" class="c-red" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/>
+<circle cx="290" cy="200" r="160" fill="none" class="c-red" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4" style="fill:none"/>
   <text x="383.3" y="25.4" text-anchor="middle" class="c-red" font-size="15" font-weight="600">红 6 条</text>
   <text x="487.0" y="219.4" text-anchor="middle" class="c-blue" font-size="15" font-weight="600">蓝 6 条</text>
   <text x="383.3" y="374.6" text-anchor="middle" class="c-green" font-size="15" font-weight="600">绿 4 条</text>
