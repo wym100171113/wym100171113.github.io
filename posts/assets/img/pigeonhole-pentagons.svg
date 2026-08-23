@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" font-family="PingFang SC, Hiragino Sans GB, sans-serif">
+<style>
+  .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+  .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+  .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+  @media (prefers-color-scheme: dark) {
+    .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+    .c-blue { color: #6b9df0; fill: #6b9df0; }
+    .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+  }
+</style>
+
+<!-- P2(中间层,虚线:每层转 36°、缩放 cos 36°) -->
+<polygon points="365.6,127.7 406.2,252.5 300.0,329.6 193.8,252.5 234.4,127.7" fill="none" class="c-gray" stroke="currentColor" stroke-width="1.2" stroke-dasharray="5 4"/>
+<!-- P6(隔 5 层,同向) -->
+<polygon points="300.0,265.8 254.5,232.8 271.9,179.3 328.1,179.3 345.5,232.8" fill="none" class="c-blue" stroke="currentColor" stroke-width="1.8"/>
+<!-- P1(外层) -->
+<polygon points="300.0,80.0 431.2,175.4 381.1,329.6 218.9,329.6 168.8,175.4" fill="none" class="c-blue" stroke="currentColor" stroke-width="1.8"/>
+
+<!-- 半径 OB1(A₁C₁ 与 D₆E₆ 的弧中点都在这个方向) -->
+<line x1="300.0" y1="218.0" x2="431.2" y2="175.4" class="c-gray" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+<circle cx="300.0" cy="218.0" r="2.5" class="c-gray" fill="currentColor"/>
+
+<!-- 等腰梯形 A1C1E6D6(A₁C₁ ∥ D₆E₆)高亮 -->
+<g class="c-red" fill="none" stroke="currentColor" stroke-width="3">
+  <line x1="300.0" y1="80.0" x2="381.1" y2="329.6"/>
+  <line x1="381.1" y1="329.6" x2="345.5" y2="232.8"/>
+  <line x1="345.5" y1="232.8" x2="328.1" y2="179.3"/>
+  <line x1="328.1" y1="179.3" x2="300.0" y2="80.0"/>
+</g>
+<circle cx="300.0" cy="80.0" r="7" class="c-red" fill="currentColor"/>
+<circle cx="381.1" cy="329.6" r="7" class="c-red" fill="currentColor"/>
+<circle cx="328.1" cy="179.3" r="7" class="c-red" fill="currentColor"/>
+<circle cx="345.5" cy="232.8" r="7" class="c-red" fill="currentColor"/>
+
+<text x="284.0" y="74.0" class="c-ink" font-size="14">A₁</text>
+<text x="437.0" y="169.0" class="c-ink" font-size="14">B₁</text>
+<text x="388.0" y="325.0" class="c-ink" font-size="14">C₁</text>
+<text x="204.0" y="325.0" class="c-ink" font-size="14">D₁</text>
+<text x="162.0" y="169.0" class="c-ink" font-size="14">E₁</text>
+<text x="308.0" y="262.0" class="c-ink" font-size="12">A₆</text>
+<text x="247.0" y="236.0" class="c-ink" font-size="12">B₆</text>
+<text x="263.0" y="174.0" class="c-ink" font-size="12">C₆</text>
+<text x="336.0" y="174.0" class="c-ink" font-size="12">D₆</text>
+<text x="352.0" y="220.0" class="c-ink" font-size="12">E₆</text>
+<text x="305.0" y="244.0" class="c-gray" font-size="12">O</text>
+
+<text x="456.0" y="100.0" class="c-gray" font-size="14">P₁</text>
+<text x="408.0" y="122.0" class="c-gray" font-size="13">P₂</text>
+<text x="230.0" y="220.0" class="c-gray" font-size="14">P₆</text>
+
+<text x="300" y="30" text-anchor="middle" class="c-ink" font-size="18" font-weight="600">嵌套正五边形:隔 5 层同向,对应弦构成等腰梯形</text>
+<text x="300" y="390" text-anchor="middle" class="c-gray" font-size="14">P₁(外)与 P₆(隔 5 层)同向:转了 180°、对应弦互相平行;虚线 P₂ 表示每层转 36°、缩放 cos 36°</text>
+<text x="300" y="407" text-anchor="middle" class="c-gray" font-size="14">红色四边形 A₁C₁D₆E₆:A₁C₁ ∥ D₆E₆(弧中点都在半径 OB₁ 上),等腰梯形 → 四点共圆</text>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 310" font-family="PingFang SC, Hiragino Sans GB, sans-serif">
+<style>
+  .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+  .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+  .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+  @media (prefers-color-scheme: dark) {
+    .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+    .c-blue { color: #6b9df0; fill: #6b9df0; }
+    .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+  }
+</style>
+
+<text x="260" y="30" text-anchor="middle" class="c-ink" font-size="18" font-weight="600">把 1~2011 按"奇数部分"排成整除链</text>
+<text x="150" y="46" text-anchor="middle" class="c-gray" font-size="13">奇部 = 1(11 个)</text>
+<text x="400" y="46" text-anchor="middle" class="c-gray" font-size="13">奇部 = 3(10 个)</text>
+
+<line x1="150" y1="74" x2="150" y2="80" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="150" y1="94" x2="150" y2="100" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="150" y1="114" x2="150" y2="120" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="150" y1="134" x2="150" y2="140" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="150" y1="154" x2="150" y2="160" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="150" y1="174" x2="150" y2="180" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="150" y1="194" x2="150" y2="200" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="150" y1="214" x2="150" y2="220" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="150" y1="234" x2="150" y2="240" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="150" y1="254" x2="150" y2="260" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="400" y1="74" x2="400" y2="80" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="400" y1="94" x2="400" y2="100" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="400" y1="114" x2="400" y2="120" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="400" y1="134" x2="400" y2="140" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="400" y1="154" x2="400" y2="160" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="400" y1="174" x2="400" y2="180" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="400" y1="194" x2="400" y2="200" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="400" y1="214" x2="400" y2="220" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<line x1="400" y1="234" x2="400" y2="240" class="c-gray" stroke="currentColor" stroke-width="1.2"/>
+<text x="150" y="60" text-anchor="end" class="c-ink" font-size="15">1</text>
+<circle cx="160" cy="55" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="80" text-anchor="end" class="c-ink" font-size="15">2</text>
+<circle cx="160" cy="75" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="100" text-anchor="end" class="c-ink" font-size="15">4</text>
+<circle cx="160" cy="95" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="120" text-anchor="end" class="c-ink" font-size="15">8</text>
+<circle cx="160" cy="115" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="140" text-anchor="end" class="c-ink" font-size="15">16</text>
+<circle cx="160" cy="135" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="160" text-anchor="end" class="c-ink" font-size="15">32</text>
+<circle cx="160" cy="155" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="180" text-anchor="end" class="c-ink" font-size="15">64</text>
+<circle cx="160" cy="175" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="200" text-anchor="end" class="c-ink" font-size="15">128</text>
+<circle cx="160" cy="195" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="220" text-anchor="end" class="c-ink" font-size="15">256</text>
+<circle cx="160" cy="215" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="240" text-anchor="end" class="c-ink" font-size="15">512</text>
+<circle cx="160" cy="235" r="4" class="c-ink" fill="currentColor"/>
+<text x="150" y="260" text-anchor="end" class="c-ink" font-size="15">1024</text>
+<circle cx="160" cy="255" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="60" text-anchor="end" class="c-ink" font-size="15">3</text>
+<circle cx="410" cy="55" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="80" text-anchor="end" class="c-ink" font-size="15">6</text>
+<circle cx="410" cy="75" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="100" text-anchor="end" class="c-ink" font-size="15">12</text>
+<circle cx="410" cy="95" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="120" text-anchor="end" class="c-ink" font-size="15">24</text>
+<circle cx="410" cy="115" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="140" text-anchor="end" class="c-ink" font-size="15">48</text>
+<circle cx="410" cy="135" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="160" text-anchor="end" class="c-ink" font-size="15">96</text>
+<circle cx="410" cy="155" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="180" text-anchor="end" class="c-ink" font-size="15">192</text>
+<circle cx="410" cy="175" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="200" text-anchor="end" class="c-ink" font-size="15">384</text>
+<circle cx="410" cy="195" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="220" text-anchor="end" class="c-ink" font-size="15">768</text>
+<circle cx="410" cy="215" r="4" class="c-ink" fill="currentColor"/>
+<text x="400" y="240" text-anchor="end" class="c-ink" font-size="15">1536</text>
+<circle cx="410" cy="235" r="4" class="c-ink" fill="currentColor"/>
+<circle cx="160" cy="95" r="9" fill="none" class="c-blue" stroke="currentColor" stroke-width="2.2"/>
+<circle cx="410" cy="155" r="9" fill="none" class="c-red" stroke="currentColor" stroke-width="2.2"/>
+<circle cx="410" cy="235" r="9" fill="none" class="c-red" stroke="currentColor" stroke-width="2.2"/>
+
+<text x="260" y="286" text-anchor="middle" class="c-ink" font-size="15">每一列里,下面的数除得动上面的数</text>
+<text x="260" y="304" text-anchor="middle" class="c-gray" font-size="13">例 {4, 96, 1536}:96 与 1536 同列 → 96 | 1536(红圈)</text>
+</svg>
