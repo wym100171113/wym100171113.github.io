@@ -36,11 +36,11 @@
 
 <!-- 红色邻居圈 -->
 <circle cx="290" cy="200" r="160" fill="none" class="c-red" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4" style="fill:none"/>
-  <text x="383.3" y="25.4" text-anchor="middle" class="c-red" font-size="15" font-weight="600">红 6 条</text>
+  <text x="377" y="48" text-anchor="middle" class="c-red" font-size="15" font-weight="600">红 6 条</text>
   <text x="487.0" y="219.4" text-anchor="middle" class="c-blue" font-size="15" font-weight="600">蓝 6 条</text>
   <text x="383.3" y="374.6" text-anchor="middle" class="c-green" font-size="15" font-weight="600">绿 4 条</text>
 
-<text x="180" y="398" text-anchor="middle" class="c-ink" font-size="15">第一步:16 条边染 3 色,16 = 3×5 + 1 → 某色至少 6 条(红)</text>
+<text x="225" y="398" text-anchor="middle" class="c-ink" font-size="14">第一步:16 条边染 3 色,16 = 3×5 + 1 → 某色至少 6 条(红)</text>
 
 <!-- 中间箭头 -->
 <text x="430" y="210" text-anchor="middle" class="c-gray" font-size="34" font-weight="600">⇒</text>
@@ -51,7 +51,7 @@
   <line x1="660.0" y1="80.0" x2="763.9" y2="140.0" class="c-blue" stroke="currentColor" stroke-width="1.4"/>
   <line x1="660.0" y1="80.0" x2="763.9" y2="260.0" class="c-green" stroke="currentColor" stroke-width="3.4"/>
   <line x1="660.0" y1="80.0" x2="660.0" y2="320.0" class="c-blue" stroke="currentColor" stroke-width="1.4"/>
-  <line x1="660.0" y1="80.0" x2="556.1" y2="260.0" class="c-blue" stroke="currentColor" stroke-width="1.4"/>
+  <line x1="660.0" y1="80.0" x2="556.1" y2="260.0" class="c-green" stroke="currentColor" stroke-width="3.4"/>
   <line x1="660.0" y1="80.0" x2="556.1" y2="140.0" class="c-blue" stroke="currentColor" stroke-width="1.4"/>
   <line x1="763.9" y1="140.0" x2="763.9" y2="260.0" class="c-blue" stroke="currentColor" stroke-width="1.4"/>
   <line x1="763.9" y1="140.0" x2="660.0" y2="320.0" class="c-blue" stroke="currentColor" stroke-width="1.4"/>
