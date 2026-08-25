@@ -7,6 +7,14 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>抽屉原理:挤一挤,总会溢出</title>
+      <link>https://wym100171113.github.io/post.html?id=pigeonhole-principle</link>
+      <guid>https://wym100171113.github.io/post.html?id=pigeonhole-principle</guid>
+      <pubDate>Tue, 25 Aug 2026 00:00:00 +0800</pubDate>
+      <description>只有 n 个抽屉,却要放 n+1 个物体——总有一个抽屉至少装两个。鸽巢原理、抽屉原理、狄利克雷原理,说的是同一件事:它平凡得像句废话,却是竞赛里最锋利的小刀。六人必有三相识、十七位科学家必有三人同题、两千个数里的整除与删减,全靠这一刀。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>抽象函数：不给公式，也能破案</title>
       <link>https://wym100171113.github.io/post.html?id=abstract-functions</link>
       <guid>https://wym100171113.github.io/post.html?id=abstract-functions</guid>
