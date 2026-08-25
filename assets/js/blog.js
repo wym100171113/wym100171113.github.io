@@ -440,6 +440,9 @@
     headings.forEach((h) => {
       const id = `sec-${++n}`;
       h.id = id;
+      /* 折叠 callout（技术附录）里的标题不进目录：折叠时锚点无法跳转，
+         且附录排在文末会让目录顺序看起来错乱。id 仍保留，展开后可手动深链 */
+      if (h.closest(".callout.is-collapsible")) return;
       toc.push({
         id,
         text: h.textContent,
@@ -576,8 +579,9 @@
       const onToc = () => {
         let cur = "";
         $$("#prose h2, #prose h3, #prose h4").forEach((el) => {
-          /* 折叠 callout 内的标题是 display:none，rect 全 0 会被误判为"正在阅读"（如附录 D 常亮），跳过 */
-          if (!el.offsetParent) return;
+          /* 折叠 callout 内的标题：display:none 时 rect 全 0 会误判为"正在阅读"；
+             展开阅读附录时也跳过，让高亮保持在主结构（与目录口径一致） */
+          if (!el.offsetParent || el.closest(".callout.is-collapsible")) return;
           if (el.getBoundingClientRect().top <= 140) cur = el.id;
         });
         tocLinks.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${cur}`));
