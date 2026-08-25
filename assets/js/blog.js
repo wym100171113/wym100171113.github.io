@@ -20,6 +20,8 @@
 
   const MANIFEST = "/posts/index.json";
   const THEME_KEY = "wym-blog-theme";
+  /* 画布底色（与各页 head 内联脚本、style.css 的 --paper 三方同步） */
+  const THEME_BG = { light: "#fefdfa", dark: "#121214" };
 
   const $  = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -107,7 +109,9 @@
   function applyTheme() {
     const root = document.documentElement;
     const saved = localStorage.getItem(THEME_KEY);
-    root.setAttribute("data-theme", saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    const t = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    root.setAttribute("data-theme", t);
+    root.style.background = THEME_BG[t] || "";
   }
 
   function initTheme() {
@@ -117,6 +121,7 @@
       btn.addEventListener("click", () => {
         const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
         document.documentElement.setAttribute("data-theme", next);
+        document.documentElement.style.background = THEME_BG[next] || "";
         localStorage.setItem(THEME_KEY, next);
       });
     }
@@ -1093,6 +1098,16 @@
           args.delete("page");
           const qs = args.toString();
           history.replaceState(null, "", qs ? `archive.html?${qs}` : "archive.html");
+
+          /* 清空搜索：必须整体重渲染。内存扁平渲染还原不了文件夹视图与分页；
+             且此时 URL 已复位，若不重渲染，之后点「清空筛选」会因 URL 无变化被去重跳过 */
+          if (!v) {
+            renderArchive().then(() => {
+              const box = $("#qInput");
+              if (box) box.focus();
+            });
+            return;
+          }
 
           /* 内存中重新筛选并只重渲染结果区 */
           const kw2 = v.toLowerCase();

@@ -8,7 +8,11 @@
     try {
       var t = localStorage.getItem("wym-blog-theme") ||
         (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", t);
+      var root = document.documentElement;
+      root.setAttribute("data-theme", t);
+      /* 画布底色前置：html 背景会传播给浏览器画布，跨页导航时新文档在
+         style.css 到位前就是主题色，消除暗色模式闪白。色值与 style.css --paper 同步 */
+      root.style.background = t === "dark" ? "#121214" : "#fefdfa";
     } catch (e) {}
   })();
 </script>
@@ -72,7 +76,7 @@
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js"></script>
-<script src="assets/js/blog.js?v=31"></script>
+<script src="assets/js/blog.js?v=33"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
