@@ -562,6 +562,14 @@ input { font: inherit; }
   border-radius: 10px; border: 1px solid var(--line);
   box-shadow: 0 2px 14px rgba(28, 28, 30, 0.06);
 }
+/* 暗色主题：白底位图（Mathematica 导出的 PNG/GIF）降亮度，减少刺眼白块；
+   透明底 SVG 本就融合，不处理 */
+[data-theme="dark"] .prose img[src$=".png"],
+[data-theme="dark"] .prose img[src$=".gif"],
+[data-theme="dark"] .prose img[src$=".jpg"],
+[data-theme="dark"] .prose img[src$=".jpeg"] {
+  filter: brightness(.9);
+}
 .prose figcaption, .prose img + em {
   display: block; text-align: center; font-size: 0.78rem; color: var(--muted);
   font-style: normal; margin-top: -8px;

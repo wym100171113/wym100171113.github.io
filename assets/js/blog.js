@@ -323,12 +323,12 @@
     tmp.innerHTML = html;
 
     /* 站内文章链接转译：Obsidian 里站内链接是相对 .md 路径（如 ../代数/韦达定理.md），
-       站点上点击会 404。这里把指向 .md（或纯文件名、post.html?id= 旧写法）的链接
-       统一换成分享页地址 /post/文件名.html */
+       站点上点击会 404。这里把指向 .md（或纯文件名）的链接，与 post.html?id=/slug= 旧写法
+       统一换成 post.html?id=文件名 */
     $$("a[href]", tmp).forEach((a) => {
       let href = a.getAttribute("href");
       if (!href) return;
-      const old = href.match(/^post\.html\?id=([^&#]+)/);
+      const old = href.match(/^post\.html\?(?:id|slug)=([^&#]+)/);
       if (old) { a.setAttribute("href", postUrl(old[1])); return; }
       if (/^(https?:|mailto:|tel:|#|javascript:|data:)/i.test(href)) return;
       if (/\.(html?|xml|png|jpe?g|gif|svg|webp|pdf|zip|css|js)([?#]|$)/i.test(href)) return;
@@ -516,27 +516,38 @@
     /* 代码块复制按钮（mermaid 块会被替换为图表，跳过） */
     initCopyButtons();
 
-    /* Mermaid 图表 */
-    if (window.mermaid) {
-      try {
-        mermaid.initialize({ startOnLoad: false, securityLevel: "loose", theme: "default", themeVariables: { background: "transparent" } });
-      } catch (e) { /* noop */ }
-      let mmd = 0;
-      $$("#prose pre code.language-mermaid").forEach((el) => {
-        const code = el.textContent;
-        const id = `mmd-${++mmd}-${Date.now()}`;
-        (async () => {
-          try {
-            const { svg } = await mermaid.render(id, code);
-            const wrap = document.createElement("div");
-            wrap.className = "mermaid";
-            wrap.innerHTML = `${svg}<span class="mmd-hint">点击放大</span>`;
-            const pre = el.closest("pre");
-            if (pre) pre.replaceWith(wrap);
-            initMmdZoom(wrap);
-          } catch (e) { /* 渲染失败则保留原代码块 */ }
-        })();
-      });
+    /* Mermaid 图表（按需加载：正文里出现 mermaid 代码块才注入脚本，其余页面零开销） */
+    const mmdBlocks = $$("#prose pre code.language-mermaid");
+    if (mmdBlocks.length) {
+      const renderMmd = () => {
+        try {
+          mermaid.initialize({ startOnLoad: false, securityLevel: "loose", theme: "default", themeVariables: { background: "transparent" } });
+        } catch (e) { /* noop */ }
+        let mmd = 0;
+        mmdBlocks.forEach((el) => {
+          const code = el.textContent;
+          const id = `mmd-${++mmd}-${Date.now()}`;
+          (async () => {
+            try {
+              const { svg } = await mermaid.render(id, code);
+              const wrap = document.createElement("div");
+              wrap.className = "mermaid";
+              wrap.innerHTML = `${svg}<span class="mmd-hint">点击放大</span>`;
+              const pre = el.closest("pre");
+              if (pre) pre.replaceWith(wrap);
+              initMmdZoom(wrap);
+            } catch (e) { /* 渲染失败则保留原代码块 */ }
+          })();
+        });
+      };
+      if (window.mermaid) renderMmd();
+      else {
+        const s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+        s.onload = renderMmd;
+        s.onerror = () => { /* 加载失败则保留原代码块 */ };
+        document.head.appendChild(s);
+      }
     }
 
     /* 阅读进度 */
@@ -1069,10 +1080,13 @@
     const resultsBox = $("#arcResults");
     if (qInput && resultsBox) {
       let timer;
+      const foldActions = $(".fold-actions");
       qInput.addEventListener("input", () => {
         clearTimeout(timer);
         timer = setTimeout(() => {
           const v = qInput.value.trim();
+          /* 搜索结果为扁平列表，折叠按钮不再适用，随关键词显隐 */
+          if (foldActions) foldActions.style.display = v ? "none" : "";
           /* 同步 URL（可分享），不触发重载 */
           const args = new URLSearchParams(location.search);
           if (v) args.set("q", v); else args.delete("q");

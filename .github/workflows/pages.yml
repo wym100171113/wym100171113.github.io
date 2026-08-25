@@ -32,7 +32,7 @@ jobs:
         run: python3 tools/blog.py build
 
       - name: Validate all posts (frontmatter)
-        run: python3 tools/blog.py check || true
+        run: python3 tools/blog.py check
 
       - name: Commit generated files (if any)
         run: |

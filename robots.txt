@@ -1,3 +1,5 @@
+# 向各位访客问好
+# 索引在 /sitemap.xml，建议按map检索。
 User-agent: *
 Allow: /
 
