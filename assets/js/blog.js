@@ -112,6 +112,7 @@
     const t = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     root.setAttribute("data-theme", t);
     root.style.background = THEME_BG[t] || "";
+    root.style.colorScheme = t;
   }
 
   function initTheme() {
@@ -122,6 +123,7 @@
         const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
         document.documentElement.setAttribute("data-theme", next);
         document.documentElement.style.background = THEME_BG[next] || "";
+        document.documentElement.style.colorScheme = next;
         localStorage.setItem(THEME_KEY, next);
       });
     }
@@ -490,6 +492,8 @@
       if (!t) return;
       const c = t.closest(".callout");
       if (c) c.classList.toggle("is-collapsed");
+      /* 展开改变后续标题位置，主动触发 scroll 监听器让阅读进度/目录高亮立即重算 */
+      window.dispatchEvent(new Event("scroll"));
     });
 
     /* KaTeX 数学公式（$..$ 行内 / $$..$$ 独立 / \(..\) 与 \[..\] 兼容） */
@@ -572,11 +576,15 @@
       const onToc = () => {
         let cur = "";
         $$("#prose h2, #prose h3, #prose h4").forEach((el) => {
+          /* 折叠 callout 内的标题是 display:none，rect 全 0 会被误判为"正在阅读"（如附录 D 常亮），跳过 */
+          if (!el.offsetParent) return;
           if (el.getBoundingClientRect().top <= 140) cur = el.id;
         });
         tocLinks.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${cur}`));
       };
       window.addEventListener("scroll", onToc, { passive: true });
+      /* 图片/GIF 加载与 mermaid 替换会改变标题位置，资源就绪后重算一次 */
+      window.addEventListener("load", onToc);
       onToc();
     }
 
