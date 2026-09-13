@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    .k0 { color: #d63e3e; fill: currentColor; } .k1 { color: #3c6eb9; fill: currentColor; } .k2 { color: #2e8b57; fill: currentColor; }
+    .k3 { color: #e0861e; fill: currentColor; } .k4 { color: #7d5bb5; fill: currentColor; } .k5 { color: #159a9a; fill: currentColor; } .k6 { color: #9a8c2e; fill: currentColor; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+      .k0 { color: #f07070; fill: currentColor; } .k1 { color: #6b9df0; fill: currentColor; } .k2 { color: #4caf7d; fill: currentColor; }
+      .k3 { color: #f0a860; fill: currentColor; } .k4 { color: #a98fe0; fill: currentColor; } .k5 { color: #5cc8c8; fill: currentColor; } .k6 { color: #c8b860; fill: currentColor; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+    .hex { fill-opacity: 0.30; }
+  </style>
+<text x="320.0" y="28.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">分圆域的塔：每上一层，开一次平方</text>
+<text x="170.0" y="80.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">n = 5：φ(5) = 4，塔有两层</text>
+<rect x="55.0" y="320.0" width="230" height="40" stroke="currentColor" stroke-width="1.4" class="c-ink nf"/>
+<text x="170.0" y="345.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="400">ℚ（度 1）</text>
+<line x1="170.0" y1="318.0" x2="170.0" y2="308.0" stroke="currentColor" stroke-width="1.3" class="c-gray"/>
+<polygon points="170.0,306.0 167.3,312.0 172.7,312.0" fill="currentColor" class="c-gray"/>
+<text x="45.0" y="336.0" font-size="11" class="c-gray" text-anchor="end" font-weight="400">开平方</text>
+<rect x="55.0" y="264.0" width="230" height="40" stroke="currentColor" stroke-width="1.4" class="c-green semi"/>
+<text x="170.0" y="289.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="400">ℚ(√5)（度 2）</text>
+<line x1="170.0" y1="262.0" x2="170.0" y2="252.0" stroke="currentColor" stroke-width="1.3" class="c-gray"/>
+<polygon points="170.0,250.0 167.3,256.0 172.7,256.0" fill="currentColor" class="c-gray"/>
+<rect x="55.0" y="208.0" width="230" height="40" stroke="currentColor" stroke-width="1.4" class="c-blue semi"/>
+<text x="170.0" y="233.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="400">ℚ(ζ₅)（度 4）</text>
+<text x="480.0" y="80.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">n = 17：φ(17) = 16 = 2⁴，塔有四层</text>
+<rect x="355.0" y="320.0" width="250" height="40" stroke="currentColor" stroke-width="1.4" class="c-ink nf"/>
+<text x="480.0" y="345.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="400">ℚ（度 1）</text>
+<line x1="480.0" y1="318.0" x2="480.0" y2="308.0" stroke="currentColor" stroke-width="1.3" class="c-gray"/>
+<polygon points="480.0,306.0 477.3,312.0 482.7,312.0" fill="currentColor" class="c-gray"/>
+<text x="345.0" y="336.0" font-size="11" class="c-gray" text-anchor="end" font-weight="400">开平方</text>
+<rect x="355.0" y="264.0" width="250" height="40" stroke="currentColor" stroke-width="1.4" class="c-green semi"/>
+<text x="480.0" y="289.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="400">ℚ(√17)（度 2）</text>
+<line x1="480.0" y1="262.0" x2="480.0" y2="252.0" stroke="currentColor" stroke-width="1.3" class="c-gray"/>
+<polygon points="480.0,250.0 477.3,256.0 482.7,256.0" fill="currentColor" class="c-gray"/>
+<rect x="355.0" y="208.0" width="250" height="40" stroke="currentColor" stroke-width="1.4" class="c-gray semi"/>
+<text x="480.0" y="233.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="400">度 4 的域</text>
+<line x1="480.0" y1="206.0" x2="480.0" y2="196.0" stroke="currentColor" stroke-width="1.3" class="c-gray"/>
+<polygon points="480.0,194.0 477.3,200.0 482.7,200.0" fill="currentColor" class="c-gray"/>
+<rect x="355.0" y="152.0" width="250" height="40" stroke="currentColor" stroke-width="1.4" class="c-gray semi"/>
+<text x="480.0" y="177.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="400">度 8 的域</text>
+<line x1="480.0" y1="150.0" x2="480.0" y2="140.0" stroke="currentColor" stroke-width="1.3" class="c-gray"/>
+<polygon points="480.0,138.0 477.3,144.0 482.7,144.0" fill="currentColor" class="c-gray"/>
+<rect x="355.0" y="96.0" width="250" height="40" stroke="currentColor" stroke-width="1.4" class="c-blue semi"/>
+<text x="480.0" y="121.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="400">ℚ(ζ₁₇)（度 16）</text>
+<text x="170.0" y="386.0" font-size="11.5" class="c-green" text-anchor="middle" font-weight="400">√5 = ζ + ζ⁴ − ζ² − ζ³ 就住在中间层</text>
+<text x="320.0" y="408.0" font-size="12.5" class="c-ink" text-anchor="middle" font-weight="400">塔高 = log₂φ(n)：每层翻倍 ⟹ 能逐层开平方搭到顶 ⟹ 正五边形、正十七边形可尺规作图</text>
+</svg>

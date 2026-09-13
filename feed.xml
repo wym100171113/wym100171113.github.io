@@ -39,6 +39,22 @@
       <category>数学</category>
     </item>
     <item>
+      <title>随谈：分圆域与单位距离</title>
+      <link>https://wym100171113.github.io/post.html?id=cyclotomic-and-unit-distance</link>
+      <guid>https://wym100171113.github.io/post.html?id=cyclotomic-and-unit-distance</guid>
+      <pubDate>Sun, 13 Sep 2026 00:00:00 +0800</pubDate>
+      <description>单位根能造出哪些数？分圆域给了完整答案。给整个平面染色、让距离恰为 1 的点永不重色，最少要几种？答案七十年来被夹在 4 和 7 之间，直到 2018 年被一位研究衰老的学者改成 5 和 7。两个话题一个在代数深水区、一个在组合边疆，都远没有讲完备——所以这篇不叫教程，叫随谈。</description>
+      <category>数学</category>
+    </item>
+    <item>
+      <title>算两次：同一件事数两遍</title>
+      <link>https://wym100171113.github.io/post.html?id=double-counting</link>
+      <guid>https://wym100171113.github.io/post.html?id=double-counting</guid>
+      <pubDate>Sun, 13 Sep 2026 00:00:00 +0800</pubDate>
+      <description>握过奇数次手的人为什么必有偶数个？1+3+5+⋯+(2n−1) 为什么恰好是 n²？费马小定理为什么能靠"转项链"转出来？这些问题的答案共享同一个动作：给同一个量找两个说法。从一张 0-1 表出发，这篇路过组合、几何、数论、分析与概率，最后发现它们全是同一张表。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>抽屉原理:挤一挤,总会溢出</title>
       <link>https://wym100171113.github.io/post.html?id=pigeonhole-principle</link>
       <guid>https://wym100171113.github.io/post.html?id=pigeonhole-principle</guid>

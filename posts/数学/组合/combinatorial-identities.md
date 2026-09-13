@@ -229,4 +229,5 @@ $$\binom{n-k}{k} + \binom{n-k-1}{k-1}$$
 
 - [排列组合进阶:从圆排列到容斥原理](post.html?slug=permutations-combinations)(本站):基本计数工具,本文恒等式的"原料"。
 - [生成函数:把计数打包成多项式](post.html?slug=generating-functions-counting)(本站):卡特兰数从生成函数里走出来的那篇,与本文的投票模型互为镜像。
+- [算两次:同一件事数两遍](post.html?slug=double-counting)(本站):本文恒等式背后的统一方法——从握手定理到费马小定理,全是"数两遍"。
 - [Proofs that Really Count](https://book.douban.com/subject/3003381/)(Benjamin & Quinn):计数证明的宝库,两百多条恒等式全是"数两遍"。

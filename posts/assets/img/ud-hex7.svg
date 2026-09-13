@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    .k0 { color: #d63e3e; fill: currentColor; } .k1 { color: #3c6eb9; fill: currentColor; }
+    .k2 { color: #2e8b57; fill: currentColor; } .k3 { color: #e0861e; fill: currentColor; }
+    .k4 { color: #7d5bb5; fill: currentColor; } .k5 { color: #159a9a; fill: currentColor; }
+    .k6 { color: #9a8c2e; fill: currentColor; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+      .k0 { color: #f07070; fill: currentColor; } .k1 { color: #6b9df0; fill: currentColor; }
+      .k2 { color: #4caf7d; fill: currentColor; } .k3 { color: #f0a860; fill: currentColor; }
+      .k4 { color: #a98fe0; fill: currentColor; } .k5 { color: #5cc8c8; fill: currentColor; }
+      .k6 { color: #c8b860; fill: currentColor; }
+    }
+    .nf { fill: none; }
+    .hex { fill-opacity: 0.30; }
+  </style>
+<text x="320.0" y="28.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">七色铺法：7 种颜色一定够</text>
+<defs><clipPath id="hexband"><rect x="0" y="48" width="640" height="282"/></clipPath></defs>
+<g clip-path="url(#hexband)">
+<polygon points="40.0,25.3 22.0,56.5 -14.0,56.5 -32.0,25.3 -14.0,-5.9 22.0,-5.9" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="40.0,87.6 22.0,118.8 -14.0,118.8 -32.0,87.6 -14.0,56.5 22.0,56.5" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="40.0,150.0 22.0,181.2 -14.0,181.2 -32.0,150.0 -14.0,118.8 22.0,118.8" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="40.0,212.4 22.0,243.5 -14.0,243.5 -32.0,212.4 -14.0,181.2 22.0,181.2" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+<polygon points="40.0,274.7 22.0,305.9 -14.0,305.9 -32.0,274.7 -14.0,243.5 22.0,243.5" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="40.0,337.1 22.0,368.2 -14.0,368.2 -32.0,337.1 -14.0,305.9 22.0,305.9" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="94.0,56.5 76.0,87.6 40.0,87.6 22.0,56.5 40.0,25.3 76.0,25.3" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="94.0,118.8 76.0,150.0 40.0,150.0 22.0,118.8 40.0,87.6 76.0,87.6" stroke="currentColor" class="k0 hex" stroke-width="1.2"/>
+<polygon points="94.0,181.2 76.0,212.4 40.0,212.4 22.0,181.2 40.0,150.0 76.0,150.0" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="94.0,243.5 76.0,274.7 40.0,274.7 22.0,243.5 40.0,212.4 76.0,212.4" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="94.0,305.9 76.0,337.1 40.0,337.1 22.0,305.9 40.0,274.7 76.0,274.7" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="148.0,25.3 130.0,56.5 94.0,56.5 76.0,25.3 94.0,-5.9 130.0,-5.9" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="148.0,87.6 130.0,118.8 94.0,118.8 76.0,87.6 94.0,56.5 130.0,56.5" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+<polygon points="148.0,150.0 130.0,181.2 94.0,181.2 76.0,150.0 94.0,118.8 130.0,118.8" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="148.0,212.4 130.0,243.5 94.0,243.5 76.0,212.4 94.0,181.2 130.0,181.2" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="148.0,274.7 130.0,305.9 94.0,305.9 76.0,274.7 94.0,243.5 130.0,243.5" stroke="currentColor" class="k0 hex" stroke-width="1.2"/>
+<polygon points="148.0,337.1 130.0,368.2 94.0,368.2 76.0,337.1 94.0,305.9 130.0,305.9" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="202.0,56.5 184.0,87.6 148.0,87.6 130.0,56.5 148.0,25.3 184.0,25.3" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="202.0,118.8 184.0,150.0 148.0,150.0 130.0,118.8 148.0,87.6 184.0,87.6" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="202.0,181.2 184.0,212.4 148.0,212.4 130.0,181.2 148.0,150.0 184.0,150.0" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="202.0,243.5 184.0,274.7 148.0,274.7 130.0,243.5 148.0,212.4 184.0,212.4" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+<polygon points="202.0,305.9 184.0,337.1 148.0,337.1 130.0,305.9 148.0,274.7 184.0,274.7" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="256.0,25.3 238.0,56.5 202.0,56.5 184.0,25.3 202.0,-5.9 238.0,-5.9" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="256.0,87.6 238.0,118.8 202.0,118.8 184.0,87.6 202.0,56.5 238.0,56.5" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="256.0,212.4 238.0,243.5 202.0,243.5 184.0,212.4 202.0,181.2 238.0,181.2" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="256.0,274.7 238.0,305.9 202.0,305.9 184.0,274.7 202.0,243.5 238.0,243.5" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="256.0,337.1 238.0,368.2 202.0,368.2 184.0,337.1 202.0,305.9 238.0,305.9" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="310.0,56.5 292.0,87.6 256.0,87.6 238.0,56.5 256.0,25.3 292.0,25.3" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="310.0,118.8 292.0,150.0 256.0,150.0 238.0,118.8 256.0,87.6 292.0,87.6" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+<polygon points="310.0,181.2 292.0,212.4 256.0,212.4 238.0,181.2 256.0,150.0 292.0,150.0" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="310.0,243.5 292.0,274.7 256.0,274.7 238.0,243.5 256.0,212.4 292.0,212.4" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="310.0,305.9 292.0,337.1 256.0,337.1 238.0,305.9 256.0,274.7 292.0,274.7" stroke="currentColor" class="k0 hex" stroke-width="1.2"/>
+<polygon points="364.0,25.3 346.0,56.5 310.0,56.5 292.0,25.3 310.0,-5.9 346.0,-5.9" stroke="currentColor" class="k0 hex" stroke-width="1.2"/>
+<polygon points="364.0,87.6 346.0,118.8 310.0,118.8 292.0,87.6 310.0,56.5 346.0,56.5" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="364.0,150.0 346.0,181.2 310.0,181.2 292.0,150.0 310.0,118.8 346.0,118.8" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="364.0,212.4 346.0,243.5 310.0,243.5 292.0,212.4 310.0,181.2 346.0,181.2" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="364.0,274.7 346.0,305.9 310.0,305.9 292.0,274.7 310.0,243.5 346.0,243.5" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+<polygon points="364.0,337.1 346.0,368.2 310.0,368.2 292.0,337.1 310.0,305.9 346.0,305.9" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="418.0,56.5 400.0,87.6 364.0,87.6 346.0,56.5 364.0,25.3 400.0,25.3" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="418.0,118.8 400.0,150.0 364.0,150.0 346.0,118.8 364.0,87.6 400.0,87.6" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="418.0,243.5 400.0,274.7 364.0,274.7 346.0,243.5 364.0,212.4 400.0,212.4" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="418.0,305.9 400.0,337.1 364.0,337.1 346.0,305.9 364.0,274.7 400.0,274.7" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="472.0,25.3 454.0,56.5 418.0,56.5 400.0,25.3 418.0,-5.9 454.0,-5.9" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="472.0,87.6 454.0,118.8 418.0,118.8 400.0,87.6 418.0,56.5 454.0,56.5" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="472.0,150.0 454.0,181.2 418.0,181.2 400.0,150.0 418.0,118.8 454.0,118.8" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+<polygon points="472.0,212.4 454.0,243.5 418.0,243.5 400.0,212.4 418.0,181.2 454.0,181.2" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="472.0,274.7 454.0,305.9 418.0,305.9 400.0,274.7 418.0,243.5 454.0,243.5" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="472.0,337.1 454.0,368.2 418.0,368.2 400.0,337.1 418.0,305.9 454.0,305.9" stroke="currentColor" class="k0 hex" stroke-width="1.2"/>
+<polygon points="526.0,56.5 508.0,87.6 472.0,87.6 454.0,56.5 472.0,25.3 508.0,25.3" stroke="currentColor" class="k0 hex" stroke-width="1.2"/>
+<polygon points="526.0,118.8 508.0,150.0 472.0,150.0 454.0,118.8 472.0,87.6 508.0,87.6" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="526.0,181.2 508.0,212.4 472.0,212.4 454.0,181.2 472.0,150.0 508.0,150.0" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="526.0,243.5 508.0,274.7 472.0,274.7 454.0,243.5 472.0,212.4 508.0,212.4" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="526.0,305.9 508.0,337.1 472.0,337.1 454.0,305.9 472.0,274.7 508.0,274.7" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+<polygon points="580.0,25.3 562.0,56.5 526.0,56.5 508.0,25.3 526.0,-5.9 562.0,-5.9" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+<polygon points="580.0,87.6 562.0,118.8 526.0,118.8 508.0,87.6 526.0,56.5 562.0,56.5" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="580.0,150.0 562.0,181.2 526.0,181.2 508.0,150.0 526.0,118.8 562.0,118.8" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="580.0,212.4 562.0,243.5 526.0,243.5 508.0,212.4 526.0,181.2 562.0,181.2" stroke="currentColor" class="k0 hex" stroke-width="1.2"/>
+<polygon points="580.0,274.7 562.0,305.9 526.0,305.9 508.0,274.7 526.0,243.5 562.0,243.5" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="580.0,337.1 562.0,368.2 526.0,368.2 508.0,337.1 526.0,305.9 562.0,305.9" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="634.0,56.5 616.0,87.6 580.0,87.6 562.0,56.5 580.0,25.3 616.0,25.3" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="634.0,118.8 616.0,150.0 580.0,150.0 562.0,118.8 580.0,87.6 616.0,87.6" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="634.0,181.2 616.0,212.4 580.0,212.4 562.0,181.2 580.0,150.0 616.0,150.0" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+<polygon points="634.0,243.5 616.0,274.7 580.0,274.7 562.0,243.5 580.0,212.4 616.0,212.4" stroke="currentColor" class="k1 hex" stroke-width="1.2"/>
+<polygon points="634.0,305.9 616.0,337.1 580.0,337.1 562.0,305.9 580.0,274.7 616.0,274.7" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="688.0,25.3 670.0,56.5 634.0,56.5 616.0,25.3 634.0,-5.9 670.0,-5.9" stroke="currentColor" class="k4 hex" stroke-width="1.2"/>
+<polygon points="688.0,87.6 670.0,118.8 634.0,118.8 616.0,87.6 634.0,56.5 670.0,56.5" stroke="currentColor" class="k0 hex" stroke-width="1.2"/>
+<polygon points="688.0,150.0 670.0,181.2 634.0,181.2 616.0,150.0 634.0,118.8 670.0,118.8" stroke="currentColor" class="k3 hex" stroke-width="1.2"/>
+<polygon points="688.0,212.4 670.0,243.5 634.0,243.5 616.0,212.4 634.0,181.2 670.0,181.2" stroke="currentColor" class="k6 hex" stroke-width="1.2"/>
+<polygon points="688.0,274.7 670.0,305.9 634.0,305.9 616.0,274.7 634.0,243.5 670.0,243.5" stroke="currentColor" class="k2 hex" stroke-width="1.2"/>
+<polygon points="688.0,337.1 670.0,368.2 634.0,368.2 616.0,337.1 634.0,305.9 670.0,305.9" stroke="currentColor" class="k5 hex" stroke-width="1.2"/>
+</g>
+<polygon points="256.0,150.0 238.0,181.2 202.0,181.2 184.0,150.0 202.0,118.8 238.0,118.8" class="k0 hex" stroke-width="1.2"/>
+<polygon points="256.0,150.0 238.0,181.2 202.0,181.2 184.0,150.0 202.0,118.8 238.0,118.8" stroke="currentColor" class="c-ink nf" stroke-width="2.4"/>
+<polygon points="418.0,181.2 400.0,212.4 364.0,212.4 346.0,181.2 364.0,150.0 400.0,150.0" class="k0 hex" stroke-width="1.2"/>
+<polygon points="418.0,181.2 400.0,212.4 364.0,212.4 346.0,181.2 364.0,150.0 400.0,150.0" stroke="currentColor" class="c-ink nf" stroke-width="2.4"/>
+<line x1="245.2" y1="130.2" x2="353.2" y2="208.2" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5,4" class="c-ink"/>
+<text x="301.0" y="153.6" font-size="11.5" class="c-ink" text-anchor="middle" font-weight="500">同色至少隔 3 步</text>
+<line x1="0.0" y1="48.0" x2="640.0" y2="48.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="0.0" y1="330.0" x2="640.0" y2="330.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<text x="320.0" y="372.0" font-size="12.5" class="c-ink" text-anchor="middle" font-weight="400">六边形直径 2R = 0.9，小于 1：同一格内任意两点距离小于 1，格内随便同色</text>
+<text x="320.0" y="392.0" font-size="11.5" class="c-gray" text-anchor="middle" font-weight="400">同色六边形中心距 ≥ √21·R ≈ 2.06 ⟹ 同色两点距离 ≥ 2.06 − 0.9 = 1.16 > 1</text>
+</svg>

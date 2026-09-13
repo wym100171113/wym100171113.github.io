@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    .k0 { color: #d63e3e; fill: currentColor; } .k1 { color: #3c6eb9; fill: currentColor; } .k2 { color: #2e8b57; fill: currentColor; }
+    .k3 { color: #e0861e; fill: currentColor; } .k4 { color: #7d5bb5; fill: currentColor; } .k5 { color: #159a9a; fill: currentColor; } .k6 { color: #9a8c2e; fill: currentColor; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+      .k0 { color: #f07070; fill: currentColor; } .k1 { color: #6b9df0; fill: currentColor; } .k2 { color: #4caf7d; fill: currentColor; }
+      .k3 { color: #f0a860; fill: currentColor; } .k4 { color: #a98fe0; fill: currentColor; } .k5 { color: #5cc8c8; fill: currentColor; } .k6 { color: #c8b860; fill: currentColor; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+    .hex { fill-opacity: 0.30; }
+  </style>
+<text x="320.0" y="28.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">莫泽纺锤：4 色只是下限（1955）</text>
+<polygon points="140.0,250.0 287.2,165.0 434.4,250.0 287.2,335.0" stroke="currentColor" stroke-width="1.5" class="c-blue semi"/>
+<polygon points="140.0,250.0 309.7,239.5 385.4,87.2 215.7,97.8" stroke="currentColor" stroke-width="1.5" class="c-green semi"/>
+<line x1="140.0" y1="250.0" x2="287.2" y2="165.0" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="140.0" y1="250.0" x2="287.2" y2="335.0" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="287.2" y1="165.0" x2="434.4" y2="250.0" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="287.2" y1="335.0" x2="434.4" y2="250.0" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="287.2" y1="165.0" x2="287.2" y2="335.0" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="140.0" y1="250.0" x2="309.7" y2="239.5" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="140.0" y1="250.0" x2="215.7" y2="97.8" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="309.7" y1="239.5" x2="385.4" y2="87.2" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="215.7" y1="97.8" x2="385.4" y2="87.2" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="309.7" y1="239.5" x2="215.7" y2="97.8" stroke="currentColor" stroke-width="1.5" class="c-ink"/>
+<line x1="140.0" y1="250.0" x2="434.4" y2="250.0" stroke="currentColor" stroke-width="1.2" stroke-dasharray="5,4" class="c-gray"/>
+<line x1="140.0" y1="250.0" x2="385.4" y2="87.2" stroke="currentColor" stroke-width="1.2" stroke-dasharray="5,4" class="c-gray"/>
+<line x1="434.4" y1="250.0" x2="385.4" y2="87.2" stroke="currentColor" stroke-width="2.4" class="c-red"/>
+<circle cx="287.2" cy="165.0" r="3.5" fill="currentColor" class="c-ink"/>
+<circle cx="287.2" cy="335.0" r="3.5" fill="currentColor" class="c-ink"/>
+<circle cx="309.7" cy="239.5" r="3.5" fill="currentColor" class="c-ink"/>
+<circle cx="215.7" cy="97.8" r="3.5" fill="currentColor" class="c-ink"/>
+<circle cx="140.0" cy="250.0" r="6" fill="currentColor" class="c-red"/>
+<circle cx="434.4" cy="250.0" r="5.5" fill="currentColor" class="c-blue"/>
+<circle cx="385.4" cy="87.2" r="5.5" fill="currentColor" class="c-blue"/>
+<text x="126.0" y="270.0" font-size="14" class="c-red" text-anchor="middle" font-weight="600">O</text>
+<text x="438.4" y="277.0" font-size="14" class="c-blue" text-anchor="middle" font-weight="600">F₁</text>
+<text x="385.4" y="73.2" font-size="14" class="c-blue" text-anchor="middle" font-weight="600">F₂</text>
+<text x="287.2" y="268.0" font-size="12.5" class="c-gray" text-anchor="middle" font-weight="400">√3</text>
+<text x="240.7" y="160.6" font-size="12.5" class="c-gray" text-anchor="middle" font-weight="400">√3</text>
+<text x="435.9" y="162.6" font-size="14" class="c-red" text-anchor="middle" font-weight="600">1</text>
+<text x="460.0" y="128.0" font-size="13" class="c-ink" text-anchor="start" font-weight="500">两个尖角被迫同色</text>
+<text x="460.0" y="148.0" font-size="11.5" class="c-gray" text-anchor="start" font-weight="400">（底边三角形用满三色）</text>
+<text x="460.0" y="188.0" font-size="13" class="c-ink" text-anchor="start" font-weight="400">两枚钻石共享尖角 O</text>
+<text x="460.0" y="208.0" font-size="13" class="c-ink" text-anchor="start" font-weight="400">⟹ O、F₁、F₂ 全同色</text>
+<text x="460.0" y="248.0" font-size="13.5" class="c-red" text-anchor="start" font-weight="600">但 F₁F₂ = 1</text>
+<text x="460.0" y="268.0" font-size="13.5" class="c-red" text-anchor="start" font-weight="400">⟹ 3 色当场崩盘</text>
+<text x="320.0" y="392.0" font-size="12.5" class="c-ink" text-anchor="middle" font-weight="400">7 个顶点、11 条单位边：3 种颜色必有两点相距 1 且同色 ⟹ 至少 4 色</text>
+<text x="320.0" y="412.0" font-size="11.5" class="c-gray" text-anchor="middle" font-weight="400">1955 年上桌，一口气守住 63 年的下界纪录——直到 2018 年</text>
+</svg>
