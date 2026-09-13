@@ -456,7 +456,7 @@ $$T=\begin{pmatrix}1&0\\0&\frac ba\end{pmatrix},\qquad \det T=\frac ba$$
 
 ## 相关阅读
 
-- 上一篇：《椭圆（上）：从三个定义说起》（[`post.html?id=ellipse-basics`](post.html?id=ellipse-basics)）——三个定义、准线、点差法、弦长公式、焦点弦与切线的光学性质。
+- 上一篇：[《椭圆（上）：从三个定义说起》](post.html?slug=ellipse-basics)——三个定义、准线、点差法、弦长公式、焦点弦与切线的光学性质。
 - [Pascal's theorem](https://en.wikipedia.org/wiki/Pascal%27s_theorem)（Wikipedia）：神秘六边形、60 条帕斯卡线与更多退化形式。
 - [Poncelet's porism](https://en.wikipedia.org/wiki/Poncelet%27s_porism)（Wikipedia）：闭链定理的陈述与历史。
 - [Ellipse](https://en.wikipedia.org/wiki/Ellipse)（Wikipedia）：极点极线、蒙日圆等专题的参考。

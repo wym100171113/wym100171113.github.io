@@ -155,6 +155,26 @@ $$x^3+x^2-2x-1=0$$
 
 而 $\varphi(7)/2=3$——次数的来源在下一节会变得清楚。这一次它不再是二次的，也就意味着 $\cos\frac{2\pi}7$ **没法只用平方根写出来**。这不是技巧问题，是本质障碍。
 
+不过同一个 $n=7$ 还能白捡一个轻巧漂亮的小结论：
+
+$$\cos\frac{2\pi}7+\cos\frac{4\pi}7+\cos\frac{8\pi}7=-\frac12$$
+
+第一步是把第三个角"拉回来"：$\cos\dfrac{8\pi}7=\cos\left(2\pi-\dfrac{6\pi}7\right)=\cos\dfrac{6\pi}7$。这样三个角都落在 $[0,\pi]$ 里，恰好是三对共轭根的"代表"——$\frac{2\pi}7$ 代表 $\{\omega,\omega^6\}$，$\frac{4\pi}7$ 代表 $\{\omega^2,\omega^5\}$，$\frac{6\pi}7$ 代表 $\{\omega^3,\omega^4\}$。
+
+于是把第一节的引理按共轭配对重新分组：
+
+$$-1=\omega+\omega^2+\cdots+\omega^6=\underbrace{\left(\omega+\omega^6\right)}_{2\cos\frac{2\pi}7}+\underbrace{\left(\omega^2+\omega^5\right)}_{2\cos\frac{4\pi}7}+\underbrace{\left(\omega^3+\omega^4\right)}_{2\cos\frac{6\pi}7}$$
+
+（每一对 $\omega^k+\omega^{7-k}=2\cos\dfrac{2\pi k}7$——正是上面 $n=5$ 用过的配对。）所以
+
+$$-1=2\left(\cos\frac{2\pi}7+\cos\frac{4\pi}7+\cos\frac{6\pi}7\right)=2\left(\cos\frac{2\pi}7+\cos\frac{4\pi}7+\cos\frac{8\pi}7\right)$$
+
+$$\boxed{\ \cos\frac{2\pi}7+\cos\frac{4\pi}7+\cos\frac{8\pi}7=-\frac12\ }$$
+
+没有积化和差，没有解方程，引理按对一分就出来了。数值验一下：$0.6235-0.2225-0.9010=-0.5$ ✓。
+
+顺带一提，原题把第三个角写成 $\frac{8\pi}7$ 而不是 $\frac{6\pi}7$，其实是点题之笔：$\frac{2\pi}7\to\frac{4\pi}7\to\frac{8\pi}7$ 每次翻倍，指数 $1,2,4$ 恰好是 $1^2,2^2,3^2$ 模 $7$ 的余数——**二次剩余**。也就是说，这个和同时是"反复取平方"选出来的那一半根 $\omega+\omega^2+\omega^4$ 的实部；第四节里劈开正十七边形的高斯周期，玩的正是同一套分组游戏。
+
 ### 第三件：进入代数数论
 
 单位根是**代数整数**：它是首一整系数多项式的根（$x^n-1$ 本身就是首一的）。一切含 $\omega$ 的整系数表达式都还是代数整数。把它们收拢成一个环 $\mathbb Z[\omega]$，再允许除法就得到**分圆域** $\mathbb Q(\omega)$。
@@ -274,7 +294,7 @@ $17=2^{2^2}+1$，是**费马素数**。费马当年猜：形如 $2^{2^m}+1$ 的�
 
 ## 相关阅读
 
-- 上一篇：《三角函数与欧拉公式：单位圆上的统一》（[`post.html?id=trig-euler`](post.html?id=trig-euler)）——$e^{i\theta}$ 从哪里来，以及和角公式为什么只是指数律的推论。
+- 上一篇：[《三角函数与欧拉公式：单位圆上的统一》](post.html?slug=trig-euler)——$e^{i\theta}$ 从哪里来，以及和角公式为什么只是指数律的推论。
 - [Heptadecagon](https://en.wikipedia.org/wiki/Heptadecagon)（Wikipedia）：正十七边形的作图步骤、历史考据，以及 65537 边形的来龙去脉。
 
 > [!detail] 技术细节

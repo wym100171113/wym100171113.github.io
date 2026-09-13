@@ -260,7 +260,7 @@ $$\frac1{|AF|}+\frac1{|BF|}=\frac{1+e\cos\alpha}{a(1-e^2)}+\frac{1-e\cos\alpha}{
 
 ## 相关阅读
 
-- 下一篇：《椭圆（下）：斜率、变换与线性代数》（[`post.html?id=ellipse-advanced`](post.html?id=ellipse-advanced)）——齐次化联立、"斜率双用"与"翻转斜率"，仿射变换与极坐标，极点极线，以及用二次型和主轴定理重看整个椭圆。
+- 下一篇：[《椭圆（下）：斜率、变换与线性代数》](post.html?slug=ellipse-advanced)——齐次化联立、"斜率双用"与"翻转斜率"，仿射变换与极坐标，极点极线，以及用二次型和主轴定理重看整个椭圆。
 - [Ellipse](https://en.wikipedia.org/wiki/Ellipse)（Wikipedia）：三个定义的等价性证明与更多历史资料。
 
 > [!detail] 技术细节
