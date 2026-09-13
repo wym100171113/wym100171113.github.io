@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="430" viewBox="0 0 640 430" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+  </style>
+<text x="320.0" y="28.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">例 5：当角平分线遇上中线</text>
+<line x1="300.0" y1="80.0" x2="90.0" y2="350.0" stroke="currentColor" stroke-width="1.6" class="c-ink"/>
+<line x1="90.0" y1="350.0" x2="560.0" y2="350.0" stroke="currentColor" stroke-width="1.6" class="c-ink"/>
+<line x1="560.0" y1="350.0" x2="300.0" y2="80.0" stroke="currentColor" stroke-width="1.6" class="c-ink"/>
+<line x1="300.0" y1="80.0" x2="314.3" y2="350.0" stroke="currentColor" stroke-width="1.4" class="c-gray"/>
+<line x1="90.0" y1="350.0" x2="430.0" y2="215.0" stroke="currentColor" stroke-width="1.4" class="c-gray"/>
+<circle cx="300.0" cy="80.0" r="4.5" fill="currentColor" class="c-ink"/>
+<circle cx="90.0" cy="350.0" r="4.5" fill="currentColor" class="c-ink"/>
+<circle cx="560.0" cy="350.0" r="4.5" fill="currentColor" class="c-ink"/>
+<circle cx="314.3" cy="350.0" r="4" fill="currentColor" class="c-gray"/>
+<circle cx="430.0" cy="215.0" r="4.5" fill="currentColor" class="c-green"/>
+<circle cx="309.6" cy="262.8" r="5" fill="currentColor" class="c-red"/>
+<path d="M 307.0 119.4 A 40 40 0 0 1 274.4 110.7" stroke="currentColor" stroke-width="1.6" class="c-green nf"/>
+<path d="M 328.7 107.8 A 40 40 0 0 1 297.2 119.9" stroke="currentColor" stroke-width="1.6" class="c-green nf"/>
+<line x1="424.0" y1="213.8" x2="429.1" y2="209.0" stroke="currentColor" stroke-width="1.4" class="c-green"/>
+<line x1="430.9" y1="221.0" x2="436.0" y2="216.2" stroke="currentColor" stroke-width="1.4" class="c-green"/>
+<text x="298.0" y="68.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">A</text>
+<text x="77.0" y="366.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">B</text>
+<text x="574.0" y="366.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">C</text>
+<text x="318.3" y="368.0" font-size="12.5" class="c-gray" text-anchor="middle" font-weight="400">D</text>
+<text x="446.0" y="211.0" font-size="12.5" class="c-green" text-anchor="middle" font-weight="400">M</text>
+<text x="324.6" y="264.8" font-size="13.5" class="c-red" text-anchor="middle" font-weight="600">P</text>
+<text x="470.0" y="130.0" font-size="12.5" class="c-ink" text-anchor="start" font-weight="400">AD 平分 ∠A</text>
+<text x="470.0" y="152.0" font-size="12.5" class="c-ink" text-anchor="start" font-weight="400">M 为 AC 中点</text>
+<text x="470.0" y="174.0" font-size="12.5" class="c-ink" text-anchor="start" font-weight="400">P = AD ∩ BM</text>
+<text x="470.0" y="196.0" font-size="12.5" class="c-red" text-anchor="start" font-weight="600">求 AP : PD</text>
+<text x="320.0" y="396.0" font-size="12.5" class="c-ink" text-anchor="middle">答案：AP : PD = (AB + AC) : AB —— 在 △ADC 上用一次梅涅劳斯</text>
+<text x="320.0" y="418.0" font-size="11.5" class="c-gray" text-anchor="middle" font-weight="400">质量法视角：m_B : m_C = AC : AB，m_A = m_C ⟹ AP : PD = (m_B + m_C) : m_A</text>
+</svg>

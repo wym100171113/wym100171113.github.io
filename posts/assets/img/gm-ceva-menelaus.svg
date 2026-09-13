@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="410" viewBox="0 0 640 410" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+  </style>
+<text x="320.0" y="28.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">塞瓦与梅涅劳斯：共点与共线是一对镜像</text>
+<line x1="170.0" y1="90.0" x2="70.0" y2="330.0" stroke="currentColor" stroke-width="1.6" class="c-ink"/>
+<line x1="70.0" y1="330.0" x2="290.0" y2="330.0" stroke="currentColor" stroke-width="1.6" class="c-ink"/>
+<line x1="290.0" y1="330.0" x2="170.0" y2="90.0" stroke="currentColor" stroke-width="1.6" class="c-ink"/>
+<line x1="170.0" y1="90.0" x2="134.4" y2="330.0" stroke="currentColor" stroke-width="1.4" class="c-gray"/>
+<line x1="70.0" y1="330.0" x2="202.8" y2="155.7" stroke="currentColor" stroke-width="1.4" class="c-gray"/>
+<line x1="290.0" y1="330.0" x2="122.4" y2="204.3" stroke="currentColor" stroke-width="1.4" class="c-gray"/>
+<circle cx="170.0" cy="90.0" r="4.5" fill="currentColor" class="c-ink"/>
+<circle cx="70.0" cy="330.0" r="4.5" fill="currentColor" class="c-ink"/>
+<circle cx="290.0" cy="330.0" r="4.5" fill="currentColor" class="c-ink"/>
+<circle cx="134.4" cy="330.0" r="4" fill="currentColor" class="c-gray"/>
+<circle cx="202.8" cy="155.7" r="4" fill="currentColor" class="c-gray"/>
+<circle cx="122.4" cy="204.3" r="4" fill="currentColor" class="c-gray"/>
+<circle cx="150.0" cy="225.0" r="5" fill="currentColor" class="c-red"/>
+<text x="182.0" y="84.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">A</text>
+<text x="58.0" y="346.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">B</text>
+<text x="303.0" y="346.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">C</text>
+<text x="130.4" y="348.0" font-size="12.5" class="c-gray" text-anchor="middle" font-weight="400">D</text>
+<text x="216.8" y="151.7" font-size="12.5" class="c-gray" text-anchor="middle" font-weight="400">E</text>
+<text x="108.4" y="202.3" font-size="12.5" class="c-gray" text-anchor="middle" font-weight="400">F</text>
+<text x="137.0" y="231.0" font-size="13.5" class="c-red" text-anchor="middle" font-weight="600">P</text>
+<text x="170.0" y="378.0" font-size="12.5" class="c-ink" text-anchor="middle" font-weight="400">塞瓦：AD、BE、CF 三线共点</text>
+<line x1="470.0" y1="90.0" x2="370.0" y2="330.0" stroke="currentColor" stroke-width="1.6" class="c-ink"/>
+<line x1="370.0" y1="330.0" x2="590.0" y2="330.0" stroke="currentColor" stroke-width="1.6" class="c-ink"/>
+<line x1="590.0" y1="330.0" x2="470.0" y2="90.0" stroke="currentColor" stroke-width="1.6" class="c-ink"/>
+<line x1="452.6" y1="34.1" x2="481.5" y2="345.9" stroke="currentColor" stroke-width="1.8" class="c-red"/>
+<circle cx="470.0" cy="90.0" r="4.5" fill="currentColor" class="c-ink"/>
+<circle cx="370.0" cy="330.0" r="4.5" fill="currentColor" class="c-ink"/>
+<circle cx="590.0" cy="330.0" r="4.5" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="330.0" r="4" fill="currentColor" class="c-red"/>
+<circle cx="455.0" cy="60.0" r="4" fill="currentColor" class="c-red"/>
+<circle cx="460.0" cy="114.0" r="4" fill="currentColor" class="c-red"/>
+<text x="482.0" y="84.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">A</text>
+<text x="358.0" y="346.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">B</text>
+<text x="603.0" y="346.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="600">C</text>
+<text x="486.0" y="348.0" font-size="12.5" class="c-red" text-anchor="middle" font-weight="400">D</text>
+<text x="449.0" y="52.0" font-size="12.5" class="c-red" text-anchor="middle" font-weight="400">E</text>
+<text x="474.0" y="112.0" font-size="12.5" class="c-red" text-anchor="middle" font-weight="400">F</text>
+<text x="480.0" y="378.0" font-size="12.5" class="c-ink" text-anchor="middle" font-weight="400">梅涅劳斯：D、E、F 三点共线</text>
+</svg>

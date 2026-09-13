@@ -1,0 +1,325 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="460" viewBox="0 0 640 460" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+  </style>
+<text x="320.0" y="28.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">Erdős 1946：格点上的单位距离</text>
+<circle cx="320" cy="245" r="161.2" stroke="currentColor" stroke-width="1.8" class="c-blue nf"/>
+<line x1="320.0" y1="245.0" x2="340.0" y2="405.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="480.0" y2="265.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="400.0" y2="385.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="460.0" y2="325.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="340.0" y2="85.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="480.0" y2="225.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="400.0" y2="105.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="460.0" y2="165.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="300.0" y2="405.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="160.0" y2="265.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="240.0" y2="385.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="180.0" y2="325.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="300.0" y2="85.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="160.0" y2="225.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="240.0" y2="105.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<line x1="320.0" y1="245.0" x2="180.0" y2="165.0" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.55" class="c-red"/>
+<circle cx="160.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="225.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="160.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="265.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="160.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="160.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="165.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="180.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="325.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="180.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="180.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="200.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="220.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="105.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="240.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="240.0" cy="385.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="240.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="260.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="280.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="85.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="300.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="300.0" cy="405.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="320.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="245.0" r="5" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="320.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="85.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="340.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="340.0" cy="405.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="360.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="360.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="380.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="105.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="400.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="400.0" cy="385.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="400.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="420.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="440.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="165.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="460.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="225.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="265.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="325.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="460.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="460.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="85.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="105.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="125.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="145.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="165.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="185.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="205.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="225.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="480.0" cy="245.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="265.0" r="5" fill="currentColor" class="c-red"/>
+<circle cx="480.0" cy="285.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="305.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="325.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="345.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="365.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="385.0" r="2.2" fill="currentColor" class="c-ink"/>
+<circle cx="480.0" cy="405.0" r="2.2" fill="currentColor" class="c-ink"/>
+<text x="310.0" y="267.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="600">O</text>
+<text x="203.9" y="125.7" font-size="12.5" class="c-blue" text-anchor="middle" font-weight="400">半径 √65</text>
+<text x="320.0" y="428.0" font-size="12.5" class="c-ink" text-anchor="middle" font-weight="400">65 = 1² + 8² = 4² + 7²：半径 √65 的圆穿过 16 个格点，圆心一连就是 16 对“单位距离”</text>
+<text x="320.0" y="448.0" font-size="11.5" class="c-gray" text-anchor="middle" font-weight="400">Erdős 猜想 ν(n) ≤ n^{1+o(1)}（悬赏 500 美元）——2026 年被 OpenAI 的模型推翻</text>
+</svg>
