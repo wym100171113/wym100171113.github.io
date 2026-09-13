@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+  </style>
+<text x="320.0" y="30.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">1796 年 3 月 30 日：高斯完成的那件事</text><line x1="170.0" y1="88.0" x2="127.4" y2="96.0" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="127.4" y1="96.0" x2="90.5" y2="118.8" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="90.5" y1="118.8" x2="64.4" y2="153.4" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="64.4" y1="153.4" x2="52.5" y2="195.1" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="52.5" y1="195.1" x2="56.5" y2="238.3" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="56.5" y1="238.3" x2="75.8" y2="277.1" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="75.8" y1="277.1" x2="107.9" y2="306.3" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="107.9" y1="306.3" x2="148.3" y2="322.0" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="148.3" y1="322.0" x2="191.7" y2="322.0" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="191.7" y1="322.0" x2="232.1" y2="306.3" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="232.1" y1="306.3" x2="264.2" y2="277.1" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="264.2" y1="277.1" x2="283.5" y2="238.3" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="283.5" y1="238.3" x2="287.5" y2="195.1" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="287.5" y1="195.1" x2="275.6" y2="153.4" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="275.6" y1="153.4" x2="249.5" y2="118.8" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="249.5" y1="118.8" x2="212.6" y2="96.0" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<line x1="212.6" y1="96.0" x2="170.0" y2="88.0" stroke="currentColor" stroke-width="1.2" class="c-ink"/>
+<circle cx="170.0" cy="88.0" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="127.4" cy="96.0" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="90.5" cy="118.8" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="64.4" cy="153.4" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="52.5" cy="195.1" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="56.5" cy="238.3" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="75.8" cy="277.1" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="107.9" cy="306.3" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="148.3" cy="322.0" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="191.7" cy="322.0" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="232.1" cy="306.3" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="264.2" cy="277.1" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="283.5" cy="238.3" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="287.5" cy="195.1" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="275.6" cy="153.4" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="249.5" cy="118.8" r="2.6" fill="currentColor" class="c-ink"/>
+<circle cx="212.6" cy="96.0" r="2.6" fill="currentColor" class="c-ink"/>
+<text x="170.0" y="366.0" font-size="13.5" class="c-ink" text-anchor="middle" font-weight="500">正十七边形</text>
+<text x="170.0" y="388.0" font-size="11.5" class="c-gray" text-anchor="middle">尺规可作</text>
+<line x1="470.0" y1="88.0" x2="356.5" y2="238.3" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="427.4" y1="96.0" x2="375.8" y2="277.1" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="390.5" y1="118.8" x2="407.9" y2="306.3" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="364.4" y1="153.4" x2="448.3" y2="322.0" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="352.5" y1="195.1" x2="491.7" y2="322.0" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="356.5" y1="238.3" x2="532.1" y2="306.3" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="375.8" y1="277.1" x2="564.2" y2="277.1" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="407.9" y1="306.3" x2="583.5" y2="238.3" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="448.3" y1="322.0" x2="587.5" y2="195.1" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="491.7" y1="322.0" x2="575.6" y2="153.4" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="532.1" y1="306.3" x2="549.5" y2="118.8" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="564.2" y1="277.1" x2="512.6" y2="96.0" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="583.5" y1="238.3" x2="470.0" y2="88.0" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="587.5" y1="195.1" x2="427.4" y2="96.0" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="575.6" y1="153.4" x2="390.5" y2="118.8" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="549.5" y1="118.8" x2="364.4" y2="153.4" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<line x1="512.6" y1="96.0" x2="352.5" y2="195.1" stroke="currentColor" stroke-width="1.2" class="c-red"/>
+<circle cx="470.0" cy="88.0" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="427.4" cy="96.0" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="390.5" cy="118.8" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="364.4" cy="153.4" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="352.5" cy="195.1" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="356.5" cy="238.3" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="375.8" cy="277.1" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="407.9" cy="306.3" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="448.3" cy="322.0" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="491.7" cy="322.0" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="532.1" cy="306.3" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="564.2" cy="277.1" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="583.5" cy="238.3" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="587.5" cy="195.1" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="575.6" cy="153.4" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="549.5" cy="118.8" r="2.6" fill="currentColor" class="c-red"/>
+<circle cx="512.6" cy="96.0" r="2.6" fill="currentColor" class="c-red"/>
+<text x="470.0" y="366.0" font-size="13.5" class="c-red" text-anchor="middle" font-weight="500">十七角星 {17/5}</text>
+<text x="470.0" y="388.0" font-size="11.5" class="c-gray" text-anchor="middle">高斯纪念碑基座背面</text>
+<g class="c-gray" transform="translate(274.3,56.0) scale(0.0130)"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D711" d="M92 210Q92 176 106 149T142 108T185 85T220 72L235 70L237 71L250 112Q268 170 283 211T322 299T370 375T429 423T502 442Q547 442 582 410T618 302Q618 224 575 152T457 35T299 -10Q273 -10 273 -12L266 -48Q260 -83 252 -125T241 -179Q236 -203 215 -212Q204 -218 190 -218Q159 -215 159 -185Q159 -175 214 -2L209 0Q204 2 195 5T173 14T147 28T120 46T94 71T71 103T56 142T50 190Q50 238 76 311T149 431H162Q183 431 183 423Q183 417 175 409Q134 361 114 300T92 210ZM574 278Q574 320 550 344T486 369Q437 369 394 329T323 218Q309 184 295 109L286 64Q304 62 306 62Q423 62 498 131T574 278Z"></path></g><g data-mml-node="mo" transform="translate(654,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(1043,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="37" d="M55 458Q56 460 72 567L88 674Q88 676 108 676H128V672Q128 662 143 655T195 646T364 644H485V605L417 512Q408 500 387 472T360 435T339 403T319 367T305 330T292 284T284 230T278 162T275 80Q275 66 275 52T274 28V19Q270 2 255 -10T221 -22Q210 -22 200 -19T179 0T168 40Q168 198 265 368Q285 400 349 489L395 552H302Q128 552 119 546Q113 543 108 522T98 479L95 458V455H55V458Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(2043,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(2709.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(3765.6,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(5043.3,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msup" transform="translate(6099.1,0)"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mn" transform="translate(533,363) scale(0.707)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path></g></g></g></g></g>
+</svg>

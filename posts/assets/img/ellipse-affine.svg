@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+  </style>
+<text x="320.0" y="30.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">仿射变换：把椭圆压成圆，做完再压回来</text><line x1="52.0" y1="324.0" x2="268.0" y2="324.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="268.0" y1="108.0" x2="268.0" y2="324.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="52.0" y1="270.0" x2="268.0" y2="270.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="214.0" y1="108.0" x2="214.0" y2="324.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="52.0" y1="216.0" x2="268.0" y2="216.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="160.0" y1="108.0" x2="160.0" y2="324.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="52.0" y1="162.0" x2="268.0" y2="162.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="106.0" y1="108.0" x2="106.0" y2="324.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="52.0" y1="108.0" x2="268.0" y2="108.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="52.0" y1="108.0" x2="52.0" y2="324.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<ellipse cx="160.0" cy="216.0" rx="108.0" ry="108.0" stroke="currentColor" stroke-width="1.8" class="c-red nf"/>
+<text x="160.0" y="358.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">圆</text>
+<text x="160.0" y="380.0" font-size="11.5" class="c-gray" text-anchor="middle">x² + y² = a²</text>
+<line x1="352.0" y1="283.0" x2="568.0" y2="283.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="568.0" y1="149.0" x2="568.0" y2="283.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="352.0" y1="249.5" x2="568.0" y2="249.5" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="514.0" y1="149.0" x2="514.0" y2="283.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="352.0" y1="216.0" x2="568.0" y2="216.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="460.0" y1="149.0" x2="460.0" y2="283.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="352.0" y1="182.5" x2="568.0" y2="182.5" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="406.0" y1="149.0" x2="406.0" y2="283.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="352.0" y1="149.0" x2="568.0" y2="149.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<line x1="352.0" y1="149.0" x2="352.0" y2="283.0" stroke="currentColor" stroke-width="0.8" class="c-gray"/>
+<ellipse cx="460.0" cy="216.0" rx="108.0" ry="67.0" stroke="currentColor" stroke-width="1.8" class="c-red nf"/>
+<text x="460.0" y="358.0" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">椭圆</text>
+<text x="460.0" y="380.0" font-size="11.5" class="c-gray" text-anchor="middle">纵向压缩 b/a 倍</text>
+<polygon points="300.0,216.0 291.0,219.8 291.0,212.2" fill="currentColor" class="c-ink"/>
+<text x="300.0" y="198.0" font-size="12" class="c-ink" text-anchor="middle">压缩</text>
+<g class="c-blue" transform="translate(268.1,358.0) scale(0.0140)"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="64" d="M376 495Q376 511 376 535T377 568Q377 613 367 624T316 637H298V660Q298 683 300 683L310 684Q320 685 339 686T376 688Q393 689 413 690T443 693T454 694H457V390Q457 84 458 81Q461 61 472 55T517 46H535V0Q533 0 459 -5T380 -11H373V44L365 37Q307 -11 235 -11Q158 -11 96 50T34 215Q34 315 97 378T244 442Q319 442 376 393V495ZM373 342Q328 405 260 405Q211 405 173 369Q146 341 139 305T131 211Q131 155 138 120T173 59Q203 26 251 26Q322 26 373 103V342Z"></path><path data-c="65" d="M28 218Q28 273 48 318T98 391T163 433T229 448Q282 448 320 430T378 380T406 316T415 245Q415 238 408 231H126V216Q126 68 226 36Q246 30 270 30Q312 30 342 62Q359 79 369 104L379 128Q382 131 395 131H398Q415 131 415 121Q415 117 412 108Q393 53 349 21T250 -11Q155 -11 92 58T28 218ZM333 275Q322 403 238 411H236Q228 411 220 410T195 402T166 381T143 340T127 274V267H333V275Z" transform="translate(556,0)"></path><path data-c="74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z" transform="translate(1000,0)"></path></g><g data-mml-node="mi" transform="translate(1555.7,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(2537.4,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mstyle" transform="translate(3593.2,0)"><g data-mml-node="mfrac"><g data-mml-node="mi" transform="translate(270,676)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mi" transform="translate(220,-686)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><rect width="729" height="60" x="120" y="220"></rect></g></g></g></g></g>
+<text x="300.0" y="384.0" font-size="12" class="c-gray" text-anchor="middle">面积按行列式的绝对值缩放</text>
+</svg>

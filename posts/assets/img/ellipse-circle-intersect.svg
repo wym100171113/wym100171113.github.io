@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+  </style>
+<text x="320.0" y="30.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">圆与椭圆的交点：同心时漂亮，偏心时没有捷径</text><ellipse cx="168.0" cy="208.0" rx="108.0" ry="68.0" stroke="currentColor" stroke-width="1.6" class="c-ink nf"/>
+<circle cx="168.0" cy="208.0" r="84.0" stroke="currentColor" stroke-width="1.4" stroke-dasharray="7,5" class="c-blue nf"/>
+<polygon points="223.0,144.5 223.0,271.5 113.0,271.5 113.0,144.5" stroke="currentColor" stroke-width="2" class="c-red nf"/>
+<circle cx="223.0" cy="144.5" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="223.0" cy="271.5" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="113.0" cy="271.5" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="113.0" cy="144.5" r="4.5" fill="currentColor" class="c-red"/>
+<text x="168.0" y="322.0" font-size="12.5" class="c-ink" text-anchor="middle">同心：四点必构成矩形</text>
+<ellipse cx="470.0" cy="208.0" rx="108.0" ry="68.0" stroke="currentColor" stroke-width="1.6" class="c-ink nf"/>
+<circle cx="510.0" cy="186.0" r="76.0" stroke="currentColor" stroke-width="1.4" stroke-dasharray="7,5" class="c-blue nf"/>
+<circle cx="574.0" cy="189.6" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.9" cy="189.4" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.8" cy="189.2" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.7" cy="189.0" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.6" cy="188.8" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.5" cy="188.6" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.4" cy="188.4" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.3" cy="188.2" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.2" cy="188.0" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.1" cy="187.8" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="573.0" cy="187.6" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.9" cy="187.4" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.8" cy="187.2" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.7" cy="187.0" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.6" cy="186.8" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.5" cy="186.6" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.4" cy="186.4" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.3" cy="186.2" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.2" cy="186.0" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.1" cy="185.8" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="572.0" cy="185.6" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="571.8" cy="185.4" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="571.7" cy="185.2" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="571.6" cy="185.0" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="571.5" cy="184.8" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="448.1" cy="274.6" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="448.4" cy="274.6" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="448.8" cy="274.7" r="4.5" fill="currentColor" class="c-red"/>
+<text x="470.0" y="322.0" font-size="12.5" class="c-ink" text-anchor="middle">不同心：没有"根轴"</text>
+<text x="470.0" y="344.0" font-size="11.5" class="c-gray" text-anchor="middle">二次项系数不成比例，相减消不掉</text>
+<line x1="320" y1="60" x2="320" y2="336" stroke="currentColor" stroke-width="1" stroke-dasharray="5,5" class="c-gray"/>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="440" viewBox="0 0 640 440" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+  </style>
+<text x="320.0" y="30.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">帕斯卡定理：内接六边形的三组对边交点共线</text><ellipse cx="320.0" cy="250.0" rx="150.0" ry="88.0" stroke="currentColor" stroke-width="1.6" class="c-ink nf"/>
+<line x1="469.4" y1="242.3" x2="410.3" y2="179.7" stroke="currentColor" stroke-width="1.7" class="c-ink"/>
+<line x1="410.3" y1="179.7" x2="256.6" y2="329.8" stroke="currentColor" stroke-width="1.7" class="c-ink"/>
+<line x1="256.6" y1="329.8" x2="176.6" y2="275.7" stroke="currentColor" stroke-width="1.7" class="c-ink"/>
+<line x1="176.6" y1="275.7" x2="291.4" y2="163.6" stroke="currentColor" stroke-width="1.7" class="c-ink"/>
+<line x1="291.4" y1="163.6" x2="191.4" y2="204.7" stroke="currentColor" stroke-width="1.7" class="c-ink"/>
+<line x1="191.4" y1="204.7" x2="469.4" y2="242.3" stroke="currentColor" stroke-width="1.7" class="c-ink"/>
+<line x1="410.3" y1="179.7" x2="345.3" y2="111.0" stroke="currentColor" stroke-width="1" stroke-dasharray="5,4" class="c-gray"/>
+<line x1="291.4" y1="163.6" x2="345.3" y2="111.0" stroke="currentColor" stroke-width="1" stroke-dasharray="5,4" class="c-gray"/>
+<circle cx="345.3" cy="111.0" r="5" fill="currentColor" class="c-red"/>
+<text x="355.3" y="128.0" font-size="14" class="c-red" text-anchor="middle" font-weight="500">X</text>
+<line x1="410.3" y1="179.7" x2="525.1" y2="67.6" stroke="currentColor" stroke-width="1" stroke-dasharray="5,4" class="c-gray"/>
+<line x1="291.4" y1="163.6" x2="525.1" y2="67.6" stroke="currentColor" stroke-width="1" stroke-dasharray="5,4" class="c-gray"/>
+<circle cx="525.1" cy="67.6" r="5" fill="currentColor" class="c-red"/>
+<text x="535.1" y="84.6" font-size="14" class="c-red" text-anchor="middle" font-weight="500">Y</text>
+<line x1="176.6" y1="275.7" x2="41.1" y2="184.3" stroke="currentColor" stroke-width="1" stroke-dasharray="5,4" class="c-gray"/>
+<line x1="191.4" y1="204.7" x2="41.1" y2="184.3" stroke="currentColor" stroke-width="1" stroke-dasharray="5,4" class="c-gray"/>
+<circle cx="41.1" cy="184.3" r="5" fill="currentColor" class="c-red"/>
+<text x="51.1" y="201.3" font-size="14" class="c-red" text-anchor="middle" font-weight="500">Z</text>
+<line x1="41.1" y1="184.3" x2="583.2" y2="53.6" stroke="currentColor" stroke-width="2.6" class="c-red"/>
+<text x="485.4" y="245.9" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">A</text>
+<text x="419.9" y="171.9" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">B</text>
+<text x="249.8" y="349.3" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">C</text>
+<text x="161.3" y="285.4" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">D</text>
+<text x="288.3" y="152.9" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">E</text>
+<text x="177.7" y="201.4" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">F</text>
+<text x="320.0" y="400.0" font-size="13" class="c-red" text-anchor="middle">三者共线 —— 这条线叫帕斯卡线</text>
+<text x="320.0" y="424.0" font-size="12" class="c-gray" text-anchor="middle">定理只涉及位置关系：换椭圆、抛物线、双曲线都成立</text>
+</svg>

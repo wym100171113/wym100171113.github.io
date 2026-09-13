@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="440" viewBox="0 0 640 440" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+  </style>
+<text x="320.0" y="30.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">切线的光学性质：与两条焦半径成等角</text>
+<ellipse cx="320.0" cy="252.0" rx="205.0" ry="122.0" stroke="currentColor" stroke-width="1.6" class="c-ink nf"/>
+<line x1="101.0" y1="252.0" x2="539.0" y2="252.0" stroke="currentColor" stroke-width="1.0" stroke-dasharray="4,4" class="c-gray"/>
+<line x1="273.2" y1="99.0" x2="559.3" y2="189.5" stroke="currentColor" stroke-width="1.7" class="c-blue"/>
+<line x1="444.0" y1="56.6" x2="388.5" y2="232.0" stroke="currentColor" stroke-width="1.2" stroke-dasharray="5,4" class="c-gray"/>
+<line x1="155.3" y1="252.0" x2="416.2" y2="144.3" stroke="currentColor" stroke-width="2.0" class="c-red"/>
+<line x1="416.2" y1="144.3" x2="484.7" y2="252.0" stroke="currentColor" stroke-width="2.0" class="c-red"/>
+<polygon points="291.0,196.0 285.7,201.6 283.3,195.7" stroke="currentColor" stroke-width="0" class="c-red nf"/>
+<polygon points="458.7,211.1 452.3,206.9 457.6,203.5" stroke="currentColor" stroke-width="0" class="c-red nf"/>
+<path d="M 383.8 134.0 A 34 34 0 0 0 384.8 157.3" stroke="currentColor" stroke-width="1.6" class="c-green nf"/>
+<path d="M 434.5 173.0 A 34 34 0 0 0 448.7 154.5" stroke="currentColor" stroke-width="1.6" class="c-green nf"/>
+<circle cx="155.3" cy="252.0" r="4.5" fill="currentColor" class="c-red"/>
+<circle cx="484.7" cy="252.0" r="4.5" fill="currentColor" class="c-red"/>
+<text x="155.3" y="278.0" font-size="14" class="c-red" text-anchor="middle" font-weight="500">F₁</text>
+<text x="484.7" y="278.0" font-size="14" class="c-red" text-anchor="middle" font-weight="500">F₂</text>
+<text x="431.2" y="138.3" font-size="14" class="c-ink" text-anchor="middle" font-weight="500">P</text>
+<text x="269.2" y="91.0" font-size="13" class="c-blue" text-anchor="middle" font-weight="500">切线</text>
+<text x="450.0" y="60.6" font-size="13" class="c-gray" text-anchor="start" font-weight="500">法线</text>
+<text x="320.0" y="412.0" font-size="12.5" class="c-ink" text-anchor="middle">两段绿弧相等 ⟹ 法线平分 ∠F₁PF₂ ⟹ 从 F₁ 发出的光线反射后必过 F₂</text>
+<text x="320.0" y="432.0" font-size="11.5" class="c-gray" text-anchor="middle">耳语廊与体外碎石机用的就是这一条：椭圆壁把一个焦点处的声波聚到另一个焦点</text>
+</svg>

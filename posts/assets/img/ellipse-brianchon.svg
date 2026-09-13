@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="460" viewBox="0 0 640 460" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+  </style>
+<text x="320.0" y="30.0" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">布里昂雄定理：外切六边形的三条主对角线共点</text>
+<ellipse cx="320.0" cy="246.0" rx="168.0" ry="104.0" stroke="currentColor" stroke-width="1.6" class="c-ink nf"/>
+<line x1="488.0" y1="158.7" x2="304.8" y2="138.7" stroke="currentColor" stroke-width="1.8" class="c-ink"/>
+<line x1="304.8" y1="138.7" x2="171.4" y2="168.8" stroke="currentColor" stroke-width="1.8" class="c-ink"/>
+<line x1="171.4" y1="168.8" x2="134.1" y2="299.7" stroke="currentColor" stroke-width="1.8" class="c-ink"/>
+<line x1="134.1" y1="299.7" x2="289.0" y2="355.0" stroke="currentColor" stroke-width="1.8" class="c-ink"/>
+<line x1="289.0" y1="355.0" x2="488.0" y2="333.3" stroke="currentColor" stroke-width="1.8" class="c-ink"/>
+<line x1="488.0" y1="333.3" x2="488.0" y2="158.7" stroke="currentColor" stroke-width="1.8" class="c-ink"/>
+<circle cx="488.0" cy="246.0" r="2.6" fill="currentColor" class="c-gray"/>
+<circle cx="349.2" cy="143.6" r="2.6" fill="currentColor" class="c-gray"/>
+<circle cx="262.5" cy="148.3" r="2.6" fill="currentColor" class="c-gray"/>
+<circle cx="154.6" cy="227.9" r="2.6" fill="currentColor" class="c-gray"/>
+<circle cx="236.0" cy="336.1" r="2.6" fill="currentColor" class="c-gray"/>
+<circle cx="349.2" cy="348.4" r="2.6" fill="currentColor" class="c-gray"/>
+<line x1="488.0" y1="158.7" x2="134.1" y2="299.7" stroke="currentColor" stroke-width="2.1" class="c-red"/>
+<line x1="304.8" y1="138.7" x2="289.0" y2="355.0" stroke="currentColor" stroke-width="2.1" class="c-red"/>
+<line x1="171.4" y1="168.8" x2="488.0" y2="333.3" stroke="currentColor" stroke-width="2.1" class="c-red"/>
+<circle cx="297.8" cy="234.5" r="5" fill="currentColor" class="c-red"/>
+<text x="306.1" y="253.3" font-size="14" class="c-red" text-anchor="middle" font-weight="500">P</text>
+<text x="501.8" y="151.2" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">A</text>
+<text x="303.3" y="124.8" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">B</text>
+<text x="157.6" y="161.2" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">C</text>
+<text x="117.8" y="311.3" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">D</text>
+<text x="285.8" y="376.7" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">E</text>
+<text x="474.2" y="325.7" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">F</text>
+<text x="320.0" y="430.0" font-size="12.5" class="c-ink" text-anchor="middle">六条边都与椭圆相切；AD、BE、CF 交于同一点 P</text>
+<text x="320.0" y="450.0" font-size="11.5" class="c-gray" text-anchor="middle">P 恰是六个切点构成的内接六边形那条帕斯卡线的极点——帕斯卡的镜像</text>
+</svg>
