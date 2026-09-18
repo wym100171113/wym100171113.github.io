@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="440" viewBox="0 0 640 440" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; }
+    .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; }
+    .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; }
+      .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; }
+      .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+  </style>
+
+  <text x="320" y="26" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">斜椭圆的中心与主轴</text>
+
+  <!-- 原坐标轴 -->
+  <line x1="90" y1="220" x2="510" y2="220" class="c-gray" stroke="currentColor" stroke-width="1"/>
+  <line x1="300" y1="55" x2="300" y2="385" class="c-gray" stroke="currentColor" stroke-width="1"/>
+  <text x="516" y="224" font-size="12" class="c-gray">x</text>
+  <text x="306" y="52" font-size="12" class="c-gray">y</text>
+
+  <!-- 主轴延长线 -->
+  <line x1="160" y1="80" x2="440" y2="360" class="c-blue" stroke="currentColor" stroke-width="1.5" stroke-dasharray="7,4"/>
+  <line x1="440" y1="80" x2="160" y2="360" class="c-green" stroke="currentColor" stroke-width="1.5" stroke-dasharray="7,4"/>
+
+  <!-- 椭圆 -->
+  <ellipse cx="300" cy="220" rx="145" ry="72" transform="rotate(45 300 220)" class="c-red nf" stroke="currentColor" stroke-width="1.9"/>
+
+  <!-- 旋转角 theta 弧 -->
+  <path d="M 378 220 A 78 78 0 0 1 355.2 275.2" class="c-gray nf" stroke="currentColor" stroke-width="1.5"/>
+  <text x="390" y="258" font-size="13" class="c-gray">θ</text>
+
+  <!-- 中心 -->
+  <circle cx="300" cy="220" r="4.5" class="c-red"/>
+  <text x="314" y="231" font-size="11.5" class="c-red">中心</text>
+
+  <!-- 主轴标注 -->
+  <text x="446" y="82" font-size="11.5" class="c-green">短轴</text>
+  <text x="446" y="378" font-size="11.5" class="c-blue">长轴</text>
+
+  <!-- 图注 -->
+  <text x="320" y="404" font-size="11.5" class="c-gray" text-anchor="middle">中心是梯度为零的唯一一点 —— 也就是平移后一次项全部消失的位置</text>
+  <text x="320" y="426" font-size="11.5" class="c-gray" text-anchor="middle">两条主轴沿 M 的特征向量方向；旋转角满足 tan 2θ = B / (A − C)</text>
+</svg>
