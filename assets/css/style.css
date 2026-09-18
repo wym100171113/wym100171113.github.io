@@ -510,7 +510,21 @@ input { font: inherit; }
   font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--faint); margin-bottom: 14px;
 }
-.toc nav { border-left: 1px solid var(--line); padding-left: 14px; }
+.toc nav {
+  border-left: 1px solid var(--line); padding-left: 14px;
+  /* 长文章目录会超出一屏：给个高度上限并允许内部滚动，标题留在外面不跟着滚 */
+  max-height: calc(100vh - 170px); overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: var(--line) transparent;
+}
+.toc nav::-webkit-scrollbar { width: 6px; }
+.toc nav::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+.toc nav::-webkit-scrollbar-track { background: transparent; }
+/* 可滚动时给上下边缘加渐隐，避免文字被硬生生切断；
+   只在真的溢出时才启用（由 JS 加 .is-scrollable），短目录不受影响 */
+.toc nav.is-scrollable {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+}
 .toc a {
   display: block; font-size: 0.8rem; line-height: 1.5; color: var(--muted);
   padding: 4px 0; transition: color 0.25s var(--ease), transform 0.25s var(--ease);
@@ -805,6 +819,18 @@ body.mmd-locked { overflow: hidden; }
    ========================================================================== */
 .status { padding: 40px 0; color: var(--muted); font-family: var(--mono); font-size: 0.82rem; }
 .status.err { color: var(--accent); }
+/* 骨架屏：文章加载期间的占位轮廓。由 blog.js 延迟 300ms 才挂上——
+   加载够快时它根本不出现，避免"闪一下"反而更难受 */
+.skeleton { padding: 6px 0; }
+.skeleton span { display: block; height: 13px; border-radius: 6px; background: var(--paper-2); }
+.skeleton span + span { margin-top: 13px; }
+.skeleton span.title { height: 30px; width: 54%; border-radius: 8px; margin-bottom: 28px; }
+.skeleton .w1 { width: 100%; }
+.skeleton .w2 { width: 95%; }
+.skeleton .w3 { width: 88%; }
+.skeleton .w4 { width: 63%; }
+@keyframes skPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.52; } }
+@media (prefers-reduced-motion: no-preference) { .skeleton span { animation: skPulse 1.8s ease-in-out infinite; } }
 .empty { padding: clamp(36px, 6vw, 56px) 0; text-align: center; color: var(--muted); font-size: 0.9rem; }
 .empty code { font-family: var(--mono); background: var(--paper-2); border: 1px solid var(--line); border-radius: 5px; padding: 2px 8px; color: var(--accent); }
 

@@ -20,6 +20,11 @@
     } catch (e) {}
   })();
 </script>
+<script>
+  /* 提前发起索引请求：与 CDN 库的下载并行，省掉一次串行往返。
+     blog.js 的 getPosts() 会优先复用这个 Promise，不会重复请求。 */
+  window.__posts = fetch("/posts/index.json", { cache: "no-cache" });
+</script>
 <meta name="description" content="wym's blog — 文章正文。">
 <meta name="author" content="wym">
 <meta property="og:site_name" content="wym's blog">
@@ -29,9 +34,11 @@
 <title>文章 · wym's blog</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=28">
+<link rel="stylesheet" href="assets/css/style.css?v=29">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233b82f6'/%3E%3Ctext x='16' y='22' font-size='15' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3Ew%3C/text%3E%3C/svg%3E">
 </head>
 <body data-theme="light" class="page-post">
@@ -76,11 +83,11 @@
   </div>
 </footer>
 
+<!-- marked 是解析 Markdown 的必需品，直接加载。
+     KaTeX（约 270KB）与 highlight.js（约 120KB）改为按需：blog.js 读到正文后，
+     判断确实有公式／代码块才动态注入，并由它们各自在被使用前 await -->
 <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js"></script>
-<script src="assets/js/blog.js?v=36"></script>
+<script src="assets/js/blog.js?v=38"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

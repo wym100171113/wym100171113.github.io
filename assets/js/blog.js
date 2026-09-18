@@ -63,6 +63,29 @@
     marked.setOptions({ gfm: true, breaks: false });
   }
 
+  /* ---------------- 按需加载的外部库 ---------------- */
+  /* KaTeX 与 highlight.js 都不小（约 270KB / 120KB），但多数文章只用得上其中一个，
+     甚至两个都不用 —— 所以不放在 <head> 里无条件加载，改成读到正文后再决定。
+     Promise 按 URL 缓存，同一份库不会重复注入；加载失败清掉缓存以便下次重试。 */
+  const LIB = {
+    katex: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js",
+    katexRender: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js",
+    hljs: "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js",
+  };
+  const libCache = Object.create(null);
+  function loadLib(src) {
+    if (!libCache[src]) {
+      libCache[src] = new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = src;
+        s.onload = () => resolve();
+        s.onerror = () => { delete libCache[src]; reject(new Error(`load failed: ${src}`)); };
+        document.head.appendChild(s);
+      });
+    }
+    return libCache[src];
+  }
+
   /* ---------------- 日期 ---------------- */
   const MONTHS_ZH = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"];
   const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -89,7 +112,9 @@
   let postsPromise = null;
   function getPosts() {
     if (!postsPromise) {
-      postsPromise = fetch(MANIFEST, { cache: "no-cache" })
+      /* post.html 在 <head> 里已提前发起同一个请求（与 CDN 库并行下载），这里直接复用它；
+         首页/归档页没有 __posts，则自己发起。两者都套同一段解析链。 */
+      postsPromise = (window.__posts || fetch(MANIFEST, { cache: "no-cache" }))
         .then((res) => {
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           return res.json();
@@ -271,6 +296,17 @@
     return { meta, body: m ? m[2].trim() : md };
   }
 
+  /* ---------------- 骨架屏 ---------------- */
+  /* 文章是 JS 渲染的，从进入页面到内容就绪之间必然有一段空白。
+     骨架屏用灰色轮廓先占住版面，但延迟 300ms 才出场 —— 加载够快时它根本不露面，
+     避免"闪一下"反而更难受。轮廓比例照着文章的实际结构摆：标题 + 若干段 + 一张图。 */
+  const SKELETON_HTML = `
+    <div class="skeleton" aria-hidden="true">
+      <span class="title"></span>
+      <span class="w1"></span><span class="w2"></span><span class="w3"></span><span class="w4"></span>
+      <span class="w1"></span><span class="w2"></span><span class="w3"></span>
+    </div>`;
+
   async function renderPost() {
     const main = $("#main");
     const id = new URLSearchParams(location.search).get("id") ||
@@ -280,6 +316,11 @@
       return;
     }
     main.innerHTML = `<div class="status">载入中…</div>`;
+    /* 300ms 后若仍在载入，就把这句换成骨架屏。用 :not(.err) 兜住一个坑：
+       错误提示也带 .status，若不排除，慢网络下它会被骨架屏盖掉 */
+    const skelTimer = setTimeout(() => {
+      if (main.querySelector(".status:not(.err)")) main.innerHTML = SKELETON_HTML;
+    }, 300);
 
     let posts = [];
     try { posts = await getPosts(); } catch { /* ignore */ }
@@ -305,6 +346,14 @@
       main.innerHTML = `<div class="status err">这是一篇草稿，尚未发布。<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
       return;
     }
+    /* 按需加载：读到手稿才知道用不用得上 ——
+       有公式（$ 或 \( \[）才要 KaTeX，有围栏代码块才要 highlight.js。
+       这里只发起、不等待，让它和后面的解析／构建 DOM 并行；真正用到时再 await。 */
+    const libsReady = Promise.all([
+      /\\\(|\\\[|\$/.test(body) ? loadLib(LIB.katex).then(() => loadLib(LIB.katexRender)) : null,
+      /^[ \t]*```/m.test(body) ? loadLib(LIB.hljs) : null,
+    ].filter(Boolean)).catch(() => {});
+
     const title = meta.title || (info && info.title) || id;
     const date = meta.date || (info && info.date) || "";
     const tags = (meta.tags && meta.tags.length ? meta.tags : (info && info.tags)) || [];
@@ -328,6 +377,13 @@
     const toc = [];
     const tmp = document.createElement("div");
     tmp.innerHTML = html;
+
+    /* 图片懒加载：长文里绝大多数插图在首屏之外，交给浏览器按需取；
+       decoding=async 让解码不阻塞后续渲染 */
+    $$("img", tmp).forEach((img) => {
+      if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+      img.setAttribute("decoding", "async");
+    });
 
     /* 站内文章链接转译：Obsidian 里站内链接是相对 .md 路径（如 ../代数/韦达定理.md），
        站点上点击会 404。这里把指向 .md（或纯文件名）的链接，与 post.html?id=/slug= 旧写法
@@ -451,6 +507,7 @@
     });
     html = tmp.innerHTML;
 
+    clearTimeout(skelTimer);   /* 内容就绪，撤掉可能还在等待出场的骨架屏 */
     main.innerHTML = `
       <div class="read-progress"><i id="readBar"></i></div>
       <section class="post-head rise">
@@ -500,6 +557,8 @@
     });
 
     /* KaTeX 数学公式（$..$ 行内 / $$..$$ 独立 / \(..\) 与 \[..\] 兼容） */
+    /* 等库就位再渲染公式（文章没有公式时，libsReady 已经是已 resolve 的空 Promise） */
+    await libsReady;
     if (window.renderMathInElement) {
       try {
         renderMathInElement($("#prose"), {
@@ -518,6 +577,7 @@
     initImgZoom();
 
     /* 代码高亮（mermaid 交给 mermaid.js，跳过） */
+    await libsReady;   /* 同上：代码高亮也要等库先到位 */
     if (window.hljs) {
       $$("#prose pre code").forEach((b) => {
         if (b.className && String(b.className).includes("language-mermaid")) return;
@@ -574,17 +634,31 @@
     }
 
     /* 目录高亮 */
-    const tocLinks = $$("#tocNav a");
+    const tocNav = $("#tocNav");
+    const tocLinks = tocNav ? $$("#tocNav a", tocNav) : [];
     if (tocLinks.length) {
       const onToc = () => {
-        let cur = "";
+        let cur = "", hit = null;
         $$("#prose h2, #prose h3, #prose h4").forEach((el) => {
           /* 折叠 callout 内的标题：display:none 时 rect 全 0 会误判为"正在阅读"；
              展开阅读附录时也跳过，让高亮保持在主结构（与目录口径一致） */
           if (!el.offsetParent || el.closest(".callout.is-collapsible")) return;
           if (el.getBoundingClientRect().top <= 140) cur = el.id;
         });
-        tocLinks.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${cur}`));
+        tocLinks.forEach((a) => {
+          const on = a.getAttribute("href") === `#${cur}`;
+          a.classList.toggle("on", on);
+          if (on) hit = a;
+        });
+        /* 目录比一屏长时：挂上 .is-scrollable（触发上下渐隐），
+           并把高亮项带进它自己的可视区（只动目录，不碰页面滚动） */
+        const scrollable = tocNav.scrollHeight > tocNav.clientHeight;
+        tocNav.classList.toggle("is-scrollable", scrollable);
+        if (hit && scrollable) {
+          const nr = tocNav.getBoundingClientRect(), ar = hit.getBoundingClientRect();
+          if (ar.top < nr.top) tocNav.scrollTop -= nr.top - ar.top + 10;
+          else if (ar.bottom > nr.bottom) tocNav.scrollTop += ar.bottom - nr.bottom + 10;
+        }
       };
       window.addEventListener("scroll", onToc, { passive: true });
       /* 图片/GIF 加载与 mermaid 替换会改变标题位置，资源就绪后重算一次 */
