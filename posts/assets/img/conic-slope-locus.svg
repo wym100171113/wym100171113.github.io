@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="424" viewBox="0 0 640 424" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; }
+    .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; }
+    .c-gray { color: #6b7280; fill: #6b7280; }
+    .c-faint { color: #9aa0a6; fill: #9aa0a6; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; }
+      .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; }
+      .c-gray { color: #8e8e93; fill: #8e8e93; }
+      .c-faint { color: #6e6e75; fill: #6e6e75; }
+    }
+    .nf { fill: none; }
+  </style>
+<text x="320" y="26" font-size="15" class="c-ink" text-anchor="middle" font-weight="600">斜率和是定值，为什么就一定过定点</text>
+<ellipse cx="309.0" cy="215.5" rx="220" ry="110" class="c-gray nf" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+<line x1="309.0" y1="105.5" x2="447.4" y2="301.0" class="c-blue" stroke="currentColor" stroke-width="1.8"/>
+<line x1="309.0" y1="105.5" x2="93.0" y2="194.7" class="c-green" stroke="currentColor" stroke-width="1.8"/>
+<line x1="93.0" y1="194.7" x2="529.0" y2="325.5" class="c-red" stroke="currentColor" stroke-width="2.1" stroke-dasharray="8,4"/>
+<circle cx="447.4" cy="301.0" r="5" class="c-ink"/>
+<circle cx="93.0" cy="194.7" r="5" class="c-ink"/>
+<circle cx="309.0" cy="105.5" r="5.5" class="c-red"/>
+<circle cx="529.0" cy="325.5" r="5.5" class="c-red"/>
+<text x="297.0" y="96.5" font-size="12" class="c-red" text-anchor="end" font-weight="600">P(0, 1)</text>
+<text x="462.4" y="316.0" font-size="13" class="c-ink" font-weight="600">A</text>
+<text x="78.0" y="187.7" font-size="13" class="c-ink" text-anchor="end" font-weight="600">B</text>
+<text x="542.0" y="330.5" font-size="12.5" class="c-red" font-weight="600">(2, −1)</text>
+<text x="542.0" y="313.5" font-size="11" class="c-gray">定点</text>
+<text x="320" y="72" font-size="12" class="c-ink" text-anchor="middle">两条弦 PA、PB 的斜率之和恒为 −1</text>
+<text x="320" y="392" font-size="11.5" class="c-gray" text-anchor="middle">椭圆 x²/4 + y² = 1，P 是上顶点。不论 AB 转到哪里，它始终穿过同一个点</text>
+<text x="320" y="412" font-size="11" class="c-faint" text-anchor="middle">原因是 k₁+k₂ 是 α、β 的分式线性函数 —— 给它定一个值，就定出一条过定点的直线族</text></svg>

@@ -15,7 +15,7 @@
     .nf { fill: none; }
   </style>
 
-  <text x="320" y="26" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">斜椭圆的中心与主轴</text>
+  <text x="320" y="26" font-size="15" class="c-ink" text-anchor="middle" font-weight="600">斜椭圆的中心与主轴</text>
 
   <!-- 原坐标轴 -->
   <line x1="90" y1="220" x2="510" y2="220" class="c-gray" stroke="currentColor" stroke-width="1"/>

@@ -15,7 +15,7 @@
     .nf { fill: none; }
   </style>
 
-  <text x="320" y="26" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">六项式的解剖：系数 → 不变量 → 结论</text>
+  <text x="320" y="26" font-size="15" class="c-ink" text-anchor="middle" font-weight="600">六项式的解剖：系数 → 不变量 → 结论</text>
 
   <rect x="120" y="44" width="400" height="40" rx="8" class="c-ink nf" stroke="currentColor" stroke-width="1.4"/>
   <text x="320" y="69" font-size="15" class="c-ink" text-anchor="middle">Ax² + Bxy + Cy² + Dx + Ey + F = 0</text>

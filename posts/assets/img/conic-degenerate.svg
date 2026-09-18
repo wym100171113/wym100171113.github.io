@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="262" viewBox="0 0 640 262" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; }
+    .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; }
+    .c-gray { color: #6b7280; fill: #6b7280; }
+    .c-faint { color: #9aa0a6; fill: #9aa0a6; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; }
+      .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; }
+      .c-gray { color: #8e8e93; fill: #8e8e93; }
+      .c-faint { color: #6e6e75; fill: #6e6e75; }
+    }
+    .nf { fill: none; }
+  </style>
+<text x="320" y="24" font-size="15" class="c-ink" text-anchor="middle" font-weight="600">退化：I₃ = 0 之后，曲线散成什么</text>
+<rect x="25" y="42" width="190" height="150" rx="10" class="c-gray" fill-opacity="0.05"/>
+<rect x="225" y="42" width="190" height="150" rx="10" class="c-gray" fill-opacity="0.05"/>
+<rect x="425" y="42" width="190" height="150" rx="10" class="c-gray" fill-opacity="0.05"/>
+<text x="120" y="62" font-size="12.5" class="c-red" text-anchor="middle" font-weight="600">I₂ &gt; 0</text>
+<text x="320" y="62" font-size="12.5" class="c-green" text-anchor="middle" font-weight="600">I₂ &lt; 0</text>
+<text x="520" y="62" font-size="12.5" class="c-blue" text-anchor="middle" font-weight="600">I₂ = 0</text>
+<ellipse cx="120" cy="126" rx="60" ry="34" class="c-faint nf" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5,4"/>
+<circle cx="120" cy="126" r="6" class="c-red"/>
+<text x="120" y="184" font-size="11" class="c-gray" text-anchor="middle">椭圆缩成一个点</text>
+<path d="M 265.7 168.3 L 267.2 166.6 L 268.7 164.9 L 270.1 163.3 L 271.4 161.7 L 272.7 160.2 L 273.9 158.7 L 275.1 157.2 L 276.2 155.8 L 277.3 154.4 L 278.3 153.0 L 279.3 151.7 L 280.2 150.4 L 281.1 149.2 L 281.9 147.9 L 282.7 146.7 L 283.4 145.6 L 284.1 144.4 L 284.8 143.3 L 285.4 142.1 L 285.9 141.0 L 286.5 140.0 L 287.0 138.9 L 287.4 137.8 L 287.8 136.8 L 288.2 135.8 L 288.6 134.8 L 288.9 133.8 L 289.1 132.8 L 289.4 131.8 L 289.6 130.8 L 289.7 129.9 L 289.8 128.9 L 289.9 127.9 L 290.0 127.0 L 290.0 126.0 L 290.0 125.0 L 289.9 124.1 L 289.8 123.1 L 289.7 122.1 L 289.6 121.2 L 289.4 120.2 L 289.1 119.2 L 288.9 118.2 L 288.6 117.2 L 288.2 116.2 L 287.8 115.2 L 287.4 114.2 L 287.0 113.1 L 286.5 112.0 L 285.9 111.0 L 285.4 109.9 L 284.8 108.7 L 284.1 107.6 L 283.4 106.4 L 282.7 105.3 L 281.9 104.1 L 281.1 102.8 L 280.2 101.6 L 279.3 100.3 L 278.3 99.0 L 277.3 97.6 L 276.2 96.2 L 275.1 94.8 L 273.9 93.3 L 272.7 91.8 L 271.4 90.3 L 270.1 88.7 L 268.7 87.1 L 267.2 85.4 L 265.7 83.7" class="c-faint nf" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M 374.3 168.3 L 372.8 166.6 L 371.3 164.9 L 369.9 163.3 L 368.6 161.7 L 367.3 160.2 L 366.1 158.7 L 364.9 157.2 L 363.8 155.8 L 362.7 154.4 L 361.7 153.0 L 360.7 151.7 L 359.8 150.4 L 358.9 149.2 L 358.1 147.9 L 357.3 146.7 L 356.6 145.6 L 355.9 144.4 L 355.2 143.3 L 354.6 142.1 L 354.1 141.0 L 353.5 140.0 L 353.0 138.9 L 352.6 137.8 L 352.2 136.8 L 351.8 135.8 L 351.4 134.8 L 351.1 133.8 L 350.9 132.8 L 350.6 131.8 L 350.4 130.8 L 350.3 129.9 L 350.2 128.9 L 350.1 127.9 L 350.0 127.0 L 350.0 126.0 L 350.0 125.0 L 350.1 124.1 L 350.2 123.1 L 350.3 122.1 L 350.4 121.2 L 350.6 120.2 L 350.9 119.2 L 351.1 118.2 L 351.4 117.2 L 351.8 116.2 L 352.2 115.2 L 352.6 114.2 L 353.0 113.1 L 353.5 112.0 L 354.1 111.0 L 354.6 109.9 L 355.2 108.7 L 355.9 107.6 L 356.6 106.4 L 357.3 105.3 L 358.1 104.1 L 358.9 102.8 L 359.8 101.6 L 360.7 100.3 L 361.7 99.0 L 362.7 97.6 L 363.8 96.2 L 364.9 94.8 L 366.1 93.3 L 367.3 91.8 L 368.6 90.3 L 369.9 88.7 L 371.3 87.1 L 372.8 85.4 L 374.3 83.7" class="c-faint nf" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5,4"/>
+<line x1="268" y1="174.5" x2="372" y2="77.5" class="c-green" stroke="currentColor" stroke-width="1.9"/>
+<line x1="268" y1="77.5" x2="372" y2="174.5" class="c-green" stroke="currentColor" stroke-width="1.9"/>
+<text x="320" y="184" font-size="11" class="c-gray" text-anchor="middle">双曲线 → 它的两条渐近线</text>
+<line x1="460" y1="100" x2="580" y2="100" class="c-blue" stroke="currentColor" stroke-width="1.9"/>
+<line x1="460" y1="152" x2="580" y2="152" class="c-blue" stroke="currentColor" stroke-width="1.9"/>
+<text x="520" y="184" font-size="11" class="c-gray" text-anchor="middle">两条平行直线</text>
+<text x="320" y="228" font-size="11.5" class="c-gray" text-anchor="middle">散成什么由 I₂ 定，散不散由 I₃ 定</text>
+<text x="320" y="248" font-size="11" class="c-faint" text-anchor="middle">灰色虚线是退化前的曲线，彩色实线是退化后的残骸</text></svg>

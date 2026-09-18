@@ -7,11 +7,11 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>六项式圆锥曲线：从配方到不变量</title>
+      <title>圆锥曲线：六个系数里的三个数</title>
       <link>https://wym100171113.github.io/post.html?id=conic-general</link>
       <guid>https://wym100171113.github.io/post.html?id=conic-general</guid>
       <pubDate>Fri, 18 Sep 2026 00:00:00 +0800</pubDate>
-      <description>课本里的圆锥曲线都摆在标准位置，你只要认 a、b、c、e 四个数。但题目给的常常是 Ax²+Bxy+Cy²+Dx+Ey+F=0，六项全展开。这篇文章换个视角：一次项背后是平移（中心就是梯度为零的点），交叉项背后是旋转（主轴就是特征向量），而三个不变量能让你根本不做这两步，直接读出类型、半轴和离心率。</description>
+      <description>课本里的圆锥曲线都摆在标准位置，你只要认 a、b、c、e。可题目给的常常是 Ax²+Bxy+Cy²+Dx+Ey+F=0，六项全展开。这篇文章换个视角：一次项背后是平移（中心就是梯度为零的点），交叉项背后是旋转（主轴就是特征向量），而六个系数里藏着三个不随坐标系变化的数，能直接给出类型、半轴和离心率。</description>
       <category>数学</category>
     </item>
     <item>

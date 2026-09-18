@@ -17,7 +17,7 @@
     .nf { fill: none; }
   </style>
 
-  <text x="320" y="26" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">伯努利双纽线：y 的最大值在哪取到</text>
+  <text x="320" y="26" font-size="15" class="c-ink" text-anchor="middle" font-weight="600">伯努利双纽线：y 的最大值在哪取到</text>
 
   <line x1="105" y1="200" x2="555" y2="200" class="c-gray" stroke="currentColor" stroke-width="1"/>
   <line x1="320" y1="52" x2="320" y2="330" class="c-gray" stroke="currentColor" stroke-width="1"/>
