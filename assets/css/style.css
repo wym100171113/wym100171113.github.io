@@ -819,9 +819,11 @@ body.mmd-locked { overflow: hidden; }
    ========================================================================== */
 .status { padding: 40px 0; color: var(--muted); font-family: var(--mono); font-size: 0.82rem; }
 .status.err { color: var(--accent); }
-/* 骨架屏：文章加载期间的占位轮廓。由 blog.js 延迟 300ms 才挂上——
-   加载够快时它根本不出现，避免"闪一下"反而更难受 */
-.skeleton { padding: 6px 0; }
+/* 骨架屏：写在 post.html 里，JS 与 CDN 库到位之前就已占住版面。
+   延迟 300ms 才淡入——加载够快时它根本不会露面，避免"闪一下"；
+   由 blog.js 在渲染完成（或出错）时整块替换掉 */
+.skeleton { padding: 6px 0; opacity: 0; animation: skelIn 0.01s linear 0.3s forwards; }
+@keyframes skelIn { to { opacity: 1; } }
 .skeleton span { display: block; height: 13px; border-radius: 6px; background: var(--paper-2); }
 .skeleton span + span { margin-top: 13px; }
 .skeleton span.title { height: 30px; width: 54%; border-radius: 8px; margin-bottom: 28px; }

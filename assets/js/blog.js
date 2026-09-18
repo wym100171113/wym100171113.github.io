@@ -125,6 +125,42 @@
     return postsPromise;
   }
 
+  /* ---------------- 正文缓存 ---------------- */
+  /* 每次进文章页都要拉一次 .md。GitHub Pages 给 .md 的缓存期很短，于是即便有 ETag，
+     每次访问仍要走一个网络往返（304 也得等）。这里用 Cache API 存一份原文：
+     命中就立即渲染，同时后台悄悄拉新版回来 —— 下次访问自然是最新的
+     （stale-while-revalidate）。不用 Service Worker，caches 在主线程就能用。
+     注意它只在 https / localhost 下存在，没有就安静退化成普通请求，绝不因为缓存坏了读不了文章。 */
+  const MD_CACHE = "wym-md-v1";
+
+  async function fetchMd(url) {
+    const fromNetwork = () =>
+      fetch(url, { cache: "no-cache" }).then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.text();
+      });
+
+    if (!("caches" in window)) return fromNetwork();
+
+    try {
+      const cache = await caches.open(MD_CACHE);
+      const hit = await cache.match(url);
+      if (hit) {
+        /* 先给缓存的，再后台更新；下次访问即拿到最新 */
+        fetch(url)
+          .then((r) => { if (r.ok) cache.put(url, r.clone()); })
+          .catch(() => {});
+        return hit.text();
+      }
+      const res = await fetch(url, { cache: "no-cache" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      cache.put(url, res.clone());
+      return res.text();
+    } catch {
+      return fromNetwork();
+    }
+  }
+
   function postUrl(slug) {
     return `post.html?id=${encodeURIComponent(slug)}`;
   }
@@ -296,16 +332,8 @@
     return { meta, body: m ? m[2].trim() : md };
   }
 
-  /* ---------------- 骨架屏 ---------------- */
-  /* 文章是 JS 渲染的，从进入页面到内容就绪之间必然有一段空白。
-     骨架屏用灰色轮廓先占住版面，但延迟 300ms 才出场 —— 加载够快时它根本不露面，
-     避免"闪一下"反而更难受。轮廓比例照着文章的实际结构摆：标题 + 若干段 + 一张图。 */
-  const SKELETON_HTML = `
-    <div class="skeleton" aria-hidden="true">
-      <span class="title"></span>
-      <span class="w1"></span><span class="w2"></span><span class="w3"></span><span class="w4"></span>
-      <span class="w1"></span><span class="w2"></span><span class="w3"></span>
-    </div>`;
+  /* 骨架屏写在 post.html 里（延迟淡入的时机见 .skeleton 样式），
+     这里不必生成——下面渲染出结果时整块替换 main，它自然就消失了 */
 
   async function renderPost() {
     const main = $("#main");
@@ -315,12 +343,8 @@
       main.innerHTML = `<div class="status err">缺少文章参数（?id=…）</div>`;
       return;
     }
-    main.innerHTML = `<div class="status">载入中…</div>`;
-    /* 300ms 后若仍在载入，就把这句换成骨架屏。用 :not(.err) 兜住一个坑：
-       错误提示也带 .status，若不排除，慢网络下它会被骨架屏盖掉 */
-    const skelTimer = setTimeout(() => {
-      if (main.querySelector(".status:not(.err)")) main.innerHTML = SKELETON_HTML;
-    }, 300);
+    /* main 里现在是 post.html 写好的骨架屏，先原样留着；
+       下面无论渲染出结果还是报错，都是整块替换，骨架屏随之消失 */
 
     let posts = [];
     try { posts = await getPosts(); } catch { /* ignore */ }
@@ -333,9 +357,7 @@
       ? `/posts/${folder.split("/").map(encodeURIComponent).join("/")}/${encodeURIComponent(id)}.md`
       : `/posts/${encodeURIComponent(id)}.md`;
     try {
-      const res = await fetch(mdPath, { cache: "no-cache" });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      md = await res.text();
+      md = await fetchMd(mdPath);
     } catch (e) {
       main.innerHTML = `<div class="status err">找不到文章 <code>${esc(id)}</code>（${esc(e.message)}）<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
       return;
@@ -507,7 +529,6 @@
     });
     html = tmp.innerHTML;
 
-    clearTimeout(skelTimer);   /* 内容就绪，撤掉可能还在等待出场的骨架屏 */
     main.innerHTML = `
       <div class="read-progress"><i id="readBar"></i></div>
       <section class="post-head rise">
