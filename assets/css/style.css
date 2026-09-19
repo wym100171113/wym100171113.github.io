@@ -489,8 +489,14 @@ input { font: inherit; }
   pointer-events: none;
 }
 .read-progress i {
-  display: block; height: 100%; width: 0;
+  display: block; height: 100%;
   background: var(--accent);
+  /* 用 transform 而不是 width：width 是布局属性，滚动中每帧改它都会触发
+     layout + paint，必然丢帧；transform 只走合成器线程，滚动时零布局开销。
+     --p 是 0..1 的全精度浮点（JS 兜底路径写入），不做任何四舍五入。 */
+  transform: scaleX(var(--p, 0));
+  transform-origin: left center;
+  will-change: transform;
 }
 /* 移动端不显示进度条：窄屏自带垂直滚动条已能判断进度，2px 横条信息冗余且占视觉 */
 @media (max-width: 640px) { .read-progress { display: none; } }

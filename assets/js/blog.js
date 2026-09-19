@@ -689,15 +689,29 @@
       }
     }
 
-    /* 阅读进度 */
+    /* 阅读进度条：rAF 节流（一帧最多写一次）+ transform 全精度写入。
+       旧实现的两个卡顿来源都去掉了：
+         1. 写 width —— width 是布局属性，滚动中每帧改它都触发 layout + paint，
+            必然丢帧；改用 --p 驱动 transform，纯合成器，零布局开销。
+         2. toFixed(1) —— 把进度量化成 0.1% 一档，本页约每滚 33px 条才跳一次，
+            在 1440px 宽上是 1.44px 一跳，肉眼可见"突越"；改用全精度浮点即连续。 */
     const bar = $("#readBar");
     if (bar) {
-      const onScroll = () => {
+      let ticking = false;
+      const update = () => {
+        ticking = false;
         const max = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = `${max > 0 ? ((window.scrollY / max) * 100).toFixed(1) : 0}%`;
+        const p = max > 0 ? window.scrollY / max : 0;
+        bar.style.setProperty("--p", String(p < 0 ? 0 : p > 1 ? 1 : p));
+      };
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
       };
       window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
+      window.addEventListener("resize", onScroll, { passive: true });
+      update();
     }
 
     /* 目录高亮 */
