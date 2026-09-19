@@ -14,7 +14,7 @@
   --line:        #e5e5e7;   /* 界线 */
   --line-2:      #efefef;   /* 界线·更浅 */
   --accent:      oklch(0.55 0.15 250);   /* 强调蓝 */
-  --accent-2:    #3b82f6;   /* 强调·亮（图标、行内代码） */
+  --accent-2:    #2563eb;   /* 强调·亮（图标、行内代码）；#3b82f6 在 paper 上仅 3.62:1，不过 WCAG AA，调深 */
   --selection:   rgba(59, 130, 246, 0.14);
 
   --serif: "Fraunces", "Noto Serif SC", "Songti SC", "Source Han Serif SC",
@@ -471,6 +471,8 @@ input { font: inherit; }
   display: block; height: 100%; width: 0;
   background: var(--accent);
 }
+/* 移动端不显示进度条：窄屏自带垂直滚动条已能判断进度，2px 横条信息冗余且占视觉 */
+@media (max-width: 640px) { .read-progress { display: none; } }
 
 .post-head {
   padding: clamp(40px, 6vw, 64px) 0 clamp(24px, 4vw, 34px);
@@ -855,6 +857,18 @@ body.mmd-locked { overflow: hidden; }
 /* 文章图片微交互：轻轻浮起 */
 .prose img { transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); }
 .prose img:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(28, 28, 30, 0.12); }
+
+/* 深色模式：SVG 配图只跟系统的 prefers-color-scheme，不跟随本站手动切换的
+   data-theme（外部 SVG 是独立文档，读不到宿主属性）。当两者不一致时，浅色 SVG
+   会趴在深色页面上。这里给它一个「刻意的卡片」底色 + 内边距，把突兀的白块
+   转化成设计感；一致时也只是多个柔和的卡片底，不违和。 */
+[data-theme="dark"] .prose img {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+[data-theme="dark"] .prose img:hover { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); }
 
 @media (max-width: 640px) {
   .post-row { grid-template-columns: 1fr; gap: 8px; }

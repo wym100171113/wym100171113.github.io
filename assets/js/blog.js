@@ -31,23 +31,37 @@
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   /* 保护数学公式：在交给 marked 之前把 $..$ / $$..$$ 换成占位符，
-     避免 marked 把 $F_n$ 这类下划线解析成斜体；渲染 HTML 后再还原。 */
+     避免 marked 把 $F_n$ 这类下划线解析成斜体；渲染 HTML 后再还原。
+
+     顺序很关键：必须【先】把代码（围栏块 + 行内 code）抽走，【再】抽数学。
+     否则代码里的 $x$（shell 的 $HOME、模板字符串 ${x}）会被当成公式吃掉，
+     restore 后又被 KaTeX auto-render 渲染成数学——代码块被污染。
+
+     代码占位符（\u0000Cn\u0000）与数学占位符（\u0000Mn\u0000）共用一个 stash。
+     代码在 restore 时单独交给 marked 解析那段原始源码，得到真正的
+     <pre><code> / <code>，复制按钮、hljs 照常工作，代码里的 $ 不进数学管线。 */
   function protectMath(md) {
     const stash = [];
-    md = md.replace(/\$\$([\s\S]+?)\$\$/g, (_, tex) => {
-      stash.push({ display: true, tex });
-      return `\u0000M${stash.length - 1}\u0000`;
-    });
-    md = md.replace(/\$([^\$\n]+?)\$/g, (_, tex) => {
-      stash.push({ display: false, tex });
-      return `\u0000M${stash.length - 1}\u0000`;
-    });
+    const push = (obj) => { stash.push(obj); return `\u0000${obj.code ? "C" : "M"}${stash.length - 1}\u0000`; };
+    // 1) 先抽代码：围栏块 ``` / ~~~，再行内 code（\1 配对等长反引号）
+    md = md.replace(/(```[\s\S]*?```|~~~[\s\S]*?~~~)/g, (m) => push({ code: true, raw: m }));
+    md = md.replace(/(`+)([\s\S]*?)\1(?!`)/g, (m) => push({ code: true, raw: m }));
+    // 2) 再抽数学：display $$..$$ 优先，然后行内 $..$
+    md = md.replace(/\$\$([\s\S]+?)\$\$/g, (_, tex) => push({ display: true, tex }));
+    md = md.replace(/\$([^\$\n]+?)\$/g, (_, tex) => push({ display: false, tex }));
     return { md, stash };
   }
   function restoreMath(html, stash) {
-    return html.replace(/\u0000M(\d+)\u0000/g, (_, i) => {
+    /* 代码块占位符单独成行时，marked 会把它当成普通段落包成 <p>…</p>；
+       若不剥掉，restore 后会变成 <p><pre>… 的无效嵌套。先把这层壳去掉。 */
+    html = html.replace(/<p>(\u0000C\d+\u0000)<\/p>/g, "$1");
+    return html.replace(/\u0000([MC])(\d+)\u0000/g, (_, kind, i) => {
       const m = stash[+i];
       if (!m) return "";
+      if (kind === "C") {
+        // 代码：单独让 marked 解析这一段原始源码，产出真正的代码块 / 行内 code
+        return window.marked ? marked.parse(m.raw) : esc(m.raw);
+      }
       // 公式里若有 < 或 &（如 $a<b$），直接插回会被浏览器当 HTML 标签解析；转义后
       // KaTeX auto-render 按 textContent 读取，实体解码后公式不受影响。
       const tex = m.tex.replace(/&/g, "&amp;").replace(/</g, "&lt;");
