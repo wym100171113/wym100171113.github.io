@@ -202,6 +202,9 @@ input { font: inherit; }
 
 /* 所属文件夹小标签（首页 / 详情页） */
 .p-folder {
+  /* 必须抬到 .post-row h3 a::after 那个铺满整行的覆盖层之上：
+     覆盖层是定位元素、且在 DOM 中排在 .p-meta 之后，否则会把本标签的点击整个吃掉 */
+  position: relative; z-index: 1;
   display: inline-flex; align-items: center; gap: 4px;
   font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.04em;
   color: var(--muted); border: 1px solid var(--line); border-radius: 6px;

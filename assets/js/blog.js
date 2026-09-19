@@ -90,8 +90,15 @@
   const MONTHS_ZH = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"];
   const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+  /* 按【本地时区】解析 YYYY-MM-DD。
+     不能用 new Date("2026-01-01")：纯日期字符串按 ISO 规则被当作 UTC 午夜，
+     而 getFullYear()/getMonth()/getDate() 取的是本地值——UTC 以西的时区
+     （如纽约 UTC-5）会退回前一天，跨年时连年份都错（2026-01-01 → 2025 年 12 月 31 日）。
+     这里显式用本地时区构造，任何时区的访客看到的都是 frontmatter 里写的那个日期。 */
   const parseDate = (iso) => {
-    const d = new Date(iso);
+    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ""));
+    if (!m) return null;
+    const d = new Date(+m[1], +m[2] - 1, +m[3]);
     return isNaN(d) ? null : d;
   };
   const zhDate = (iso) => {
@@ -119,8 +126,13 @@
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           return res.json();
         })
-        .then((list) => list.filter((p) => p && p.slug && p.date).sort((a, b) => new Date(b.date) - new Date(a.date)))
-        .catch((e) => { postsPromise = null; throw e; });
+        .then((list) => list.filter((p) => p && p.slug && p.date)
+          /* 日期是 YYYY-MM-DD，字典序即时间序，不必绕 Date */
+          .sort((a, b) => String(b.date || "").localeCompare(String(a.date || ""))))
+        /* 失败时两个缓存都要清：postsPromise 是本会话的，__posts 是 post.html
+           在 <head> 里预发的那个。只清前者的话，文章页重试会一直复用同一个
+           已失败的 Promise，必须整页刷新才能恢复 */
+        .catch((e) => { postsPromise = null; window.__posts = null; throw e; });
     }
     return postsPromise;
   }
@@ -146,15 +158,19 @@
       const cache = await caches.open(MD_CACHE);
       const hit = await cache.match(url);
       if (hit) {
-        /* 先给缓存的，再后台更新；下次访问即拿到最新 */
-        fetch(url)
-          .then((r) => { if (r.ok) cache.put(url, r.clone()); })
+        /* 先给缓存的，再后台更新；下次访问即拿到最新。
+           必须显式 no-cache：默认模式下这次请求会被 HTTP 缓存命中
+           （GitHub Pages 给 .md 的是 max-age=600），等于把同一份旧内容
+           又写回 Cache API 一遍，"后台更新"实际不生效 */
+        fetch(url, { cache: "no-cache" })
+          .then((r) => (r.ok ? cache.put(url, r.clone()) : null))
           .catch(() => {});
         return hit.text();
       }
       const res = await fetch(url, { cache: "no-cache" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      cache.put(url, res.clone());
+      /* 写缓存失败（配额不足等）不该影响本次阅读，所以只吞掉，不 await */
+      cache.put(url, res.clone()).catch(() => {});
       return res.text();
     } catch {
       return fromNetwork();
@@ -237,6 +253,7 @@
     const nth = posts.length;
     const tagSet = new Set();
     posts.forEach((p) => (p.tags || []).forEach((t) => tagSet.add(t)));
+    const lastYear = (() => { const d = recent.length && parseDate(recent[0].date); return d ? d.getFullYear() : "—"; })();
 
     main.innerHTML = `
       <section class="hero">
@@ -250,7 +267,7 @@
         </p>
         <div class="hero-stats rise" style="animation-delay:.24s">
           <div><b>${nth}</b><span class="unit">篇文章</span></div>
-          <div><b>${recent.length ? new Date(recent[0].date).getFullYear() : "—"}</b><span class="unit">最近更新</span></div>
+          <div><b>${lastYear}</b><span class="unit">最近更新</span></div>
           <div><b>${tagSet.size}</b><span class="unit">个标签</span></div>
         </div>
       </section>
@@ -321,6 +338,11 @@
           }
           meta.tags = items;
         } else {
+          /* 与 tools/blog.py 的 parse_frontmatter 对齐：剥掉成对包裹的引号。
+             否则 title: "…" 会把引号一起显示在页面上（Python 侧会剥，两边必须一致） */
+          if (value.length >= 2 && (value[0] === '"' || value[0] === "'") && value[value.length - 1] === value[0]) {
+            value = value.slice(1, -1);
+          }
           meta[key] = value;
         }
       }
@@ -387,18 +409,20 @@
     document.title = `${title} · ${CONFIG.siteName}`;
 
     /* Markdown → HTML，并给标题编号以便生成目录 */
-    let html;
+    /* rawHtml 是 marked 的原始输出；下面 tmp 会被逐层加工（链接改写、callout、
+       标题归一化…），加工后的结果另存为 finalHtml——两者含义不同，别共用一个名字 */
+    let rawHtml;
     if (window.marked) {
       ensureMarked();
       const { md, stash } = protectMath(body);
-      html = restoreMath(marked.parse(md), stash);
+      rawHtml = restoreMath(marked.parse(md), stash);
     } else {
-      html = `<pre>${esc(body)}</pre>`;
+      rawHtml = `<pre>${esc(body)}</pre>`;
     }
 
     const toc = [];
     const tmp = document.createElement("div");
-    tmp.innerHTML = html;
+    tmp.innerHTML = rawHtml;
 
     /* 图片懒加载：长文里绝大多数插图在首屏之外，交给浏览器按需取；
        decoding=async 让解码不阻塞后续渲染 */
@@ -455,8 +479,10 @@
     $$("blockquote", tmp).forEach((bq) => {
       const firstP = bq.firstElementChild;
       if (!firstP || firstP.tagName !== "P") return;
-      // GFM 会把 callout 的标题与正文合并进同一个 <p>，用换行切分
-      const m = firstP.innerHTML.match(/^\[!([a-zA-Z]+)\]((?:-|\+)?\s*)?([^\n]*)([\s\S]*)$/);
+      // GFM 会把 callout 的标题与正文合并进同一个 <p>，用换行切分。
+      // 第 2 组的空白只能是空格/制表符：写成 \s* 会把换行一起吃掉，
+      // 于是「> [!detail]」后另起一行写的正文会被当成标题，正文整段消失
+      const m = firstP.innerHTML.match(/^\[!([a-zA-Z]+)\]((?:-|\+)?[ \t]*)?([^\n]*)([\s\S]*)$/);
       if (!m) return;
       const type = m[1].toLowerCase();
       const titleHTML = m[3].trim();
@@ -527,7 +553,7 @@
         depth: Math.min(HEADING_TAGS.indexOf(h.tagName.toLowerCase()) - 1, 2), // h2→0, h3→1, h4+→2
       });
     });
-    html = tmp.innerHTML;
+    const finalHtml = tmp.innerHTML;
 
     main.innerHTML = `
       <div class="read-progress"><i id="readBar"></i></div>
@@ -545,7 +571,7 @@
 
       <section class="post-body-layout rise${toc.length ? "" : " no-toc"}" style="animation-delay:.06s">
         <article class="post-content">
-          <div class="prose" id="prose">${html}</div>
+          <div class="prose" id="prose">${finalHtml}</div>
 
           <div class="post-foot">
             ${tags.length ? `<div class="post-tags">${tags.map((t) => `<a href="/archive.html?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join("")}</div>` : ""}
@@ -597,8 +623,8 @@
     /* 正文图片：点击放大（灯箱缩放/平移） */
     initImgZoom();
 
-    /* 代码高亮（mermaid 交给 mermaid.js，跳过） */
-    await libsReady;   /* 同上：代码高亮也要等库先到位 */
+    /* 代码高亮（mermaid 交给 mermaid.js，跳过）。
+       libsReady 在上面已经 await 过，同一个 Promise 不必重复 await */
     if (window.hljs) {
       $$("#prose pre code").forEach((b) => {
         if (b.className && String(b.className).includes("language-mermaid")) return;
@@ -689,9 +715,19 @@
 
     /* 页面元数据与当前文章同步（便于支持 JS 渲染的搜索引擎抓取标题/简介） */
     const excerpt = meta.excerpt || (info && info.excerpt) || "";
+    /* post.html 只预置了 description / og:title / og:description；
+       og:url 与 og:image 需要时现建——只 setAttribute 的话，标签不存在就静默跳过，
+       这两行等于没写（分享到社交平台时拿不到缩略图） */
     const setMeta = (sel, val) => {
-      const el = document.querySelector(sel);
-      if (el) el.setAttribute("content", val);
+      let el = document.querySelector(sel);
+      if (!el) {
+        const parsed = /^meta\[(name|property)="([^"]+)"\]$/.exec(sel);
+        if (!parsed) return;
+        el = document.createElement("meta");
+        el.setAttribute(parsed[1], parsed[2]);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", val);
     };
     setMeta('meta[name="description"]', excerpt);
     setMeta('meta[property="og:title"]', title);
@@ -941,7 +977,10 @@
     const q = (new URLSearchParams(location.search).get("q") || "").trim();
     const tag = (new URLSearchParams(location.search).get("tag") || "").trim();
     const folder = (new URLSearchParams(location.search).get("folder") || "").trim();
-    const unfiled = new URLSearchParams(location.search).get("unfiled") === "1";
+    /* "只看散篇"与"某个分类"是互斥的：散篇的定义就是"没有 folder"，
+       两个条件同时生效只会得到空集。所以指定了 folder 就忽略 unfiled——
+       顺带让早先版本生成过的 archive.html?unfiled=1&folder=… 这类旧链接不再白屏 */
+    const unfiled = !folder && new URLSearchParams(location.search).get("unfiled") === "1";
     const page = Math.max(1, parseInt(new URLSearchParams(location.search).get("page") || "1", 10) || 1);
     const PAGE_SIZE = 15;
 
@@ -1013,7 +1052,6 @@
     const treeHTML = (node) => {
       const kids = sortKids(node);
       if (!kids.length) return "";
-      const hasKids = (c) => c.children && Object.keys(c.children).length;
       const sub = treeHTMLInner(kids);
       return sub ? `<div class="tree-sub"><div class="tree-sub-inner">${sub}</div></div>` : "";
     };
@@ -1022,7 +1060,7 @@
       return `
         <li class="${hasKids(c) ? "has-children" : ""}">
           ${hasKids(c) ? `<button class="tree-fold" aria-label="折叠">▾</button>` : ""}
-          <a href="${makeURL({ folder: c.path, page: "" })}"${folder === c.path ? ' class="on"' : ""}>${esc(c.name)}<span>${c.count}</span></a>
+          <a href="${makeURL({ folder: c.path, page: "", unfiled: "" })}"${folder === c.path ? ' class="on"' : ""}>${esc(c.name)}<span>${c.count}</span></a>
           ${hasKids(c) ? `<div class="tree-sub"><div class="tree-sub-inner">${treeHTMLInner(sortKids(c))}</div></div>` : ""}
         </li>`;
     }).join("")}</ul>`;
@@ -1031,7 +1069,7 @@
     const filtered = posts.filter((p) => {
       if (unfiled && p.folder) return false;
       if (tag && !(p.tags || []).includes(tag)) return false;
-      if (q && !`${p.title} ${p.excerpt} ${(p.tags || []).join(" ")} ${p.folder || ""}`.toLowerCase().includes(kw)) return false;
+      if (q && !`${p.title} ${p.excerpt || ""} ${(p.tags || []).join(" ")} ${p.folder || ""}`.toLowerCase().includes(kw)) return false;
       if (folder) {
         const pf = p.folder || "";
         if (pf !== folder && !pf.startsWith(folder + "/")) return false;
@@ -1057,7 +1095,8 @@
     const groupByYear = (list) => {
       const byY = {};
       for (const p of list) {
-        const y = p.date ? String(new Date(p.date).getFullYear()) : "未知";
+        const d = parseDate(p.date);
+        const y = d ? String(d.getFullYear()) : "未知";
         (byY[y] ||= []).push(p);
       }
       return Object.keys(byY).sort((a, b) => b.localeCompare(a)).map((y) => ({ y, list: byY[y] }));
@@ -1225,7 +1264,7 @@
               const pf = p.folder || "";
               if (pf !== folder && !pf.startsWith(folder + "/")) return false;
             }
-            if (v && !`${p.title} ${p.excerpt} ${(p.tags || []).join(" ")} ${p.folder || ""}`.toLowerCase().includes(kw2)) return false;
+            if (v && !`${p.title} ${p.excerpt || ""} ${(p.tags || []).join(" ")} ${p.folder || ""}`.toLowerCase().includes(kw2)) return false;
             return true;
           });
           resultsBox.innerHTML = list.length === 0
@@ -1248,7 +1287,8 @@
       });
     }
 
-    /* 标签筛选（保留 folder，重置页码） */
+    /* 标签筛选（保留 folder，重置页码；必须清掉 unfiled——
+       "散篇"与"某个分类"是互斥的，两个参数并存只会得到 0 篇） */
     $$("#chips .tag-chip").forEach((btn) => {
       btn.addEventListener("click", () => {
         const args = new URLSearchParams(location.search);
@@ -1256,6 +1296,7 @@
         else args.set("tag", btn.dataset.tag);
         if (q) args.set("q", q);
         if (folder) args.set("folder", folder);
+        args.delete("unfiled");
         args.delete("page");
         const qs = args.toString();
         switchView(qs ? `archive.html?${qs}` : "archive.html");
@@ -1319,7 +1360,7 @@
     const tagSet = new Set();
     posts.forEach((p) => (p.tags || []).forEach((t) => tagSet.add(t)));
     set("count", posts.length);
-    set("year", posts.length ? new Date(posts[0].date).getFullYear() : "—");
+    set("year", posts.length && parseDate(posts[0].date) ? parseDate(posts[0].date).getFullYear() : "—");
     set("tags", tagSet.size);
     // 仓库 stars（GitHub 公开 API，无需鉴权）
     try {
