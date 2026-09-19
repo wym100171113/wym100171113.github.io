@@ -212,10 +212,17 @@
     if (btn) {
       btn.addEventListener("click", () => {
         const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        /* 切换瞬间禁用页眉的 backdrop-filter：它依赖实时采样，背景色突变时会重采样
+           闪一帧。加个短暂类让它在这 320ms 里变成纯背景色过渡，切完再恢复。 */
+        document.documentElement.classList.add("theme-switching");
         document.documentElement.setAttribute("data-theme", next);
         document.documentElement.style.background = THEME_BG[next] || "";
         document.documentElement.style.colorScheme = next;
         localStorage.setItem(THEME_KEY, next);
+        clearTimeout(initTheme._t);
+        initTheme._t = setTimeout(() => {
+          document.documentElement.classList.remove("theme-switching");
+        }, 320);
       });
     }
   }
@@ -570,7 +577,6 @@
     const finalHtml = tmp.innerHTML;
 
     main.innerHTML = `
-      <div class="read-progress"><i id="readBar"></i></div>
       <section class="post-head rise">
         <a class="back-link" href="/archive.html">← 返回归档</a>
         <span class="p-cat">${esc(cat)}</span>

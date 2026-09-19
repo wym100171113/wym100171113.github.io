@@ -38,11 +38,15 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=31">
+<link rel="stylesheet" href="assets/css/style.css?v=32">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233b82f6'/%3E%3Ctext x='16' y='22' font-size='15' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3Ew%3C/text%3E%3C/svg%3E">
 </head>
 <body data-theme="light" class="page-post">
 <div class="paper-noise"></div>
+<!-- 阅读进度条：必须是 <body> 的直接子级。page 内的 .shell 是 position:relative;
+     z-index:1 的层叠上下文，若把它放进 main 里，它的 z-index:60 会被困在 main 的
+     z-index:1 之下，被 sticky 页眉（z-index:50）完全遮住。 -->
+<div class="read-progress" aria-hidden="true"><i id="readBar"></i></div>
 
 <header class="site-header" id="siteHeader">
   <div class="shell nav-row">
@@ -93,7 +97,7 @@
      KaTeX（约 270KB）与 highlight.js（约 120KB）改为按需：blog.js 读到正文后，
      判断确实有公式／代码块才动态注入，并由它们各自在被使用前 await -->
 <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
-<script src="assets/js/blog.js?v=42"></script>
+<script src="assets/js/blog.js?v=43"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

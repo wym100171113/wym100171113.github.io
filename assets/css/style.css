@@ -21,6 +21,10 @@
            "STSong", "SimSun", serif;
   --mono: "IBM Plex Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
 
+  /* 主题切换的统一过渡时长：所有跟主题颜色相关的过渡都用它，
+     避免不同元素各用各的时长（0.25/0.3/0.35/0.4s）导致的"不同步卡顿"感 */
+  --tdur: 0.28s;
+
   --col:   56rem;                    /* 正文栏宽（较宽，阅读不拥挤） */
   --gutter: clamp(20px, 5vw, 48px);
   --ease:  cubic-bezier(0.22, 1, 0.36, 1);
@@ -51,8 +55,10 @@ body {
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  transition: background 0.35s var(--ease), color 0.35s var(--ease);
+  /* 不写 text-rendering: optimizeLegibility：它启用连字/kerning 等复杂字形排版，
+     颜色变化时每帧都要重排重栅格化（中文衬线笔画密，闪烁尤其明显），
+     而中文没有连字，这项对中文零收益。 */
+  transition: background-color var(--tdur) var(--ease), color var(--tdur) var(--ease);
 }
 
 ::selection { background: var(--selection); color: var(--ink); }
@@ -80,8 +86,8 @@ input { font: inherit; }
 .site-header {
   position: sticky; top: 0; z-index: 50;
   border-bottom: 1px solid transparent;
-  transition: background 0.4s var(--ease), border-color 0.4s var(--ease),
-              box-shadow 0.4s var(--ease);
+  transition: background-color var(--tdur) var(--ease), border-color var(--tdur) var(--ease),
+              box-shadow var(--tdur) var(--ease);
 }
 .site-header.scrolled {
   background: color-mix(in srgb, var(--paper) 82%, transparent);
@@ -89,20 +95,35 @@ input { font: inherit; }
   -webkit-backdrop-filter: blur(14px) saturate(1.15);
   border-bottom-color: var(--line-2);
 }
+/* 主题切换瞬间（.theme-switching 由 JS 加 320ms）：禁用页眉的 backdrop-filter。
+   它依赖对下层内容的实时采样，背景色突变时会重采样闪一帧；这 320ms 里改成
+   不透明的纯背景色，让切换干净利落，过渡结束后毛玻璃再回来。 */
+.theme-switching .site-header.scrolled {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: var(--paper);
+}
+/* 主题切换期间：临时禁用所有过渡，让整页在同一帧原子切换。这比逐元素渐变好——
+   渐变要对中文衬线每帧重做栅格化（看着在闪），且各元素时长/起始时间不一（看着不同步）；
+   原子切换只栅格化一次，标题、正文、页眉、logo 必然同步。320ms 后过渡能力自动恢复。 */
+.theme-switching, .theme-switching *,
+.theme-switching *::before, .theme-switching *::after {
+  transition: none !important;
+}
 .nav-row {
   display: flex; align-items: center; justify-content: space-between;
   gap: 16px; padding: 18px 0;
 }
 .brand .wordmark {
   font-size: 1.12rem; font-weight: 600; letter-spacing: -0.01em;
-  color: var(--ink); transition: color 0.25s var(--ease);
+  color: var(--ink); transition: color var(--tdur) var(--ease);
 }
 .brand:hover .wordmark { color: var(--accent); }
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-links a {
   font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.02em;
   color: var(--muted); padding: 7px 12px; border-radius: 8px;
-  transition: color 0.25s var(--ease), background 0.25s var(--ease);
+  transition: color var(--tdur) var(--ease), background-color var(--tdur) var(--ease);
 }
 .nav-links a:hover { color: var(--ink); background: color-mix(in srgb, var(--ink) 5%, transparent); }
 .nav-links a.active { color: var(--accent); }
@@ -113,7 +134,7 @@ input { font: inherit; }
   display: inline-grid; place-items: center;
   border: 1px solid var(--line); border-radius: 50%;
   color: var(--muted);
-  transition: all 0.3s var(--ease);
+  transition: color var(--tdur) var(--ease), border-color var(--tdur) var(--ease), transform var(--tdur) var(--ease), background-color var(--tdur) var(--ease);
 }
 .theme-btn:hover { color: var(--accent); border-color: var(--accent); transform: rotate(8deg); }
 .theme-btn .sun { display: none; }
