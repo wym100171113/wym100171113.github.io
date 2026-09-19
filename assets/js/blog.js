@@ -689,14 +689,17 @@
       }
     }
 
-    /* 阅读进度条：rAF 节流（一帧最多写一次）+ transform 全精度写入。
+    /* 阅读进度条（Firefox 等不支持滚动驱动动画的浏览器的 JS 兜底路径）：
+       rAF 节流（一帧最多写一次）+ transform 全精度写入。
+       原生支持时（见 style.css 的 @supports 块）不进这里：进度条由合成器直连
+       滚动位置，CSS 动画在层叠里也压过内联 --p，双跑只是白算每帧的主线程开销。
        旧实现的两个卡顿来源都去掉了：
          1. 写 width —— width 是布局属性，滚动中每帧改它都触发 layout + paint，
             必然丢帧；改用 --p 驱动 transform，纯合成器，零布局开销。
          2. toFixed(1) —— 把进度量化成 0.1% 一档，本页约每滚 33px 条才跳一次，
             在 1440px 宽上是 1.44px 一跳，肉眼可见"突越"；改用全精度浮点即连续。 */
     const bar = $("#readBar");
-    if (bar) {
+    if (bar && !CSS.supports("animation-timeline: scroll()")) {
       let ticking = false;
       const update = () => {
         ticking = false;
@@ -741,7 +744,16 @@
           else if (ar.bottom > nr.bottom) tocNav.scrollTop += ar.bottom - nr.bottom + 10;
         }
       };
-      window.addEventListener("scroll", onToc, { passive: true });
+      /* 滚动事件可能一帧多次，而 onToc 每次都遍历全部标题做布局读
+         （offsetParent/getBoundingClientRect），还可能写 scrollTop——
+         不节流就抢掉同帧里其他滚动响应的帧预算。套 rAF：一帧至多算一次。 */
+      let tocTicking = false;
+      const onTocScroll = () => {
+        if (tocTicking) return;
+        tocTicking = true;
+        requestAnimationFrame(() => { tocTicking = false; onToc(); });
+      };
+      window.addEventListener("scroll", onTocScroll, { passive: true });
       /* 图片/GIF 加载与 mermaid 替换会改变标题位置，资源就绪后重算一次 */
       window.addEventListener("load", onToc);
       onToc();

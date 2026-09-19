@@ -498,6 +498,25 @@ input { font: inherit; }
   transform-origin: left center;
   will-change: transform;
 }
+/* 支持滚动驱动动画的浏览器（Chrome/Edge 115+、Safari 26+）：进度条直接挂到根
+   滚动时间轴上，由合成器线程逐帧驱动，与滚动位置零延迟锁死——主线程再忙
+   （mermaid/KaTeX 渲染）也不影响它。scroll 事件方案永远比实际滚动晚一帧以上，
+   忙时还会冻结后突越，这是"不够丝滑"的结构性来源。不支持的浏览器（Firefox）
+   忽略整块声明，继续走 JS 兜底。用长手属性而非 animation 简写：auto 在简写里
+   会被歧义解析；duration 取 auto 让动画铺满整条时间轴（0s 会让部分浏览器不生效） */
+@supports (animation-timeline: scroll()) {
+  .read-progress i {
+    animation-name: read-progress;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes read-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
 /* 移动端不显示进度条：窄屏自带垂直滚动条已能判断进度，2px 横条信息冗余且占视觉 */
 @media (max-width: 640px) { .read-progress { display: none; } }
 
@@ -908,6 +927,18 @@ body.mmd-locked { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
+  /* 进度条不适用"减少动态效果"：它不是装饰动画——没有自主运动，宽度 1:1
+     映射滚动位置，与滚动条拇指同理，是指示器。且支持滚动驱动动画的浏览器上
+     JS 兜底不挂载，全局 animation:none 会把它整个杀掉。这里显式恢复全套
+     长手属性（!important 对冲上面的通配符；简写会顺带重置 timeline/fill，
+     不能只写 animation-name）。 */
+  .read-progress i {
+    animation-name: read-progress !important;
+    animation-duration: auto !important;
+    animation-timing-function: linear !important;
+    animation-fill-mode: both !important;
+    animation-timeline: scroll(root block) !important;
+  }
   /* 动画被禁用时，等待滚动显现的元素必须直接可见，否则内容永久空白 */
   .js-wait { opacity: 1 !important; }
 }
