@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="330" viewBox="0 0 680 330" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; } .c-ink { color: #1c1c1e; fill: #1c1c1e; }
+    .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; } .c-ink { color: #d8d8de; fill: #d8d8de; }
+      .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; } .semi { fill-opacity: 0.16; }
+  </style>
+
+<text x="340" y="30" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">LC 振荡：能量在电场和磁场之间来回倒</text>
+<text x="150" y="64" font-size="14" class="c-ink" text-anchor="middle" font-weight="600">LC 回路</text>
+<path d="M 90 96 A 12 12 0 0 1 114 96 A 12 12 0 0 1 138 96 A 12 12 0 0 1 162 96 A 12 12 0 0 1 186 96 A 12 12 0 0 1 210 96" class="c-red nf" stroke="currentColor" stroke-width="3"/>
+<text x="72" y="100" font-size="13" class="c-red" text-anchor="end">L</text>
+<line x1="90" y1="96" x2="90" y2="216" stroke="currentColor" stroke-width="2" class="c-ink"/>
+<line x1="210" y1="96" x2="210" y2="216" stroke="currentColor" stroke-width="2" class="c-ink"/>
+<line x1="90" y1="216" x2="136" y2="216" stroke="currentColor" stroke-width="2" class="c-ink"/>
+<line x1="164" y1="216" x2="210" y2="216" stroke="currentColor" stroke-width="2" class="c-ink"/>
+<line x1="136" y1="204" x2="136" y2="228" stroke="currentColor" stroke-width="3.5" class="c-blue"/>
+<line x1="164" y1="204" x2="164" y2="228" stroke="currentColor" stroke-width="3.5" class="c-blue"/>
+<text x="176" y="222" font-size="13" class="c-blue">C</text>
+<text x="120" y="212" font-size="11" class="c-red" text-anchor="middle">+</text>
+<text x="120" y="224" font-size="11" class="c-red" text-anchor="middle">+</text>
+<text x="180" y="212" font-size="11" class="c-blue" text-anchor="middle">−</text>
+<text x="180" y="224" font-size="11" class="c-blue" text-anchor="middle">−</text>
+<text x="150" y="252" font-size="12" class="c-gray" text-anchor="middle">能量来回倒，ω = 1/√(LC)</text>
+<text x="490" y="64" font-size="14" class="c-ink" text-anchor="middle" font-weight="600">两种能量此消彼长</text>
+<line x1="330" y1="156.0" x2="630" y2="156.0" stroke="currentColor" stroke-width="1" class="c-gray" stroke-dasharray="3,4"/>
+<line x1="330" y1="96" x2="330" y2="216" stroke="currentColor" stroke-width="1.2" class="c-gray"/>
+<text x="322" y="100" font-size="11" class="c-gray" text-anchor="end">u</text>
+<text x="636" y="160.0" font-size="12" class="c-gray">t</text>
+<path d="M 330.0 102.0 L 332.5 102.6 L 335.0 104.3 L 337.5 107.2 L 340.0 110.9 L 342.5 115.5 L 345.0 120.7 L 347.5 126.2 L 350.0 131.8 L 352.5 137.3 L 355.0 142.5 L 357.5 147.1 L 360.0 150.8 L 362.5 153.7 L 365.0 155.4 L 367.5 156.0 L 370.0 155.4 L 372.5 153.7 L 375.0 150.8 L 377.5 147.1 L 380.0 142.5 L 382.5 137.3 L 385.0 131.8 L 387.5 126.2 L 390.0 120.7 L 392.5 115.5 L 395.0 110.9 L 397.5 107.2 L 400.0 104.3 L 402.5 102.6 L 405.0 102.0 L 407.5 102.6 L 410.0 104.3 L 412.5 107.2 L 415.0 110.9 L 417.5 115.5 L 420.0 120.7 L 422.5 126.2 L 425.0 131.8 L 427.5 137.3 L 430.0 142.5 L 432.5 147.1 L 435.0 150.8 L 437.5 153.7 L 440.0 155.4 L 442.5 156.0 L 445.0 155.4 L 447.5 153.7 L 450.0 150.8 L 452.5 147.1 L 455.0 142.5 L 457.5 137.3 L 460.0 131.8 L 462.5 126.2 L 465.0 120.7 L 467.5 115.5 L 470.0 110.9 L 472.5 107.2 L 475.0 104.3 L 477.5 102.6 L 480.0 102.0 L 482.5 102.6 L 485.0 104.3 L 487.5 107.2 L 490.0 110.9 L 492.5 115.5 L 495.0 120.7 L 497.5 126.2 L 500.0 131.8 L 502.5 137.3 L 505.0 142.5 L 507.5 147.1 L 510.0 150.8 L 512.5 153.7 L 515.0 155.4 L 517.5 156.0 L 520.0 155.4 L 522.5 153.7 L 525.0 150.8 L 527.5 147.1 L 530.0 142.5 L 532.5 137.3 L 535.0 131.8 L 537.5 126.2 L 540.0 120.7 L 542.5 115.5 L 545.0 110.9 L 547.5 107.2 L 550.0 104.3 L 552.5 102.6 L 555.0 102.0 L 557.5 102.6 L 560.0 104.3 L 562.5 107.2 L 565.0 110.9 L 567.5 115.5 L 570.0 120.7 L 572.5 126.2 L 575.0 131.8 L 577.5 137.3 L 580.0 142.5 L 582.5 147.1 L 585.0 150.8 L 587.5 153.7 L 590.0 155.4 L 592.5 156.0 L 595.0 155.4 L 597.5 153.7 L 600.0 150.8 L 602.5 147.1 L 605.0 142.5 L 607.5 137.3 L 610.0 131.8 L 612.5 126.2 L 615.0 120.7 L 617.5 115.5 L 620.0 110.9 L 622.5 107.2 L 625.0 104.3 L 627.5 102.6 L 630.0 102.0" class="c-blue nf" stroke="currentColor" stroke-width="2.2"/>
+<path d="M 330.0 156.0 L 332.5 155.4 L 335.0 153.7 L 337.5 150.8 L 340.0 147.1 L 342.5 142.5 L 345.0 137.3 L 347.5 131.8 L 350.0 126.2 L 352.5 120.7 L 355.0 115.5 L 357.5 110.9 L 360.0 107.2 L 362.5 104.3 L 365.0 102.6 L 367.5 102.0 L 370.0 102.6 L 372.5 104.3 L 375.0 107.2 L 377.5 110.9 L 380.0 115.5 L 382.5 120.7 L 385.0 126.2 L 387.5 131.8 L 390.0 137.3 L 392.5 142.5 L 395.0 147.1 L 397.5 150.8 L 400.0 153.7 L 402.5 155.4 L 405.0 156.0 L 407.5 155.4 L 410.0 153.7 L 412.5 150.8 L 415.0 147.1 L 417.5 142.5 L 420.0 137.3 L 422.5 131.8 L 425.0 126.2 L 427.5 120.7 L 430.0 115.5 L 432.5 110.9 L 435.0 107.2 L 437.5 104.3 L 440.0 102.6 L 442.5 102.0 L 445.0 102.6 L 447.5 104.3 L 450.0 107.2 L 452.5 110.9 L 455.0 115.5 L 457.5 120.7 L 460.0 126.2 L 462.5 131.8 L 465.0 137.3 L 467.5 142.5 L 470.0 147.1 L 472.5 150.8 L 475.0 153.7 L 477.5 155.4 L 480.0 156.0 L 482.5 155.4 L 485.0 153.7 L 487.5 150.8 L 490.0 147.1 L 492.5 142.5 L 495.0 137.3 L 497.5 131.8 L 500.0 126.2 L 502.5 120.7 L 505.0 115.5 L 507.5 110.9 L 510.0 107.2 L 512.5 104.3 L 515.0 102.6 L 517.5 102.0 L 520.0 102.6 L 522.5 104.3 L 525.0 107.2 L 527.5 110.9 L 530.0 115.5 L 532.5 120.7 L 535.0 126.2 L 537.5 131.8 L 540.0 137.3 L 542.5 142.5 L 545.0 147.1 L 547.5 150.8 L 550.0 153.7 L 552.5 155.4 L 555.0 156.0 L 557.5 155.4 L 560.0 153.7 L 562.5 150.8 L 565.0 147.1 L 567.5 142.5 L 570.0 137.3 L 572.5 131.8 L 575.0 126.2 L 577.5 120.7 L 580.0 115.5 L 582.5 110.9 L 585.0 107.2 L 587.5 104.3 L 590.0 102.6 L 592.5 102.0 L 595.0 102.6 L 597.5 104.3 L 600.0 107.2 L 602.5 110.9 L 605.0 115.5 L 607.5 120.7 L 610.0 126.2 L 612.5 131.8 L 615.0 137.3 L 617.5 142.5 L 620.0 147.1 L 622.5 150.8 L 625.0 153.7 L 627.5 155.4 L 630.0 156.0" class="c-green nf" stroke="currentColor" stroke-width="2.2"/>
+<line x1="340" y1="86" x2="368" y2="86" stroke="currentColor" stroke-width="2.2" class="c-blue"/>
+<text x="376" y="90" font-size="12" class="c-ink">电场能量 q²/2C</text>
+<line x1="530" y1="86" x2="558" y2="86" stroke="currentColor" stroke-width="2.2" class="c-green"/>
+<text x="566" y="90" font-size="12" class="c-ink">磁场能量 LI²/2</text>
+<text x="368" y="232" font-size="11" class="c-gray" text-anchor="middle">C 满</text>
+<text x="405" y="232" font-size="11" class="c-gray" text-anchor="middle">L 满</text>
+<text x="442" y="232" font-size="11" class="c-gray" text-anchor="middle">C 满</text>
+<text x="480" y="232" font-size="11" class="c-gray" text-anchor="middle">L 满</text>
+<text x="340" y="292" font-size="12" class="c-gray" text-anchor="middle">q ↔ x，L ↔ m，1/C ↔ k —— 整个力学振子的语言可以逐字翻译过来</text>
+<text x="340" y="314" font-size="12" class="c-gray" text-anchor="middle">把这个回路"打开"（拉直线圈、拉开电容），振荡就会以波的形式辐射出去 —— 这就是电磁波</text>
+</svg>

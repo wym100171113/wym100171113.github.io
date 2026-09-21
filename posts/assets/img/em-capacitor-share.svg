@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="320" viewBox="0 0 680 320" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; } .c-amber { color: #b06f1a; fill: #b06f1a; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; } .c-amber { color: #d99a4e; fill: #d99a4e; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; } .semi { fill-opacity: 0.16; } .semi2 { fill-opacity: 0.07; }
+  </style>
+
+<text x="340" y="30" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">两个电容一连线：能量为什么少了一半</text>
+<text x="180" y="64" font-size="14" class="c-ink" text-anchor="middle" font-weight="600">初态</text>
+<line x1="138.0" y1="78" x2="222.0" y2="78" stroke="currentColor" stroke-width="4" class="c-red"/>
+<line x1="138.0" y1="102" x2="222.0" y2="102" stroke="currentColor" stroke-width="4" class="c-blue"/>
+<text x="152" y="91" font-size="12" class="c-red" text-anchor="middle">+</text>
+<text x="152" y="99" font-size="12" class="c-blue" text-anchor="middle">−</text>
+<text x="171" y="91" font-size="12" class="c-red" text-anchor="middle">+</text>
+<text x="171" y="99" font-size="12" class="c-blue" text-anchor="middle">−</text>
+<text x="189" y="91" font-size="12" class="c-red" text-anchor="middle">+</text>
+<text x="189" y="99" font-size="12" class="c-blue" text-anchor="middle">−</text>
+<text x="208" y="91" font-size="12" class="c-red" text-anchor="middle">+</text>
+<text x="208" y="99" font-size="12" class="c-blue" text-anchor="middle">−</text>
+<text x="272" y="99" font-size="13" class="c-ink">Q，U</text>
+<line x1="138.0" y1="132" x2="222.0" y2="132" stroke="currentColor" stroke-width="4" class="c-red"/>
+<line x1="138.0" y1="156" x2="222.0" y2="156" stroke="currentColor" stroke-width="4" class="c-blue"/>
+<text x="272" y="153" font-size="13" class="c-gray">空</text>
+<line x1="308" y1="126" x2="372" y2="126" stroke="currentColor" stroke-width="1.6" class="c-gray"/>
+<polygon points="372,126 362,121 362,131" class="c-gray"/>
+<text x="340" y="112" font-size="12" class="c-gray" text-anchor="middle">用导线连起来</text>
+<text x="500" y="64" font-size="14" class="c-ink" text-anchor="middle" font-weight="600">末态</text>
+<line x1="458.0" y1="78" x2="542.0" y2="78" stroke="currentColor" stroke-width="4" class="c-red"/>
+<line x1="458.0" y1="102" x2="542.0" y2="102" stroke="currentColor" stroke-width="4" class="c-blue"/>
+<text x="472" y="91" font-size="12" class="c-red" text-anchor="middle">+</text>
+<text x="472" y="99" font-size="12" class="c-blue" text-anchor="middle">−</text>
+<text x="528" y="91" font-size="12" class="c-red" text-anchor="middle">+</text>
+<text x="528" y="99" font-size="12" class="c-blue" text-anchor="middle">−</text>
+<text x="592" y="99" font-size="13" class="c-ink">Q/2，U/2</text>
+<line x1="458.0" y1="132" x2="542.0" y2="132" stroke="currentColor" stroke-width="4" class="c-red"/>
+<line x1="458.0" y1="156" x2="542.0" y2="156" stroke="currentColor" stroke-width="4" class="c-blue"/>
+<text x="472" y="145" font-size="12" class="c-red" text-anchor="middle">+</text>
+<text x="472" y="153" font-size="12" class="c-blue" text-anchor="middle">−</text>
+<text x="528" y="145" font-size="12" class="c-red" text-anchor="middle">+</text>
+<text x="528" y="153" font-size="12" class="c-blue" text-anchor="middle">−</text>
+<text x="592" y="153" font-size="13" class="c-ink">Q/2，U/2</text>
+<text x="70" y="205" font-size="13" class="c-ink" font-weight="600">能量</text>
+<rect x="130" y="192" width="400" height="26" rx="4" class="c-blue semi" fill="currentColor"/>
+<rect x="130" y="192" width="400" height="26" rx="4" class="c-blue nf" stroke="currentColor" stroke-width="1.4"/>
+<text x="540" y="210" font-size="13" class="c-ink">½CU²</text>
+<rect x="130" y="236" width="200" height="26" rx="4" class="c-green semi" fill="currentColor"/>
+<rect x="130" y="236" width="200" height="26" rx="4" class="c-green nf" stroke="currentColor" stroke-width="1.4"/>
+<text x="340" y="254" font-size="13" class="c-ink">¼CU²</text>
+<rect x="330" y="236" width="200" height="26" rx="4" class="c-amber nf" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5,4"/>
+<text x="430" y="282" font-size="12" class="c-amber" text-anchor="middle">差额 → 导线里的焦耳热</text>
+<text x="340" y="304" font-size="12" class="c-gray" text-anchor="middle">关键：损失与电阻无关，永远是初态的一半</text>
+</svg>
