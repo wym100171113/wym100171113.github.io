@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="470" viewBox="0 0 680 470" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; } .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; } .c-gray { color: #6b7280; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; } .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; } .c-gray { color: #8e8e93; fill: #8e8e93; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.14; }
+    .dash { stroke-dasharray: 7 5; }
+  </style>
+<text x="340.0" y="30" font-size="16" class="c-ink" text-anchor="middle" font-weight="600">弦的垂直平分线恒过定点</text>
+<line x1="198.74" y1="263.89" x2="513.37" y2="263.89" stroke="currentColor" stroke-width="1.3" class="c-ink"/>
+<line x1="198.74" y1="405.16" x2="198.74" y2="64.84" stroke="currentColor" stroke-width="1.3" class="c-ink"/>
+<path d="M513.37,263.89 l-9,-3.6 M513.37,263.89 l-9,3.6" stroke="currentColor" stroke-width="1.3" class="c-ink nf"/>
+<path d="M198.74,64.84 l-3.6,9 M198.74,64.84 l3.6,9" stroke="currentColor" stroke-width="1.3" class="c-ink nf"/>
+<text x="511.4" y="283.9" font-size="13" class="c-ink" text-anchor="start" font-weight="400">x</text>
+<text x="180.7" y="68.8" font-size="13" class="c-ink" text-anchor="start" font-weight="400">y</text>
+<path d="M 347.14 401.95 L 341.28 399.19 L 335.53 396.44 L 329.9 393.68 L 324.39 390.92 L 319.0 388.17 L 313.72 385.41 L 308.57 382.66 L 303.53 379.9 L 298.61 377.15 L 293.81 374.39 L 289.13 371.63 L 284.56 368.88 L 280.11 366.12 L 275.79 363.37 L 271.58 360.61 L 267.49 357.86 L 263.51 355.1 L 259.66 352.34 L 255.92 349.59 L 252.3 346.83 L 248.8 344.08 L 245.42 341.32 L 242.16 338.57 L 239.01 335.81 L 235.98 333.05 L 233.07 330.3 L 230.28 327.54 L 227.61 324.79 L 225.06 322.03 L 222.62 319.28 L 220.3 316.52 L 218.1 313.76 L 216.02 311.01 L 214.06 308.25 L 212.21 305.5 L 210.49 302.74 L 208.88 299.99 L 207.39 297.23 L 206.02 294.47 L 204.77 291.72 L 203.63 288.96 L 202.61 286.21 L 201.72 283.45 L 200.94 280.7 L 200.27 277.94 L 199.73 275.19 L 199.3 272.43 L 199.0 269.67 L 198.81 266.92 L 198.74 264.16 L 198.79 261.41 L 198.95 258.65 L 199.24 255.9 L 199.64 253.14 L 200.16 250.38 L 200.8 247.63 L 201.55 244.87 L 202.43 242.12 L 203.42 239.36 L 204.54 236.61 L 205.77 233.85 L 207.11 231.09 L 208.58 228.34 L 210.17 225.58 L 211.87 222.83 L 213.69 220.07 L 215.63 217.32 L 217.69 214.56 L 219.87 211.8 L 222.16 209.05 L 224.57 206.29 L 227.11 203.54 L 229.75 200.78 L 232.52 198.03 L 235.41 195.27 L 238.41 192.51 L 241.54 189.76 L 244.78 187.0 L 248.14 184.25 L 251.61 181.49 L 255.21 178.74 L 258.92 175.98 L 262.75 173.22 L 266.7 170.47 L 270.77 167.71 L 274.96 164.96 L 279.27 162.2 L 283.69 159.45 L 288.23 156.69 L 292.89 153.93 L 297.67 151.18 L 302.57 148.42 L 307.58 145.67 L 312.71 142.91 L 317.96 140.16 L 323.33 137.4 L 328.82 134.64 L 334.43 131.89 L 340.15 129.13 L 346.0 126.38 L 351.96 123.62 L 358.04 120.87 L 364.23 118.11 L 370.55 115.35 L 376.98 112.6 L 383.53 109.84 L 390.21 107.09 L 396.99 104.33 L 403.9 101.58 L 410.93 98.82 L 418.07 96.06 L 425.33 93.31 L 432.71 90.55 L 440.21 87.8 L 447.83 85.04 L 455.56 82.29 L 463.42 79.53 L 471.39 76.77 L 479.48 74.02 L 487.68 71.26" stroke="currentColor" stroke-width="1.8" class="c-ink nf"/>
+<line x1="327.16" y1="347.37" x2="327.16" y2="80.89" stroke="currentColor" stroke-width="1.2" class="c-gray dash"/>
+<line x1="230.84" y1="199.68" x2="423.47" y2="94.01" stroke="currentColor" stroke-width="2.0" class="c-red"/>
+<line x1="327.16" y1="146.85" x2="391.37" y2="263.89" stroke="currentColor" stroke-width="1.5" class="c-red dash"/>
+<line x1="206.76" y1="231.79" x2="447.55" y2="85.14" stroke="currentColor" stroke-width="2.0" class="c-green"/>
+<line x1="327.16" y1="158.46" x2="391.37" y2="263.89" stroke="currentColor" stroke-width="1.5" class="c-green dash"/>
+<circle cx="230.84" cy="199.68" r="4.6" fill="currentColor" class="c-red"/>
+<circle cx="423.47" cy="94.01" r="4.6" fill="currentColor" class="c-red"/>
+<circle cx="206.76" cy="231.79" r="4.6" fill="currentColor" class="c-green"/>
+<circle cx="447.55" cy="85.14" r="4.6" fill="currentColor" class="c-green"/>
+<circle cx="327.16" cy="146.85" r="4.8" fill="currentColor" class="c-blue"/>
+<circle cx="327.16" cy="158.46" r="4.8" fill="currentColor" class="c-blue"/>
+<circle cx="391.37" cy="263.89" r="5.6" fill="currentColor" class="c-ink"/>
+<text x="208.8" y="201.7" font-size="14" class="c-red" text-anchor="start" font-weight="600">A</text>
+<text x="429.5" y="86.0" font-size="14" class="c-red" text-anchor="start" font-weight="600">B</text>
+<text x="208.8" y="219.8" font-size="14" class="c-green" text-anchor="start" font-weight="600">A′</text>
+<text x="455.6" y="81.1" font-size="14" class="c-green" text-anchor="start" font-weight="600">B′</text>
+<text x="301.2" y="136.8" font-size="14" class="c-blue" text-anchor="start" font-weight="600">M</text>
+<text x="291.2" y="176.5" font-size="14" class="c-blue" text-anchor="start" font-weight="600">M′</text>
+<text x="401.4" y="283.9" font-size="14" class="c-ink" text-anchor="start" font-weight="600">N(6, 0)</text>
+<text x="229.2" y="77.3" font-size="12" class="c-gray" text-anchor="start" font-weight="400">x = x₀ = 4</text>
+<text x="656" y="452" font-size="12" class="c-gray" text-anchor="end">两条弦都满足 x_A + x_B = 8，垂直平分线都过 N(6, 0)</text>
+</svg>
