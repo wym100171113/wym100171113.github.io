@@ -1056,6 +1056,13 @@
       try { localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...collapsed])); } catch { /* ignore */ }
     };
 
+    /* 侧栏分类树：子级默认收起（当前选中分支强制展开），用户手动展开的节点持久化记忆 */
+    const SIDE_OPEN_KEY = "wym-blog-sidebar-open";
+    let sideOpen = new Set();
+    try { sideOpen = new Set(JSON.parse(localStorage.getItem(SIDE_OPEN_KEY) || "[]")); } catch { /* ignore */ }
+    const onActivePath = (path) => !!folder && (folder === path || folder.startsWith(path + "/"));
+    const sideIsOpen = (path) => onActivePath(path) || sideOpen.has(path);
+
     /* 文件夹树（侧栏分类 + 主区嵌套分组，可折叠子级） */
     const tree = { name: "", path: "", count: 0, children: {}, posts: [] };
     for (const p of posts) {
@@ -1103,9 +1110,10 @@
     };
     const treeHTMLInner = (kids) => `<ul class="folder-tree">${kids.map((c) => {
       const hasKids = (x) => x.children && Object.keys(x.children).length;
+      const open = hasKids(c) && sideIsOpen(c.path);
       return `
-        <li class="${hasKids(c) ? "has-children" : ""}">
-          ${hasKids(c) ? `<button class="tree-fold" aria-label="折叠">▾</button>` : ""}
+        <li class="${hasKids(c) ? (open ? "has-children" : "has-children folded") : ""}">
+          ${hasKids(c) ? `<button class="tree-fold" data-path="${esc(c.path)}" aria-label="折叠/展开">${open ? "▾" : "▸"}</button>` : ""}
           <a href="${makeURL({ folder: c.path, page: "", unfiled: "" })}"${folder === c.path ? ' class="on"' : ""}>${esc(c.name)}<span>${c.count}</span></a>
           ${hasKids(c) ? `<div class="tree-sub"><div class="tree-sub-inner">${treeHTMLInner(sortKids(c))}</div></div>` : ""}
         </li>`;
@@ -1213,9 +1221,13 @@
               <span class="s-icon">⌕</span>
               <input id="qInput" type="search" placeholder="搜标题 / 摘要 / 标签 / 分类…" value="${esc(q)}">
             </div>
-            ${tags.length ? `<div class="tag-chips" id="chips">${tags.map((t) =>
-              `<button class="tag-chip${t === tag ? " on" : ""}" data-tag="${esc(t)}">${esc(t)} · ${tagCount[t]}</button>`
-            ).join("")}</div>` : ""}
+            ${tags.length ? (() => {
+              const TOP = 8; /* 标签多时只露出高频前 8 个，其余收进「更多」 */
+              const chip = (t) => `<button class="tag-chip${t === tag ? " on" : ""}" data-tag="${esc(t)}">${esc(t)} · ${tagCount[t]}</button>`;
+              const rest = tags.slice(TOP);
+              const expand = tag && tags.indexOf(tag) >= TOP; /* 激活标签在折叠区里：自动展开 */
+              return `<div class="tag-chips${expand ? " show-all" : ""}" id="chips">${tags.slice(0, TOP).map(chip).join("")}${rest.length ? `<span class="tag-more">${rest.map(chip).join("")}</span><button type="button" class="tag-chip tag-more-btn" id="tagMoreBtn" data-n="${rest.length}">更多 +${rest.length}</button>` : ""}</div>`;
+            })() : ""}
           </div>
 
           ${!isFiltered ? `
@@ -1335,7 +1347,7 @@
 
     /* 标签筛选（保留 folder，重置页码；必须清掉 unfiled——
        "散篇"与"某个分类"是互斥的，两个参数并存只会得到 0 篇） */
-    $$("#chips .tag-chip").forEach((btn) => {
+    $$(`#chips .tag-chip[data-tag]`).forEach((btn) => {
       btn.addEventListener("click", () => {
         const args = new URLSearchParams(location.search);
         if (btn.dataset.tag === tag) args.delete("tag");
@@ -1348,6 +1360,16 @@
         switchView(qs ? `archive.html?${qs}` : "archive.html");
       });
     });
+
+    /* 「更多标签」展开/收起（不带 data-tag，不参与筛选） */
+    const tagMoreBtn = $("#tagMoreBtn");
+    if (tagMoreBtn) {
+      tagMoreBtn.addEventListener("click", () => {
+        const chips = $("#chips");
+        const open = chips.classList.toggle("show-all");
+        tagMoreBtn.textContent = open ? "收起" : `更多 +${tagMoreBtn.dataset.n}`;
+      });
+    }
 
     /* 分类区块折叠/展开 */
     $$(".folder-toggle").forEach((btn) => {
@@ -1380,13 +1402,18 @@
       });
     }
 
-    /* 侧栏分类树折叠 */
+    /* 侧栏分类树折叠（默认收起，手动展开的记忆到 localStorage） */
     $$(".tree-fold").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const li = btn.closest("li");
         const folded = li.classList.toggle("folded");
         btn.textContent = folded ? "▸" : "▾";
+        const path = btn.dataset.path;
+        if (path) {
+          if (folded) sideOpen.delete(path); else sideOpen.add(path);
+          try { localStorage.setItem(SIDE_OPEN_KEY, JSON.stringify([...sideOpen])); } catch { /* ignore */ }
+        }
       });
     });
 
