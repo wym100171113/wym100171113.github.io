@@ -7,7 +7,6 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-<<<<<<< HEAD
       <title>化学随谈（一）：平衡常数为什么不变</title>
       <link>https://wym100171113.github.io/post.html?id=why-ka-is-constant</link>
       <guid>https://wym100171113.github.io/post.html?id=why-ka-is-constant</guid>
@@ -22,14 +21,14 @@
       <pubDate>Mon, 21 Sep 2026 00:00:00 +0800</pubDate>
       <description>抛物线的弦有一条很好用的性质：只要弦中点的横坐标（或纵坐标）固定，它的垂直平分线就一定过定点。这条引理连同它的两个"兄弟"——点差法与垂径定理、张直角的弦过定点——可以一口气处理四道典型题：矩形、等腰三角形、距离和最小、定弦过定点。每题在标答之外都给出另一种走法。</description>
       <category>数学</category>
-=======
+    </item>
+    <item>
       <title>电与磁漫谈（三）：把电荷装起来</title>
       <link>https://wym100171113.github.io/post.html?id=capacitance-and-energy</link>
       <guid>https://wym100171113.github.io/post.html?id=capacitance-and-energy</guid>
       <pubDate>Sat, 19 Sep 2026 00:00:00 +0800</pubDate>
       <description>1745 年的莱顿瓶第一次让人把电"装"进了容器，也第一次让人尝到了电击的滋味。电容这个量到底在说什么？能量公式里那个 ½ 是从哪冒出来的？为什么说能量不是存在电荷上、而是存在空间里？以及一个流传了两百多年的漂亮悖论：两个电容一连线，一半的能量凭空消失了。</description>
       <category>物理</category>
->>>>>>> origin/main
     </item>
     <item>
       <title>电与磁漫谈（一）：电荷的算术</title>
@@ -48,8 +47,6 @@
       <category>物理</category>
     </item>
     <item>
-<<<<<<< HEAD
-=======
       <title>电与磁漫谈（五）：感应与统一</title>
       <link>https://wym100171113.github.io/post.html?id=induction-and-maxwell</link>
       <guid>https://wym100171113.github.io/post.html?id=induction-and-maxwell</guid>
@@ -66,7 +63,6 @@
       <category>物理</category>
     </item>
     <item>
->>>>>>> origin/main
       <title>圆锥曲线：六个系数里的三个数</title>
       <link>https://wym100171113.github.io/post.html?id=conic-general</link>
       <guid>https://wym100171113.github.io/post.html?id=conic-general</guid>
