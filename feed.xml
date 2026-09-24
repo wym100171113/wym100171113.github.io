@@ -7,6 +7,14 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>立体几何的第一课：从三点定面到法向量</title>
+      <link>https://wym100171113.github.io/post.html?id=solid-geometry-foundations</link>
+      <guid>https://wym100171113.github.io/post.html?id=solid-geometry-foundations</guid>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0800</pubDate>
+      <description>三条腿的凳子从来不晃，四条腿的反而晃——因为不共线的三点确定一个平面。从这条最朴素的公理出发，由简入深走完立体几何的整条主线：位置关系里的新物种（异面直线）、投影与三垂线定理、六种距离背后同一个思想、二面角，最后落到法向量——把整章压成一个公式的工具。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>化学随谈（一）：平衡常数为什么不变</title>
       <link>https://wym100171113.github.io/post.html?id=why-ka-is-constant</link>
       <guid>https://wym100171113.github.io/post.html?id=why-ka-is-constant</guid>
