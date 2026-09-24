@@ -34,8 +34,8 @@
   <text x="252" y="66" font-size="15" class="c-red" font-weight="600">P</text>
   <text x="222" y="288" font-size="14" class="c-ink">垂足 O</text>
   <text x="406" y="310" font-size="14" class="c-red">斜足 A</text>
-  <text x="252" y="170" font-size="13" class="c-gray">垂线 PO（最短）</text>
-  <text x="330" y="168" font-size="13" class="c-red">斜线 PA</text>
-  <text x="296" y="308" font-size="13" class="c-blue">投影 OA</text>
+  <text x="228" y="170" font-size="13" class="c-gray" text-anchor="end">垂线 PO（最短）</text>
+  <text x="316" y="146" font-size="13" class="c-red">斜线 PA</text>
+  <text x="300" y="258" font-size="13" class="c-blue">投影 OA</text>
   <text x="320" y="352" font-size="12.5" class="c-gray" text-anchor="middle">线面角 θ = 斜线与它在平面上的投影的夹角；PO ≤ PA，等号仅当 A 与 O 重合</text>
 </svg>
