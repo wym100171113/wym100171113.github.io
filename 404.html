@@ -24,16 +24,24 @@
 <meta property="og:site_name" content="wym's blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="404 · wym's blog">
+<meta name="twitter:card" content="summary">
+<!-- 404 页不该被收录：不给 canonical（自指反而会被当成正常页面索引），
+     直接声明 noindex。RSS 链接保留，方便误入的访客换个入口 -->
+<meta name="robots" content="noindex">
 <title>404 · wym's blog</title>
+<link rel="alternate" type="application/rss+xml" title="wym's blog" href="/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css?v=34">
+<!-- 与其它页一致的异步字体写法：media="print" 让字体不阻塞首屏渲染，
+     加载完再切回 all。404 页正是最不该让访客多等一秒的地方 -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/assets/css/style.css?v=35">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233b82f6'/%3E%3Ctext x='16' y='22' font-size='15' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3Ew%3C/text%3E%3C/svg%3E">
 </head>
 <body data-theme="light">
 <div class="paper-noise"></div>
-<main class="shell">
+<a class="skip-link" href="#main">跳到正文</a>
+<main class="shell" id="main">
   <div class="notfound rise">
     <span class="code">404</span>
     <p class="zh">这一页不存在。</p>
@@ -41,5 +49,8 @@
     <a class="back-link" href="/">← 回到首页</a>
   </div>
 </main>
+<!-- 本页没有交互逻辑，不需要 blog.js；md-core 一并加载是为了让 5 个页面的
+     资源加载口径完全一致（将来若给 404 加"随机推荐一篇"之类的功能不必再回头补） -->
+<script src="/assets/js/md-core.js?v=1"></script>
 </body>
 </html>

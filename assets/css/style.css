@@ -68,6 +68,22 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
 input { font: inherit; }
 
+/* 键盘可达性：默认焦点环在这套纸感配色下几乎看不见。统一给一条蓝色描边——
+   用 :focus-visible 而不是 :focus，只在键盘／辅助技术聚焦时出现，
+   鼠标点击不会亮，视觉上对普通读者完全无感，却补上了键盘用户本来缺失的那一环 */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* 跳转链接：Tab 的第一下就能跳过页眉直达正文（页眉有 4 个链接，
+   键盘用户每翻一页都要多按 5 次）。平时完全离屏，聚焦时才滑下来 */
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 200;
+  font-family: var(--mono); font-size: 0.78rem;
+  color: var(--paper); background: var(--accent);
+  border-radius: 0 0 8px 8px; padding: 8px 14px;
+  transition: top 0.2s var(--ease);
+}
+.skip-link:focus { top: 0; }
+
 /* 纸面颗粒感（固定于背景，不遮挡交互） */
 .paper-noise {
   position: fixed; inset: 0;
@@ -890,6 +906,27 @@ body.mmd-locked { overflow: hidden; }
 .empty { padding: clamp(36px, 6vw, 56px) 0; text-align: center; color: var(--muted); font-size: 0.9rem; }
 .empty code { font-family: var(--mono); background: var(--paper-2); border: 1px solid var(--line); border-radius: 5px; padding: 2px 8px; color: var(--accent); }
 
+/* 外部库（KaTeX / highlight.js）加载失败的提示条：正文照常可读，
+   但用户得知道"公式为什么还是 $ 原文"，并且有地方能点一下重试。
+   类名 .lib-notice / .lib-notice .retry 由 blog.js 固定写入，改名要同步两边。
+   配色走变量，明暗两主题自动适配；只把左侧警示条按主题给两种橙 */
+.lib-notice {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin: 0 0 1.4rem; padding: 10px 14px;
+  font-family: var(--mono); font-size: 0.76rem; line-height: 1.6;
+  color: var(--ink-2); background: var(--paper-2);
+  border: 1px solid var(--line); border-left: 3px solid #d97706;
+  border-radius: 8px;
+}
+[data-theme="dark"] .lib-notice { border-left-color: #f59e0b; }
+.lib-notice .retry {
+  margin-left: auto;
+  font-family: var(--mono); font-size: 0.74rem; color: var(--accent);
+  border: 1px solid var(--line); border-radius: 6px; padding: 3px 12px;
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.lib-notice .retry:hover { border-color: var(--accent); }
+
 /* ==========================================================================
    动效（参考 yohaku-blog-template：fadeIn + 弹簧交互；stylekit：Blur In）
    ========================================================================== */
@@ -950,3 +987,27 @@ body.mmd-locked { overflow: hidden; }
    页面间跳转自动交叉淡入；不支持（如 Firefox）时自动降级为普通跳转，不影响功能。
    系统开启"减少动态效果"时浏览器会自动跳过过渡。 */
 @view-transition { navigation: auto; }
+
+/* ==========================================================================
+   打印
+   ========================================================================== */
+/* 纸上只留正文。页眉/页脚/目录/进度条/骨架屏都是屏幕上的导航与状态，
+   印出来只会占地方；配图的阴影、圆角、悬停浮起同理，一并去掉换成干净的黑白。
+   注意 .js-wait：屏幕外还没"滚动显现"的段落是不透明的 0，不强制恢复的话
+   打印出来会缺内容 */
+@media print {
+  .site-header, .site-footer, .toc, .read-progress, .skeleton, .skip-link,
+  .paper-noise, .lib-notice, .pn-nav, .back-link, .mmd-hint, .mmd-lightbox,
+  .prose .code-block .copy-btn { display: none !important; }
+  body { background: #fff; color: #000; }
+  .prose { animation: none !important; }
+  .js-wait { opacity: 1 !important; }
+  .post-body-layout, .layout-2col { display: block; }
+  .prose img, .prose svg, .prose .mermaid svg {
+    max-height: 60vh; box-shadow: none; border-color: #ccc; filter: none !important;
+  }
+  .prose pre { background: none; border: 1px solid #ccc; }
+  .prose code { background: none; border-color: #ccc; color: #000; }
+  .prose a { color: #000; text-decoration: underline; }
+  .prose blockquote, .callout { border-color: #ccc; background: none; }
+}

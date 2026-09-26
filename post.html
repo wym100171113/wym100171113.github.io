@@ -25,24 +25,36 @@
      blog.js 的 getPosts() 会优先复用这个 Promise，不会重复请求。 */
   window.__posts = fetch("/posts/index.json", { cache: "no-cache" });
 </script>
+<!-- PRERENDER:HEAD -->
+<!-- ↑↓ 这两个标记之间的整段（description / author / og / twitter / canonical /
+     title）由 tools/prerender.mjs 生成 /p/<slug>.html 时整段替换成该篇的真实元数据，
+     并追加 og:image 与 JSON-LD。标记注释必须原样保留——删掉或改名即断掉预渲染，
+     换来的只是社交爬虫抓不到内容。 -->
 <meta name="description" content="wym's blog — 文章正文。">
 <meta name="author" content="wym">
 <meta property="og:site_name" content="wym's blog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文章 · wym's blog">
 <meta property="og:description" content="文章正文。">
+<meta name="twitter:card" content="summary_large_image">
 <title>文章 · wym's blog</title>
+<!-- /PRERENDER:HEAD -->
+<!-- 这里刻意不写静态 canonical：post.html 是带 ?id= 参数的兜底页，静态自指会把
+     所有文章声明成同一个 URL（明确的 SEO 损害）。真实值由 blog.js 按 manifest
+     里的 prerendered 动态写入——有预渲染产物就指向 /p/<slug>.html -->
+<link rel="alternate" type="application/rss+xml" title="wym's blog" href="/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=34">
+<link rel="stylesheet" href="assets/css/style.css?v=35">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233b82f6'/%3E%3Ctext x='16' y='22' font-size='15' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3Ew%3C/text%3E%3C/svg%3E">
 </head>
 <body data-theme="light" class="page-post">
 <div class="paper-noise"></div>
+<a class="skip-link" href="#main">跳到正文</a>
 <!-- 阅读进度条：必须是 <body> 的直接子级。page 内的 .shell 是 position:relative;
      z-index:1 的层叠上下文，若把它放进 main 里，它的 z-index:60 会被困在 main 的
      z-index:1 之下，被 sticky 页眉（z-index:50）完全遮住。 -->
@@ -66,6 +78,9 @@
 </header>
 
 <main class="shell" id="main" data-view="post">
+  <noscript>
+    <p class="status">本页需要 JavaScript 才能渲染正文。也可以直接看 <a href="/archive.html">归档</a>，或订阅 <a href="/feed.xml">RSS</a>。</p>
+  </noscript>
   <!-- 骨架屏直接写在这里：JS 与 CDN 库到位之前就已经占住版面，不必等脚本执行。
        它由 CSS 延迟 300ms 才淡入，加载够快时不会露面；blog.js 渲染完成后整块替换掉 -->
   <div class="skeleton" aria-hidden="true">
@@ -93,11 +108,16 @@
   </div>
 </footer>
 
-<!-- marked 是解析 Markdown 的必需品，直接加载。
+<!-- marked 走本地副本（不再依赖 CDN 单点）：CDN 挂掉时正文仍然能渲染。
+     本地文件加载失败（部署漏文件等）才回退 jsdelivr，回退是异步注入的，
+     此时 blog.js 可能先跑起来——它已经有 window.marked 缺失时的降级路径
+     （正文以 <pre> 原文呈现），不会白屏。
      KaTeX（约 270KB）与 highlight.js（约 120KB）改为按需：blog.js 读到正文后，
      判断确实有公式／代码块才动态注入，并由它们各自在被使用前 await -->
-<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
-<script src="assets/js/blog.js?v=45"></script>
+<script src="/assets/vendor/marked-12.0.2.min.js" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/marked@12/marked.min.js';document.head.appendChild(s);"></script>
+<!-- md-core 必须在 blog.js 之前：正文渲染（含预渲染水合）由它提供 -->
+<script src="/assets/js/md-core.js?v=1"></script>
+<script src="assets/js/blog.js?v=46"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

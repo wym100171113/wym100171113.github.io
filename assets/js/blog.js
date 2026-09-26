@@ -30,51 +30,16 @@
     String(s ?? "").replace(/[&<>"']/g, (c) =>
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-  /* 保护数学公式：在交给 marked 之前把 $..$ / $$..$$ 换成占位符，
-     避免 marked 把 $F_n$ 这类下划线解析成斜体；渲染 HTML 后再还原。
-
-     顺序很关键：必须【先】把代码（围栏块 + 行内 code）抽走，【再】抽数学。
-     否则代码里的 $x$（shell 的 $HOME、模板字符串 ${x}）会被当成公式吃掉，
-     restore 后又被 KaTeX auto-render 渲染成数学——代码块被污染。
-
-     代码占位符（\u0000Cn\u0000）与数学占位符（\u0000Mn\u0000）共用一个 stash。
-     代码在 restore 时单独交给 marked 解析那段原始源码，得到真正的
-     <pre><code> / <code>，复制按钮、hljs 照常工作，代码里的 $ 不进数学管线。 */
-  function protectMath(md) {
-    const stash = [];
-    const push = (obj) => { stash.push(obj); return `\u0000${obj.code ? "C" : "M"}${stash.length - 1}\u0000`; };
-    // 1) 先抽代码：围栏块 ``` / ~~~，再行内 code（\1 配对等长反引号）
-    md = md.replace(/(```[\s\S]*?```|~~~[\s\S]*?~~~)/g, (m) => push({ code: true, raw: m }));
-    md = md.replace(/(`+)([\s\S]*?)\1(?!`)/g, (m) => push({ code: true, raw: m }));
-    // 2) 再抽数学：display $$..$$ 优先，然后行内 $..$
-    md = md.replace(/\$\$([\s\S]+?)\$\$/g, (_, tex) => push({ display: true, tex }));
-    md = md.replace(/\$([^\$\n]+?)\$/g, (_, tex) => push({ display: false, tex }));
-    return { md, stash };
-  }
-  function restoreMath(html, stash) {
-    /* 代码块占位符单独成行时，marked 会把它当成普通段落包成 <p>…</p>；
-       若不剥掉，restore 后会变成 <p><pre>… 的无效嵌套。先把这层壳去掉。 */
-    html = html.replace(/<p>(\u0000C\d+\u0000)<\/p>/g, "$1");
-    return html.replace(/\u0000([MC])(\d+)\u0000/g, (_, kind, i) => {
-      const m = stash[+i];
-      if (!m) return "";
-      if (kind === "C") {
-        // 代码：单独让 marked 解析这一段原始源码，产出真正的代码块 / 行内 code
-        return window.marked ? marked.parse(m.raw) : esc(m.raw);
-      }
-      // 公式里若有 < 或 &（如 $a<b$），直接插回会被浏览器当 HTML 标签解析；转义后
-      // KaTeX auto-render 按 textContent 读取，实体解码后公式不受影响。
-      const tex = m.tex.replace(/&/g, "&amp;").replace(/</g, "&lt;");
-      return m.display ? `$$${tex}$$` : `$${tex}$`;
-    });
-  }
-
-  /* marked 配置（只初始化一次） */
-  let markedReady = false;
-  function ensureMarked() {
-    if (!window.marked || markedReady) return;
-    markedReady = true;
-    marked.setOptions({ gfm: true, breaks: false });
+  /* ---------------- 共享渲染核心 ---------------- */
+  /* 正文的 Markdown → HTML 不再由本文件实现，改由 assets/js/md-core.js 提供：
+     同一份代码在浏览器与 Node 预渲染里各跑一次，两条路径的结果才会逐字节一致，
+     各写一套迟早会漂移。md-core 在各页 blog.js 之前同步加载，缺席只可能来自
+     缓存错配或网络故障——此时给一条看得见、可操作的提示，而不是让页面停在
+     骨架屏上（那是"白屏"最坏的形态：用户不知道发生了什么）。 */
+  function requireMdCore(main) {
+    if (window.MDCore) return window.MDCore;
+    main.innerHTML = `<div class="status err">渲染核心 <code>md-core.js</code> 未能加载，正文无法显示。<br>请刷新重试；若反复出现，强制刷新（Ctrl/Cmd + Shift + R）清掉旧缓存。<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
+    return null;
   }
 
   /* ---------------- 按需加载的外部库 ---------------- */
@@ -86,18 +51,62 @@
     katexRender: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js",
     hljs: "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js",
   };
+  /* CDN 半死不活时请求会挂很久（不是失败，是不响应），Promise 永远不 settle——
+     公式和高亮就无限等待。加一条超时兜底：到点当作失败处理，走同一套提示与重试。 */
+  const LIB_TIMEOUT = 10000;
   const libCache = Object.create(null);
   function loadLib(src) {
     if (!libCache[src]) {
       libCache[src] = new Promise((resolve, reject) => {
         const s = document.createElement("script");
+        const timer = setTimeout(() => {
+          delete libCache[src];
+          s.remove();
+          reject(new Error(`load timeout: ${src}`));
+        }, LIB_TIMEOUT);
         s.src = src;
-        s.onload = () => resolve();
-        s.onerror = () => { delete libCache[src]; reject(new Error(`load failed: ${src}`)); };
+        s.onload = () => { clearTimeout(timer); resolve(); };
+        s.onerror = () => {
+          clearTimeout(timer);
+          delete libCache[src];
+          reject(new Error(`load failed: ${src}`));
+        };
         document.head.appendChild(s);
       });
     }
     return libCache[src];
+  }
+
+  /* 这篇文章要用哪些库：只发起、不等待（调用方稍后才 await），让下载与解析并行。
+     返回值是「加载失败的库名数组」——空数组表示全都就位。 */
+  function loadPostLibs(need) {
+    const jobs = [];
+    if (need.math) jobs.push(["数学公式", () => loadLib(LIB.katex).then(() => loadLib(LIB.katexRender))]);
+    if (need.code) jobs.push(["代码高亮", () => loadLib(LIB.hljs)]);
+    return Promise.all(jobs.map(([name, run]) => run().then(() => null, () => name)))
+      .then((names) => names.filter(Boolean));
+  }
+
+  /* 库加载失败不再静默：正文照常可读（公式退化成 $…$ 原文、代码退化成无高亮），
+     但要在正文顶部给一条看得见的说明与重试入口。类名固定为
+     .lib-notice / .lib-notice .retry（样式由 style.css 提供）。 */
+  function showLibNotice(names, retry) {
+    const host = $("#prose") || $("#main");
+    if (!host) return;
+    const old = $(".lib-notice");
+    if (old) old.remove();
+    const box = document.createElement("div");
+    box.className = "lib-notice";
+    const msg = document.createElement("span");
+    msg.textContent = `${names.join("、")}资源加载失败，相关内容可能显示为原文。`;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "retry";
+    btn.textContent = "重试";
+    btn.addEventListener("click", () => { box.remove(); retry(); });
+    box.appendChild(msg);
+    box.appendChild(btn);
+    host.insertBefore(box, host.firstChild);
   }
 
   /* ---------------- 日期 ---------------- */
@@ -159,7 +168,20 @@
      注意它只在 https / localhost 下存在，没有就安静退化成普通请求，绝不因为缓存坏了读不了文章。 */
   const MD_CACHE = "wym-md-v1";
 
-  async function fetchMd(url) {
+  /* 同一篇文章的旧缓存条目：缓存键带上内容 hash 之后，正文改一次就会多一个
+     key（旧 hash 那份再也没人读）。这里按路径前缀把它们删掉，避免缓存无限堆积。
+     只比 pathname 前缀，不会误伤别的文章；删失败也不影响本次阅读。 */
+  async function pruneMdCache(cache, url, keepKey) {
+    const base = new URL(url, location.origin).pathname;
+    const keep = new URL(keepKey, location.origin).pathname;
+    const keys = await cache.keys();
+    await Promise.all(keys.map((req) => {
+      const p = new URL(req.url).pathname;
+      return p.startsWith(base + ":") && p !== keep ? cache.delete(req) : null;
+    }));
+  }
+
+  async function fetchMd(url, key) {
     const fromNetwork = () =>
       fetch(url, { cache: "no-cache" }).then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -168,23 +190,31 @@
 
     if (!("caches" in window)) return fromNetwork();
 
+    /* 缓存键 = 路径 + 内容 hash（manifest 里的 info.hash）。
+       只按路径存的话，文章改完、访客命中缓存，看到的还是旧正文，且"后台更新"
+       把新内容写回同一个 key 也无法区分版本；带上 hash 后，内容一变就是新 key，
+       旧 key 立刻失效，SWR 的"下次访问是最新的"才真正成立。
+       manifest 里没有 hash（老数据）时退化成纯路径键，行为与从前一致。 */
+    const cacheKey = key || url;
+
     try {
       const cache = await caches.open(MD_CACHE);
-      const hit = await cache.match(url);
+      const hit = await cache.match(cacheKey);
       if (hit) {
         /* 先给缓存的，再后台更新；下次访问即拿到最新。
            必须显式 no-cache：默认模式下这次请求会被 HTTP 缓存命中
            （GitHub Pages 给 .md 的是 max-age=600），等于把同一份旧内容
            又写回 Cache API 一遍，"后台更新"实际不生效 */
         fetch(url, { cache: "no-cache" })
-          .then((r) => (r.ok ? cache.put(url, r.clone()) : null))
+          .then((r) => (r.ok ? cache.put(cacheKey, r.clone()) : null))
           .catch(() => {});
         return hit.text();
       }
       const res = await fetch(url, { cache: "no-cache" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       /* 写缓存失败（配额不足等）不该影响本次阅读，所以只吞掉，不 await */
-      cache.put(url, res.clone()).catch(() => {});
+      cache.put(cacheKey, res.clone()).catch(() => {});
+      pruneMdCache(cache, url, cacheKey).catch(() => {});
       return res.text();
     } catch {
       return fromNetwork();
@@ -380,8 +410,20 @@
 
   async function renderPost() {
     const main = $("#main");
-    const id = new URLSearchParams(location.search).get("id") ||
-               new URLSearchParams(location.search).get("slug");
+    const MD = requireMdCore(main);
+    if (!MD) return;
+
+    /* 两条入口，同一套渲染流程：
+       水合模式 —— /p/<slug>.html 是预渲染好的静态页，正文已经在 HTML 里
+         （article.prose[data-post-slug]），不必再拉 .md、也不必再跑 marked。
+         它正是"不执行 JS 也能读"的那份产物，JS 到位后只是补上目录、公式、
+         高亮、灯箱这些增强。
+       兜底模式 —— post.html?id=<slug>，正文要现取现渲染（老链接、手改 URL
+         进来的、预渲染尚未覆盖的文章都走这条）。 */
+    const hydrated = $("article.prose[data-post-slug]", main);
+    const qs = new URLSearchParams(location.search);
+    const id = (hydrated && hydrated.getAttribute("data-post-slug")) ||
+               qs.get("id") || qs.get("slug");
     if (!id) {
       main.innerHTML = `<div class="status err">缺少文章参数（?id=…）</div>`;
       return;
@@ -395,29 +437,53 @@
     const idx = posts.findIndex((p) => p.slug === id);
     const folder = (info && info.folder) || "";
 
-    let md;
-    const mdPath = folder
-      ? `/posts/${folder.split("/").map(encodeURIComponent).join("/")}/${encodeURIComponent(id)}.md`
-      : `/posts/${encodeURIComponent(id)}.md`;
-    try {
-      md = await fetchMd(mdPath);
-    } catch (e) {
-      main.innerHTML = `<div class="status err">找不到文章 <code>${esc(id)}</code>（${esc(e.message)}）<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
-      return;
+    let meta = {}, body = "", rawHtml = "";
+    if (hydrated) {
+      /* 正文已在 DOM 里，manifest 只用来补齐标题/日期/标签/摘要。
+         即便索引拿不到（离线、接口挂了），也不能退化成"无标题"——预渲染页的
+         <title> 与 description 本来就是真的，直接拿它们兜底：正文都躺在页面上
+         了，没有任何理由因为一次索引失败而白屏。 */
+      const headTitle = (document.title || "").replace(/\s*[·|]\s*wym's blog\s*$/, "").trim();
+      const headDesc = ($('meta[name="description"]') || {}).content || "";
+      rawHtml = hydrated.innerHTML;
+      /* 纯文本仅用于判断"这篇有没有公式"（见下面的 libsReady）；
+         代码块不能用围栏判断——那层标记已经被 marked 吃掉了 */
+      body = hydrated.textContent || "";
+      meta = {
+        title: (info && info.title) || headTitle,
+        date: (info && info.date) || "",
+        tags: (info && info.tags) || [],
+        excerpt: (info && info.excerpt) || headDesc,
+      };
+    } else {
+      const mdPath = folder
+        ? `/posts/${folder.split("/").map(encodeURIComponent).join("/")}/${encodeURIComponent(id)}.md`
+        : `/posts/${encodeURIComponent(id)}.md`;
+      let md;
+      try {
+        /* 缓存键带内容 hash：文章一改，旧缓存立刻失效，不必等 HTTP 缓存过期 */
+        md = await fetchMd(mdPath, `${mdPath}:${(info && info.hash) || ""}`);
+      } catch (e) {
+        main.innerHTML = `<div class="status err">找不到文章 <code>${esc(id)}</code>（${esc(e.message)}）<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
+        return;
+      }
+      const parsed = parseFrontmatter(md);
+      meta = parsed.meta;
+      body = parsed.body;
+      if (String(meta.status || "").toLowerCase() === "draft") {
+        main.innerHTML = `<div class="status err">这是一篇草稿，尚未发布。<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
+        return;
+      }
     }
 
-    const { meta, body } = parseFrontmatter(md);
-    if (String(meta.status || "").toLowerCase() === "draft") {
-      main.innerHTML = `<div class="status err">这是一篇草稿，尚未发布。<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
-      return;
-    }
-    /* 按需加载：读到手稿才知道用不用得上 ——
-       有公式（$ 或 \( \[）才要 KaTeX，有围栏代码块才要 highlight.js。
-       这里只发起、不等待，让它和后面的解析／构建 DOM 并行；真正用到时再 await。 */
-    const libsReady = Promise.all([
-      /\\\(|\\\[|\$/.test(body) ? loadLib(LIB.katex).then(() => loadLib(LIB.katexRender)) : null,
-      /^[ \t]*```/m.test(body) ? loadLib(LIB.hljs) : null,
-    ].filter(Boolean)).catch(() => {});
+    /* 按需加载：知道这篇用不用得上才决定拉不拉 ——
+       有公式（$ 或 \( \[）才要 KaTeX，有代码块才要 highlight.js。
+       这里只发起、不等待，让它和后面的解析／构建 DOM 并行；真正用到时再 await。
+       水合模式下围栏标记已被 marked 吃掉，代码块改用「有没有 pre>code」判断，
+       两条路径的加载口径因此保持一致。 */
+    const hasMath = /\\\(|\\\[|\$/.test(body);
+    const hasCode = hydrated ? !!$("pre code", hydrated) : /^[ \t]*```/m.test(body);
+    const libsReady = loadPostLibs({ math: hasMath, code: hasCode });
 
     const title = meta.title || (info && info.title) || id;
     const date = meta.date || (info && info.date) || "";
@@ -429,16 +495,13 @@
 
     document.title = `${title} · ${CONFIG.siteName}`;
 
-    /* Markdown → HTML，并给标题编号以便生成目录 */
-    /* rawHtml 是 marked 的原始输出；下面 tmp 会被逐层加工（链接改写、callout、
-       标题归一化…），加工后的结果另存为 finalHtml——两者含义不同，别共用一个名字 */
-    let rawHtml;
-    if (window.marked) {
-      ensureMarked();
-      const { md, stash } = protectMath(body);
-      rawHtml = restoreMath(marked.parse(md), stash);
-    } else {
-      rawHtml = `<pre>${esc(body)}</pre>`;
+    /* Markdown → HTML，再给标题补锚点以便生成目录 */
+    /* rawHtml 是渲染器的原始输出；下面 tmp 会被逐层加工（链接改写、callout、
+       标题归一化…），加工后的结果另存为 finalHtml——两者含义不同，别共用一个名字。
+       水合模式下 rawHtml 上面已经从 DOM 取好了，这里只处理兜底模式；
+       渲染交给 md-core —— 与 Node 预渲染跑的是同一份代码。 */
+    if (!hydrated) {
+      rawHtml = window.marked ? MD.mdToHtml(body) : `<pre>${esc(body)}</pre>`;
     }
 
     const toc = [];
@@ -475,6 +538,7 @@
        站点渲染页在根目录。这里把 vault 相对路径换算成站点根相对路径：
        按 ../ 级数上溯、按笔记所在文件夹深度归位，统一指向 posts/ 下的附件。
        例如（笔记在 posts/数学/代数/ 下）：../../assets/img/x.png → posts/assets/img/x.png */
+    const imgSizes = (info && info.images) || null;
     $$("img[src]", tmp).forEach((img) => {
       /* Obsidian 图片尺寸语法：![alt|宽] 或 ![alt|宽x高]，从 alt 中解析并应用显示尺寸 */
       const alt = img.getAttribute("alt") || "";
@@ -487,6 +551,19 @@
       let src = img.getAttribute("src");
       if (!src) return;
       if (/^(https?:|data:|blob:)/i.test(src)) return;
+      /* 已知尺寸写进 width/height：值由 build 阶段读文件头算出，浏览器据此在
+         图片下载完成之前就留出正确高度，这是消除 CLS 的关键一步。
+         必须在路径转译【之前】按「md 里的原样 src」查表——manifest 的 key 就是
+         原样字符串，不做解码也不做归一。已用 ![](…|宽x高) 指定显示尺寸的跳过，
+         属性与内联样式叠加只会互相打架。 */
+      if (!size && imgSizes && imgSizes[src]) {
+        const [w, h] = imgSizes[src];
+        if (!img.hasAttribute("width")) img.setAttribute("width", w);
+        if (!img.hasAttribute("height")) img.setAttribute("height", h);
+      }
+      /* 已经是站根绝对路径（预渲染产物可能已经转译过）就不要再算一遍，
+         否则会被当成 vault 相对路径，再叠一层 posts/<folder>/ 前缀 */
+      if (/^\/posts\//.test(src)) return;
       const segs = folder ? folder.split("/") : [];
       let rest = src;
       let up = 0;
@@ -561,15 +638,17 @@
       });
       headings = $$("h2, h3, h4", tmp);
     }
-    let n = 0;
+    /* 标题 id 交给共享核心统一派生：由标题文本生成稳定锚点（CJK 原样保留），
+       幂等，且运行时渲染与 Node 预渲染得到同一个 id——读者收藏的 #某小节
+       深链在两条路径下都成立。不再用位置编号 sec-1/sec-2：正文增删一节，
+       后面所有锚点会集体错位，深链全部失效。 */
+    MD.headingIds(tmp);
     headings.forEach((h) => {
-      const id = `sec-${++n}`;
-      h.id = id;
       /* 折叠 callout（技术附录）里的标题不进目录：折叠时锚点无法跳转，
          且附录排在文末会让目录顺序看起来错乱。id 仍保留，展开后可手动深链 */
       if (h.closest(".callout.is-collapsible")) return;
       toc.push({
-        id,
+        id: h.id,
         text: h.textContent,
         depth: Math.min(HEADING_TAGS.indexOf(h.tagName.toLowerCase()) - 1, 2), // h2→0, h3→1, h4+→2
       });
@@ -623,10 +702,9 @@
       window.dispatchEvent(new Event("scroll"));
     });
 
-    /* KaTeX 数学公式（$..$ 行内 / $$..$$ 独立 / \(..\) 与 \[..\] 兼容） */
-    /* 等库就位再渲染公式（文章没有公式时，libsReady 已经是已 resolve 的空 Promise） */
-    await libsReady;
-    if (window.renderMathInElement) {
+    /* 公式与高亮的"应用"步骤各自成函数，好让「重试」按钮原样再跑一遍 */
+    const applyMath = () => {
+      if (!window.renderMathInElement) return;
       try {
         renderMathInElement($("#prose"), {
           delimiters: [
@@ -638,18 +716,38 @@
           throwOnError: false,
         });
       } catch (e) { /* noop */ }
-    }
+    };
+    const applyHljs = () => {
+      if (!window.hljs) return;
+      $$("#prose pre code").forEach((b) => {
+        if (b.className && String(b.className).includes("language-mermaid")) return;
+        try { hljs.highlightElement(b); } catch (e) { /* noop */ }
+      });
+    };
+
+    /* KaTeX 数学公式（$..$ 行内 / $$..$$ 独立 / \(..\) 与 \[..\] 兼容）。
+       等库就位再渲染（文章没有公式时，libsReady 已经是已 resolve 的空数组）。
+       失败的库不再静默吞掉：正文照常可读，但挂一条看得见的提示 + 重试入口。 */
+    const failedLibs = await libsReady;
+    applyMath();
 
     /* 正文图片：点击放大（灯箱缩放/平移） */
     initImgZoom();
 
     /* 代码高亮（mermaid 交给 mermaid.js，跳过）。
        libsReady 在上面已经 await 过，同一个 Promise 不必重复 await */
-    if (window.hljs) {
-      $$("#prose pre code").forEach((b) => {
-        if (b.className && String(b.className).includes("language-mermaid")) return;
-        try { hljs.highlightElement(b); } catch (e) { /* noop */ }
-      });
+    applyHljs();
+
+    if (failedLibs.length) {
+      /* 重试会重新 loadLib（失败时缓存已清空，所以真的会再发一次请求），
+         再跑一遍公式与高亮；仍旧失败就把提示与按钮留着，可以一直重试 */
+      const retryLibs = async () => {
+        const again = await loadPostLibs({ math: hasMath, code: hasCode });
+        applyMath();
+        applyHljs();
+        if (again.length) showLibNotice(again, retryLibs);
+      };
+      showLibNotice(failedLibs, retryLibs);
     }
 
     /* 代码块复制按钮（mermaid 块会被替换为图表，跳过） */
@@ -778,7 +876,25 @@
     setMeta('meta[name="description"]', excerpt);
     setMeta('meta[property="og:title"]', title);
     setMeta('meta[property="og:description"]', excerpt);
-    setMeta('meta[property="og:url"]', `${location.origin}/post.html?id=${encodeURIComponent(id)}`);
+    /* 规范链接：有预渲染产物时一律指向它——那才是搜索引擎与社交爬虫该看到的
+       地址（带完整 head 与正文、不执行 JS 也能读）。兜底地址只在没有预渲染产物时
+       才充当规范链接，否则同一篇文章会以两个 URL 互相竞争收录。 */
+    const canonical = (info && info.prerendered)
+      ? new URL(info.prerendered, location.origin).href
+      : (hydrated
+          ? location.origin + location.pathname
+          : `${location.origin}/post.html?id=${encodeURIComponent(id)}`);
+    setMeta('meta[property="og:url"]', canonical);
+    /* post.html 刻意不写静态 canonical（带 ?id= 的参数化页面自指会把所有文章
+       声明成同一个 URL，是明确的 SEO 损害），所以这里得负责把它建出来——
+       只 setAttribute 的话，元素不存在就静默跳过，等于没写 */
+    let canonLink = document.querySelector('link[rel="canonical"]');
+    if (!canonLink) {
+      canonLink = document.createElement("link");
+      canonLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonLink);
+    }
+    canonLink.setAttribute("href", canonical);
     const firstImg = $("#prose img");
     if (firstImg) {
       let src = firstImg.getAttribute("src");
@@ -786,6 +902,25 @@
         src = new URL(src, location.origin).href;
       }
       if (src) setMeta('meta[property="og:image"]', src);
+    }
+
+    /* 锚点跳转：正文是重新写进 DOM 的（水合模式下也整块重建了 main），
+       浏览器"文档加载完自动滚到 #hash"的那一次已经错过时机，这里补一次。
+       若目标此刻还不存在，最多在 load 事件后再试一次——不做无休止轮询。 */
+    const jumpToHash = () => {
+      const raw = location.hash.slice(1);
+      if (!raw) return false;
+      let el = null;
+      try { el = document.getElementById(decodeURIComponent(raw)); } catch { el = null; }
+      if (!el) return false;
+      /* 目标藏在折叠的 callout 里时先展开，否则滚过去看到的仍是一片折叠标题 */
+      const box = el.closest && el.closest(".callout.is-collapsed");
+      if (box) box.classList.remove("is-collapsed");
+      el.scrollIntoView();
+      return true;
+    };
+    if (!jumpToHash() && document.readyState !== "complete") {
+      window.addEventListener("load", jumpToHash, { once: true });
     }
   }
 

@@ -26,15 +26,19 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="wym's blog">
 <meta property="og:description" content="关于数学、代码与有趣想法的笔记本。把复杂的，讲得漂亮。">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://wym100171113.github.io/">
 <title>wym's blog</title>
+<link rel="alternate" type="application/rss+xml" title="wym's blog" href="/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="assets/css/style.css?v=34">
+<link rel="stylesheet" href="assets/css/style.css?v=35">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233b82f6'/%3E%3Ctext x='16' y='22' font-size='15' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3Ew%3C/text%3E%3C/svg%3E">
 </head>
 <body data-theme="light" class="page-home">
 <div class="paper-noise"></div>
+<a class="skip-link" href="#main">跳到正文</a>
 
 <header class="site-header" id="siteHeader">
   <div class="shell nav-row">
@@ -54,6 +58,9 @@
 </header>
 
 <main class="shell" id="main" data-view="home">
+  <noscript>
+    <p class="status">本页需要 JavaScript 才能渲染文章列表。也可以直接看 <a href="/archive.html">归档</a>，或订阅 <a href="/feed.xml">RSS</a>。</p>
+  </noscript>
   <div class="status">载入中…</div>
 </main>
 
@@ -75,7 +82,9 @@
   </div>
 </footer>
 
-<script src="assets/js/blog.js?v=45"></script>
+<!-- md-core 必须在 blog.js 之前：正文渲染由它提供 -->
+<script src="/assets/js/md-core.js?v=1"></script>
+<script src="assets/js/blog.js?v=46"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
