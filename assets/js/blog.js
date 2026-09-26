@@ -138,20 +138,43 @@
   };
 
   /* ---------------- 数据 ---------------- */
+  /* 任何"等外部资源"的步骤都必须带超时。
+     真实网络里最难缠的失败不是"连不上"（那会立刻报错），而是"连上了、响应头也
+     回来了，但响应体永远读不完"——中间设备掐断、CDN 边缘异常、代理半死不活都会
+     这样。fetch 的 Promise 会一直挂着，一个没有超时的 await 就让页面永远停在骨架屏
+     上：用户看不到任何错误，只能干等，也不知道该不该刷新。
+     超时后走既有的降级路径，把"无声的等待"换成"看得见的失败"。 */
+  const withTimeout = (promise, ms, label) => {
+    let timer;
+    return Promise.race([
+      promise,
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error(`${label}超时`)), ms);
+      }),
+    ]).finally(() => clearTimeout(timer));
+  };
+  const POSTS_TIMEOUT = 10000;   /* 索引约 18KB：10 秒还拿不到就不等了 */
+  const MD_TIMEOUT = 15000;      /* 正文 .md：给宽松些，长文可能几百 KB */
+  const CACHE_TIMEOUT = 3000;    /* 本地 Cache API 操作不该超过 3 秒 */
+
   /* 会话级缓存：归档页渲染层切换时零网络请求；失败自动重置以便重试 */
   let postsPromise = null;
   function getPosts() {
     if (!postsPromise) {
       /* post.html 在 <head> 里已提前发起同一个请求（与 CDN 库并行下载），这里直接复用它；
-         首页/归档页没有 __posts，则自己发起。两者都套同一段解析链。 */
-      postsPromise = (window.__posts || fetch(MANIFEST, { cache: "no-cache" }))
-        .then((res) => {
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          return res.json();
-        })
-        .then((list) => list.filter((p) => p && p.slug && p.date)
-          /* 日期是 YYYY-MM-DD，字典序即时间序，不必绕 Date */
-          .sort((a, b) => String(b.date || "").localeCompare(String(a.date || ""))))
+         首页/归档页没有 __posts，则自己发起。两者都套同一段解析链。
+         整条链（含 res.json() 读响应体）一起套超时——读 body 挂起正是最常见的形态 */
+      postsPromise = withTimeout(
+        (window.__posts || fetch(MANIFEST, { cache: "no-cache" }))
+          .then((res) => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+          })
+          .then((list) => list.filter((p) => p && p.slug && p.date)
+            /* 日期是 YYYY-MM-DD，字典序即时间序，不必绕 Date */
+            .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))),
+        POSTS_TIMEOUT, "文章索引"
+      )
         /* 失败时两个缓存都要清：postsPromise 是本会话的，__posts 是 post.html
            在 <head> 里预发的那个。只清前者的话，文章页重试会一直复用同一个
            已失败的 Promise，必须整页刷新才能恢复 */
@@ -182,10 +205,12 @@
   }
 
   async function fetchMd(url, key) {
+    /* 走网络的完整读取。读响应体（.text()）是最容易永久挂住的一步，必须一起套超时——
+       只给 fetch 加超时不够：fetch 在"收到响应头"时就 resolve 了，body 还在后面 */
     const fromNetwork = () =>
-      fetch(url, { cache: "no-cache" }).then((r) => {
+      withTimeout(fetch(url, { cache: "no-cache" }), MD_TIMEOUT, "正文下载").then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.text();
+        return withTimeout(r.text(), MD_TIMEOUT, "正文读取");
       });
 
     if (!("caches" in window)) return fromNetwork();
@@ -198,8 +223,10 @@
     const cacheKey = key || url;
 
     try {
-      const cache = await caches.open(MD_CACHE);
-      const hit = await cache.match(cacheKey);
+      /* Cache API 也套超时：caches.open() 在少数环境下会长时间不 settle（存储初始化
+         卡住）。缓存只是锦上添花——绝不能因为它让读者读不到文章，超时就当缓存不可用 */
+      const cache = await withTimeout(caches.open(MD_CACHE), CACHE_TIMEOUT, "缓存打开");
+      const hit = await withTimeout(cache.match(cacheKey), CACHE_TIMEOUT, "缓存查找");
       if (hit) {
         /* 先给缓存的，再后台更新；下次访问即拿到最新。
            必须显式 no-cache：默认模式下这次请求会被 HTTP 缓存命中
@@ -208,14 +235,14 @@
         fetch(url, { cache: "no-cache" })
           .then((r) => (r.ok ? cache.put(cacheKey, r.clone()) : null))
           .catch(() => {});
-        return hit.text();
+        return withTimeout(hit.text(), CACHE_TIMEOUT, "缓存读取");
       }
-      const res = await fetch(url, { cache: "no-cache" });
+      const res = await withTimeout(fetch(url, { cache: "no-cache" }), MD_TIMEOUT, "正文下载");
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       /* 写缓存失败（配额不足等）不该影响本次阅读，所以只吞掉，不 await */
       cache.put(cacheKey, res.clone()).catch(() => {});
       pruneMdCache(cache, url, cacheKey).catch(() => {});
-      return res.text();
+      return withTimeout(res.text(), MD_TIMEOUT, "正文读取");
     } catch {
       return fromNetwork();
     }
@@ -431,8 +458,12 @@
     /* main 里现在是 post.html 写好的骨架屏，先原样留着；
        下面无论渲染出结果还是报错，都是整块替换，骨架屏随之消失 */
 
-    let posts = [];
-    try { posts = await getPosts(); } catch { /* ignore */ }
+    /* 索引失败与"这篇文章不存在"是两回事，文案要分开：前者是网络问题（刷新可能
+       就好），后者是链接失效（刷新没用）。混成一句"找不到文章"会把用户引向
+       错误的动作——尤其是索引挂起时，用户看到"找不到文章"会以为文章被删了。
+       报错要报【索引那次】的原因（超时/HTTP 码），不是后面连带的 md 404。 */
+    let posts = [], postsErr = null;
+    try { posts = await getPosts(); } catch (e) { postsErr = e; }
     const info = posts.find((p) => p.slug === id);
     const idx = posts.findIndex((p) => p.slug === id);
     const folder = (info && info.folder) || "";
@@ -464,7 +495,9 @@
         /* 缓存键带内容 hash：文章一改，旧缓存立刻失效，不必等 HTTP 缓存过期 */
         md = await fetchMd(mdPath, `${mdPath}:${(info && info.hash) || ""}`);
       } catch (e) {
-        main.innerHTML = `<div class="status err">找不到文章 <code>${esc(id)}</code>（${esc(e.message)}）<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
+        main.innerHTML = postsErr
+          ? `<div class="status err">文章索引加载失败（${esc(postsErr.message)}），暂时无法定位这篇。<br>请刷新重试；也可以先看 <a href="/archive.html">归档</a>。<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`
+          : `<div class="status err">找不到文章 <code>${esc(id)}</code>（${esc(e.message)}）<br><a class="back-link" href="/archive.html">← 返回归档</a></div>`;
         return;
       }
       const parsed = parseFrontmatter(md);
