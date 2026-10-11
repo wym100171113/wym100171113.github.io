@@ -1,5 +1,18 @@
 [
   {
+    "slug": "iterated-functional-equation",
+    "folder": "数学/函数",
+    "title": "一道迭代函数方程：有界如何逼出恒等",
+    "date": "2026-10-11",
+    "tags": [
+      "数学",
+      "函数"
+    ],
+    "excerpt": "f(f(x))+f(x)=2x，再加一句“f 离 x 不会太远”，就能逼出 f(x)=x。这道题的精妙全在一个代换——把吓人的“套两层”变成一条会指数爆炸的递推，再看有界性如何把它摁死在零。",
+    "category": "数学",
+    "readTime": "3 分钟"
+  },
+  {
     "slug": "solid-geometry-foundations",
     "folder": "数学/几何",
     "title": "立体几何的第一课：从三点定面到法向量",

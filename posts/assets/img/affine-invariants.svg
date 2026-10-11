@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="404" viewBox="0 0 660 404" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; }
+    .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-purple { color: #8554c8; fill: #8554c8; }
+    .c-orange { color: #c97a1e; fill: #c97a1e; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; }
+    .c-gray { color: #6b7280; fill: #6b7280; }
+    .c-faint { color: #9aa0a6; fill: #9aa0a6; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; }
+      .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-purple { color: #b795ee; fill: #b795ee; }
+      .c-orange { color: #e0a24f; fill: #e0a24f; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; }
+      .c-gray { color: #8e8e93; fill: #8e8e93; }
+      .c-faint { color: #6e6e75; fill: #6e6e75; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.16; }
+    .thin { fill-opacity: 0.10; }
+  </style>
+<text x="330.0" y="26" font-size="15" class="c-ink" text-anchor="middle" font-weight="600">仿射变换保存什么、改变什么</text>
+<text x="330.0" y="380.0" font-size="11.5" class="c-gray" text-anchor="middle">共线、平行、直线上的简单比、面积比——全部保留；角度、长度、面积——一般改变</text>
+<text x="330.0" y="396.0" font-size="11" class="c-faint" text-anchor="middle">正方形的 90° 被拉斜、边长改变，但三个分点仍共线，简单比 P₁P₂ : P₂P₃ 不变</text>
+<line x1="20" y1="212" x2="220" y2="212" class="c-gray" stroke="currentColor" stroke-width="0.9"/><line x1="120" y1="112" x2="120" y2="312" class="c-gray" stroke="currentColor" stroke-width="0.9"/><text x="120.0" y="340" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">变换前</text><text x="120.0" y="360" font-size="11.5" class="c-gray" text-anchor="middle">角度、长度原样</text>
+<polygon points="120.0,212.0 176.0,212.0 176.0,156.0 120.0,156.0" class="c-blue semi" stroke="currentColor" stroke-width="1.5"/>
+<circle cx="148.0" cy="310.0" r="3.2" class="c-red"/>
+<text x="154.0" y="314.0" font-size="11" class="c-red">P₁</text>
+<circle cx="148.0" cy="261.0" r="3.2" class="c-red"/>
+<text x="154.0" y="265.0" font-size="11" class="c-red">P₂</text>
+<circle cx="148.0" cy="212.0" r="3.2" class="c-red"/>
+<text x="154.0" y="216.0" font-size="11" class="c-red">P₃</text>
+<text x="154" y="150" font-size="11.5" class="c-blue">90°</text>
+<line x1="390" y1="212" x2="590" y2="212" class="c-gray" stroke="currentColor" stroke-width="0.9"/><line x1="490" y1="112" x2="490" y2="312" class="c-gray" stroke="currentColor" stroke-width="0.9"/><text x="490.0" y="340" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">仿射变换后</text><text x="490.0" y="360" font-size="11.5" class="c-gray" text-anchor="middle">90° 被拉斜，长度改变</text>
+<polygon points="490,212 534.8,212 554.4,181.2 509.6,181.2" class="c-blue semi" stroke="currentColor" stroke-width="1.5"/>
+<polyline points="478.1,265.9 495.25,238.95 512.4,212" class="c-red nf" stroke="currentColor" stroke-width="1.4"/>
+<circle cx="478.1" cy="265.9" r="3.2" class="c-red"/>
+<text x="484.1" y="269.9" font-size="11" class="c-red">P₁</text>
+<circle cx="495.25" cy="238.95" r="3.2" class="c-red"/>
+<text x="501.25" y="242.95" font-size="11" class="c-red">P₂</text>
+<circle cx="512.4" cy="212" r="3.2" class="c-red"/>
+<text x="518.4" y="216" font-size="11" class="c-red">P₃</text>
+</svg>

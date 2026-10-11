@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="404" viewBox="0 0 660 404" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; }
+    .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-purple { color: #8554c8; fill: #8554c8; }
+    .c-orange { color: #c97a1e; fill: #c97a1e; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; }
+    .c-gray { color: #6b7280; fill: #6b7280; }
+    .c-faint { color: #9aa0a6; fill: #9aa0a6; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; }
+      .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-purple { color: #b795ee; fill: #b795ee; }
+      .c-orange { color: #e0a24f; fill: #e0a24f; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; }
+      .c-gray { color: #8e8e93; fill: #8e8e93; }
+      .c-faint { color: #6e6e75; fill: #6e6e75; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.16; }
+    .thin { fill-opacity: 0.10; }
+  </style>
+<text x="330.0" y="26" font-size="15" class="c-ink" text-anchor="middle" font-weight="600">仿射 = 线性 + 平移；线性 = 旋转·缩放·切变</text>
+<text x="330.0" y="380.0" font-size="11.5" class="c-gray" text-anchor="middle">旋转保长保角，缩放改长不改角，切变改角不改长——三者都是可逆的仿射</text>
+<text x="330.0" y="396.0" font-size="11" class="c-faint" text-anchor="middle">切变保持每条水平线的长度，却把竖边推斜：正方形变成了平行四边形</text>
+<text x="120.0" y="120" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">旋转</text><text x="120.0" y="140" font-size="11.5" class="c-gray" text-anchor="middle">x′=x cosθ − y sinθ</text>
+<line x1="60.0" y1="170.0" x2="60.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="80.0" y1="170.0" x2="80.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="100.0" y1="170.0" x2="100.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="120.0" y1="170.0" x2="120.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="140.0" y1="170.0" x2="140.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="160.0" y1="170.0" x2="160.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="180.0" y1="170.0" x2="180.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="60.0" y1="170.0" x2="180.0" y2="170.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="60.0" y1="190.0" x2="180.0" y2="190.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="60.0" y1="210.0" x2="180.0" y2="210.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="60.0" y1="230.0" x2="180.0" y2="230.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="60.0" y1="250.0" x2="180.0" y2="250.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="60.0" y1="270.0" x2="180.0" y2="270.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="60.0" y1="290.0" x2="180.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="50" y1="230" x2="190" y2="230" class="c-gray" stroke="currentColor" stroke-width="1"/>
+<line x1="120" y1="160" x2="120" y2="300" class="c-gray" stroke="currentColor" stroke-width="1"/>
+<polygon points="102.0,248.0 138.0,248.0 138.0,212.0 102.0,212.0" class="c-faint nf thin" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4,4"/>
+<polygon points="117.8,255.4 145.4,232.2 122.2,204.6 94.6,227.8" class="c-blue semi" stroke="currentColor" stroke-width="1.5"/>
+<circle cx="120" cy="230" r="2.4" class="c-gray"/>
+<line x1="120.0" y1="230.0" x2="160.0" y2="230.0" class="c-gray nf" stroke="currentColor" stroke-width="1" stroke-dasharray="3,3"/>
+<polygon points="120,230 160,230 159.96,228.26 159.85,226.51 159.66,224.78 159.39,223.05 159.05,221.34 158.64,219.65 158.15,217.97 157.59,216.32 156.96,214.69 156.25,213.1 155.48,211.53 154.64,210 153.74,208.51 152.77,207.06 151.73,205.65 150.64,204.29" class="c-blue thin"/>
+<path d="M 160.0 230.0 A 40.0 40.0 0 0 0 150.6 204.3" class="c-gray nf" stroke="currentColor" stroke-width="1.4"/>
+<text x="172.6" y="214.8" font-size="12" class="c-gray" text-anchor="middle" font-weight="600">&#952; = 40&#176;</text>
+<text x="330.0" y="120" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">缩放</text><text x="330.0" y="140" font-size="11.5" class="c-gray" text-anchor="middle">x′=2x，y′=½y</text>
+<line x1="270.0" y1="170.0" x2="270.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="290.0" y1="170.0" x2="290.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="310.0" y1="170.0" x2="310.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="330.0" y1="170.0" x2="330.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="350.0" y1="170.0" x2="350.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="370.0" y1="170.0" x2="370.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="390.0" y1="170.0" x2="390.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="270.0" y1="170.0" x2="390.0" y2="170.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="270.0" y1="190.0" x2="390.0" y2="190.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="270.0" y1="210.0" x2="390.0" y2="210.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="270.0" y1="230.0" x2="390.0" y2="230.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="270.0" y1="250.0" x2="390.0" y2="250.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="270.0" y1="270.0" x2="390.0" y2="270.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="270.0" y1="290.0" x2="390.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="260" y1="230" x2="400" y2="230" class="c-gray" stroke="currentColor" stroke-width="1"/>
+<line x1="330" y1="160" x2="330" y2="300" class="c-gray" stroke="currentColor" stroke-width="1"/>
+<polygon points="312.0,248.0 348.0,248.0 348.0,212.0 312.0,212.0" class="c-faint nf thin" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4,4"/>
+<polygon points="294.0,239.0 366.0,239.0 366.0,221.0 294.0,221.0" class="c-green semi" stroke="currentColor" stroke-width="1.5"/>
+<text x="540.0" y="120" font-size="13" class="c-ink" text-anchor="middle" font-weight="500">切变</text><text x="540.0" y="140" font-size="11.5" class="c-gray" text-anchor="middle">x′=x + y，y′=y</text>
+<line x1="480.0" y1="170.0" x2="480.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="500.0" y1="170.0" x2="500.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="520.0" y1="170.0" x2="520.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="540.0" y1="170.0" x2="540.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="560.0" y1="170.0" x2="560.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="580.0" y1="170.0" x2="580.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="600.0" y1="170.0" x2="600.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="480.0" y1="170.0" x2="600.0" y2="170.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="480.0" y1="190.0" x2="600.0" y2="190.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="480.0" y1="210.0" x2="600.0" y2="210.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="480.0" y1="230.0" x2="600.0" y2="230.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="480.0" y1="250.0" x2="600.0" y2="250.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="480.0" y1="270.0" x2="600.0" y2="270.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="480.0" y1="290.0" x2="600.0" y2="290.0" class="c-faint" stroke="currentColor" stroke-width="0.8"/>
+<line x1="470" y1="230" x2="610" y2="230" class="c-gray" stroke="currentColor" stroke-width="1"/>
+<line x1="540" y1="160" x2="540" y2="300" class="c-gray" stroke="currentColor" stroke-width="1"/>
+<polygon points="522.0,248.0 558.0,248.0 558.0,212.0 522.0,212.0" class="c-faint nf thin" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4,4"/>
+<polygon points="507.6,248.0 543.6,248.0 572.4,212.0 536.4,212.0" class="c-orange semi" stroke="currentColor" stroke-width="1.5"/>
+</svg>

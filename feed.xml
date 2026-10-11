@@ -7,6 +7,14 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>一道迭代函数方程：有界如何逼出恒等</title>
+      <link>https://wym100171113.github.io/post.html?id=iterated-functional-equation</link>
+      <guid>https://wym100171113.github.io/post.html?id=iterated-functional-equation</guid>
+      <pubDate>Sun, 11 Oct 2026 00:00:00 +0800</pubDate>
+      <description>f(f(x))+f(x)=2x，再加一句“f 离 x 不会太远”，就能逼出 f(x)=x。这道题的精妙全在一个代换——把吓人的“套两层”变成一条会指数爆炸的递推，再看有界性如何把它摁死在零。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>立体几何的第一课：从三点定面到法向量</title>
       <link>https://wym100171113.github.io/post.html?id=solid-geometry-foundations</link>
       <guid>https://wym100171113.github.io/post.html?id=solid-geometry-foundations</guid>

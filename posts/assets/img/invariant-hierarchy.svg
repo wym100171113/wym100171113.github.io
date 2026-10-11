@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="436" viewBox="0 0 640 436" font-family="system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <style>
+    .c-red { color: #d63e3e; fill: #d63e3e; }
+    .c-green { color: #2e8b57; fill: #2e8b57; }
+    .c-blue { color: #3c6eb9; fill: #3c6eb9; }
+    .c-purple { color: #8554c8; fill: #8554c8; }
+    .c-orange { color: #c97a1e; fill: #c97a1e; }
+    .c-ink { color: #1c1c1e; fill: #1c1c1e; }
+    .c-gray { color: #6b7280; fill: #6b7280; }
+    .c-faint { color: #9aa0a6; fill: #9aa0a6; }
+    @media (prefers-color-scheme: dark) {
+      .c-red { color: #f07070; fill: #f07070; }
+      .c-green { color: #4caf7d; fill: #4caf7d; }
+      .c-blue { color: #6b9df0; fill: #6b9df0; }
+      .c-purple { color: #b795ee; fill: #b795ee; }
+      .c-orange { color: #e0a24f; fill: #e0a24f; }
+      .c-ink { color: #d8d8de; fill: #d8d8de; }
+      .c-gray { color: #8e8e93; fill: #8e8e93; }
+      .c-faint { color: #6e6e75; fill: #6e6e75; }
+    }
+    .nf { fill: none; }
+    .semi { fill-opacity: 0.16; }
+    .thin { fill-opacity: 0.10; }
+  </style>
+<text x="320.0" y="26" font-size="15" class="c-ink" text-anchor="middle" font-weight="600">群越大，不变量越少</text>
+<text x="172.0" y="142.0" font-size="11.5" class="c-gray" text-anchor="middle">限制最严，管得最窄</text>
+<rect x="72.0" y="150" width="200.0" height="46" rx="8" class="c-red semi" stroke="currentColor" stroke-width="1.5"/>
+<text x="172.0" y="169.0" font-size="13" class="c-red" text-anchor="middle" font-weight="600">等距变换</text>
+<text x="172.0" y="185.0" font-size="10.5" class="c-ink" text-anchor="middle">距离·角度·面积本身</text>
+<rect x="69.0" y="210" width="206.0" height="46" rx="8" class="c-blue semi" stroke="currentColor" stroke-width="1.5"/>
+<text x="172.0" y="229.0" font-size="13" class="c-blue" text-anchor="middle" font-weight="600">相似变换</text>
+<text x="172.0" y="245.0" font-size="10.5" class="c-ink" text-anchor="middle">形状（角度）·长度之比</text>
+<rect x="66.0" y="270" width="212.0" height="46" rx="8" class="c-green semi" stroke="currentColor" stroke-width="1.5"/>
+<text x="172.0" y="289.0" font-size="13" class="c-green" text-anchor="middle" font-weight="600">仿射变换</text>
+<text x="172.0" y="305.0" font-size="10.5" class="c-ink" text-anchor="middle">共线·平行·简单比·面积比</text>
+<rect x="63.0" y="330" width="218.0" height="46" rx="8" class="c-orange semi" stroke="currentColor" stroke-width="1.5"/>
+<text x="172.0" y="349.0" font-size="13" class="c-orange" text-anchor="middle" font-weight="600">射影变换</text>
+<text x="172.0" y="365.0" font-size="10.5" class="c-ink" text-anchor="middle">交比·共线</text>
+<text x="172.0" y="392.0" font-size="11.5" class="c-gray" text-anchor="middle">限制最松，管得最宽</text>
+<text x="470.0" y="116" font-size="11.5" class="c-gray" text-anchor="middle">一个圆，在各群里能变成：</text>
+<circle cx="378.0" cy="200" r="26" class="c-red nf" stroke="currentColor" stroke-width="1.6"/>
+<text x="378.0" y="248" font-size="11" class="c-red" text-anchor="middle">圆（等距）</text>
+<circle cx="456.0" cy="200" r="34" class="c-blue nf" stroke="currentColor" stroke-width="1.6"/>
+<text x="456.0" y="248" font-size="11" class="c-blue" text-anchor="middle">圆（相似，放大）</text>
+<ellipse cx="536.0" cy="200" rx="40" ry="22" class="c-green nf" stroke="currentColor" stroke-width="1.6"/>
+<text x="536.0" y="248" font-size="11" class="c-green" text-anchor="middle">椭圆（仿射）</text>
+<path d="M 577,180 L 579.25,187.35 L 581.5,194.06 L 583.75,200.12 L 586,205.56 L 588.25,210.35 L 590.5,214.5 L 592.75,218.01 L 595,220.89 L 597.25,223.12 L 599.5,224.72 L 601.75,225.68 L 604,226 L 606.25,225.68 L 608.5,224.72 L 610.75,223.12 L 613,220.89 L 615.25,218.01 L 617.5,214.5 L 619.75,210.35 L 622,205.56 L 624.25,200.12 L 626.5,194.06 L 628.75,187.35 L 631,180" class="c-orange nf" stroke="currentColor" stroke-width="1.6"/>
+<text x="604.0" y="248" font-size="10.5" class="c-orange" text-anchor="middle">抛物线（射影）</text>
+<text x="320.0" y="420.0" font-size="11.5" class="c-gray" text-anchor="middle">从等距一路放到射影：能变的越来越多，能用来区分的性质越来越少</text>
+</svg>
