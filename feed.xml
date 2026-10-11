@@ -7,6 +7,14 @@
     <language>zh-CN</language>
     <atom:link href="https://wym100171113.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
+      <title>仿射变换与坐标变换：动点与换系的两种语言</title>
+      <link>https://wym100171113.github.io/post.html?id=affine-and-coordinate-transformations</link>
+      <guid>https://wym100171113.github.io/post.html?id=affine-and-coordinate-transformations</guid>
+      <pubDate>Sun, 11 Oct 2026 00:00:00 +0800</pubDate>
+      <description>椭圆、圆锥曲线、分形里那些各显神通的技巧——把椭圆压成圆、消掉交叉项、自相似的迭代——其实都在偷偷用同一件事：仿射变换与坐标变换。这篇文章单独把这门语言讲清楚：仿射变换是"动点"，坐标变换是"换系"，而二者本质上是同一件事的两种说法。读完你会拿到一张地图，把前面散落的技巧收进同一个框架。</description>
+      <category>数学</category>
+    </item>
+    <item>
       <title>一道迭代函数方程：有界如何逼出恒等</title>
       <link>https://wym100171113.github.io/post.html?id=iterated-functional-equation</link>
       <guid>https://wym100171113.github.io/post.html?id=iterated-functional-equation</guid>
